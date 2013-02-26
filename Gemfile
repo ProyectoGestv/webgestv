@@ -41,7 +41,3 @@ gem 'bson_ext'
 
 gem 'haml'
 gem 'haml-rails'
-
-group :development, :test do
-  gem 'ruby-debug19'
-end

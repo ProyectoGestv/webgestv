@@ -1,7 +1,9 @@
 Webgestv::Application.routes.draw do
 
-  resources :man_rscs
+  resources :net_eles
 
-  root to: 'man_rscs#index', as: 'manres'
+  resources :servs
+
+  root to: 'servs#index', as: 'servs'
 
 end
