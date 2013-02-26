@@ -4,6 +4,4 @@ Webgestv::Application.routes.draw do
 
   resources :servs
 
-  root to: 'servs#index', as: 'servs'
-
 end

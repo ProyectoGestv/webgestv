@@ -25,7 +25,8 @@ class NetElesController < ApplicationController
   # GET /net_eles/new.json
   def new
     @net_ele = NetEle.new
-
+#    @conn=Conn.new
+#    @net_ele.conn=@conn
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @net_ele }
@@ -40,8 +41,9 @@ class NetElesController < ApplicationController
   # POST /net_eles
   # POST /net_eles.json
   def create
+    @conn=Conn.new(params[:conn])
     @net_ele = NetEle.new(params[:net_ele])
-
+    @net_ele.conn=@conn
     respond_to do |format|
       if @net_ele.save
         format.html { redirect_to @net_ele, notice: 'Net ele was successfully created.' }

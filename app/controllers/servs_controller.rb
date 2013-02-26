@@ -40,6 +40,7 @@ class ServsController < ApplicationController
   # POST /servs
   # POST /servs.json
   def create
+    #params[:serv][:name]=params[:serv][:name].downcase
     @serv = Serv.new(params[:serv])
 
     respond_to do |format|

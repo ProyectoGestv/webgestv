@@ -6,5 +6,20 @@
         - @net_ele.errors.full_messages.each do |msg|
           %li= msg
 
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :desc
+    = f.text_field :desc
+
+  = fields_for :conn do |f|
+    = f.label :ip
+    = f.text_field :ip
+    = f.label :port
+    = f.text_field :port
+
   .actions
-    = f.submit 'Save'
+    = f.submit 'Guardar'
+
+  -#= form_for :conn do |f1|

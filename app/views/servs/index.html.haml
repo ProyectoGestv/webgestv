@@ -1,13 +1,15 @@
-%h1 Listing servs
+%h1 Listado de servicios
 
 %table
   %tr
     %th
     %th
     %th
+    %th
 
   - @servs.each do |serv|
     %tr
+      %td= serv.name
       %td= link_to 'Show', serv
       %td= link_to 'Edit', edit_serv_path(serv)
       %td= link_to 'Destroy', serv, :method => :delete, :data => { :confirm => 'Are you sure?' }

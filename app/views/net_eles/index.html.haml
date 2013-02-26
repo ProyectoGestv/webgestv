@@ -5,9 +5,11 @@
     %th
     %th
     %th
+    %th
 
   - @net_eles.each do |net_ele|
     %tr
+      %td= net_ele.name
       %td= link_to 'Show', net_ele
       %td= link_to 'Edit', edit_net_ele_path(net_ele)
       %td= link_to 'Destroy', net_ele, :method => :delete, :data => { :confirm => 'Are you sure?' }
