@@ -1,0 +1,17 @@
+%h1 Listing net_eles
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @net_eles.each do |net_ele|
+    %tr
+      %td= link_to 'Show', net_ele
+      %td= link_to 'Edit', edit_net_ele_path(net_ele)
+      %td= link_to 'Destroy', net_ele, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Net ele', new_net_ele_path

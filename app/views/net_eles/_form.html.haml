@@ -1,0 +1,10 @@
+= form_for @net_ele do |f|
+  - if @net_ele.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@net_ele.errors.count, "error")} prohibited this net_ele from being saved:"
+      %ul
+        - @net_ele.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

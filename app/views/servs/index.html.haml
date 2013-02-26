@@ -1,0 +1,17 @@
+%h1 Listing servs
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @servs.each do |serv|
+    %tr
+      %td= link_to 'Show', serv
+      %td= link_to 'Edit', edit_serv_path(serv)
+      %td= link_to 'Destroy', serv, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Serv', new_serv_path
