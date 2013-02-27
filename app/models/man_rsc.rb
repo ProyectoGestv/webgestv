@@ -6,4 +6,5 @@ class ManRsc
   field :desc, type: String
   embeds_one :conn
   attr_accessible :name, :desc
+  accepts_nested_attributes_for :conn
 end

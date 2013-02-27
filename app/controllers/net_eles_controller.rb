@@ -25,7 +25,7 @@ class NetElesController < ApplicationController
   # GET /net_eles/new.json
   def new
     @net_ele = NetEle.new
-#    @conn=Conn.new
+    @conn=Conn.new
 #    @net_ele.conn=@conn
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +36,7 @@ class NetElesController < ApplicationController
   # GET /net_eles/1/edit
   def edit
     @net_ele = NetEle.find(params[:id])
+    @conn = @net_ele.conn
   end
 
   # POST /net_eles
@@ -59,9 +60,9 @@ class NetElesController < ApplicationController
   # PUT /net_eles/1.json
   def update
     @net_ele = NetEle.find(params[:id])
-
+    @conn = @net_ele.conn
     respond_to do |format|
-      if @net_ele.update_attributes(params[:net_ele])
+      if @conn.update_attributes(params[:conn]) and @net_ele.update_attributes(params[:net_ele])
         format.html { redirect_to @net_ele, notice: 'Net ele was successfully updated.' }
         format.json { head :no_content }
       else

@@ -1,7 +1,7 @@
 = form_for @net_ele do |f|
   - if @net_ele.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@net_ele.errors.count, "error")} prohibited this net_ele from being saved:"
+      %h2= "#{pluralize(@net_ele.errors.count, "error")} prohibited this network element from being saved:"
       %ul
         - @net_ele.errors.full_messages.each do |msg|
           %li= msg
@@ -13,7 +13,14 @@
     = f.label :desc
     = f.text_field :desc
 
-  = fields_for :conn do |f|
+  = fields_for @conn do |f|
+    - if @conn.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@conn.errors.count, "error")} prohibited this connection from being saved:"
+        %ul
+          - @conn.errors.full_messages.each do |msg|
+            %li= msg
+
     = f.label :ip
     = f.text_field :ip
     = f.label :port
@@ -21,5 +28,3 @@
 
   .actions
     = f.submit 'Guardar'
-
-  -#= form_for :conn do |f1|

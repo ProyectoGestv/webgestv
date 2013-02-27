@@ -12,6 +12,19 @@
   .field
     = f.label :desc
     = f.text_field :desc
+  .field
+    = f.label 'Repositorio'
+    = f.select :mother, @net_eles.map{ |c| [c.name, c.id] } , selected: @repoid
+
+  = fields_for @conn do |f|
+    - if @conn.errors.any?
+      #error_explanation
+        %h2= "#{pluralize(@conn.errors.count, "error")} prohibited this connection from being saved:"
+        %ul
+          - @conn.errors.full_messages.each do |msg|
+            %li= msg
+    = f.label :port
+    = f.text_field :port
 
   .actions
     = f.submit 'Guardar'

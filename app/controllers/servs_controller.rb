@@ -25,7 +25,8 @@ class ServsController < ApplicationController
   # GET /servs/new.json
   def new
     @serv = Serv.new
-
+    @conn=Conn.new
+    @net_eles = NetEle.all
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @serv }
@@ -35,14 +36,20 @@ class ServsController < ApplicationController
   # GET /servs/1/edit
   def edit
     @serv = Serv.find(params[:id])
+    @repoid=@serv.mother.id
+    @net_eles = NetEle.all
+    @conn = @serv.conn
   end
 
   # POST /servs
   # POST /servs.json
   def create
-    #params[:serv][:name]=params[:serv][:name].downcase
+    @conn=Conn.new
+    @conn.port= params[:conn][:port]
     @serv = Serv.new(params[:serv])
 
+    @conn.ip=@serv.mother.conn.ip
+    @serv.conn=@conn
     respond_to do |format|
       if @serv.save
         format.html { redirect_to @serv, notice: 'Serv was successfully created.' }
@@ -58,9 +65,16 @@ class ServsController < ApplicationController
   # PUT /servs/1.json
   def update
     @serv = Serv.find(params[:id])
+    @conn = @serv.conn
+    @serv2 = Serv.new(params[:serv])
+    params[:serv][:mother]=@serv2.mother
+    params[:conn][:ip]=@serv2.mother.conn.ip
+    puts "///////////////////////////////////////"
+    puts params[:serv]
+    puts "///////////////////////////////////////"
 
     respond_to do |format|
-      if @serv.update_attributes(params[:serv])
+      if @conn.update_attributes(params[:conn]) and @serv.update_attributes(params[:serv])
         format.html { redirect_to @serv, notice: 'Serv was successfully updated.' }
         format.json { head :no_content }
       else
