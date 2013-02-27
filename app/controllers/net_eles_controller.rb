@@ -47,7 +47,7 @@ class NetElesController < ApplicationController
     @net_ele.conn=@conn
     respond_to do |format|
       if @net_ele.save
-        format.html { redirect_to @net_ele, notice: 'Net ele was successfully created.' }
+        format.html { redirect_to net_eles_url, notice: 'Net ele was successfully created.'  }
         format.json { render json: @net_ele, status: :created, location: @net_ele }
       else
         format.html { render action: "new" }
@@ -63,7 +63,11 @@ class NetElesController < ApplicationController
     @conn = @net_ele.conn
     respond_to do |format|
       if @conn.update_attributes(params[:conn]) and @net_ele.update_attributes(params[:net_ele])
-        format.html { redirect_to @net_ele, notice: 'Net ele was successfully updated.' }
+        @net_ele.children.each do |h|
+          h.conn.ip=@conn.ip
+          h.save
+        end
+        format.html { redirect_to net_eles_url, notice: 'Net ele was successfully updated.'  }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -76,11 +80,17 @@ class NetElesController < ApplicationController
   # DELETE /net_eles/1.json
   def destroy
     @net_ele = NetEle.find(params[:id])
-    @net_ele.destroy
-
-    respond_to do |format|
-      format.html { redirect_to net_eles_url }
-      format.json { head :no_content }
+    begin
+      @net_ele.destroy
+      respond_to do |format|
+        format.html { redirect_to net_eles_url, notice: 'Net ele was successfully deleted.'   }
+        format.json { head :no_content }
+      end
+    rescue Mongoid::Errors::DeleteRestriction
+      respond_to do |format|
+        format.html { redirect_to net_eles_url, notice: 'Net ele has children and cant be deleted.'  }
+        format.json { render json: @net_ele.errors, status: :unprocessable_entity }
+      end
     end
   end
 end

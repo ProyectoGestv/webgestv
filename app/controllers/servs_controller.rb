@@ -27,10 +27,18 @@ class ServsController < ApplicationController
     @serv = Serv.new
     @conn=Conn.new
     @net_eles = NetEle.all
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @serv }
+    if @net_eles.count > 0
+      respond_to do |format|
+        format.html # new.html.erb
+        format.json { render json: @serv }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to servs_url, notice: 'Create at least one Net Ele.'  }
+        format.json { render json: @servs.errors, status: :unprocessable_entity }
+      end
     end
+
   end
 
   # GET /servs/1/edit
@@ -44,17 +52,16 @@ class ServsController < ApplicationController
   # POST /servs
   # POST /servs.json
   def create
-    @conn=Conn.new
-    @conn.port= params[:conn][:port]
     @serv = Serv.new(params[:serv])
-
-    @conn.ip=@serv.mother.conn.ip
+    params[:conn][:ip]=@serv.mother.conn.ip
+    @conn=Conn.new(params[:conn])
     @serv.conn=@conn
     respond_to do |format|
       if @serv.save
-        format.html { redirect_to @serv, notice: 'Serv was successfully created.' }
+        format.html { redirect_to servs_url, notice: 'Serv was successfully created.'  }
         format.json { render json: @serv, status: :created, location: @serv }
       else
+        @net_eles = NetEle.all
         format.html { render action: "new" }
         format.json { render json: @serv.errors, status: :unprocessable_entity }
       end
@@ -69,15 +76,13 @@ class ServsController < ApplicationController
     @serv2 = Serv.new(params[:serv])
     params[:serv][:mother]=@serv2.mother
     params[:conn][:ip]=@serv2.mother.conn.ip
-    puts "///////////////////////////////////////"
-    puts params[:serv]
-    puts "///////////////////////////////////////"
 
     respond_to do |format|
       if @conn.update_attributes(params[:conn]) and @serv.update_attributes(params[:serv])
-        format.html { redirect_to @serv, notice: 'Serv was successfully updated.' }
+        format.html { redirect_to servs_url, notice: 'Serv was successfully updated.'  }
         format.json { head :no_content }
       else
+        @net_eles = NetEle.all
         format.html { render action: "edit" }
         format.json { render json: @serv.errors, status: :unprocessable_entity }
       end
@@ -91,7 +96,7 @@ class ServsController < ApplicationController
     @serv.destroy
 
     respond_to do |format|
-      format.html { redirect_to servs_url }
+      format.html { redirect_to servs_url, notice: 'Serv was successfully deleted.'   }
       format.json { head :no_content }
     end
   end
