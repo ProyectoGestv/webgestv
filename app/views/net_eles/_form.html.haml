@@ -1,30 +1,34 @@
 = form_for @net_ele do |f|
   - if @net_ele.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@net_ele.errors.count, "error")} prohibited this network element from being saved:"
+
+      %h2=t("errors.template.header", count: @net_ele.errors.count, model: t('net_eles.model'))
       %ul
-        - @net_ele.errors.full_messages.each do |msg|
-          %li= msg
+        - @net_ele.errors.messages.values.each do |msg|
+          - msg.each do |m|
+            %li= m
 
   .field
-    = f.label :name
+    = f.label t('.name')
     = f.text_field :name
   .field
-    = f.label :desc
+    = f.label t('.desc')
     = f.text_field :desc
 
   = fields_for @conn do |f|
     - if @conn.errors.any?
       #error_explanation
-        %h2= "#{pluralize(@conn.errors.count, "error")} prohibited this connection from being saved:"
+        %h2= t("errors.template.header", count: @conn.errors.count, model: t('net_eles.model'))
         %ul
-          - @conn.errors.full_messages.each do |msg|
-            %li= msg
+          - @conn.errors.messages.values.each do |msg|
+            - msg.each do |m|
+              %li= m
 
-    = f.label :ip
-    = f.text_field :ip
-    = f.label :port
-    = f.text_field :port
+    = f.label t('.ip')
+    = f.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
+    = f.label t('.port')
+    = f.number_field :port, min: 1, placeholder: 1000
+
 
   .actions
-    = f.submit 'Guardar'
+    = f.submit t('.submit')

@@ -1,4 +1,4 @@
-%h1 Listing net_eles
+%h1= t('.title')
 - if notice
   %p#notice= notice
 %table
@@ -11,11 +11,11 @@
   - @net_eles.each do |net_ele|
     %tr
       %td= net_ele.name
-      %td= link_to 'Show', net_ele
-      %td= link_to 'Edit', edit_net_ele_path(net_ele)
-      %td= link_to 'Destroy', net_ele, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to t('.show'), net_ele
+      %td= link_to t('.edit'), edit_net_ele_path(net_ele)
+      %td= link_to t('.destroy'), net_ele, :method => :delete, :data => { :confirm => t('.confirm') }
 
 %br
 
-= link_to 'New Net ele', new_net_ele_path
+= link_to t('.new'), new_net_ele_path
 

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
   resources :net_eles
   resources :servs

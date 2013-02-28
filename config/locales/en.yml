@@ -2,4 +2,102 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  errors:
+    template:
+      body:        "Hubo problemas con los siguientes campos:"
+      header:
+        one:       "1 error no permite guardar el %{model}"
+        other:     "%{count} errores no permiten guardar el %{model}"
+
+#  errors: &errors
+#    format: ! '%{attribute} %{message}'
+#    conn: "Conexion"
+#    messages:
+#      invalid: "no es válido"
+
+  mongoid:
+    models:
+      conn:
+        one: "Conexión"
+        other: "Conexiones"
+      net_ele:
+        one: "Elemento de red"
+        other: "Elementos de red"
+      serv:
+        one: "Servicio"
+        other: "Servicios"
+    attributes:
+      net_ele:
+        conn: "Conexión"
+      serv:
+        conn: "Conexión"
+    errors:
+      models:
+        net_ele:
+          attributes:
+            conn:
+              invalid: "Los parámetros de conexión no son válidos"
+        serv:
+          attributes:
+            conn:
+              invalid: "Los parámetros de conexión no son válidos"
+
+  net_eles:
+    model:        "Elemento de Red"
+    index:
+      title:      "Listado de Elementos de Red"
+      show:       "Ver"
+      edit:       "Editar"
+      destroy:    "Eliminar"
+      new:        "Crear elemento de red"
+      confirm:    "Está seguro que desea eliminar el elemento de red?"
+    form:
+      name:       "Nombre"
+      desc:       "Descripción"
+      ip:         "Dirección IP"
+      port:       "Puerto"
+      submit:     "Guardar"
+    new:
+      title:      "Nuevo elemento de Red"
+      back:       "Volver"
+    edit:
+      title:      "Modificando elemento de Red"
+      back:       "Volver"
+      show:       "Ver"
+    update:
+      notice:     "El elemento de red fue actualizado satisfactoriamente."
+    create:
+      notice:     "El elemento de red fue creado satisfactoriamente."
+    delete:
+      notice:     "El elemento de red fue eliminado satisfactoriamente."
+      error_ch:   "El elemento de red tiene servicios asociados y no puede ser eliminado."
+
+  servs:
+    model:        "Servicio"
+    index:
+      title:      "Listado de Servicios"
+      show:        "Ver"
+      edit:        "Editar"
+      destroy:     "Eliminar"
+      new:         "Crear servicio"
+      confirm:    "Está seguro que desea eliminar el servicio?"
+    form:
+      name:       "Nombre"
+      desc:       "Descripción"
+      port:       "Puerto"
+      submit:     "Guardar"
+      repository: "Repositorio"
+    new:
+      title:      "Nuevo servicio"
+      back:       "Volver"
+    edit:
+      title:      "Modificando servicio"
+      back:       "Volver"
+      show:       "Ver"
+    update:
+      notice:     "El servicio fue actualizado satisfactoriamente."
+    create:
+      notice:     "El servicio fue creado satisfactoriamente."
+    delete:
+      notice:     "El servicio fue eliminado satisfactoriamente."
+      error_mo:   "Debe crear al menos un Elemento de Red."

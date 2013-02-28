@@ -1,30 +1,32 @@
 = form_for @serv do |f|
   - if @serv.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@serv.errors.count, "error")} prohibited this serv from being saved:"
+      %h2=t("errors.template.header", count: @serv.errors.count, model: t('servs.model'))
       %ul
-        - @serv.errors.full_messages.each do |msg|
-          %li= msg
+        - @serv.errors.messages.values.each do |msg|
+          - msg.each do |m|
+            %li= m
 
   .field
-    = f.label :name
+    = f.label t('.name')
     = f.text_field :name
   .field
-    = f.label :desc
+    = f.label t('.desc')
     = f.text_field :desc
   .field
-    = f.label 'Repositorio'
+    = f.label t('.repository')
     = f.select :mother, @net_eles.map{ |c| [c.name, c.id] } , selected: @repoid
 
   = fields_for @conn do |f|
     - if @conn.errors.any?
       #error_explanation
-        %h2= "#{pluralize(@conn.errors.count, "error")} prohibited this connection from being saved:"
+        %h2= t("errors.template.header", count: @conn.errors.count, model: t('servs.model'))
         %ul
-          - @conn.errors.full_messages.each do |msg|
-            %li= msg
-    = f.label :port
-    = f.text_field :port
+          - @conn.errors.messages.values.each do |msg|
+            - msg.each do |m|
+              %li= m
+    = f.label t('.port')
+    = f.number_field :port, min: 1, placeholder: 1000
 
   .actions
-    = f.submit 'Guardar'
+    = f.submit t('.submit')

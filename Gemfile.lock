@@ -60,6 +60,7 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.7.6)
     libv8 (3.11.8.13)
+    magic_encoding (0.0.2)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -135,6 +136,7 @@ DEPENDENCIES
   haml
   haml-rails
   jquery-rails
+  magic_encoding
   mongoid
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)

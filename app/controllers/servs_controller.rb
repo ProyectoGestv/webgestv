@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class ServsController < ApplicationController
   # GET /servs
   # GET /servs.json
@@ -34,7 +35,7 @@ class ServsController < ApplicationController
       end
     else
       respond_to do |format|
-        format.html { redirect_to servs_url, notice: 'Create at least one Net Ele.'  }
+        format.html { redirect_to servs_url, notice: t('servs.delete.error_mo')  }
         format.json { render json: @servs.errors, status: :unprocessable_entity }
       end
     end
@@ -58,7 +59,7 @@ class ServsController < ApplicationController
     @serv.conn=@conn
     respond_to do |format|
       if @serv.save
-        format.html { redirect_to servs_url, notice: 'Serv was successfully created.'  }
+        format.html { redirect_to servs_url, notice: t('servs.create.notice')  }
         format.json { render json: @serv, status: :created, location: @serv }
       else
         @net_eles = NetEle.all
@@ -79,7 +80,7 @@ class ServsController < ApplicationController
 
     respond_to do |format|
       if @conn.update_attributes(params[:conn]) and @serv.update_attributes(params[:serv])
-        format.html { redirect_to servs_url, notice: 'Serv was successfully updated.'  }
+        format.html { redirect_to servs_url, notice: t('servs.update.notice')  }
         format.json { head :no_content }
       else
         @net_eles = NetEle.all
@@ -96,7 +97,7 @@ class ServsController < ApplicationController
     @serv.destroy
 
     respond_to do |format|
-      format.html { redirect_to servs_url, notice: 'Serv was successfully deleted.'   }
+      format.html { redirect_to servs_url, notice: t('servs.delete.notice')   }
       format.json { head :no_content }
     end
   end

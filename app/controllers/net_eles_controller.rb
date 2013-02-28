@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class NetElesController < ApplicationController
   # GET /net_eles
   # GET /net_eles.json
@@ -47,7 +48,7 @@ class NetElesController < ApplicationController
     @net_ele.conn=@conn
     respond_to do |format|
       if @net_ele.save
-        format.html { redirect_to net_eles_url, notice: 'Net ele was successfully created.'  }
+        format.html { redirect_to net_eles_url, notice: t('net_eles.create.notice')  }
         format.json { render json: @net_ele, status: :created, location: @net_ele }
       else
         format.html { render action: "new" }
@@ -67,7 +68,7 @@ class NetElesController < ApplicationController
           h.conn.ip=@conn.ip
           h.save
         end
-        format.html { redirect_to net_eles_url, notice: 'Net ele was successfully updated.'  }
+        format.html { redirect_to net_eles_url, notice: t('net_eles.update.notice')  }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -83,12 +84,12 @@ class NetElesController < ApplicationController
     begin
       @net_ele.destroy
       respond_to do |format|
-        format.html { redirect_to net_eles_url, notice: 'Net ele was successfully deleted.'   }
+        format.html { redirect_to net_eles_url, notice: t('net_eles.delete.notice')   }
         format.json { head :no_content }
       end
     rescue Mongoid::Errors::DeleteRestriction
       respond_to do |format|
-        format.html { redirect_to net_eles_url, notice: 'Net ele has children and cant be deleted.'  }
+        format.html { redirect_to net_eles_url, notice: t('net_eles.delete.error_ch')  }
         format.json { render json: @net_ele.errors, status: :unprocessable_entity }
       end
     end
