@@ -1,0 +1,51 @@
+@import 'bootstrap';
+* {
+  margin: 0;
+}
+body{
+  height: 100%;
+  background: #9fccbb;
+  color: #f9f9f9;
+  font-family: Arial;
+  line-height: 1.5;
+}
+.banner{
+  background: #8fcc4c;
+  padding: 10px;
+  border-bottom: 2px solid;
+  color: #282;
+  text-align: left;
+}
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -40px;
+}
+#footer{
+  height: 40px;
+  background-color: #000000;
+  color:#ffffff;
+  vertical-align: middle;
+  text-align: center;
+}
+#push {
+  height: 40px;
+}
+.content {
+    padding: 0 0 0 40px;
+}
+.navbar .nav {
+  margin: 0 0 0 0;
+}
+.navbar .nav .dropdown-toggle .caret {
+  margin-top: 14px;
+}
+
+li {
+  line-height: 30px;
+}
+
+.pp {
+  padding: 10px 0 0 0px;
+}
