@@ -94,4 +94,43 @@ class NetElesController < ApplicationController
       end
     end
   end
+
+  def sauce
+    ip=params['ip']
+    port=params['port']
+    a=""
+    if self.is_port_open?(ip,port)
+      puts "//////////////////////////////////////v"
+      a="Conexión exitosa"
+    else
+      puts "//////////////////////////////////////f"
+      a="No hay conexión"
+    end
+    respond_to do |format|
+      format.js { render :js => "alert('#{a}')" }
+    end
+  end
+
+  def is_port_open?(ip, port)
+    puts "//////////////////////////////////////e"
+    begin
+      Timeout::timeout(1) do
+        begin
+          puts "//////////////////////////////////////"
+          s = TCPSocket.new(ip, port)
+          s.close
+          puts "it works"
+          puts "//////////////////////////////////////"
+          return true
+        rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH
+          puts "dont work"
+          puts "//////////////////////////////////////"
+          return false
+        end
+      end
+    rescue Timeout::Error
+    end
+
+    return false
+  end
 end

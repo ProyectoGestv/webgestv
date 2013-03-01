@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+
 class ManRsc
   include Mongoid::Document
   validates_presence_of :name, message: 'Nombre no puede estar vacío'
