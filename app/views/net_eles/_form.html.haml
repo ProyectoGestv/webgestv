@@ -28,14 +28,14 @@
     = f1.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
     = f1.label t('.port')
     = f1.number_field :port, min: 1, placeholder: 1000
-    = link_to  'Probar', '/sauce', :id => "my_link", :remote => true, :class => "button-link"
+    = link_to  'Probar Conexión', '/neteles/testconn', :id => "testconn", :remote => true, :class => "testconn"
 
   %script{:type => "text/javascript"}
     :plain
-      $('.button-link').bind('ajax:success', function(){
+      $('.testconn').bind('ajax:success', function(){
       });
       $().ready(function(){
-          $('#my_link').click(function(){
+          $('#testconn').click(function(){
               ip=document.getElementById('conn_ip').value
               port=document.getElementById('conn_port').value
               $(this).attr('href', $(this).attr('href') + '?ip=' + ip + '&port=' + port);

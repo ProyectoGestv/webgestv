@@ -101,4 +101,36 @@ class ServsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def testconn
+    repo=params['repo']
+    port=params['port']
+    @netele = NetEle.find_by(:_id => repo)
+    ip=@netele.conn.ip
+    if self.is_port_open?(ip,port)
+      a="Conexión exitosa"
+    else
+      a="No hay conexión"
+    end
+    respond_to do |format|
+      format.js { render :js => "alert('#{a}')" }
+    end
+  end
+
+  def is_port_open?(ip, port)
+    begin
+      Timeout::timeout(1) do
+        begin
+          s = TCPSocket.new(ip, port)
+          s.close
+          return true
+        rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::EADDRNOTAVAIL
+          return false
+        end
+      end
+    rescue Timeout::Error
+    end
+
+    return false
+  end
 end
