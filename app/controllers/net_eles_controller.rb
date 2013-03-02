@@ -96,8 +96,11 @@ class NetElesController < ApplicationController
   end
 
   def testconn
+    puts params
     ip=params['ip']
     port=params['port']
+    puts 'ip='+ip
+    puts 'port='+port
     if self.is_port_open?(ip,port)
       a="Conexión exitosa"
     else
@@ -109,6 +112,8 @@ class NetElesController < ApplicationController
   end
 
   def is_port_open?(ip, port)
+    puts 'ip='+ip
+    puts 'port='+port
     begin
       Timeout::timeout(1) do
         begin

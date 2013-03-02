@@ -27,18 +27,7 @@
               %li= m
     = f.label t('.port')
     = f.number_field :port, min: 1, placeholder: 1000
-    = link_to  'Probar Conexión', '/servs/testconn', :id => "testconn", :remote => true, :class => "testconn"
+    = link_to  'Probar Conexión', '/serv/testconn', :id => "testconnserv", :remote => true, :class => "testconnserv"
 
-  %script{:type => "text/javascript"}
-    :plain
-      $('.testconn').bind('ajax:success', function(){
-      });
-      $().ready(function(){
-          $('#testconn').click(function(){
-              repo=document.getElementById('serv_mother').value
-              port=document.getElementById('conn_port').value
-              $(this).attr('href', $(this).attr('href') + '?repo=' + repo + '&port=' + port);
-          });
-      });
   .actions
     = f.submit t('.submit')

@@ -15,7 +15,7 @@
     = f.label t('.desc')
     = f.text_field :desc
 
-  = fields_for @conn, :remote => true, :action => "sauce", class: "button-link"  do |f1|
+  = fields_for @conn do |f|
     - if @conn.errors.any?
       #error_explanation
         %h2= t("errors.template.header", count: @conn.errors.count, model: t('net_eles.model'))
@@ -24,23 +24,11 @@
             - msg.each do |m|
               %li= m
 
-    = f1.label t('.ip')
-    = f1.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
-    = f1.label t('.port')
-    = f1.number_field :port, min: 1, placeholder: 1000
-    = link_to  'Probar Conexión', '/neteles/testconn', :id => "testconn", :remote => true, :class => "testconn"
-
-  %script{:type => "text/javascript"}
-    :plain
-      $('.testconn').bind('ajax:success', function(){
-      });
-      $().ready(function(){
-          $('#testconn').click(function(){
-              ip=document.getElementById('conn_ip').value
-              port=document.getElementById('conn_port').value
-              $(this).attr('href', $(this).attr('href') + '?ip=' + ip + '&port=' + port);
-          });
-      });
+    = f.label t('.ip')
+    = f.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
+    = f.label t('.port')
+    = f.number_field :port, min: 1, placeholder: 1000
+    = link_to  'Probar Conexión', '/net_ele/testconn', :id => "testconnnetele", :remote => true, :class => "testconnnetele"
 
   .actions
     = f.submit t('.submit')
