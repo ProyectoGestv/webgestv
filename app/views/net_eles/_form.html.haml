@@ -7,28 +7,34 @@
         - @net_ele.errors.messages.values.each do |msg|
           - msg.each do |m|
             %li= m
-
-  .field
-    = f.label t('.name')
+  %fieldset#mainform
+    %legend
+      Datos
+    = f.label :name, t('.name')
     = f.text_field :name
-  .field
-    = f.label t('.desc')
+    %br
+    = f.label :desc, t('.desc')
     = f.text_field :desc
-
-  = fields_for @conn do |f|
-    - if @conn.errors.any?
-      #error_explanation
-        %h2= t("errors.template.header", count: @conn.errors.count, model: t('net_eles.model'))
-        %ul
-          - @conn.errors.messages.values.each do |msg|
-            - msg.each do |m|
-              %li= m
-
-    = f.label t('.ip')
-    = f.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
-    = f.label t('.port')
-    = f.number_field :port, min: 1, placeholder: 1000
-    = link_to  'Probar Conexión', '/net_ele/testconn', :id => "testconnnetele", :remote => true, :class => "testconnnetele"
-
-  .actions
-    = f.submit t('.submit')
+    %br
+    = fields_for @conn do |f|
+      - if @conn.errors.any?
+        #error_explanation
+          %h2= t("errors.template.header", count: @conn.errors.count, model: t('net_eles.model'))
+          %ul
+            - @conn.errors.messages.values.each do |msg|
+              - msg.each do |m|
+                %li= m
+      %fieldset#subform1
+        %legend
+          Conexión
+        = f.label :ip, t('.ip')
+        = f.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
+        %br
+        = f.label :port, t('.port')
+        = f.number_field :port, min: 1, placeholder: 1000
+        %br
+        = link_to  'Probar Conexión', '/net_ele/testconn', :id => "testconnnetele", :remote => true, :class => "testconnnetele"
+    %br
+    .form-actions
+      %button.btn.btn-primary{:type => "submit"}=t('.submit')
+    = link_to "Volver", net_eles_path
