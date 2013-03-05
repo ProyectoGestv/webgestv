@@ -1,21 +1,26 @@
 %h1= t('.title')
+%br
 - if notice
-  %p#notice= notice
-%table
-  %tr
-    %th
-    %th
-    %th
-    %th
+  .alert.alert-success
+    %a.close{"data-dismiss" => "alert"} ×
+    = notice
 
-  - @net_eles.each do |net_ele|
-    %tr
-      %td= net_ele.name
-      %td= link_to t('.show'), net_ele
-      %td= link_to t('.edit'), edit_net_ele_path(net_ele)
-      %td= link_to t('.destroy'), net_ele, :method => :delete, :data => { :confirm => t('.confirm') }
+%table.table.table-striped
+  %thead
+    %th Nombre
+    %th Descripción
+    %th Ver
+    %th Editar
+    %th Eliminar
+  %tbody
+    - @net_eles.each do |net_ele|
+      %tr
+        %td= net_ele.name
+        %td= net_ele.desc
+        %td= link_to image_tag('ver.png', {:title => t('.show')}), net_ele
+        %td= link_to image_tag('editar.png', {:title => t('.edit')}), edit_net_ele_path(net_ele)
+        %td= link_to image_tag('eliminar.png', {:title => t('.destroy')}), net_ele, :method => :delete, :data => { :confirm => t('.confirm') }
 
 %br
-
-= link_to t('.new'), new_net_ele_path
-
+.form-actions
+  = link_to t('.new'), new_net_ele_path, {:class => "links"}

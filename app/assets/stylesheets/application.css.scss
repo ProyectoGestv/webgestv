@@ -34,6 +34,7 @@ body{
 }
 .content {
     padding: 0 0 0 40px;
+    width: 50%;
 }
 
 .navbar-inner {
@@ -187,28 +188,12 @@ legend {
   padding: 10px;
 }
 #subform1 {
-  padding: 0 0 0 20;
-  margin: 10;
-  border: 0;
+  border: 0px solid #ccc;
+  padding: 30px;
 }
 
 .the-legend {
-  border-style: none;
-  border-width: 0;
-  font-size: 14px;
-  line-height: 20px;
-  margin-bottom: 0;
-}
-.the-fieldset1 {
-  border: 2px groove threedface #444;
-  -webkit-box-shadow:  0px 0px 0px 0px #000;
-  box-shadow:  0px 0px 0px 0px #000;
-}
-.the-fieldset2 {
-  padding: 0 0 0 20;
-  border: 2px groove threedface #444;
-  -webkit-box-shadow:  0px 0px 0px 0px #000;
-  box-shadow:  0px 0px 0px 0px #000;
+  margin-bottom: 0px;
 }
 
 .links {
@@ -251,7 +236,7 @@ legend {
 
 form {
   margin: 0 0 20px;
-  width: 25%;
+  //width: 25%;
 }
 
 select:focus,
@@ -261,4 +246,22 @@ input[type="number"]:focus,{
   outline: 0;
   outline: thin dotted \9; /* IE6-9 */
   @include box-shadow(#{inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(#8cb44e, 1)});
+}
+
+table {
+  //max-width: 50%;
+}
+
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th {
+  background-color: #e8f9e7;
+}
+
+.show.title{
+  padding: 10 0 0 0;
+  font-size: 19.5px;
+  color: #000000;
+}
+.show.text{
+  padding: 0 0 0 20;
 }

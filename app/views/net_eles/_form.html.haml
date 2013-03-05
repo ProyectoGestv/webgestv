@@ -1,40 +1,46 @@
 = form_for @net_ele do |f|
-  - if @net_ele.errors.any?
-    #error_explanation
-
-      %h2=t("errors.template.header", count: @net_ele.errors.count, model: t('net_eles.model'))
-      %ul
-        - @net_ele.errors.messages.values.each do |msg|
-          - msg.each do |m|
-            %li= m
-  %fieldset#mainform
-    %legend
-      Datos
-    = f.label :name, t('.name')
-    = f.text_field :name
-    %br
-    = f.label :desc, t('.desc')
-    = f.text_field :desc
-    %br
-    = fields_for @conn do |f|
-      - if @conn.errors.any?
-        #error_explanation
-          %h2= t("errors.template.header", count: @conn.errors.count, model: t('net_eles.model'))
+  %table
+    %tr
+      %td
+        %fieldset#mainform
+          %legend.the-legend
+            Datos
+          = f.label :name, t('.name')
+          = f.text_field :name
+          %br
+          = f.label :desc, t('.desc')
+          = f.text_field :desc
+      %td
+        - if @net_ele.errors.any?
           %ul
-            - @conn.errors.messages.values.each do |msg|
+            - @net_ele.errors.messages.values.each do |msg|
               - msg.each do |m|
-                %li= m
-      %fieldset#subform1
-        %legend
-          Conexión
-        = f.label :ip, t('.ip')
-        = f.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
-        %br
-        = f.label :port, t('.port')
-        = f.number_field :port, min: 1, placeholder: 1000
-        %br
-        = link_to  'Probar Conexión', '/net_ele/testconn', :id => "testconnnetele", :remote => true, :class => "testconnnetele"
-    %br
-    .form-actions
-      %button.btn.btn-primary{:type => "submit"}=t('.submit')
-      = link_to "Volver", net_eles_path, {:class => "links"}
+                .alert.alert-error
+                  %a.close{"data-dismiss" => "alert"} ×
+                  =m
+    %tr
+      = fields_for @conn do |f|
+        %td
+          %fieldset#subform1
+            %legend.the-legend
+              Conexión
+            = f.label :ip, t('.ip')
+            = f.text_field :ip, class: "ip-input", maxlength: 15, size: 20, placeholder: "1.0.0.0"
+            %br
+            = f.label :port, t('.port')
+            = f.number_field :port, min: 1, placeholder: 1000
+            %br
+            = link_to  'Probar Conexión', '/net_ele/testconn', :id => "testconnnetele", :remote => true, :class => "testconnnetele"
+        %td
+          - if @conn.errors.any?
+            %ul
+              - @conn.errors.messages.values.each do |msg|
+                - msg.each do |m|
+                  .alert.alert-error
+                    %a.close{"data-dismiss" => "alert"} ×
+                    =m
+
+
+  .form-actions
+    %button.btn.btn-primary{:type => "submit"}=t('.submit')
+    = link_to "Volver", net_eles_path, {:class => "links"}
