@@ -4,13 +4,13 @@
 }
 body{
   height: 100%;
-  background: #ffffff;
-  color: #893994;
+  background: #f7f7f7;
+  color: #3d3d3d;
   font-family: Arial;
   line-height: 1.5;
 }
 .banner{
-  background: #8fcc4c;
+  background: #3d9143;
   padding: 10px;
   border-bottom: 2px solid;
   color: #282;
@@ -24,8 +24,8 @@ body{
 }
 #footer{
   height: 40px;
-  background-color: #F0997F;
-  color:#93361B;
+  background-color: #f4f4f4;
+  color:#000000;
   vertical-align: middle;
   text-align: center;
 }
@@ -37,17 +37,41 @@ body{
 }
 
 .navbar-inner {
-  background: #93361B;
+  /*background: #93361B;*/
+  background: #262626;
 }
 
 .navbar .brand {
-  color: #F0997F;
-  text-shadow: 0 1px 0 #F0997F;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 40px;
+  /*color: #F0997F;
+  text-shadow: 0 1px 0 #F0997F;*/
+  color: #ffffff;
 }
 
 .navbar .nav > li > a {
-  color: #F0997F;
-  text-shadow: 0 1px 0 #F0997F;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: normal;
+  line-height: 40px;
+  color: #686868;
+  text-shadow: 0 1px 0 #686868;
+}
+
+.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+.navbar .nav li.dropdown.open > .dropdown-toggle,
+.navbar .nav li.dropdown.active > .dropdown-toggle,
+.navbar .nav li.dropdown.open.active > .dropdown-toggle {
+  color: #ffffff;
+  background-color: #262626;
 }
 
 .navbar .nav {
@@ -55,7 +79,21 @@ body{
 }
 
 .navbar .nav .dropdown-toggle .caret {
-  margin-top: 14px;
+  margin-top: 20px;
+}
+
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #3b3b3b;
+  background-image: -moz-linear-gradient(top, #3b3b3b, #3b3b3b);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3b3b3b), to(#3b3b3b));
+  background-image: -webkit-linear-gradient(top, #3b3b3b, #3b3b3b);
+  background-image: -o-linear-gradient(top, #3b3b3b, #3b3b3b);
+  background-image: linear-gradient(to bottom, #3b3b3b, #3b3b3b);
 }
 
 li {
@@ -139,7 +177,7 @@ legend {
   margin-bottom: 27px;
   font-size: 19.5px;
   line-height: 36px;
-  color: #333;
+  color: #7bbb37;
   border: 0;
   border-bottom: 1px solid #E5E5E5;
 }
@@ -171,4 +209,56 @@ legend {
   border: 2px groove threedface #444;
   -webkit-box-shadow:  0px 0px 0px 0px #000;
   box-shadow:  0px 0px 0px 0px #000;
+}
+
+.links {
+  text-decoration: underline;
+  padding: 0 0 0 20;
+  color: #57bb37;
+}
+.links:hover {
+   text-decoration: none;
+  color: #57bb37;
+}
+.testconnnetele:hover {
+  text-decoration: none;
+  color: #57bb37;
+}
+
+.testconnnetele {
+  text-decoration: underline;
+  padding: 20 0 0 0;
+  color: #57bb37;
+}
+
+.btn-primary {
+  color: white;
+  background-image: -webkit-linear-gradient(top, rgb(64, 151, 38), rgb(64, 151, 38));
+  border-color: #378120 #378120 #378120;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+  color: #3d3d3d;
+  background-image: -webkit-linear-gradient(top, rgb(241, 241, 241), rgb(241, 241, 241));
+  background-color: rgb(241, 241, 241);
+  border-color: #d0d0d0 #d0d0d0 #d0d0d0;
+}
+
+form {
+  margin: 0 0 20px;
+  width: 25%;
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,{
+  border-color: rgba(208,208,208,1);
+  outline: 0;
+  outline: thin dotted \9; /* IE6-9 */
+  @include box-shadow(#{inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(#8cb44e, 1)});
 }
