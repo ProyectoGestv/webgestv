@@ -42,23 +42,16 @@ body{
   background: #262626;
 }
 
-.navbar .brand {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: normal;
-  line-height: 40px;
-  /*color: #F0997F;
-  text-shadow: 0 1px 0 #F0997F;*/
-  color: #ffffff;
-}
-
 .navbar .nav > li > a {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  border-left: 0px solid #000;
   font-size: 18px;
   font-weight: normal;
-  line-height: 40px;
+  margin-top: 5px;
+  line-height: 25px;
+  margin-bottom: 5px;
   color: #686868;
-  text-shadow: 0 1px 0 #686868;
+  text-shadow: 0 0px 0 #686868;
 }
 
 .navbar .nav > li > a:focus,
@@ -79,8 +72,13 @@ body{
   margin: 0 0 0 0;
 }
 
-.navbar .nav .dropdown-toggle .caret {
-  margin-top: 20px;
+.navbar .nav > li.dropdown > a  {
+  border-left: 1px solid #000;
+}
+
+.navbar .nav > li > a.active {
+  color: #ffffff;
+  background-color: #262626;
 }
 
 .dropdown-menu > li > a:hover,
