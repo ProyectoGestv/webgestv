@@ -203,12 +203,12 @@ legend {
    text-decoration: none;
   color: #57bb37;
 }
-.testconnnetele:hover {
+.testconnnetele:hover, .testconnserv:hover{
   text-decoration: none;
   color: #57bb37;
 }
 
-.testconnnetele {
+.testconnnetele , .testconnserv{
   text-decoration: underline;
   padding: 20 0 0 0;
   color: #57bb37;

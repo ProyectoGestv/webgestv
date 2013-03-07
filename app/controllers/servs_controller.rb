@@ -54,8 +54,8 @@ class ServsController < ApplicationController
   # POST /servs.json
   def create
     @serv = Serv.new(params[:serv])
-    params[:conn][:ip]=@serv.mother.conn.ip
-    @conn=Conn.new(params[:conn])
+    params[:serv][:conn][:ip]=@serv.mother.conn.ip if @serv.mother
+    @conn=Conn.new(params[:serv][:conn])
     @serv.conn=@conn
     respond_to do |format|
       if @serv.save
@@ -103,6 +103,7 @@ class ServsController < ApplicationController
   end
 
   def testconn
+    puts params
     repo=params['repo']
     port=params['port']
     @netele = NetEle.find_by(:_id => repo)
