@@ -1,3 +1,14 @@
+= simple_form_for(@serv, :html => {:class => 'form-horizontal' }) do |f|
+  =f.input :name, label: t('.name'), :input_html => { :class => "span6" }, :hint => "nombre del elemento de red"
+  =f.input :desc, label: t('.desc'), :input_html => { :class => "span6" }, :hint => "descripción del elemento de red"
+  =f.input :mother, label: 'Repositorio', :collection => @net_eles.map{ |c| [c.name, c.id] }, :hint => "Repositorios"
+  =f.simple_fields_for @conn do |f1|
+    =f1.input :port, :as => :integer, label: t('.port'), :input_html => { placeholder: 1000, min: 1, :class => "span6" }, :hint => "nombre del elemento de red"
+  %br
+  = link_to  'Probar Conexión', '/serv/testconn', :id => "testconnserv", :remote => true, :class => "testconnserv"
+  =f.button :submit, 'Guardar', :class => 'btn-primary'
+  =submit_tag 'Cancelar', :type => :reset, :class => "btn btn-danger"
+
 = form_for @serv do |f|
   - if @serv.errors.any?
     #error_explanation
