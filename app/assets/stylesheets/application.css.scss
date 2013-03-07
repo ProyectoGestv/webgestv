@@ -159,7 +159,7 @@ input[type="color"],
   display: inline-block;
   height: 30px;
   padding: 4px 6px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   font-size: 14px;
   line-height: 20px;
   color: #555555;
@@ -169,35 +169,45 @@ input[type="color"],
   vertical-align: middle;
 }
 
-legend {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 27px;
-  font-size: 19.5px;
-  line-height: 36px;
-  color: #7bbb37;
-  border: 0;
-  border-bottom: 1px solid #E5E5E5;
-}
-
 #mainform {
-  border: 0px solid #ccc;
-  padding: 10px;
+  display: inline-block;
+  padding: 5px;
 }
 #subform1 {
-  border: 0px solid #ccc;
-  padding: 30px;
+  display: inline-block;
+  padding: 20px;
 }
 
 .the-legend {
+  font-weight: bolder;
+  color: #57bb37;
+  background: #F2F2F2;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 5px;
   margin-bottom: 0px;
+  line-height: 52px;
+}
+
+.the-legend2 {
+  font-weight: bolder;
+  color: #57bb37;
+  background: #F6F6F6;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  padding: 5px;
+  margin-bottom: 0px;
+  line-height: 52px;
 }
 
 .links {
   text-decoration: underline;
   padding: 0 0 0 20;
   color: #57bb37;
+  text-align: center;
+  font-size: 14;
 }
 .links:hover {
    text-decoration: none;
@@ -262,4 +272,45 @@ table {
 }
 .show.text{
   padding: 0 0 0 20;
+}
+
+/*
+.form-actions {
+  padding-left: 185px;
+  padding: 19px 20px 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: transparent;
+  border-top: 0px solid #e5e5e5;
+} */
+
+.form-horizontal .form-actions {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  background-color: transparent;
+  border-top: 0px solid #e5e5e5;
+  text-align: center;
+  padding-left: 0px;
+}
+
+.control-label {
+  color: #3E3535;
+  font-weight: bolder;
+  font-size: 16px;
+}
+
+.form-horizontal input + .help-block, .form-horizontal select + .help-block, .form-horizontal textarea + .help-block, .form-horizontal .uneditable-input + .help-block, .form-horizontal .input-prepend + .help-block, .form-horizontal .input-append + .help-block {
+  margin-top: 1px;
+}
+
+.help-block, .help-inline {
+  color: #999999;
+}
+
+.control-group.error .control-label, .control-group.error .help-block, .control-group.error {
+  color: #999999;
+}
+
+.control-group.error .control-label, .control-group.error, .control-group.error .help-inline {
+  font-size: 16px;
 }

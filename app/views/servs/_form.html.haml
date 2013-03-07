@@ -5,12 +5,13 @@
       =f.input :name, label: t('.name'), :input_html => { :class => "span4" }, :hint => "Nombre del elemento de red"
       =f.input :desc, label: t('.desc'), :input_html => { :class => "span6" }, :hint => "Descripción del elemento de red"
       %fieldset#subform1
-        %legend.the-legend
+        %legend.the-legend2
           Conexión
           =f.input :mother, label: 'Repositorio', :collection => @net_eles.map{ |c| [c.name, c.id] }, :hint => "Elemento de red que contiene al servicio", selected: @repoid, include_blank: 'Seleccione un repositorio'
           =f.simple_fields_for @conn do |f|
             =f.input :port, :as => :integer, label: t('.port'), :input_html => { placeholder: 1000, min: 1, :class => "span2" }, :hint => "Puerto en que escucha el servicio"
-            = link_to  'Probar Conexión', '/serv/testconn', :id => "testconnserv", :remote => true, :class => "testconnserv"
-.form-actions
-  %button.btn.btn-primary{:type => "submit"}=t('.submit')
-  = link_to "Volver", servs_path, {:class => "links"}
+            .links=link_to  'Probar Conexión', '/serv/testconn', :id => "testconnserv", :remote => true, :class => "testconnserv"
+            .succon
+    .form-actions
+      %button.btn.btn-primary{:type => "submit"}=t('.submit')
+      =link_to "Volver", servs_path, {:class => "links"}

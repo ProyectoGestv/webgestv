@@ -54,7 +54,10 @@ class ServsController < ApplicationController
   # POST /servs.json
   def create
     @serv = Serv.new(params[:serv])
-    params[:serv][:conn][:ip]=@serv.mother.conn.ip if @serv.mother
+    if @serv.mother
+      @repoid=@serv.mother.id
+      params[:serv][:conn][:ip]=@serv.mother.conn.ip
+    end
     @conn=Conn.new(params[:serv][:conn])
     @serv.conn=@conn
     respond_to do |format|
@@ -114,7 +117,8 @@ class ServsController < ApplicationController
       a="No hay conexión"
     end
     respond_to do |format|
-      format.js { render :js => "alert('#{a}')" }
+      format.js { render :js => "message=#{a};alert(message)" }
+      #conn=document.getElementById('succon');conn.innerHTML = message;
     end
   end
 
@@ -131,7 +135,6 @@ class ServsController < ApplicationController
       end
     rescue Timeout::Error
     end
-
     return false
   end
 end
