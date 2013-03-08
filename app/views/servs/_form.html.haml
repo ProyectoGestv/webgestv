@@ -1,4 +1,4 @@
-= simple_form_for(@serv, :html => {:class => 'form-horizontal' }) do |f|
+= simple_form_for(@serv, :wrapper => :bootstrap, :html => {:class => 'form-horizontal' }) do |f|
   %fieldset#mainform
     %legend.the-legend
       Datos
@@ -11,7 +11,7 @@
           =f.simple_fields_for @conn do |f|
             =f.input :port, :as => :integer, label: t('.port'), :input_html => { placeholder: 1000, min: 1, :class => "span2" }, :hint => "Puerto en que escucha el servicio"
             .links=link_to  'Probar Conexión', '/serv/testconn', :id => "testconnserv", :remote => true, :class => "testconnserv"
-            .succon
+            %p#succon
     .form-actions
       %button.btn.btn-primary{:type => "submit"}=t('.submit')
       =link_to "Volver", servs_path, {:class => "links"}

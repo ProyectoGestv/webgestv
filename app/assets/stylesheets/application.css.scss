@@ -314,3 +314,10 @@ table {
 .control-group.error .control-label, .control-group.error, .control-group.error .help-inline {
   font-size: 16px;
 }
+
+.alert-error h4 {
+  text-align: center;
+}
+.alert-success h4 {
+  text-align: center;
+}

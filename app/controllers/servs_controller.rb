@@ -112,12 +112,14 @@ class ServsController < ApplicationController
     @netele = NetEle.find_by(:_id => repo)
     ip=@netele.conn.ip
     if self.is_port_open?(ip,port)
-      a="Conexión exitosa"
+      @m="Conexión exitosa"
+      @cs="success"
     else
-      a="No hay conexión"
+      @m="No hay conexión"
+      @cs="error"
     end
     respond_to do |format|
-      format.js { render :js => "message=#{a};alert(message)" }
+      format.js {}
       #conn=document.getElementById('succon');conn.innerHTML = message;
     end
   end
