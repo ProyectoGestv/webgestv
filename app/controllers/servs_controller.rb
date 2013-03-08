@@ -45,7 +45,6 @@ class ServsController < ApplicationController
   # GET /servs/1/edit
   def edit
     @serv = Serv.find(params[:id])
-    @repoid=@serv.mother.id
     @net_eles = NetEle.all
     @conn = @serv.conn
   end
@@ -55,7 +54,6 @@ class ServsController < ApplicationController
   def create
     @serv = Serv.new(params[:serv])
     if @serv.mother
-      @repoid=@serv.mother.id
       params[:serv][:conn][:ip]=@serv.mother.conn.ip
     end
     @conn=Conn.new(params[:serv][:conn])
@@ -78,11 +76,17 @@ class ServsController < ApplicationController
     @serv = Serv.find(params[:id])
     @conn = @serv.conn
     @serv2 = Serv.new(params[:serv])
-    params[:serv][:mother]=@serv2.mother
-    params[:conn][:ip]=@serv2.mother.conn.ip
-
+    if @serv2.mother
+      params[:serv][:mother]=@serv2.mother
+      params[:serv][:conn][:ip]=@serv2.mother.conn.ip
+    else
+      params[:serv][:mother]=nil
+      params[:serv][:conn][:ip]=nil
+    end
+    pass1=@conn.update_attributes(params[:serv][:conn])
+    pass2=@serv.update_attributes(params[:serv])
     respond_to do |format|
-      if @conn.update_attributes(params[:conn]) and @serv.update_attributes(params[:serv])
+      if pass1 and pass2
         format.html { redirect_to servs_url, notice: t('servs.update.notice')  }
         format.json { head :no_content }
       else
@@ -106,21 +110,20 @@ class ServsController < ApplicationController
   end
 
   def testconn
-    puts params
+    @m='No hay conexión'
+    @cs='error'
     repo=params['repo']
     port=params['port']
-    @netele = NetEle.find_by(:_id => repo)
-    ip=@netele.conn.ip
-    if self.is_port_open?(ip,port)
-      @m="Conexión exitosa"
-      @cs="success"
-    else
-      @m="No hay conexión"
-      @cs="error"
+    if repo != ""
+      @netele = NetEle.find_by(:_id => repo)
+      ip=@netele.conn.ip
+      if self.is_port_open?(ip,port)
+        @m='Conexión exitosa'
+        @cs='success'
+      end
     end
     respond_to do |format|
       format.js {}
-      #conn=document.getElementById('succon');conn.innerHTML = message;
     end
   end
 
@@ -131,7 +134,7 @@ class ServsController < ApplicationController
           s = TCPSocket.new(ip, port)
           s.close
           return true
-        rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::EADDRNOTAVAIL
+        rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::EADDRNOTAVAIL, SocketError
           return false
         end
       end

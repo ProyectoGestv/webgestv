@@ -1,20 +1,26 @@
 %h1= t('.title')
+%br
 - if notice
-  %p#notice= notice
-%table
-  %tr
-    %th
-    %th
-    %th
-    %th
+  .alert.alert-success
+    %a.close{"data-dismiss" => "alert"} ×
+    = notice
 
-  - @servs.each do |serv|
-    %tr
-      %td= serv.name
-      %td= link_to t('.show'), serv
-      %td= link_to t('.edit'), edit_serv_path(serv)
-      %td= link_to t('.destroy'), serv, :method => :delete, :data => { :confirm => t('.confirm') }
+%table.table.table-striped
+  %thead
+    %th Nombre
+    %th Descripción
+    %th Ver
+    %th Editar
+    %th Eliminar
+  %tbody
+    - @servs.each do |serv|
+      %tr
+        %td= serv.name
+        %td= serv.desc
+        %td= link_to image_tag('ver.png', {:title => t('.show')}), serv
+        %td= link_to image_tag('editar.png', {:title => t('.edit')}), edit_serv_path(serv)
+        %td= link_to image_tag('eliminar.png', {:title => t('.destroy')}), serv, :method => :delete, :data => { :confirm => t('.confirm') }
 
 %br
-
-= link_to t('.new'), new_serv_path
+.form-actions
+  = link_to t('.new'), new_serv_path, {:class => "links"}

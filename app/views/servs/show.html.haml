@@ -1,6 +1,26 @@
-%p#notice= notice
+%h1=t('servs.model')
+%br
+- if notice
+  .alert.alert-success
+    %a.close{"data-dismiss" => "alert"} ×
+    = notice
 
+%fieldset
+  %legend.the-legend
+    Datos
+  .show.title Nombre:
+  .show.text= @serv.name
+  .show.title Descripción:
+  .show.text= @serv.desc
+%br
+%fieldset
+  %legend.the-legend
+    Conexión
+  .show.title  Dirección IP:
+  .show.text= @serv.conn.ip
+  .show.title  Puerto:
+  .show.text= @serv.conn.port
 
-= link_to t('servs.index.edit'), edit_serv_path(@serv)
-\|
-= link_to t('servs.edit.back'), servs_path
+.form-actions
+  = link_to image_tag('editar.png', {:title => t('net_eles.index.edit')}), edit_serv_path(@serv)
+  = link_to t('servs.edit.back'), servs_path, {:class => "links"}

@@ -1,6 +1,3 @@
-$('.testconnserv').bind('ajax:success', function(){
-});
-$().alert()
 $().ready(function(){
     $('#testconnserv').click(function(){
         href="/serv/testconn"

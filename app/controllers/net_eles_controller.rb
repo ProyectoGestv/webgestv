@@ -43,7 +43,7 @@ class NetElesController < ApplicationController
   # POST /net_eles
   # POST /net_eles.json
   def create
-    @conn=Conn.new(params[:conn])
+    @conn=Conn.new(params[:net_ele][:conn])
     @net_ele = NetEle.new(params[:net_ele])
     @net_ele.conn=@conn
     respond_to do |format|
@@ -62,8 +62,10 @@ class NetElesController < ApplicationController
   def update
     @net_ele = NetEle.find(params[:id])
     @conn = @net_ele.conn
+    pass1=@conn.update_attributes(params[:net_ele][:conn])
+    pass2=@net_ele.update_attributes(params[:net_ele])
     respond_to do |format|
-      if @conn.update_attributes(params[:conn]) and @net_ele.update_attributes(params[:net_ele])
+      if pass1 and pass2
         @net_ele.children.each do |h|
           h.conn.ip=@conn.ip
           h.save
@@ -71,6 +73,8 @@ class NetElesController < ApplicationController
         format.html { redirect_to net_eles_url, notice: t('net_eles.update.notice')  }
         format.json { head :no_content }
       else
+        #@net_ele.name=params[:net_ele][:name]
+        #@net_ele.desc=params[:net_ele][:desc]
         format.html { render action: "edit" }
         format.json { render json: @net_ele.errors, status: :unprocessable_entity }
       end
@@ -96,31 +100,27 @@ class NetElesController < ApplicationController
   end
 
   def testconn
-    puts params
+    @m='No hay conexión'
+    @cs='error'
     ip=params['ip']
     port=params['port']
-    puts 'ip='+ip
-    puts 'port='+port
     if self.is_port_open?(ip,port)
-      a="Conexión exitosa"
-    else
-      a="No hay conexión"
+      @m='Conexión exitosa'
+      @cs='success'
     end
     respond_to do |format|
-      format.js { render :js => "alert('#{a}')" }
+      format.js {}
     end
   end
 
   def is_port_open?(ip, port)
-    puts 'ip='+ip
-    puts 'port='+port
     begin
       Timeout::timeout(1) do
         begin
           s = TCPSocket.new(ip, port)
           s.close
           return true
-        rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::EADDRNOTAVAIL
+        rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH, Errno::EADDRNOTAVAIL, SocketError
           return false
         end
       end
