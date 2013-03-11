@@ -1,0 +1,2 @@
+class LaynetEle < ManRsc
+end
