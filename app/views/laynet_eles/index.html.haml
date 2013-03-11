@@ -17,9 +17,9 @@
       %tr
         %td= laynet_ele.name
         %td= laynet_ele.desc
-        %td= link_to image_tag('ver.png', {:title => t('.show')}), laynet_ele
-        %td= link_to image_tag('editar.png', {:title => t('.edit')}), edit_laynet_ele_path(laynet_ele)
-        %td= link_to image_tag('eliminar.png', {:title => t('.destroy')}), laynet_ele, :method => :delete, :data => { :confirm => t('.confirm') }
+        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), laynet_ele
+        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_laynet_ele_path(laynet_ele)
+        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), laynet_ele, :method => :delete, :data => { :confirm => t('.confirm') }
 
 %br
 .form-actions

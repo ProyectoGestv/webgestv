@@ -45,13 +45,17 @@ en:
             conn:
               invalid: "Los parámetros de conexión no son válidos"
 
+  forms:
+      show:        "Ver"
+      edit:        "Editar"
+      destroy:     "Eliminar"
+      back:        "Volver"
+      save:        "Guardar"
+
   net_eles:
     model:        "Elemento de Red"
     index:
       title:      "Listado de Elementos de Red"
-      show:       "Ver"
-      edit:       "Editar"
-      destroy:    "Eliminar"
       new:        "Crear elemento de red"
       confirm:    "Está seguro que desea eliminar el elemento de red?"
     form:
@@ -59,14 +63,10 @@ en:
       desc:       "Descripción"
       ip:         "Dirección IP"
       port:       "Puerto"
-      submit:     "Guardar"
     new:
       title:      "Nuevo elemento de Red"
-      back:       "Volver"
     edit:
       title:      "Modificando elemento de Red"
-      back:       "Volver"
-      show:       "Ver"
     update:
       notice:     "El elemento de red fue actualizado satisfactoriamente."
     create:
@@ -79,9 +79,6 @@ en:
     model:        "Elemento de Capa de Red"
     index:
       title:      "Listado de Elementos de Capa de Red"
-      show:       "Ver"
-      edit:       "Editar"
-      destroy:    "Eliminar"
       new:        "Crear elemento de capa de red"
       confirm:    "Está seguro que desea eliminar el elemento de capa de red?"
     form:
@@ -89,14 +86,10 @@ en:
       desc:       "Descripción"
       ip:         "Dirección IP"
       port:       "Puerto"
-      submit:     "Guardar"
     new:
       title:      "Nuevo elemento de Capa de Red"
-      back:       "Volver"
     edit:
       title:      "Modificando elemento de Capa de Red"
-      back:       "Volver"
-      show:       "Ver"
     update:
       notice:     "El elemento de capa de red fue actualizado satisfactoriamente."
     create:
@@ -108,24 +101,18 @@ en:
     model:        "Servicio"
     index:
       title:      "Listado de Servicios"
-      show:        "Ver"
-      edit:        "Editar"
-      destroy:     "Eliminar"
       new:         "Crear servicio"
       confirm:    "Está seguro que desea eliminar el servicio?"
     form:
       name:       "Nombre"
       desc:       "Descripción"
       port:       "Puerto"
-      submit:     "Guardar"
       repository: "Repositorio"
     new:
       title:      "Nuevo servicio"
-      back:       "Volver"
+
     edit:
       title:      "Modificando servicio"
-      back:       "Volver"
-      show:       "Ver"
     update:
       notice:     "El servicio fue actualizado satisfactoriamente."
     create:
@@ -133,3 +120,24 @@ en:
     delete:
       notice:     "El servicio fue eliminado satisfactoriamente."
       error_mo:   "Debe crear al menos un Elemento de Red."
+
+  links:
+    model:        "Conexiones"
+    index:
+      title:      "Listado de Conexiones"
+      new:         "Crear una conexión"
+      confirm:    "Está seguro que desea eliminar la conexión?"
+    form:
+      desc:       "Descripción"
+      reca:       "Recurso A"
+      recb:       "Recurso B"
+    new:
+      title:      "Nueva conexión"
+    edit:
+      title:      "Modificando conexión"
+    update:
+      notice:     "La conexión fue actualizada satisfactoriamente."
+    create:
+      notice:     "La conexión fue creada satisfactoriamente."
+    delete:
+      notice:     "La conexión fue eliminada satisfactoriamente."

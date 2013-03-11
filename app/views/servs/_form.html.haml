@@ -13,5 +13,5 @@
             .links=link_to  'Probar Conexión', '/serv/testconn', :id => "testconnserv", :remote => true, :class => "testconnserv"
             %p#succon
     .form-actions
-      %button.btn.btn-primary{:type => "submit"}=t('.submit')
-      =link_to "Volver", servs_path, {:class => "links"}
+      %button.btn.btn-primary{:type => "submit"}=t('forms.save')
+      =link_to t('forms.back'), servs_path, {:class => "links"}

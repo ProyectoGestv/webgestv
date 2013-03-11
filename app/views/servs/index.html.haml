@@ -17,9 +17,9 @@
       %tr
         %td= serv.name
         %td= serv.desc
-        %td= link_to image_tag('ver.png', {:title => t('.show')}), serv
-        %td= link_to image_tag('editar.png', {:title => t('.edit')}), edit_serv_path(serv)
-        %td= link_to image_tag('eliminar.png', {:title => t('.destroy')}), serv, :method => :delete, :data => { :confirm => t('.confirm') }
+        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), serv
+        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_serv_path(serv)
+        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), serv, :method => :delete, :data => { :confirm => t('.confirm') }
 
 %br
 .form-actions

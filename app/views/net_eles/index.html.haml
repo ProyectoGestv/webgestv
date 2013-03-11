@@ -17,9 +17,9 @@
       %tr
         %td= net_ele.name
         %td= net_ele.desc
-        %td= link_to image_tag('ver.png', {:title => t('.show')}), net_ele
-        %td= link_to image_tag('editar.png', {:title => t('.edit')}), edit_net_ele_path(net_ele)
-        %td= link_to image_tag('eliminar.png', {:title => t('.destroy')}), net_ele, :method => :delete, :data => { :confirm => t('.confirm') }
+        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), net_ele
+        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_net_ele_path(net_ele)
+        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), net_ele, :method => :delete, :data => { :confirm => t('.confirm') }
 
 %br
 .form-actions

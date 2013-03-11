@@ -22,5 +22,5 @@
   .show.text= @laynet_ele.conn.port
 
 .form-actions
-  = link_to image_tag('editar.png', {:title => t('laynet_eles.index.edit')}), edit_laynet_ele_path(@laynet_ele)
-  = link_to t('laynet_eles.edit.back'), laynet_eles_path, {:class => "links"}
+  = link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_laynet_ele_path(@laynet_ele)
+  = link_to t('forms.back'), laynet_eles_path, {:class => "links"}

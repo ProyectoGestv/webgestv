@@ -22,5 +22,5 @@
   .show.text= @serv.conn.port
 
 .form-actions
-  = link_to image_tag('editar.png', {:title => t('net_eles.index.edit')}), edit_serv_path(@serv)
-  = link_to t('servs.edit.back'), servs_path, {:class => "links"}
+  = link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_serv_path(@serv)
+  = link_to t('forms.back'), servs_path, {:class => "links"}

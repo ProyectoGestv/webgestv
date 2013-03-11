@@ -13,5 +13,5 @@
             .links=link_to  'Probar Conexión', '/laynet_ele/testconn', :id => "testconnlaynetele", :remote => true, :class => "testconnlaynetele"
             %p#succon
     .form-actions
-      %button.btn.btn-primary{:type => "submit"}=t('.submit')
-      =link_to "Volver", laynet_eles_path, {:class => "links"}
+      %button.btn.btn-primary{:type => "submit"}=t('forms.save')
+      =link_to t('forms.back'), laynet_eles_path, {:class => "links"}
