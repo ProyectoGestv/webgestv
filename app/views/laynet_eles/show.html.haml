@@ -1,0 +1,26 @@
+%h1=t('laynet_eles.model')
+%br
+- if notice
+  .alert.alert-success
+    %a.close{'data-dismiss' => "alert"} ×
+    = notice
+
+%fieldset
+  %legend.the-legend
+    Datos
+  .show.title Nombre:
+  .show.text= @laynet_ele.name
+  .show.title Descripción:
+  .show.text= @laynet_ele.desc
+%br
+%fieldset
+  %legend.the-legend
+    Conexión
+  .show.title  Dirección IP:
+  .show.text= @laynet_ele.conn.ip
+  .show.title  Puerto:
+  .show.text= @laynet_ele.conn.port
+
+.form-actions
+  = link_to image_tag('editar.png', {:title => t('laynet_eles.index.edit')}), edit_laynet_ele_path(@laynet_ele)
+  = link_to t('laynet_eles.edit.back'), laynet_eles_path, {:class => "links"}

@@ -1,0 +1,26 @@
+%h1= t('.title')
+%br
+- if notice
+  .alert.alert-success
+    %a.close{"data-dismiss" => "alert"} ×
+    = notice
+
+%table.table.table-striped
+  %thead
+    %th Nombre
+    %th Descripción
+    %th Ver
+    %th Editar
+    %th Eliminar
+  %tbody
+    - @laynet_eles.each do |laynet_ele|
+      %tr
+        %td= laynet_ele.name
+        %td= laynet_ele.desc
+        %td= link_to image_tag('ver.png', {:title => t('.show')}), laynet_ele
+        %td= link_to image_tag('editar.png', {:title => t('.edit')}), edit_laynet_ele_path(laynet_ele)
+        %td= link_to image_tag('eliminar.png', {:title => t('.destroy')}), laynet_ele, :method => :delete, :data => { :confirm => t('.confirm') }
+
+%br
+.form-actions
+  = link_to t('.new'), new_laynet_ele_path, {:class => "links"}

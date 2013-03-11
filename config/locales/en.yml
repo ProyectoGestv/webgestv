@@ -26,6 +26,9 @@ en:
       serv:
         one: "Servicio"
         other: "Servicios"
+      laynet_ele:
+        one: "ELemento de capa de red"
+        other: "Elementos de capa de red"
     attributes:
       net_ele:
         conn: "Conexión"
@@ -71,6 +74,35 @@ en:
     delete:
       notice:     "El elemento de red fue eliminado satisfactoriamente."
       error_ch:   "El elemento de red tiene servicios asociados y no puede ser eliminado."
+
+  laynet_eles:
+    model:        "Elemento de Capa de Red"
+    index:
+      title:      "Listado de Elementos de Capa de Red"
+      show:       "Ver"
+      edit:       "Editar"
+      destroy:    "Eliminar"
+      new:        "Crear elemento de capa de red"
+      confirm:    "Está seguro que desea eliminar el elemento de capa de red?"
+    form:
+      name:       "Nombre"
+      desc:       "Descripción"
+      ip:         "Dirección IP"
+      port:       "Puerto"
+      submit:     "Guardar"
+    new:
+      title:      "Nuevo elemento de Capa de Red"
+      back:       "Volver"
+    edit:
+      title:      "Modificando elemento de Capa de Red"
+      back:       "Volver"
+      show:       "Ver"
+    update:
+      notice:     "El elemento de capa de red fue actualizado satisfactoriamente."
+    create:
+      notice:     "El elemento de capa de red fue creado satisfactoriamente."
+    delete:
+      notice:     "El elemento de capa de red fue eliminado satisfactoriamente."
 
   servs:
     model:        "Servicio"

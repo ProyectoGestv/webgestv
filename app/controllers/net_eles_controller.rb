@@ -73,8 +73,6 @@ class NetElesController < ApplicationController
         format.html { redirect_to net_eles_url, notice: t('net_eles.update.notice')  }
         format.json { head :no_content }
       else
-        #@net_ele.name=params[:net_ele][:name]
-        #@net_ele.desc=params[:net_ele][:desc]
         format.html { render action: "edit" }
         format.json { render json: @net_ele.errors, status: :unprocessable_entity }
       end
