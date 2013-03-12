@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class LinksController < ApplicationController
   # GET /links
   # GET /links.json
@@ -83,4 +84,13 @@ class LinksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def update_linksb
+    @links_b=ManRsc.where(name: params[:name])
+    puts "///////////////////////////////////////////"
+    puts @links_b.as_json
+    @link = Link.new
+    render :partial => "linksb", :link => @links_b
+  end
+
 end

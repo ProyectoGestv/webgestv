@@ -1,0 +1,2 @@
+=simple_fields_for @link do |f|
+  =f.input :link_b, label: 'Recurso B', :collection => @links_b.map{ |c| [c.name, c.name] }, include_blank: 'Seleccione un recurso'

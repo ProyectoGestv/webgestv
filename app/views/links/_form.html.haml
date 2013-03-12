@@ -1,10 +1,10 @@
-= simple_form_for(@link, :wrapper => :bootstrap, :html => {:class => 'form-horizontal' }) do |f|
+= simple_form_for(@link, :html => {:class => 'form-horizontal' }) do |f|
   %fieldset#mainform
     %legend.the-legend
       Datos
       =f.input :desc, label: t('.desc'), :input_html => { :class => "span6" }, :hint => "Descripción del servicio"
-      =f.input :link_a, label: 'Recurso A', :collection => @links_a.map{ |c| [c.name, c.name] }, include_blank: 'Seleccione un recurso'
-      =f.input :link_b, label: 'Recurso B', :collection => @links_b.map{ |c| [c.name, c.name] }, include_blank: 'Seleccione un recurso'
+      =f.input :link_a, label: 'Recurso A', :collection => @links_a.map{ |c| [c.name, c.name] }, include_blank: 'Seleccione un recurso', :input_html => {:onchange => "update_linksb(this.value)"}
+      #linksbDiv=render :partial => 'linksb', :link => @links_b
     .form-actions
       %button.btn.btn-primary{:type => "submit"}=t('forms.save')
       =link_to t('forms.back'), links_path, {:class => "links"}
