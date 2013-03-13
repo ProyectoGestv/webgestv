@@ -10,8 +10,6 @@
     %th Descripción
     %th Recurso A
     %th Recurso B
-    %th Ver
-    %th Editar
     %th Eliminar
   %tbody
     - @links.each do |link|
@@ -19,8 +17,6 @@
         %td= link.desc
         %td= link.link_a
         %td= link.link_b
-        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), link
-        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_link_path(link)
         %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), link, :method => :delete, :data => { :confirm => t('.confirm') }
 
 %br

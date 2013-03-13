@@ -34,40 +34,20 @@ class LinksController < ApplicationController
     end
   end
 
-  # GET /links/1/edit
-  def edit
-    @link = Link.find(params[:id])
-  end
-
   # POST /links
   # POST /links.json
   def create
     @link = Link.new(params[:link])
-
+    puts "////////////////////////////"
+    puts params
     respond_to do |format|
       if @link.save
         format.html { redirect_to links_url, notice: t('links.create.notice') }
         format.json { render json: @link, status: :created, location: @link }
       else
         @links_a=ManRsc.all
-        @links_b=@links_a
+        @links_b=linksb(params[:link][:link_a])
         format.html { render action: "new" }
-        format.json { render json: @link.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PUT /links/1
-  # PUT /links/1.json
-  def update
-    @link = Link.find(params[:id])
-
-    respond_to do |format|
-      if @link.update_attributes(params[:link])
-        format.html { redirect_to @link, notice: 'Link was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
         format.json { render json: @link.errors, status: :unprocessable_entity }
       end
     end
@@ -86,11 +66,37 @@ class LinksController < ApplicationController
   end
 
   def update_linksb
-    @links_b=ManRsc.where(name: params[:name])
-    puts "///////////////////////////////////////////"
-    puts @links_b.as_json
     @link = Link.new
+    inc=false
+    #if params[:action] == "edit" or params[:action] == "update"
+      #inc = true
+    #end
+    @links_b=linksb(params[:name])
     render :partial => "linksb", :link => @links_b
+  end
+
+  def linksb(name)
+    linksb=ManRsc.excludes(name: name)
+    puts "////////////////////////////////"
+    puts linksb.as_json
+    links_b=[]
+    nob=Link.where(link_a: name)
+    lb=[]
+    nob.each do |a|
+      lb << a.link_b
+    end
+    noa=Link.where(link_b: name)
+    noa.each do |a|
+      lb << a.link_a
+    end
+    #puts "////////////////////////////////"
+    #puts lb
+    linksb.each do |a|
+      if not lb.include?(a.name)
+        links_b << a
+      end
+    end
+    links_b
   end
 
 end
