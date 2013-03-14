@@ -1,0 +1,3 @@
+class MaCom < McrAtr
+
+end

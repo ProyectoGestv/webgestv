@@ -1,0 +1,25 @@
+%h1 Listing mcr_atrs
+
+%table
+  %tr
+    %th Name
+    %th Type
+    %th Desc
+    %th Ref prot
+    %th
+    %th
+    %th
+
+  - @mcr_atrs.each do |mcr_atr|
+    %tr
+      %td= mcr_atr.name
+      %td= mcr_atr.type
+      %td= mcr_atr.desc
+      %td= mcr_atr.ref_prot
+      %td= link_to 'Show', mcr_atr
+      %td= link_to 'Edit', edit_mcr_atr_path(mcr_atr)
+      %td= link_to 'Destroy', mcr_atr, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Mcr atr', new_mcr_atr_path

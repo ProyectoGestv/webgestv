@@ -1,0 +1,31 @@
+%h1 Listing atrs
+
+%table
+  %tr
+    %th Name
+    %th Desc
+    %th Ref prot
+    %th Type
+    %th Value
+    %th Rdbl
+    %th Wtbl
+    %th
+    %th
+    %th
+
+  - @atrs.each do |atr|
+    %tr
+      %td= atr.name
+      %td= atr.desc
+      %td= atr.ref_prot
+      %td= atr.type
+      %td= atr.value
+      %td= atr.rdbl
+      %td= atr.wtbl
+      %td= link_to 'Show', atr
+      %td= link_to 'Edit', edit_atr_path(atr)
+      %td= link_to 'Destroy', atr, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Atr', new_atr_path

@@ -1,0 +1,3 @@
+class MaSim < McrAtr
+
+end

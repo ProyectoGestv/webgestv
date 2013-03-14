@@ -1,5 +1,11 @@
 # -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
+  resources :atrs
+
+
+  resources :mcr_atrs
+
+
   resources :links
 
 

@@ -1,0 +1,22 @@
+= form_for @mcr_atr do |f|
+  - if @mcr_atr.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@mcr_atr.errors.count, "error")} prohibited this mcr_atr from being saved:"
+      %ul
+        - @mcr_atr.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :type
+    = f.text_field :type
+  .field
+    = f.label :desc
+    = f.text_field :desc
+  .field
+    = f.label :ref_prot
+    = f.text_field :ref_prot
+  .actions
+    = f.submit 'Save'

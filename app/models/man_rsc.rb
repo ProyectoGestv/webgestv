@@ -8,7 +8,9 @@ class ManRsc
   field :desc, type: String
   field :mngbl, type:Boolean, default: false
   field :alrtbl, type:Boolean, default:false
+  field :ref_prot, type: String
   embeds_one :conn
+  has_many :mcr_atrs
   attr_accessible :name, :desc
   accepts_nested_attributes_for :conn
 end

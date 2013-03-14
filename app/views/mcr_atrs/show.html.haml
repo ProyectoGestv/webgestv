@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @mcr_atr.name
+%p
+  %b Type:
+  = @mcr_atr.type
+%p
+  %b Desc:
+  = @mcr_atr.desc
+%p
+  %b Ref prot:
+  = @mcr_atr.ref_prot
+
+= link_to 'Edit', edit_mcr_atr_path(@mcr_atr)
+\|
+= link_to 'Back', mcr_atrs_path

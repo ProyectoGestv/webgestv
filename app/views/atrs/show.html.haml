@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @atr.name
+%p
+  %b Desc:
+  = @atr.desc
+%p
+  %b Ref prot:
+  = @atr.ref_prot
+%p
+  %b Type:
+  = @atr.type
+%p
+  %b Value:
+  = @atr.value
+%p
+  %b Rdbl:
+  = @atr.rdbl
+%p
+  %b Wtbl:
+  = @atr.wtbl
+
+= link_to 'Edit', edit_atr_path(@atr)
+\|
+= link_to 'Back', atrs_path
