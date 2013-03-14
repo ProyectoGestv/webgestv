@@ -1,0 +1,43 @@
+<Monitors>
+	<counterMonitors>
+		<myCounterMonitor name="Services:type=CounterMonitor,name=CounterMonitor">
+		  <attribute>attr1</attribute>
+		  <threshold>5</threshold>
+		  <period>1000</period>
+		  <offset>0</offset>
+		</myCounterMonitor>
+		<myCounterMonitor name="Services:type=CounterMonitor,name=CounterMonitor">
+		  <attribute>attr2</attribute>
+		  <threshold>10</threshold>
+		  <period>1000</period>
+		  <offset>5</offset>
+		</myCounterMonitor>
+	</counterMonitors>
+	<gaugeMonitors>
+		<myGaugeMonitor name="Services:type=GaugeMonitor,name=GaugeMonitor">
+		  <attribute>attr3</attribute>
+		  <thresholdHigh>10</thresholdHigh>
+		  <thresholdLow>0</thresholdLow>
+		  <notifyHigh>true</notifyHigh>
+		  <notifyLow>false</notifyLow>
+		  <period>1000</period>
+		  <difference>false</difference>
+		</myGaugeMonitor>
+		<myGaugeMonitor name="Services:type=GaugeMonitor,name=GaugeMonitor">
+		  <attribute>attr4</attribute>
+		  <thresholdHigh>5</thresholdHigh>
+		  <thresholdLow>0</thresholdLow>
+		  <notifyHigh>true</notifyHigh>
+		  <notifyLow>false</notifyLow>
+		  <period>1000</period>
+		  <difference>false</difference>
+		</myGaugeMonitor>
+	</gaugeMonitors>
+	<stringMonitors>
+		<myStringMonitor name="Services:type=StringMonitor,name=StringMonitor">
+		  <attribute>attr5</attribute>
+		  <compareValue>loco</compareValue>
+		  <period>1000</period>
+		</myStringMonitor>
+	</stringMonitors>
+</Monitors>

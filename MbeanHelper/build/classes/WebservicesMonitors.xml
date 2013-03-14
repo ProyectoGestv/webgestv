@@ -1,0 +1,13 @@
+<Monitors>
+<gaugeMonitors>
+		<myGaugeMonitor name="Services:type=GaugeMonitor,name=GaugeMonitor">
+		  <attribute>notificacionesTime</attribute>
+		  <thresholdHigh>0.09</thresholdHigh>
+		  <thresholdLow>0.09</thresholdLow>
+		  <notifyHigh>true</notifyHigh>
+		  <notifyLow>false</notifyLow>
+		  <period>1000</period>
+		  <difference>false</difference>
+		</myGaugeMonitor>
+	</gaugeMonitors>
+</Monitors>

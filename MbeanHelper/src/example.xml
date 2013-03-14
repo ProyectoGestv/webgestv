@@ -1,0 +1,10 @@
+<myMBeanInfo className="mbean.MyDynamicMBean" description="Property Manager MBean">
+   <attributes length="6">
+      <myMBeanAttributeInfo name="attr1" type="java.lang.Integer" description="Property 1" isReadable="true" isWritable="true" isIs="false"/>
+      <myMBeanAttributeInfo name="attr2" type="java.lang.Integer" description="Property 2" isReadable="true" isWritable="true" isIs="false"/>
+      <myMBeanAttributeInfo name="attr3" type="java.lang.Integer" description="Property 3" isReadable="true" isWritable="true" isIs="false"/>
+      <myMBeanAttributeInfo name="attr4" type="java.lang.Integer" description="Property 4" isReadable="true" isWritable="true" isIs="false"/>
+      <myMBeanAttributeInfo name="attr5" type="java.lang.String" description="Property 5" isReadable="true" isWritable="true" isIs="false"/>
+      <myMBeanAttributeInfo name="log" type="java.lang.String" description="Property log" isReadable="true" isWritable="true" isIs="false"/>
+   </attributes>
+</myMBeanInfo>
