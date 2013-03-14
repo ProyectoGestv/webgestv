@@ -25,10 +25,11 @@ public class TestMBeanServerAgent {
 
 	public TestMBeanServerAgent() {
 		String domain = "gestv";
+		String name = "attrs1";
 		String type = "Webservices";
 		java.net.URL r = this.getClass().getResource("/");
         MBeanServer mbeanServer = ManagementFactory.getPlatformMBeanServer();
-		DynamicMBeanFactory.getDynamicBean(domain, type, r.getPath(), type);
+		DynamicMBeanFactory.getDynamicBean(domain, name, type, r.getPath(), type);
         try {
 			LocateRegistry.createRegistry(10000);
 	        JMXServiceURL url = new JMXServiceURL("service:jmx:rmi:///jndi/rmi://" + InetAddress.getLocalHost().getHostName() + ":10000/jmxrmi");
@@ -38,7 +39,7 @@ public class TestMBeanServerAgent {
 	        System.in.read();
 	        Attribute attr = new Attribute("notificaciones", 3);
 			try {
-				mbeanServer.setAttribute(new ObjectName(domain+":type="+type), attr);
+				mbeanServer.setAttribute(new ObjectName(domain+":type="+type+":name="+name), attr);
 			} catch (InstanceNotFoundException e) {
 				e.printStackTrace();
 			} catch (InvalidAttributeValueException e) {

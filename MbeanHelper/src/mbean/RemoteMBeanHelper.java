@@ -23,10 +23,10 @@ public class RemoteMBeanHelper {
 	@Path("/register")
 	@Produces(MediaType.TEXT_PLAIN)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String register(@FormParam("domain") String domain,
+	public String register(@FormParam("domain") String domain, @FormParam("name") String name,
 			@FormParam("type") String type) {
 		java.net.URL r = this.getClass().getResource("/");
-		MyDynamicMBean mBean = DynamicMBeanFactory.getDynamicBean(domain, type, r.getPath(),null);
+		MyDynamicMBean mBean = DynamicMBeanFactory.getDynamicBean(domain, name, type, r.getPath(),null);
 		if (mBean == null)
 			return "Error";
 		else
@@ -34,34 +34,35 @@ public class RemoteMBeanHelper {
 	}
 
 	@DELETE
-	@Path("/{domain}/{type}")
+	@Path("/{domain}/{type}/{name}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String remove(@PathParam("domain") String domain,
+	public String remove(@PathParam("domain") String domain,@PathParam("name") String name,
 			@PathParam("type") String type) {
-		return DynamicMBeanFactory.removeDynamicBean(domain, type);
+		return DynamicMBeanFactory.removeDynamicBean(domain, name, type);
 	}
 	
 	@PUT
-	@Path("/{domain}/{type}/{attribute}")
+	@Path("/{domain}/{type}/{name}/{attribute}")
 	  @Produces(MediaType.TEXT_PLAIN)
 	  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	  public String setAttribute(@PathParam("domain") String domain,
-				@PathParam("type") String type, 
+			  @PathParam("name") String name,
+			  @PathParam("type") String type, 
 				@PathParam("attribute") String attribute,
 				@FormParam("value") String value) {
-	    return DynamicMBeanFactory.setAttribute(domain, type, attribute, value);
+	    return DynamicMBeanFactory.setAttribute(domain, name, type, attribute, value);
 	  }
 
 	@PUT
-	@Path("/{domain}/{type}/attributes")
+	@Path("/{domain}/{type}/{name}/attributes")
 	  @Produces(MediaType.TEXT_PLAIN)
 	  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	  public String setAttributes(@PathParam("domain") String domain, @PathParam("type") String type, @FormParam("name") List<String> names, @FormParam("value") List<String> values) {
+	  public String setAttributes(@PathParam("domain") String domain, @PathParam("name") String name, @PathParam("type") String type, @FormParam("name") List<String> names, @FormParam("value") List<String> values) {
 		HashMap<String, String> attrhm = new HashMap<String, String>();
 		for(int i=0;i<names.size();i++){
 			attrhm.put(names.get(i), values.get(i));
 			//System.out.println(names.get(i)+"="+values.get(i));
 		}
-		return DynamicMBeanFactory.setAttributes(domain, type, attrhm);
+		return DynamicMBeanFactory.setAttributes(domain, name, type, attrhm);
 	  }
 }

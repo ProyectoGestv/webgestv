@@ -156,9 +156,10 @@ public class TestMBeanServerMaster implements NotificationListener {
 	
 	private void createLocalMBean(){
 		String domain = "gestv";
+		String name = "attrs1";
 		String type = "servicios";
 		java.net.URL r = this.getClass().getResource("/");
-		DynamicMBeanFactory.getDynamicBean(domain, type,r.getPath(),null);
+		DynamicMBeanFactory.getDynamicBean(domain, name, type,r.getPath(),null);
 	}
 
 	@Override

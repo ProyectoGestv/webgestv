@@ -38,7 +38,7 @@ import model.MyMonitor;
 public class DynamicMBeanFactory {
 
 	public static MBeanServer mbeanServer;
-	public static String filename = "example";
+	public static String filename = "RWebservices";
 	public static String filenameM = "exampleMonitors";
     private static MonitorListener listener = new MonitorListener();
     private static MessageListener attlist = new MessageListener();
@@ -48,7 +48,7 @@ public class DynamicMBeanFactory {
     	super();
     }
     
-	public static MyDynamicMBean getDynamicBean(String domain, String type, String pathXml, String namefile) {
+	public static MyDynamicMBean getDynamicBean(String domain, String name, String type, String pathXml, String namefile) {
 		//Register a MBean
 		String filenameU=null;
 		if(namefile==null)
@@ -62,9 +62,10 @@ public class DynamicMBeanFactory {
 		try {
 			dynamicMBean = new MyDynamicMBean(pathXml+"/"+filenameU+".xml");
 			dynamicMBean.setDomain(domain);
+			dynamicMBean.setName(name);
 			dynamicMBean.setType(type);
-			mbeanServer.registerMBean(dynamicMBean, new ObjectName(domain + ":type=" + type));
-			mbeanServer.addNotificationListener(new ObjectName(domain + ":type=" + type), attlist, null, null);
+			mbeanServer.registerMBean(dynamicMBean, new ObjectName(domain + ":type=" + type + ",name=" + name));
+			mbeanServer.addNotificationListener(new ObjectName(domain + ":type=" + type + ",name=" + name), attlist, null, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,10 +74,10 @@ public class DynamicMBeanFactory {
 		if(ms!=null){
 			for (MyMonitor mm : ms.getMonitors()) {
 				Monitor m = mm.getMonitor();
-				String name = mm.getName()+"_"+type+"_"+m.getObservedAttribute();
+				String oname = mm.getName()+"_"+type+"_"+m.getObservedAttribute();
 				try {
-					m.addObservedObject(new ObjectName(domain + ":type=" + type));
-					mbeanServer.registerMBean(m, new ObjectName(name));
+					m.addObservedObject(new ObjectName(domain + ":type=" + type + ",name=" + name));
+					mbeanServer.registerMBean(m, new ObjectName(oname));
 				} catch (InstanceAlreadyExistsException e) {
 					e.printStackTrace();
 				} catch (MBeanRegistrationException e) {
@@ -100,13 +101,13 @@ public class DynamicMBeanFactory {
 	}
 	
 	
-	public static String removeDynamicBean(String domain, String type){
+	public static String removeDynamicBean(String domain, String name, String type){
 		//Unregister MBean
 		String retorno="";
 		mbeanServer = ManagementFactory.getPlatformMBeanServer();
 		try {
 			Set<?> dynamicData;
-			dynamicData = mbeanServer.queryMBeans(new ObjectName(domain+":type="+type), null);
+			dynamicData = mbeanServer.queryMBeans(new ObjectName(domain+":type="+type+",name="+name), null);
 			for (Iterator<?> it = dynamicData.iterator(); it.hasNext();) {
 				ObjectInstance oi = (ObjectInstance) it.next();
 				ObjectName oName = oi.getObjectName();
@@ -131,10 +132,10 @@ public class DynamicMBeanFactory {
 				ObjectInstance oi = (ObjectInstance) it.next();
 				ObjectName oName = oi.getObjectName();
 				System.out.println("name="+oName.toString());
-				if(oName.toString().contains("_"+type+"_")){
+				if(oName.toString().contains("_"+name+"_")){
 					Monitor m = null;
 					for (int i=0;i<monitors.size(); i++) {
-						if(((Monitor)monitors.get(i)).containsObservedObject(new ObjectName(domain+":type="+type))){
+						if(((Monitor)monitors.get(i)).containsObservedObject(new ObjectName(domain+":type="+type+",name="+name))){
 							m=(Monitor)monitors.get(i);
 							break;
 						}
@@ -159,12 +160,12 @@ public class DynamicMBeanFactory {
 		return retorno;
 	}
 	
-	public static String setAttribute(String domain, String type, String attribute, String value){
+	public static String setAttribute(String domain, String name, String type, String attribute, String value){
 		String retorno="OK";
 		mbeanServer = ManagementFactory.getPlatformMBeanServer();
 		Attribute attr = new Attribute(attribute, value);
 		try {
-			mbeanServer.setAttribute(new ObjectName(domain+":type="+type), attr);
+			mbeanServer.setAttribute(new ObjectName(domain+":type="+type+",name="+name), attr);
 		} catch (InstanceNotFoundException e) {
 			e.printStackTrace();
 			retorno=e.toString();
@@ -187,7 +188,7 @@ public class DynamicMBeanFactory {
 		return retorno;
 	}
 	
-	public static String setAttributes(String domain, String type, HashMap<String, String> attributes){
+	public static String setAttributes(String domain, String name, String type, HashMap<String, String> attributes){
 		
 		String retorno="OK";
 		mbeanServer = ManagementFactory.getPlatformMBeanServer();
@@ -197,7 +198,7 @@ public class DynamicMBeanFactory {
 			listattr.add(new Attribute(attribute.getKey(), attribute.getValue()));			
 		}
 		try {
-			mbeanServer.setAttributes(new ObjectName(domain+":type="+type), listattr);
+			mbeanServer.setAttributes(new ObjectName(domain+":type="+type+",name="+name), listattr);
 		} catch (InstanceNotFoundException e) {
 			e.printStackTrace();
 			retorno=e.toString();

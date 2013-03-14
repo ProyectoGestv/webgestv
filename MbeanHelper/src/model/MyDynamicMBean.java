@@ -39,6 +39,7 @@ public class MyDynamicMBean implements DynamicMBean, NotificationEmitter{
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private ArrayList<ListenerFilterHandbackTriplet> _listeners = new ArrayList();
 	private String domain;
+	private String name;
 	private String type;
 	private int changeCount=1;
 
@@ -150,7 +151,9 @@ public class MyDynamicMBean implements DynamicMBean, NotificationEmitter{
 		Serializer serializer = new Persister();
 		File source = new File(xmlFileName);
 		try {
-			mbeaninfo = serializer.read(MyMBeanInfo.class, source);
+			MyManRes manres= serializer.read(MyManRes.class, source);
+			//mbeaninfo = serializer.read(MyMBeanInfo.class, source);
+			mbeaninfo = manres.getMacroAttributes()[0];
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -283,5 +286,15 @@ public class MyDynamicMBean implements DynamicMBean, NotificationEmitter{
 			}
 		}
 		return nots;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

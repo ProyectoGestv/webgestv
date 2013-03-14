@@ -7,15 +7,19 @@ import javax.management.MBeanOperationInfo;
 
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.ElementArray;
-import org.simpleframework.xml.Root;
 
-@Root
 public class MyMBeanInfo {
 
 	@Attribute
 	private String className;
 	@Attribute
+	private String name;
+	@Attribute
 	private String description;
+	@Attribute
+	private String referenceProtocol;
+	@Attribute
+	private String type;
 	@ElementArray
 	private MyMBeanAttributeInfo[] attributes;
 	@ElementArray(required=false)
@@ -73,5 +77,29 @@ public class MyMBeanInfo {
 
 	public void setNotifications(MyMBeanNotificationInfo[] notifications) {
 		this.notifications = notifications;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getReferenceProtocol() {
+		return referenceProtocol;
+	}
+
+	public void setReferenceProtocol(String referenceProtocol) {
+		this.referenceProtocol = referenceProtocol;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }

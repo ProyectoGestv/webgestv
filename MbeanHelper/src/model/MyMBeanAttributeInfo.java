@@ -11,6 +11,8 @@ public class MyMBeanAttributeInfo{
 	private String type;
 	@Attribute
 	private String description;
+	@Attribute(required=false)
+	private String referenceProtocol;
 	@Attribute
 	private boolean isReadable;
 	@Attribute
@@ -100,5 +102,13 @@ public class MyMBeanAttributeInfo{
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getReferenceProtocol() {
+		return referenceProtocol;
+	}
+
+	public void setReferenceProtocol(String referenceProtocol) {
+		this.referenceProtocol = referenceProtocol;
 	}
 }
