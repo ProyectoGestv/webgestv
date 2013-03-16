@@ -9,6 +9,8 @@
 Serv.delete_all
 NetEle.delete_all
 LaynetEle.delete_all
+McrAtr.delete_all
+Atr.delete_all
 (1..5).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
   laynetele = LaynetEle.create(name: "nle#{i}", desc: "network layer element #{i}")
@@ -19,5 +21,10 @@ LaynetEle.delete_all
   conn2=Conn.new(ip: "1.1.1.#{i}", port: 100+i)
   serv=Serv.create(name:"s#{i}", desc: "service #{i}", mother: netele._id)
   serv.conn=conn2
+  ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}")
+  serv.mcr_atrs << ma
+  a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", type: "integer")
+  ma.atrs << a1
 end
+
 
