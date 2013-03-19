@@ -7,4 +7,12 @@ class McrAtr
   field :ref_prot, type: String
   belongs_to :man_rsc
   has_many :atrs
+  before_destroy :delete_atrs
+
+  private
+  def delete_atrs
+    self.atrs.each do |atr|
+      atr.destroy
+    end
+  end
 end

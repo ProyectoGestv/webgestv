@@ -12,9 +12,14 @@
     %th Ver
     %th Editar
     %th Eliminar
+    %th Parámetros
   %tbody
     - @laynet_eles.each do |laynet_ele|
       %tr
+        - if laynet_ele.mcr_atrs?
+          %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), laynet_ele
+        - else
+          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}), laynet_ele
         %td= laynet_ele.name
         %td= laynet_ele.desc
         %td= link_to image_tag('ver.png', {:title => t('forms.show')}), laynet_ele

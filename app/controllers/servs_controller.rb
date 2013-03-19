@@ -142,4 +142,26 @@ class ServsController < ApplicationController
     end
     return false
   end
+
+  def delparams
+    mcratrs = Serv.find(params[:id]).mcr_atrs
+    mcratrs.each do |mcratr|
+      mcratr.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to servs_url, notice: t('forms.delparam.notice')   }
+      format.json { head :no_content }
+    end
+  end
+
+  def upload
+    fileroute=Rails.application.assets['ja.xml'].pathname
+    puts '//////////////////////////'
+    data = File.read(fileroute)
+    puts data
+    respond_to do |format|
+      format.html { redirect_to servs_url }
+      format.json { head :no_content }
+    end
+  end
 end

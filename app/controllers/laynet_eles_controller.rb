@@ -116,4 +116,14 @@ class LaynetElesController < ApplicationController
     return false
   end
 
+  def delparams
+    mcratrs = LaynetEle.find(params[:id]).mcr_atrs
+    mcratrs.each do |mcratr|
+      mcratr.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to laynet_eles_url, notice: t('forms.delparam.notice')   }
+      format.json { head :no_content }
+    end
+  end
 end

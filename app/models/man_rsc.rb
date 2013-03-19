@@ -13,4 +13,12 @@ class ManRsc
   has_many :mcr_atrs
   attr_accessible :name, :desc
   accepts_nested_attributes_for :conn
+  before_destroy :delete_mcr_atrs
+
+  private
+  def delete_mcr_atrs
+    self.mcr_atrs.each do |mcratr|
+      mcratr.destroy
+    end
+  end
 end

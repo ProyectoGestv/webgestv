@@ -51,6 +51,12 @@ en:
       destroy:     "Eliminar"
       back:        "Volver"
       save:        "Guardar"
+      addparam:    "Agregar parámetros"
+      delparam:    "Eliminar parámetros"
+      delparam:
+        notice:     "Los parámetros fueron eliminados satisfactoriamente."
+        confirm:    "Está seguro que desea eliminar los parámetros?"
+
 
   net_eles:
     model:        "Elemento de Red"
@@ -96,7 +102,6 @@ en:
       notice:     "El elemento de capa de red fue creado satisfactoriamente."
     delete:
       notice:     "El elemento de capa de red fue eliminado satisfactoriamente."
-
   servs:
     model:        "Servicio"
     index:

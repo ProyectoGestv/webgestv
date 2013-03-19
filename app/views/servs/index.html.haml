@@ -12,9 +12,14 @@
     %th Ver
     %th Editar
     %th Eliminar
+    %th Parámetros
   %tbody
     - @servs.each do |serv|
       %tr
+        - if serv.mcr_atrs?
+          %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), delparams_serv_path(serv), :data => { :confirm => t('.confirm') }
+        - else
+          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}), upload_serv_path(serv)
         %td= serv.name
         %td= serv.desc
         %td= link_to image_tag('ver.png', {:title => t('forms.show')}), serv

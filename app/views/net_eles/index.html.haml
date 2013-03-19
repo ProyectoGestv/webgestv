@@ -12,9 +12,14 @@
     %th Ver
     %th Editar
     %th Eliminar
+    %th Parámetros
   %tbody
     - @net_eles.each do |net_ele|
       %tr
+        - if net_ele.mcr_atrs?
+          %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), net_ele
+        - else
+          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}), net_ele
         %td= net_ele.name
         %td= net_ele.desc
         %td= link_to image_tag('ver.png', {:title => t('forms.show')}), net_ele

@@ -126,4 +126,15 @@ class NetElesController < ApplicationController
     end
     return false
   end
+
+  def delparams
+    mcratrs = NetEle.find(params[:id]).mcr_atrs
+    mcratrs.each do |mcratr|
+      mcratr.destroy
+    end
+    respond_to do |format|
+      format.html { redirect_to net_eles_url, notice: t('forms.delparam.notice')   }
+      format.json { head :no_content }
+    end
+  end
 end

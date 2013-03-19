@@ -1,0 +1,19 @@
+<mcr-atrs>
+    <mcr-atr>
+      <desc></desc>
+      <name>ma1</name>
+      <ref-prot/>
+      <atrs>
+        <atr>
+          <desc/>
+          <name>atributo 1</name>
+          <rdbl>true</rdbl>
+          <ref-prot/>
+          <type>string</type>
+          <value/>
+          <wtbl>true</wtbl>
+        </atr>
+      </atrs>
+    </mcr-atr>
+</mcr-atrs>
+
