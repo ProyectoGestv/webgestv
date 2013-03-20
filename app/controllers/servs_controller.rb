@@ -152,13 +152,88 @@ class ServsController < ApplicationController
       format.html { redirect_to servs_url, notice: t('forms.delparam.notice')   }
       format.json { head :no_content }
     end
-  end
+    end
 
   def upload
     fileroute=Rails.application.assets['ja.xml'].pathname
-    puts '//////////////////////////'
-    data = File.read(fileroute)
-    puts data
+    puts '//////////////////////////////////////////'
+    #data = File.read(fileroute)
+    f = File.open(fileroute)
+    @doc = Nokogiri::XML(f)
+    f.close
+    #mr1=ManRsc.new
+    mr1=ManRsc.find_by(name: 's5')
+    @doc.xpath('//mcr-atrs/mcr-atr').each do |n1|
+      puts "n1 #{n1.name} = #{n1.text}"
+      mcr=McrAtr.new
+      n1.elements.each do |n2|
+        puts "n2 #{n2.name} = #{n2.text}"
+        if n2.name == 'name'
+          mcr.name=n2.text
+        elsif n2.name == 'desc'
+          mcr.desc=n2.text
+        elsif n2.name == 'ref-prot'
+          mcr.ref_prot=n2.text
+        elsif n2.name == 'atrs'
+          n2.elements.each do |n3|
+            puts "n3 #{n3.name} = #{n3.text}"
+            atr=Atr.new
+            n3.elements.each do |n4|
+              puts "n4 #{n4.name} = #{n4.text}"
+              if n4.name == 'name'
+                atr.name=n4.text
+              elsif n4.name == 'desc'
+                atr.desc=n4.text
+              elsif n4.name == 'ref-prot'
+                atr.ref_prot=n4.text
+              elsif n4.name == 'type'
+                atr.type=n4.text
+              elsif n4.name == 'rdbl'
+                atr.rdbl=n4.text
+              elsif n4.name == 'wtbl'
+                atr.wtbl=n4.text
+              elsif n4.name == 'value'
+                atr.value=n4.text
+              end
+            end
+            atr.mcr_atr=mcr
+            if not atr.save
+              puts atr.to_xml
+              puts '************ NO SAVE ATR *****************'
+              #atr.mcr_atr=nil
+              atr.destroy
+            end
+          end
+        end
+      end
+      mcr.man_rsc=mr1
+      if not mcr.save
+        puts mcr.to_xml(:include => :atrs)
+        puts '************ NO SAVE MCR *****************'
+        mcr.atrs.each do |atr|
+          atr.destroy
+        end
+        #mcr.man_rsc.destroy
+        mcr.destroy
+      end
+      #puts mcr.to_xml(:include => :atrs)
+      puts '+++++++++++++++++++++++++++++++++++++++++'
+      #puts mcr.atrs.to_xml
+    end
+
+
+    puts '------------------SALIO---------------------'
+    if mr1.save
+      puts mr1.to_xml(:include => {:mcr_atrs => {:include => :atrs} })
+      puts '************ NO SAVE MR *****************'
+      mr1=ManRsc.find_by(name: 's5')
+      puts mr1.to_xml(:include => {:mcr_atrs => {:include => :atrs} })
+    else
+      mr1.mcr_atrs.each do |mcratr|
+        mcratr.destroy
+      end
+    end
+    puts '//////////////////////////////////////////'
     respond_to do |format|
       format.html { redirect_to servs_url }
       format.json { head :no_content }

@@ -73,6 +73,7 @@ GEM
       tzinfo (~> 0.3.22)
     moped (1.4.3)
     multi_json (1.5.0)
+    nokogiri (1.5.6)
     nokogiri (1.5.6-x86-mingw32)
     origin (1.0.11)
     polyglot (0.3.3)
@@ -142,7 +143,7 @@ DEPENDENCIES
   jquery-rails
   magic_encoding
   mongoid (~> 3.1.2)
-  nokogiri (~> 1.5.6)
+  nokogiri
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
   simple_form (~> 2.1.0)
