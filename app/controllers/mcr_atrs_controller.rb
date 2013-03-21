@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class McrAtrsController < ApplicationController
   # GET /mcr_atrs
   # GET /mcr_atrs.json

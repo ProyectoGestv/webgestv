@@ -24,7 +24,7 @@
         - if serv.mcr_atrs?
           %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), delparams_serv_path(serv), :data => { :confirm => t('forms.delparam.confirm') }
         - else
-          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}), upload_serv_path(serv)
+          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}), upload_new_serv_path(serv)
 
 %br
 .form-actions

@@ -11,8 +11,9 @@ class ManRsc
   field :ref_prot, type: String
   embeds_one :conn
   has_many :mcr_atrs
-  attr_accessible :name, :desc
   accepts_nested_attributes_for :conn
+  accepts_nested_attributes_for :mcr_atrs
+  attr_accessible :name, :desc, :mcr_atrs_attributes
   before_destroy :delete_mcr_atrs
 
   private

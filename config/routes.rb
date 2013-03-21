@@ -13,7 +13,8 @@ Webgestv::Application.routes.draw do
   resources :net_eles
   resources :servs do
     get :delparams, on: :member
-    get :upload, on: :member
+    get :upload_new, on: :member
+    post :upload_create, on: :member
   end
   root :to => "static#index"
 end

@@ -1,0 +1,19 @@
+= simple_form_for(@mr, :url => upload_create_serv_path, :method => :post, :wrapper => :bootstrap, :html => {:class => 'form-horizontal' }) do |f0|
+  %fieldset#mainform
+    %legend.the-legend
+      Grupo de Atributos
+      =f0.simple_fields_for :mcr_atrs do |f1|
+        =f1.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del MA"
+        =f1.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del MA"
+        =f1.input :ref_prot, label: 'Referencia Protocolar', :input_html => { :class => "span4" }, :hint => "Referencia protocolar del MA"
+        %fieldset#subform1
+          %legend.the-legend2
+            Atributos
+            =f1.simple_fields_for :atrs do |f2|
+              =f2.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del Atr"
+              =f2.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del Atr"
+              =f2.input :type, label: 'Tipo', :input_html => { :class => "span4" }, :hint => "Tipo del Atr"
+              ='------------------'
+    .form-actions
+      %button.btn.btn-primary{:type => "submit"}=t('forms.save')
+      =link_to t('forms.back'), servs_path, {:class => "links"}

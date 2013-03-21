@@ -3,7 +3,7 @@ class ServsController < ApplicationController
   # GET /servs
   # GET /servs.json
   def index
-    @servs = Serv.all
+    @servs = Serv.all.order_by(:name.asc)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -154,20 +154,15 @@ class ServsController < ApplicationController
     end
     end
 
-  def upload
+  def upload_new
     fileroute=Rails.application.assets['ja.xml'].pathname
-    puts '//////////////////////////////////////////'
-    #data = File.read(fileroute)
     f = File.open(fileroute)
-    @doc = Nokogiri::XML(f)
+    doc = Nokogiri::XML(f)
     f.close
-    #mr1=ManRsc.new
-    mr1=ManRsc.find_by(name: 's5')
-    @doc.xpath('//mcr-atrs/mcr-atr').each do |n1|
-      puts "n1 #{n1.name} = #{n1.text}"
+    @mr=ManRsc.find(params[:id])
+    doc.xpath('//mcr-atrs/mcr-atr').each do |n1|
       mcr=McrAtr.new
       n1.elements.each do |n2|
-        puts "n2 #{n2.name} = #{n2.text}"
         if n2.name == 'name'
           mcr.name=n2.text
         elsif n2.name == 'desc'
@@ -176,10 +171,8 @@ class ServsController < ApplicationController
           mcr.ref_prot=n2.text
         elsif n2.name == 'atrs'
           n2.elements.each do |n3|
-            puts "n3 #{n3.name} = #{n3.text}"
             atr=Atr.new
             n3.elements.each do |n4|
-              puts "n4 #{n4.name} = #{n4.text}"
               if n4.name == 'name'
                 atr.name=n4.text
               elsif n4.name == 'desc'
@@ -197,46 +190,47 @@ class ServsController < ApplicationController
               end
             end
             atr.mcr_atr=mcr
-            if not atr.save
-              puts atr.to_xml
-              puts '************ NO SAVE ATR *****************'
-              #atr.mcr_atr=nil
-              atr.destroy
-            end
           end
         end
       end
-      mcr.man_rsc=mr1
-      if not mcr.save
-        puts mcr.to_xml(:include => :atrs)
-        puts '************ NO SAVE MCR *****************'
-        mcr.atrs.each do |atr|
-          atr.destroy
-        end
-        #mcr.man_rsc.destroy
-        mcr.destroy
-      end
-      #puts mcr.to_xml(:include => :atrs)
-      puts '+++++++++++++++++++++++++++++++++++++++++'
-      #puts mcr.atrs.to_xml
+      mcr.man_rsc=@mr
     end
-
-
-    puts '------------------SALIO---------------------'
-    if mr1.save
-      puts mr1.to_xml(:include => {:mcr_atrs => {:include => :atrs} })
-      puts '************ NO SAVE MR *****************'
-      mr1=ManRsc.find_by(name: 's5')
-      puts mr1.to_xml(:include => {:mcr_atrs => {:include => :atrs} })
-    else
-      mr1.mcr_atrs.each do |mcratr|
-        mcratr.destroy
-      end
-    end
-    puts '//////////////////////////////////////////'
     respond_to do |format|
-      format.html { redirect_to servs_url }
-      format.json { head :no_content }
+      format.html # upload_new.html.haml
+      format.json { render json: @mr }
     end
   end
+
+  def upload_create
+    @mr = ManRsc.find(params[:id])
+    mcr_atrs=params[:serv][:mcr_atrs_attributes]
+    @mr.mcr_atrs_attributes=mcr_atrs
+    pass=true
+    @mr.mcr_atrs.each do |mcr|
+      if not mcr.save
+        pass=false
+      end
+      mcr.atrs.each do |atr|
+        if not atr.save
+          pass=false
+        end
+      end
+    end
+
+    respond_to do |format|
+      if pass
+        @mr.save
+        format.html { redirect_to servs_url, notice: 'Parámetros creados satisfactoriamente.' }
+        format.json { head :no_content }
+      else
+        @mr.mcr_atrs.each do |mcratr|
+          mcratr.destroy
+        end
+        format.html { render action: "upload_new" }
+        format.json { render json: @mr.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 end
+
