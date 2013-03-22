@@ -1,19 +1,50 @@
 = simple_form_for(@mr, :url => upload_create_serv_path, :method => :post, :wrapper => :bootstrap, :html => {:class => 'form-horizontal' }) do |f0|
   %fieldset#mainform
     %legend.the-legend
-      Grupo de Atributos
+      -toterr=0
+      -@mr.mcr_atrs.each do |ma|
+        -toterr+=ma.errors.size
+        -ma.atrs.each do |a|
+          -toterr+=a.errors.size
+      ="Grupo de Atributos"
+      -i=0
       =f0.simple_fields_for :mcr_atrs do |f1|
-        =f1.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del MA"
-        =f1.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del MA"
-        =f1.input :ref_prot, label: 'Referencia Protocolar', :input_html => { :class => "span4" }, :hint => "Referencia protocolar del MA"
-        %fieldset#subform1
-          %legend.the-legend2
-            Atributos
-            =f1.simple_fields_for :atrs do |f2|
-              =f2.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del Atr"
-              =f2.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del Atr"
-              =f2.input :type, label: 'Tipo', :input_html => { :class => "span4" }, :hint => "Tipo del Atr"
-              ='------------------'
+        -i=i+1
+        #accordion1.accordion
+          .accordion-group
+            .accordion-heading
+              %a.accordion-toggle{"data-parent" => "#accordion1", "data-toggle" => "collapse", :href => "#collapse#{i}"}
+                ="Grupo ##{i}"
+                -if f1.object.errors.any?
+                  -coll1='in'
+            %div{:id => "collapse#{i}", :class => "accordion-body collapse #{coll1}"}
+              .accordion-inner
+                =f1.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del Grupo de Atributos"
+                =f1.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del Grupo de Atributos"
+                =f1.input :ref_prot, label: 'Referencia Protocolar', :input_html => { :class => "span4" }, :hint => "Referencia protocolar del Grupo de Atributos"
+                %fieldset#subform1
+                  %legend.the-legend2
+                    Atributos
+                    -j=0
+                    =f1.simple_fields_for :atrs do |f2|
+                      -j=j+1
+                      %div{:id => "accordionAtr#{j}", :class => "accordion"}
+                        .accordion-group
+                          .accordion-heading
+                            %a.accordion-toggle{"data-parent" => "#accordionAtr#{j}", "data-toggle" => "collapse", :href => "#collapse#{i}-#{j}"}
+                              ="Atributo ##{j}"
+                              -if f2.object.errors.any?
+                                -coll2='in'
+                                :javascript
+                                  abrirAco("#collapse#{i}")
+                          %div{:id => "collapse#{i}-#{j}", :class => "accordion-body collapse #{coll2}"}
+                            .accordion-inner
+                              =f2.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del Atributo"
+                              =f2.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del Atributo"
+                              =f2.input :type, label: 'Tipo', :input_html => { :class => "span4" }, :hint => "Tipo del Atributo"
+      -if toterr==0
+        :javascript
+          abrirAllAco()
     .form-actions
       %button.btn.btn-primary{:type => "submit"}=t('forms.save')
       =link_to t('forms.back'), servs_path, {:class => "links"}
