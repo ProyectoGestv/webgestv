@@ -155,9 +155,13 @@ class ServsController < ApplicationController
     end
 
   def upload_new
-    fileroute=Rails.application.assets['ja.xml'].pathname
-    f = File.open(fileroute)
+    tmp = params[:serv][:file].tempfile
+    #fileroute=Rails.application.assets['ja.xml'].pathname
+    #f = File.open(fileroute)
+    f=File.open(tmp)
     doc = Nokogiri::XML(f)
+    puts doc
+    puts "///////////////////////////////////////////////"
     f.close
     @mr=ManRsc.find(params[:id])
     doc.xpath('//mcr-atrs/mcr-atr').each do |n1|

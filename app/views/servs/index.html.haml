@@ -24,7 +24,27 @@
         - if serv.mcr_atrs?
           %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), delparams_serv_path(serv), :data => { :confirm => t('forms.delparam.confirm') }
         - else
-          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}), upload_new_serv_path(serv)
+          %td
+            =link_to image_tag('arch_add.png', {:title => t('forms.addparam')}),'#', :onclick => "$('#myModal').modal()"
+            #myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+              .modal-header
+                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+                %h3#myModalLabel Cargar Parámetros
+              .modal-body
+                = simple_form_for(serv, :url => upload_new_serv_path(serv), :method => :post, :wrapper => :bootstrap, :html => {:multipart => true, :class => 'form-horizontal' }) do |f|
+                  %p Seleccione un archivo XML…
+                  =f.input :file, :as => :file, :input_html => { :class => "hide ie_show" }, :label => false
+
+                  .input-append.ie_hide
+                    %input#pretty-input.input-large{:onclick => "$('input[id=serv_file]').click();", :type => "text"}
+                    %a.btn{:onclick => "$('input[id=serv_file]').click();"} Seleccionar
+                    .modal-footer
+                      %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cerrar
+                      %button.btn.btn-primary{:type => "submit"}='Cargar'
+              :javascript
+                $('input[id=serv_file]').change(function() {
+                  $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
+                });
 
 %br
 .form-actions

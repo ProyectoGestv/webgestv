@@ -18,4 +18,3 @@ function cerrarAllAco()
 {
     $('.accordion-body.in').collapse('toggle');
 }
-
