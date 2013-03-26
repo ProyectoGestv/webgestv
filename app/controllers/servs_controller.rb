@@ -220,7 +220,8 @@ class ServsController < ApplicationController
         end
       end
     end
-
+    #=f2.collection_radio_buttons :rdbl, [[true, 'SI'] ,[false, 'NO']], :first, :last, :item_wrapper_class => 'inline'
+    #=f2.input :type, label: 'Tipo', :input_html => { :class => "span4" }, :hint => "Tipo del Atributo"
     respond_to do |format|
       if pass
         @mr.save

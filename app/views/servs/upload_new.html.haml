@@ -41,7 +41,10 @@
                             .accordion-inner
                               =f2.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del Atributo"
                               =f2.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del Atributo"
-                              =f2.input :type, label: 'Tipo', :input_html => { :class => "span4" }, :hint => "Tipo del Atributo"
+                              =f2.input :type, :label => 'Tipo', :collection => [['Integer', 'Integer'], ['String', 'String'], ['Float', 'Float'], ['Double', 'Double']], :as => :select, :include_blank => false, disabled: true
+                              =f2.input :value, label: 'Valor inicial', :input_html => { :class => "span4" }, :hint => "Valor inicial del Atributo", disabled: true
+                              =f2.input :rdbl, :label => 'Leible', :collection => [['Si', 'true'], ['No', 'false']], :as => :radio_buttons, :item_wrapper_class => 'inline', disabled: true
+                              =f2.input :wtbl, :label => 'Escribible', :collection => [['Si', 'true'], ['No', 'false']], :as => :radio_buttons, :item_wrapper_class => 'inline', disabled: true
       -if toterr==0
         :javascript
           abrirAllAco()

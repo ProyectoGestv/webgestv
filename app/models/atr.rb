@@ -7,10 +7,10 @@ class Atr
   field :name, type: String
   field :desc, type: String
   field :ref_prot, type: String
-  field :type, type: String
+  field :type, type: String, default:'Integer'
   field :value, type: String
   field :rdbl, type: Boolean, default: true
   field :wtbl, type: Boolean, default: false
   belongs_to :mcr_atr
-  attr_accessible :name, :desc, :ref_prot, :type
+  attr_accessible :name, :desc, :ref_prot, :type, :rdbl, :wtbl, :value
 end

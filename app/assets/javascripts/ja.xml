@@ -9,7 +9,7 @@
         <name>atributo 1</name>
         <rdbl>true</rdbl>
         <ref-prot/>
-        <type>string</type>
+        <type>String</type>
         <value/>
         <wtbl>true</wtbl>
       </atr>
@@ -18,7 +18,7 @@
         <name>atributo 1</name>
         <rdbl>true</rdbl>
         <ref-prot/>
-        <type>string</type>
+        <type>String</type>
         <value/>
         <wtbl>true</wtbl>
       </atr>
@@ -34,7 +34,7 @@
         <name>atributo 1</name>
         <rdbl>true</rdbl>
         <ref-prot/>
-        <type>integer</type>
+        <type>Integer</type>
         <value/>
         <wtbl>false</wtbl>
       </atr>
@@ -43,7 +43,7 @@
         <name>atributo 2</name>
         <rdbl>true</rdbl>
         <ref-prot/>
-        <type>integer</type>
+        <type>Integer</type>
         <value/>
         <wtbl>false</wtbl>
       </atr>
