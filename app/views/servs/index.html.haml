@@ -32,18 +32,29 @@
                 %h3#myModalLabel Cargar Parámetros
               .modal-body
                 = simple_form_for(serv, :url => upload_new_serv_path(serv), :method => :post, :wrapper => :bootstrap, :html => {:multipart => true, :class => 'form-horizontal' }) do |f|
-                  %p Seleccione un archivo XML…
                   =f.input :file, :as => :file, :input_html => { :class => "hide ie_show" }, :label => false
-
+                  %p Seleccione un archivo XML…
                   .input-append.ie_hide
-                    %input#pretty-input.input-large{:onclick => "$('input[id=serv_file]').click();", :type => "text"}
+                    %input#pretty-input.input-large{:type => "text", :readonly => true}
                     %a.btn{:onclick => "$('input[id=serv_file]').click();"} Seleccionar
                     .modal-footer
                       %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cerrar
-                      %button.btn.btn-primary{:type => "submit"}='Cargar'
+                      %button.btn.btn-primary#submit{:type => "submit", :disabled => true}='Cargar'
               :javascript
-                $('input[id=serv_file]').change(function() {
+                $('#myModal').on('show', function(){
                   $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
+                  document.getElementById("submit").disabled = true;
+                  document.getElementById("serv_file").value = ''
+                });
+
+                $('input[id=serv_file]').change(function() {
+                  if ($(this).val().length > 0) {
+                    $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
+                    document.getElementById("submit").disabled = false;
+                  }else{
+                     $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
+                     document.getElementById("submit").disabled = true;
+                  }
                 });
 
 %br

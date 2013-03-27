@@ -156,48 +156,47 @@ class ServsController < ApplicationController
 
   def upload_new
     tmp = params[:serv][:file].tempfile
-    #fileroute=Rails.application.assets['ja.xml'].pathname
-    #f = File.open(fileroute)
     f=File.open(tmp)
     doc = Nokogiri::XML(f)
-    puts doc
-    puts "///////////////////////////////////////////////"
     f.close
-    @mr=ManRsc.find(params[:id])
-    doc.xpath('//mcr-atrs/mcr-atr').each do |n1|
-      mcr=McrAtr.new
-      n1.elements.each do |n2|
-        if n2.name == 'name'
-          mcr.name=n2.text
-        elsif n2.name == 'desc'
-          mcr.desc=n2.text
-        elsif n2.name == 'ref-prot'
-          mcr.ref_prot=n2.text
-        elsif n2.name == 'atrs'
-          n2.elements.each do |n3|
-            atr=Atr.new
-            n3.elements.each do |n4|
-              if n4.name == 'name'
-                atr.name=n4.text
-              elsif n4.name == 'desc'
-                atr.desc=n4.text
-              elsif n4.name == 'ref-prot'
-                atr.ref_prot=n4.text
-              elsif n4.name == 'type'
-                atr.type=n4.text
-              elsif n4.name == 'rdbl'
-                atr.rdbl=n4.text
-              elsif n4.name == 'wtbl'
-                atr.wtbl=n4.text
-              elsif n4.name == 'value'
-                atr.value=n4.text
+    @mr = nil
+    if doc.errors.empty?
+      @mr=ManRsc.find(params[:id])
+      doc.xpath('//mcr-atrs/mcr-atr').each do |n1|
+        mcr=McrAtr.new
+        n1.elements.each do |n2|
+          if n2.name == 'name'
+            mcr.name=n2.text
+          elsif n2.name == 'desc'
+            mcr.desc=n2.text
+          elsif n2.name == 'ref-prot'
+            mcr.ref_prot=n2.text
+          elsif n2.name == 'atrs'
+            n2.elements.each do |n3|
+              atr=Atr.new
+              n3.elements.each do |n4|
+                if n4.name == 'name'
+                  atr.name=n4.text
+                elsif n4.name == 'desc'
+                  atr.desc=n4.text
+                elsif n4.name == 'ref-prot'
+                  atr.ref_prot=n4.text
+                elsif n4.name == 'type'
+                  atr.type=n4.text
+                elsif n4.name == 'rdbl'
+                  atr.rdbl=n4.text
+                elsif n4.name == 'wtbl'
+                  atr.wtbl=n4.text
+                elsif n4.name == 'value'
+                  atr.value=n4.text
+                end
               end
+              atr.mcr_atr=mcr
             end
-            atr.mcr_atr=mcr
           end
         end
+        mcr.man_rsc=@mr
       end
-      mcr.man_rsc=@mr
     end
     respond_to do |format|
       format.html # upload_new.html.haml
@@ -220,8 +219,6 @@ class ServsController < ApplicationController
         end
       end
     end
-    #=f2.collection_radio_buttons :rdbl, [[true, 'SI'] ,[false, 'NO']], :first, :last, :item_wrapper_class => 'inline'
-    #=f2.input :type, label: 'Tipo', :input_html => { :class => "span4" }, :hint => "Tipo del Atributo"
     respond_to do |format|
       if pass
         @mr.save
@@ -238,4 +235,3 @@ class ServsController < ApplicationController
   end
 
 end
-
