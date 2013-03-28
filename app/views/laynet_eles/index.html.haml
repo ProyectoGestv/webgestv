@@ -14,17 +14,18 @@
     %th Eliminar
     %th Parámetros
   %tbody
-    - @laynet_eles.each do |laynet_ele|
+    - @laynet_eles.each do |mr|
       %tr
-        - if laynet_ele.mcr_atrs?
-          %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), laynet_ele
-        - else
-          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}), laynet_ele
-        %td= laynet_ele.name
-        %td= laynet_ele.desc
-        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), laynet_ele
-        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_laynet_ele_path(laynet_ele)
-        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), laynet_ele, :method => :delete, :data => { :confirm => t('.confirm') }
+        %td= mr.name
+        %td= mr.desc
+        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), mr
+        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_laynet_ele_path(mr)
+        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), mr, :method => :delete, :data => { :confirm => t('.confirm') }
+        -if mr.mcr_atrs?
+          %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), {:controller => "uploads", :action => 'destroy', :id => mr}, :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
+        -else
+          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}),'#', :onclick => "$('#myModal').modal({res:'#{mr._id}'})"
+    =render "shared/upload_modal"
 
 %br
 .form-actions

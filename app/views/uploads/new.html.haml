@@ -4,9 +4,9 @@
     %a.close{"data-dismiss" => "alert"} ×
     El archivo no contiene grupos de atributos o está mal formado corríjalo e intente de nuevo.
   .form-actions
-    =link_to t('forms.back'), servs_path, {:class => "links"}
+    =link_to t('forms.back'), session[:return_to], {:class => "links"}
 -else
-  = simple_form_for(@mr, :url => upload_create_serv_path, :method => :post, :wrapper => :bootstrap, :html => {:class => 'form-horizontal' }) do |f0|
+  = simple_form_for(@mr, :url => load_upload_path(@mr), :method => :post,:wrapper => :bootstrap, :html => {:class => 'form-horizontal' }) do |f0|
     %fieldset#mainform
       %legend.the-legend
         -toterr=0
@@ -58,4 +58,4 @@
             abrirAllAco()
       .form-actions
         %button.btn.btn-primary{:type => "submit"}=t('forms.save')
-        =link_to t('forms.back'), servs_path, {:class => "links"}
+        =link_to t('forms.back'), session[:return_to], {:class => "links"}

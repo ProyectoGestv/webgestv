@@ -14,48 +14,18 @@
     %th Eliminar
     %th Parámetros
   %tbody
-    - @servs.each do |serv|
+    - @servs.each do |mr|
       %tr
-        %td= serv.name
-        %td= serv.desc
-        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), serv
-        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_serv_path(serv)
-        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), serv, :method => :delete, :data => { :confirm => t('.confirm') }
-        - if serv.mcr_atrs?
-          %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), delparams_serv_path(serv), :data => { :confirm => t('forms.delparam.confirm') }
-        - else
-          %td
-            =link_to image_tag('arch_add.png', {:title => t('forms.addparam')}),'#', :onclick => "$('#myModal').modal()"
-            #myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
-              .modal-header
-                %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-                %h3#myModalLabel Cargar Parámetros
-              .modal-body
-                = simple_form_for(serv, :url => upload_new_serv_path(serv), :method => :post, :wrapper => :bootstrap, :html => {:multipart => true, :class => 'form-horizontal' }) do |f|
-                  =f.input :file, :as => :file, :input_html => { :class => "hide ie_show" }, :label => false
-                  %p Seleccione un archivo XML…
-                  .input-append.ie_hide
-                    %input#pretty-input.input-large{:type => "text", :readonly => true}
-                    %a.btn{:onclick => "$('input[id=serv_file]').click();"} Seleccionar
-                    .modal-footer
-                      %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cerrar
-                      %button.btn.btn-primary#submit{:type => "submit", :disabled => true}='Cargar'
-              :javascript
-                $('#myModal').on('show', function(){
-                  $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
-                  document.getElementById("submit").disabled = true;
-                  document.getElementById("serv_file").value = ''
-                });
-
-                $('input[id=serv_file]').change(function() {
-                  if ($(this).val().length > 0) {
-                    $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
-                    document.getElementById("submit").disabled = false;
-                  }else{
-                     $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
-                     document.getElementById("submit").disabled = true;
-                  }
-                });
+        %td= mr.name
+        %td= mr.desc
+        %td= link_to image_tag('ver.png', {:title => t('forms.show')}), mr
+        %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_serv_path(mr)
+        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), mr, :method => :delete, :data => { :confirm => t('.confirm') }
+        -if mr.mcr_atrs?
+          %td= link_to image_tag('arch_del.png', {:title => t('forms.delparam')}), {:controller => "uploads", :action => 'destroy', :id => mr}, :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
+        -else
+          %td= link_to image_tag('arch_add.png', {:title => t('forms.addparam')}),'#', :onclick => "$('#myModal').modal({res:'#{mr._id}'})"
+    =render "shared/upload_modal"
 
 %br
 .form-actions

@@ -53,7 +53,7 @@ en:
       save:        "Guardar"
       addparam:    "Agregar parámetros"
       delparam:    "Eliminar parámetros"
-      delparam:
+      delparams:
         notice:     "Los parámetros fueron eliminados satisfactoriamente."
         confirm:    "Está seguro que desea eliminar los parámetros?"
 
