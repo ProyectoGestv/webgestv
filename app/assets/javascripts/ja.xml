@@ -3,6 +3,7 @@
     <desc></desc>
     <name>ma1</name>
     <ref-prot/>
+    <type>simple</type>
     <atrs>
       <atr>
         <desc/>
@@ -28,6 +29,7 @@
     <desc></desc>
     <name>ma1</name>
     <ref-prot/>
+    <type>simple</type>
     <atrs>
       <atr>
         <desc/>

@@ -30,6 +30,7 @@
                   =f1.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del Grupo de Atributos"
                   =f1.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del Grupo de Atributos"
                   =f1.input :ref_prot, label: 'Referencia Protocolar', :input_html => { :class => "span4" }, :hint => "Referencia protocolar del Grupo de Atributos"
+                  =f1.input :type, :label => 'Tipo', :collection => [['Simple', 'simple'], ['Compuesto', 'composite']], :as => :select, :include_blank => false, disabled: true
                   %fieldset#subform1
                     %legend.the-legend2
                       Atributos

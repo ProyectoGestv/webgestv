@@ -22,6 +22,28 @@ class AtrsController < ApplicationController
     end
   end
 
+  def index_sim
+    puts params
+    #params[:mcr_atr_id]
+    puts params['mcr_atr_id']
+    puts '//////////////////////////////////////////////'
+    @atrs = Atr.where({'mcr_atr_id' => Moped::BSON::ObjectId(params['mcr_atr_id'])})
+    #.find_by(:type => 'simple')
+    respond_to do |format|
+      format.html # show_sim.html.erb
+      format.json { render json: @atr }
+    end
+  end
+
+  def index_com
+    @atrs = Atr.all
+
+    respond_to do |format|
+      format.html # show_sim.html.erb
+      format.json { render json: @atr }
+    end
+  end
+
   # GET /atrs/new
   # GET /atrs/new.json
   def new

@@ -6,6 +6,7 @@ class McrAtr
   field :name, type: String
   field :desc, type: String
   field :ref_prot, type: String
+  field :type, type: String, default: 'simple'
   belongs_to :man_rsc
   has_many :atrs
   accepts_nested_attributes_for :atrs

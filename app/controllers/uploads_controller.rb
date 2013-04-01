@@ -20,6 +20,8 @@ class UploadsController < ApplicationController
             mcr.desc=n2.text
           elsif n2.name == 'ref-prot'
             mcr.ref_prot=n2.text
+          elsif n2.name == 'type'
+            mcr.type=n2.text
           elsif n2.name == 'atrs'
             n2.elements.each do |n3|
               atr=Atr.new

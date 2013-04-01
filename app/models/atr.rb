@@ -12,5 +12,5 @@ class Atr
   field :rdbl, type: Boolean, default: true
   field :wtbl, type: Boolean, default: false
   belongs_to :mcr_atr
-  attr_accessible :name, :desc, :ref_prot, :type, :rdbl, :wtbl, :value
+  attr_accessible :name, :desc, :ref_prot, :type, :rdbl, :wtbl, :value, :mcr_atr
 end

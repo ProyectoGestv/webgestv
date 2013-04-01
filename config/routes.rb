@@ -10,17 +10,35 @@ Webgestv::Application.routes.draw do
     post :new, on: :member
     post :load, on: :member
   end
-  resources :atrs
-  resources :mcr_atrs
+
   resources :links
+
   resources :laynet_eles do
     get :delparams, on: :member
+    resources :mcr_atrs do
+      resources :atrs
+      match "/atrs_sim" => "atrs#index_sim"
+      match "/atrs_con" => "atrs#index_con"
+      match "/atrs_com" => "atrs#index_com"
+    end
   end
   resources :net_eles do
     get :delparams, on: :member
+    resources :mcr_atrs do
+      resources :atrs
+      match "/atrs_sim" => "atrs#index_sim"
+      match "/atrs_con" => "atrs#index_con"
+      match "/atrs_com" => "atrs#index_com"
+    end
   end
   resources :servs do
     get :delparams, on: :member
+    resources :mcr_atrs do
+      resources :atrs
+      match "/atrs_sim" => "atrs#index_sim"
+      match "/atrs_con" => "atrs#index_con"
+      match "/atrs_com" => "atrs#index_com"
+    end
   end
   root :to => "static#index"
 end
