@@ -1,0 +1,25 @@
+%h1 Listing alr_mntrs
+
+%table
+  %tr
+    %th Descr
+    %th Type
+    %th State
+    %th Impact
+    %th
+    %th
+    %th
+
+  - @alr_mntrs.each do |alr_mntr|
+    %tr
+      %td= alr_mntr.descr
+      %td= alr_mntr.type
+      %td= alr_mntr.state
+      %td= alr_mntr.impact
+      %td= link_to 'Show', alr_mntr
+      %td= link_to 'Edit', edit_alr_mntr_path(alr_mntr)
+      %td= link_to 'Destroy', alr_mntr, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Alr mntr', new_alr_mntr_path

@@ -1,25 +1,49 @@
-%h1 Listing mcr_atrs
+%h1= "Listado de atributos para #{@mr_name}"
+-i=0
+%fieldset#mainform
+  %legend.the-legend
+    ="Grupos de Atributos"
+    - @mcr_atrs.each do |mcr_atr|
+      -i=i+1
+      #accordion1.accordion
+        .accordion-group
+          .accordion-heading
+            %a.accordion-toggle{"data-parent" => "#accordion1", "data-toggle" => "collapse", :href => "#collapse#{i}"}
+              ="Grupo de atributos ##{i}: #{mcr_atr.name} (#{mcr_atr.tipo})"
+            %table
+              %tr
+                -if mcr_atr.tipo == 'compuesto'
+                  -if mcr_atr.alr_mntr
+                    %td=link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}),'#'
+                  -else
+                    %td=link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#'
+          %div{:id => "collapse#{i}", :class => "accordion-body collapse in"}
+            .accordion-inner
+              %table
+                %tr
+                  %th Nombre
+                  %th Descripción
+                  %th Referencia protocolar
+                  %th Tipo
+                  -if mcr_atr.tipo == 'simple'
+                    %th Monitor
+                  - mcr_atr.atrs.each do |atr|
+                    %tr
+                    %td= atr.name
+                    %td= atr.desc
+                    %td= atr.ref_prot
+                    %td= atr.tipo
+                    -if mcr_atr.tipo == 'simple'
+                      %td
+                        -if atr.alr_mntr
+                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}),'#'
+                        -else
+                          = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#'
 
-%table
-  %tr
-    %th Name
-    %th Type
-    %th Desc
-    %th Ref prot
-    %th
-    %th
-    %th
 
-  - @mcr_atrs.each do |mcr_atr|
-    %tr
-      %td= mcr_atr.name
-      %td= mcr_atr.type
-      %td= mcr_atr.desc
-      %td= mcr_atr.ref_prot
-      %td= link_to 'Show', mcr_atr
-      %td= link_to 'Edit', edit_mcr_atr_path(mcr_atr)
-      %td= link_to 'Destroy', mcr_atr, :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
+.form-actions
+  =link_to t('forms.back'), session[:return_to], {:class => "links"}
 
-= link_to 'New Mcr atr', new_mcr_atr_path
+

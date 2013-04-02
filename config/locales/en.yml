@@ -53,6 +53,8 @@ en:
       save:        "Guardar"
       addparam:    "Agregar parámetros"
       delparam:    "Eliminar parámetros"
+      addalarm:    "Agregar alarma"
+      delalarm:    "Eliminar alarma"
       delparams:
         notice:     "Los parámetros fueron eliminados satisfactoriamente."
         confirm:    "Está seguro que desea eliminar los parámetros?"

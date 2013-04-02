@@ -21,9 +21,9 @@ Atr.delete_all
   conn2=Conn.new(ip: "1.1.1.#{i}", port: 100+i)
   serv=Serv.create(name:"s#{i}", desc: "service #{i}", mother: netele._id)
   serv.conn=conn2
-  ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}")
+  ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
   serv.mcr_atrs << ma
-  a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", type: "integer")
+  a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", tipo: "integer")
   ma.atrs << a1
 end
 

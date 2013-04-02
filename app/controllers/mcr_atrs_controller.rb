@@ -3,7 +3,16 @@ class McrAtrsController < ApplicationController
   # GET /mcr_atrs
   # GET /mcr_atrs.json
   def index
-    @mcr_atrs = McrAtr.all
+    session[:return_to]=request.referer
+    params.each do |key, value|
+      if %w{serv_id net_ele_id laynet_ele_id}.include?(key)
+        mr=ManRsc.find(params[key])
+        @mcr_atrs=mr.mcr_atrs
+        @mr_name=mr.name
+        break
+      end
+    end
+    #@mcr_atrs = Serv.find(params[:serv_id]).mcr_atrs
 
     respond_to do |format|
       format.html # index.html.erb

@@ -16,7 +16,7 @@
       </atr>
       <atr>
         <desc/>
-        <name>atributo 1</name>
+        <name>atributo 2</name>
         <rdbl>true</rdbl>
         <ref-prot/>
         <type>String</type>
@@ -27,9 +27,9 @@
   </mcr-atr>
   <mcr-atr>
     <desc></desc>
-    <name>ma1</name>
+    <name>ma2</name>
     <ref-prot/>
-    <type>simple</type>
+    <type>compuesto</type>
     <atrs>
       <atr>
         <desc/>

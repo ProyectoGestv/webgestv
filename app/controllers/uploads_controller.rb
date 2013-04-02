@@ -1,8 +1,6 @@
 # -*- encoding : utf-8 -*-
 class UploadsController < ApplicationController
   def new
-    puts request.referer
-    puts '/////////////////////////////////////'
     session[:return_to]=request.referer
     tmp = params[:mr][:file].tempfile
     f=File.open(tmp)
@@ -21,7 +19,7 @@ class UploadsController < ApplicationController
           elsif n2.name == 'ref-prot'
             mcr.ref_prot=n2.text
           elsif n2.name == 'type'
-            mcr.type=n2.text
+            mcr.tipo=n2.text
           elsif n2.name == 'atrs'
             n2.elements.each do |n3|
               atr=Atr.new
@@ -33,7 +31,7 @@ class UploadsController < ApplicationController
                 elsif n4.name == 'ref-prot'
                   atr.ref_prot=n4.text
                 elsif n4.name == 'type'
-                  atr.type=n4.text
+                  atr.tipo=n4.text
                 elsif n4.name == 'rdbl'
                   atr.rdbl=n4.text
                 elsif n4.name == 'wtbl'
@@ -68,6 +66,8 @@ class UploadsController < ApplicationController
       end
     end
     #mcr_atrs=params[:serv][:mcr_atrs_attributes]
+    puts mcr_atrs.to_xml(:include => :atrs)
+    puts '////////////////////////////'
     @mr.mcr_atrs_attributes=mcr_atrs
     pass=true
     @mr.mcr_atrs.each do |mcr|
