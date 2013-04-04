@@ -24,6 +24,10 @@ class AlrMntrsController < ApplicationController
   # GET /alr_mntrs/new
   # GET /alr_mntrs/new.json
   def new
+    session[:return_to]=request.referer
+    puts params
+    puts '///////////////////////////////////////'
+
     @alr_mntr = AlrMntr.new
 
     respond_to do |format|
@@ -40,10 +44,12 @@ class AlrMntrsController < ApplicationController
   # POST /alr_mntrs
   # POST /alr_mntrs.json
   def create
+    puts params
+    puts '///////////////////////////////////////'
     @alr_mntr = AlrMntr.new(params[:alr_mntr])
 
     respond_to do |format|
-      if @alr_mntr.save
+      if @alr_mntr
         format.html { redirect_to @alr_mntr, notice: 'Alr mntr was successfully created.' }
         format.json { render json: @alr_mntr, status: :created, location: @alr_mntr }
       else

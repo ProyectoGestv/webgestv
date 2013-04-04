@@ -1,0 +1,10 @@
+= form_for @alr_mntr_rng do |f|
+  - if @alr_mntr_rng.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@alr_mntr_rng.errors.count, "error")} prohibited this alr_mntr_rng from being saved:"
+      %ul
+        - @alr_mntr_rng.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

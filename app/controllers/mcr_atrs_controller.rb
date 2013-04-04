@@ -7,7 +7,7 @@ class McrAtrsController < ApplicationController
     params.each do |key, value|
       if %w{serv_id net_ele_id laynet_ele_id}.include?(key)
         mr=ManRsc.find(params[key])
-        @mcr_atrs=mr.mcr_atrs
+        @mcr_atrs=mr.mcr_atrs.order_by(:tipo.asc)
         @mr_name=mr.name
         break
       end

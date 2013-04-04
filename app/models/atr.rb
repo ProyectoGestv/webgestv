@@ -12,7 +12,8 @@ class Atr
   field :rdbl, type: Boolean, default: true
   field :wtbl, type: Boolean, default: false
   belongs_to :mcr_atr
-  embeds_one :alr_mntr
-  accepts_nested_attributes_for :alr_mntr
-  attr_accessible :name, :desc, :ref_prot, :tipo, :rdbl, :wtbl, :value, :mcr_atr, :alr_mntr_attributes
+  embeds_one :qos_mon, :class_name => 'AlrMntr'
+  embeds_one :alr_mon, :class_name => 'AlrMntr'
+  accepts_nested_attributes_for :qos_mon, :alr_mon
+  attr_accessible :name, :desc, :ref_prot, :tipo, :rdbl, :wtbl, :value, :mcr_atr
 end

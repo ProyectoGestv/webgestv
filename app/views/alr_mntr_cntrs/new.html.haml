@@ -1,0 +1,8 @@
+-cat=''
+-if session[:alr_cat]=='qos'
+  -cat='QoS'
+-else
+  -cat='Alarma'
+%h1="Nuevo Monitor de #{cat} tipo Contador"
+= render 'form'
+%br

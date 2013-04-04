@@ -1,0 +1,17 @@
+%h1 Listing alr_mntr_rngs
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @alr_mntr_rngs.each do |alr_mntr_rng|
+    %tr
+      %td= link_to 'Show', alr_mntr_rng
+      %td= link_to 'Edit', edit_alr_mntr_rng_path(alr_mntr_rng)
+      %td= link_to 'Destroy', alr_mntr_rng, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Alr mntr rng', new_alr_mntr_rng_path

@@ -16,7 +16,7 @@
                   -if mcr_atr.alr_mntr
                     %td=link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}),'#'
                   -else
-                    %td=link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#'
+                    %td=link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}), '#'
           %div{:id => "collapse#{i}", :class => "accordion-body collapse in"}
             .accordion-inner
               %table
@@ -26,7 +26,8 @@
                   %th Referencia protocolar
                   %th Tipo
                   -if mcr_atr.tipo == 'simple'
-                    %th Monitor
+                    %th Monitor QoS
+                    %th Monitor Alarma
                   - mcr_atr.atrs.each do |atr|
                     %tr
                     %td= atr.name
@@ -35,12 +36,15 @@
                     %td= atr.tipo
                     -if mcr_atr.tipo == 'simple'
                       %td
-                        -if atr.alr_mntr
-                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}),'#'
+                        -if atr.qos_mon
+                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/alr_mntr_cntrs/#{atr.qos_mon._id}?alr_cat=qos", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
                         -else
-                          = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#'
-
-
+                          = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/alr_mntr_cntrs/new?alr_cat=qos"
+                      %td
+                        -if atr.alr_mon
+                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/alr_mntr_cntrs/#{atr.alr_mon._id}?alr_cat=alr", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
+                        -else
+                          = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/alr_mntr_cntrs/new?alr_cat=alr"
 
 %br
 .form-actions
