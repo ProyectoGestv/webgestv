@@ -1,5 +1,8 @@
-%h1 New alr_mntr_rng
-
+-cat=''
+-if session[:alr_cat]=='qos'
+  -cat='QoS'
+-else
+  -cat='Alarma'
+%h1="Nuevo Monitor de #{cat} tipo Gauge"
 = render 'form'
-
-= link_to 'Back', alr_mntr_rngs_path
+%br

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AlrMntrsController < ApplicationController
   # GET /alr_mntrs
   # GET /alr_mntrs.json

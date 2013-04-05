@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class AlrMntrCntrsController < ApplicationController
   # GET /alr_mntr_cntrs
   # GET /alr_mntr_cntrs.json
@@ -25,13 +26,10 @@ class AlrMntrCntrsController < ApplicationController
   # GET /alr_mntr_cntrs/new.json
   def new
     session[:return_to]=request.referer
-    puts params
-    puts '///////////////////////////////////////'
-    session[:man_rsc_id]=params[:man_rsc_id]
-    session[:mcr_atr_id]=params[:mcr_atr_id]
     session[:atr_id]=params[:atr_id]
     session[:alr_cat]=params[:alr_cat]
     @alr_mntr_cntr = AlrMntrCntr.new
+    @url=man_rsc_mcr_atr_atr_alr_mntr_cntrs_path
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,28 +39,36 @@ class AlrMntrCntrsController < ApplicationController
 
   # GET /alr_mntr_cntrs/1/edit
   def edit
-    @alr_mntr_cntr = AlrMntrCntr.find(params[:id])
+    session[:return_to]=request.referer
+    session[:atr_id]=params[:atr_id]
+    session[:alr_cat]=params[:alr_cat]
+
+    if params[:alr_cat]=='qos'
+      @alr_mntr_cntr = Atr.find(params[:atr_id]).qos_mon
+    else
+      @alr_mntr_cntr = Atr.find(params[:atr_id]).alr_mon
+    end
+    @url=man_rsc_mcr_atr_atr_alr_mntr_cntr_path(@alr_mntr_cntr.id)
   end
 
   # POST /alr_mntr_cntrs
   # POST /alr_mntr_cntrs.json
   def create
-    puts params
-    puts session[:atr_id]
-    puts '///////////////////////////////////////'
     @alr_mntr_cntr = AlrMntrCntr.new(params[:alr_mntr_cntr])
     atr=Atr.find(session[:atr_id])
-    atr.qos_mon=@alr_mntr_cntr
+    if session[:alr_cat]=='qos'
+      atr.qos_mon=@alr_mntr_cntr
+    else
+      atr.alr_mon=@alr_mntr_cntr
+    end
     @alr_mntr_cntr.atr=atr
-    puts atr.to_xml
-    puts @alr_mntr_cntr.to_xml
-    #atr.qos_mon=@alr_mntr_cntr
-    #puts atr.to_xml
+
     respond_to do |format|
       if @alr_mntr_cntr.save
         format.html { redirect_to session[:return_to], notice: 'Alr mntr cntr was successfully created.' }
         format.json { render json: @alr_mntr_cntr, status: :created, location: @alr_mntr_cntr }
       else
+        @url=man_rsc_mcr_atr_atr_alr_mntr_cntrs_path
         format.html { render action: "new" }
         format.json { render json: @alr_mntr_cntr.errors, status: :unprocessable_entity }
       end
@@ -72,13 +78,18 @@ class AlrMntrCntrsController < ApplicationController
   # PUT /alr_mntr_cntrs/1
   # PUT /alr_mntr_cntrs/1.json
   def update
-    @alr_mntr_cntr = AlrMntrCntr.find(params[:id])
+    if session[:alr_cat]=='qos'
+      @alr_mntr_cntr = Atr.find(session[:atr_id]).qos_mon
+    else
+      @alr_mntr_cntr = Atr.find(session[:atr_id]).alr_mon
+    end
 
     respond_to do |format|
       if @alr_mntr_cntr.update_attributes(params[:alr_mntr_cntr])
-        format.html { redirect_to @alr_mntr_cntr, notice: 'Alr mntr cntr was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: 'Alr mntr cntr was successfully updated.' }
         format.json { head :no_content }
       else
+        @url=man_rsc_mcr_atr_atr_alr_mntr_cntr_path(@alr_mntr_cntr.id)
         format.html { render action: "edit" }
         format.json { render json: @alr_mntr_cntr.errors, status: :unprocessable_entity }
       end
@@ -88,10 +99,12 @@ class AlrMntrCntrsController < ApplicationController
   # DELETE /alr_mntr_cntrs/1
   # DELETE /alr_mntr_cntrs/1.json
   def destroy
-    puts params
-    puts '///////////////////////////////////////'
-    #@alr_mntr_cntr = AlrMntrCntr.find(params[:id])
-    @alr_mntr_cntr = Atr.find(params[:atr_id]).qos_mon
+    @alr_mntr_cntr = nil
+    if params[:alr_cat]=='qos'
+      @alr_mntr_cntr = Atr.find(params[:atr_id]).qos_mon
+    else
+      @alr_mntr_cntr = Atr.find(params[:atr_id]).alr_mon
+    end
     @alr_mntr_cntr.destroy
 
     respond_to do |format|

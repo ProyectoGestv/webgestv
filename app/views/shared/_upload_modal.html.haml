@@ -17,9 +17,7 @@
         $('#pretty-input').val($(this).val().replace("C:\\fakepath\\", ""));
         document.getElementById("submit").disabled = true;
         document.getElementById("mr_file").value = ''
-
         name = $(this).data('modal').options.res
-                alert(name);
         document.getElementById("formo").action = "/uploads/"+name;
       });
 

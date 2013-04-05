@@ -1,10 +1,10 @@
-= simple_form_for(@alr_mntr_cntr, :url => @url, :html => {:class => 'form-horizontal' }) do |f|
+= simple_form_for(@alr_mntr_frml, :url => @url, :html => {:class => 'form-horizontal' }) do |f|
   %fieldset#mainform
     %legend.the-legend
       Datos
       =f.input :descr, label: 'Descripción', :input_html => { :class => "span6" }, :hint => "Descripción del monitor"
       =f.input :impact, :label => 'Impacto', :collection => [['Bajo', 'bajo'], ['Medio', 'medio'], ['Alto', 'alto']], :as => :select, :include_blank => false, :hint => "Impacto de la alarma en el sistema."
-      =f.input :value, label: 'Umbral', :input_html => { :class => "span6" }, :hint => "Valor de umbral del monitor"
+      =f.input :value, label: 'Formula', :input_html => { :class => "span6" }, :hint => "Cálculo de alerta del monitor"
     .form-actions
       %button.btn.btn-primary{:type => "submit"}=t('forms.save')
       =link_to t('forms.back'), session[:return_to], {:class => "links"}

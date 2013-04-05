@@ -1,10 +1,11 @@
-= form_for @alr_mntr_rng do |f|
-  - if @alr_mntr_rng.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@alr_mntr_rng.errors.count, "error")} prohibited this alr_mntr_rng from being saved:"
-      %ul
-        - @alr_mntr_rng.errors.full_messages.each do |msg|
-          %li= msg
-
-  .actions
-    = f.submit 'Save'
+= simple_form_for(@alr_mntr_rng, :url => @url, :html => {:class => 'form-horizontal' }) do |f|
+  %fieldset#mainform
+    %legend.the-legend
+      Datos
+      =f.input :descr, label: 'Descripción', :input_html => { :class => "span6" }, :hint => "Descripción del monitor"
+      =f.input :impact, :label => 'Impacto', :collection => [['Bajo', 'bajo'], ['Medio', 'medio'], ['Alto', 'alto']], :as => :select, :include_blank => false, :hint => "Impacto de la alarma en el sistema."
+      =f.input :value_up, label: 'Umbral Superior', :input_html => { :class => "span6" }, :hint => "Valor del umbral superior del monitor"
+      =f.input :value_down, label: 'Umbral Inferior', :input_html => { :class => "span6" }, :hint => "Valor del umbral inferior del monitor"
+    .form-actions
+      %button.btn.btn-primary{:type => "submit"}=t('forms.save')
+      =link_to t('forms.back'), session[:return_to], {:class => "links"}

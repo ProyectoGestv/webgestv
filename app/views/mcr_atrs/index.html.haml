@@ -1,4 +1,9 @@
 %h1= "Listado de atributos para #{@mr_name}"
+%br
+- if notice
+  .alert.alert-success
+    %a.close{"data-dismiss" => "alert"} ×
+    = notice
 -i=0
 %fieldset#mainform
   %legend.the-legend
@@ -13,10 +18,12 @@
             %table
               %tr
                 -if mcr_atr.tipo == 'compuesto'
-                  -if mcr_atr.alr_mntr
-                    %td=link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}),'#'
+                  -if mcr_atr.alr_mon
+                    %td
+                      = link_to image_tag('alr_edit.png', {:title => t('forms.editalarm')}), "mcr_atrs/#{mcr_atr._id}/alr_mntr_frmls/#{mcr_atr.alr_mon._id}/edit"
+                      =link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/alr_mntr_frmls/#{mcr_atr.alr_mon._id}", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
                   -else
-                    %td=link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}), '#'
+                    %td=link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}), "mcr_atrs/#{mcr_atr._id}/alr_mntr_frmls/new"
           %div{:id => "collapse#{i}", :class => "accordion-body collapse in"}
             .accordion-inner
               %table
@@ -37,31 +44,39 @@
                     -if mcr_atr.tipo == 'simple'
                       %td
                         -if atr.qos_mon
-                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/alr_mntr_cntrs/#{atr.qos_mon._id}?alr_cat=qos", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
+                          -tipo=''
+                          -if atr.qos_mon._type == 'AlrMntrCntr'
+                            -tipo='alr_mntr_cntrs'
+                          -else
+                            -tipo='alr_mntr_rngs'
+                          = link_to image_tag('alr_edit.png', {:title => t('forms.editalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.qos_mon._id}/edit?alr_cat=qos"
+                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.qos_mon._id}?alr_cat=qos", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
                         -else
                           = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'qos'})"
                       %td
                         -if atr.alr_mon
-                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/alr_mntr_cntrs/#{atr.alr_mon._id}?alr_cat=alr", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
+                          -tipo=''
+                          -if atr.alr_mon._type == 'AlrMntrCntr'
+                            -tipo='alr_mntr_cntrs'
+                          -else
+                            -tipo='alr_mntr_rngs'
+                          = link_to image_tag('alr_edit.png', {:title => t('forms.editalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.alr_mon._id}/edit?alr_cat=alr"
+                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.alr_mon._id}?alr_cat=alr", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
                         -else
                           = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'alr'})"
+
     #myMntr.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myMntrLabel", :role => "dialog", :tabindex => "-1"}
       .modal-header
         %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
         %h3#myMntrLabel Seleccionar Tipo de Monitor
-      .modal-body
-        =link_to 'Counter' , '#', :id => "conmon"
-        =link_to 'Gauge' ,'#', :id => "gaumon"
-      .modal-footer
-        %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cerrar
+      .modal-body2
+        =link_to 'Counter' , '#', :id => "conmon", :class => "links2"
+        =link_to 'Gauge' ,'#', :id => "gaumon", :class => "links2"
     :javascript
       $('#myMntr').on('show', function(e){
-        //e.preventDefault();
         aid1 = $(e.currentTarget).data('modal').options.aid
-
         maid1 = $(this).data('modal').options.maid
         alrcat1 = $(this).data('modal').options.alrcat
-
         document.getElementById("conmon").href = "mcr_atrs/"+maid1+"/atrs/"+aid1+"/alr_mntr_cntrs/new?alr_cat="+alrcat1
         document.getElementById("gaumon").href = "mcr_atrs/"+maid1+"/atrs/"+aid1+"/alr_mntr_rngs/new?alr_cat="+alrcat1
       });

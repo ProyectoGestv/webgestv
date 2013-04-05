@@ -4,5 +4,5 @@ class AlrMntr
   field :descr, type: String
   field :ctgry, type: String
   field :state, type: String
-  field :impact, type: String
+  field :impact, type: String, default: 'bajo'
 end

@@ -55,6 +55,7 @@ en:
       delparam:    "Eliminar parámetros"
       addalarm:    "Agregar alarma"
       delalarm:    "Eliminar alarma"
+      editalarm:    "Editar alarma"
       delparams:
         notice:     "Los parámetros fueron eliminados satisfactoriamente."
         confirm:    "Está seguro que desea eliminar los parámetros?"
