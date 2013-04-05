@@ -17,7 +17,7 @@
     - @servs.each do |mr|
       %tr
         -if mr.mcr_atrs?
-          %td= link_to mr.name, serv_mcr_atrs_path(mr)
+          %td= link_to mr.name, man_rsc_mcr_atrs_path(mr)
         -else
           %td= mr.name
         %td= mr.desc

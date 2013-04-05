@@ -27,7 +27,7 @@ class AlrMntrCntrsController < ApplicationController
     session[:return_to]=request.referer
     puts params
     puts '///////////////////////////////////////'
-    session[:serv_id]=params[:serv_id]
+    session[:man_rsc_id]=params[:man_rsc_id]
     session[:mcr_atr_id]=params[:mcr_atr_id]
     session[:atr_id]=params[:atr_id]
     session[:alr_cat]=params[:alr_cat]

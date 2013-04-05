@@ -16,7 +16,10 @@
   %tbody
     - @net_eles.each do |mr|
       %tr
-        %td= mr.name
+        -if mr.mcr_atrs?
+          %td= link_to mr.name, man_rsc_mcr_atrs_path(mr)
+        -else
+          %td= mr.name
         %td= mr.desc
         %td= link_to image_tag('ver.png', {:title => t('forms.show')}), mr
         %td= link_to image_tag('editar.png', {:title => t('forms.edit')}), edit_net_ele_path(mr)
