@@ -9,11 +9,12 @@ class McrAtr
   field :ref_prot, type: String
   field :tipo, type: String
   belongs_to :man_rsc
+  has_many :alrt
   has_many :atrs
   embeds_one :alr_mon, :class_name => 'AlrMntr'
   accepts_nested_attributes_for :atrs, :alr_mon
   before_destroy :delete_atrs
-  attr_accessible :name, :desc, :ref_prot, :tipo, :atrs_attributes
+  attr_accessible :name, :desc, :ref_prot, :tipo, :atrs_attributes, :alrt
   private
   def delete_atrs
     self.atrs.each do |atr|

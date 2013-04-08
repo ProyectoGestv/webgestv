@@ -11,6 +11,7 @@ NetEle.delete_all
 LaynetEle.delete_all
 McrAtr.delete_all
 Atr.delete_all
+Alrt.delete_all
 (1..5).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
   laynetele = LaynetEle.create(name: "nle#{i}", desc: "network layer element #{i}")
@@ -25,6 +26,12 @@ Atr.delete_all
   serv.mcr_atrs << ma
   a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", tipo: "integer")
   ma.atrs << a1
+  al1=Alrt.create(name:"notif #{i}", msg:"alerta de notificacion #{i}", tipo:'notif')
+  a1.alrts << al1
+  al2=Alrt.create(name:"anmly #{i}", msg:"alerta de anomalia #{i}", tipo:'anmly')
+  a1.alrts << al2
+  al3=Alrt.create(name:"alarm #{i}", msg:"alerta de alarma #{i}", tipo:'alarm')
+  a1.alrts << al3
 end
 
 

@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
 
+  resources :alrts
+
+
   resources :alr_mntr_frmls
 
 

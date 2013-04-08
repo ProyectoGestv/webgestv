@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @alrt.title
+%p
+  %b Msg:
+  = @alrt.msg
+
+= link_to 'Edit', edit_alrt_path(@alrt)
+\|
+= link_to 'Back', alrts_path

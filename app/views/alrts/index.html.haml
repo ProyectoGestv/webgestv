@@ -1,0 +1,21 @@
+%h1 Listing alrts
+
+%table
+  %tr
+    %th Title
+    %th Msg
+    %th
+    %th
+    %th
+
+  - @alrts.each do |alrt|
+    %tr
+      %td= alrt.title
+      %td= alrt.msg
+      %td= link_to 'Show', alrt
+      %td= link_to 'Edit', edit_alrt_path(alrt)
+      %td= link_to 'Destroy', alrt, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Alrt', new_alrt_path
