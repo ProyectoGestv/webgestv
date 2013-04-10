@@ -1,21 +1,53 @@
-%h1 Listing alrts
+%h1 Listado de Alertas
+:javascript
+  $(function () {
+    $('.popover-test').popover({
+      html : true
+    })
+  });
 
 %table
   %tr
-    %th Title
-    %th Msg
     %th
-    %th
+    %th Título
+    %th Mensaje
+    %th Fecha/Hora
     %th
 
   - @alrts.each do |alrt|
     %tr
+      -if alrt.tipo=='notif'
+        %td
+          =image_tag "notif.png"
+          %span.label.label-info Información
+      -elsif alrt.tipo=='anmly'
+        %td
+          =image_tag "anml.png"
+          %span.label.label-warning Anomalía
+      -else
+        %td
+          =image_tag "alrm.png"
+          %span.label.label-important Alarma
       %td= alrt.title
       %td= alrt.msg
-      %td= link_to 'Show', alrt
-      %td= link_to 'Edit', edit_alrt_path(alrt)
-      %td= link_to 'Destroy', alrt, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Alrt', new_alrt_path
+      %td= alrt.created_at
+      %td
+        -if alrt.tipo=='anmly' or alrt.tipo=='alarm'
+          -localizado=""
+          -impacto=""
+          -if alrt.atr
+            -localizado="atributo: #{alrt.atr.name}, Grupo de Atributos: #{alrt.atr.mcr_atr.name}, Recurso: #{alrt.atr.mcr_atr.man_rsc.name}"
+            -if alrt.tipo=='anmly'
+              -if alrt.atr.qos_mon
+                -impacto=alrt.atr.qos_mon.impact
+              -else
+                -impacto='ninguno'
+            -else
+              -if alrt.atr.alr_mon
+                -impacto=alrt.atr.alr_mon.impact
+              -else
+                -impacto='ninguno'
+          -else
+            -localizado="grupo de atributos #{alrt.mcr_atr.name}"
+          /%a.btn{:class => "popover-test", :rel => "popover", :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}"} Detalle
+          = link_to('Detalle', '#', :class => "popover-test", :rel => "popover", :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}")

@@ -2,7 +2,7 @@ class AlrtsController < ApplicationController
   # GET /alrts
   # GET /alrts.json
   def index
-    @alrts = Alrt.all
+    @alrts = Alrt.all.order_by(:created_at.desc)
 
     respond_to do |format|
       format.html # index.html.erb
