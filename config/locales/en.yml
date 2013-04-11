@@ -53,13 +53,24 @@ en:
       save:        "Guardar"
       addparam:    "Agregar parámetros"
       delparam:    "Eliminar parámetros"
-      addalarm:    "Agregar alarma"
-      delalarm:    "Eliminar alarma"
-      editalarm:    "Editar alarma"
+      addalarm:    "Agregar monitor de alarma"
+      delalarm:    "Eliminar monitor de alarma"
+      editalarm:   "Editar monitor de alarma"
+      stopalarm:   "Cesar monitor de alarma"
+      playalarm:   "Iniciar monitor de alarma"
+      delalarms:
+        notice:     "El monitor de alarma fueeliminado satisfactoriamente."
+        confirm:    "Está seguro que desea eliminar el monitor de alarma?"
       delparams:
         notice:     "Los parámetros fueron eliminados satisfactoriamente."
         confirm:    "Está seguro que desea eliminar los parámetros?"
 
+
+  alarms:
+    update:
+      notice:     "El monitor de alarma fue actualizado satisfactoriamente."
+    create:
+      notice:     "El monitor de alarma fue creado satisfactoriamente."
 
   net_eles:
     model:        "Elemento de Red"

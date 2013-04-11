@@ -65,7 +65,7 @@ class AlrMntrCntrsController < ApplicationController
 
     respond_to do |format|
       if @alr_mntr_cntr.save
-        format.html { redirect_to session[:return_to], notice: 'Alr mntr cntr was successfully created.' }
+        format.html { redirect_to session[:return_to], notice: t('alarms.create.notice') }
         format.json { render json: @alr_mntr_cntr, status: :created, location: @alr_mntr_cntr }
       else
         @url=man_rsc_mcr_atr_atr_alr_mntr_cntrs_path
@@ -86,7 +86,7 @@ class AlrMntrCntrsController < ApplicationController
 
     respond_to do |format|
       if @alr_mntr_cntr.update_attributes(params[:alr_mntr_cntr])
-        format.html { redirect_to session[:return_to], notice: 'Alr mntr cntr was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: t('alarms.update.notice') }
         format.json { head :no_content }
       else
         @url=man_rsc_mcr_atr_atr_alr_mntr_cntr_path(@alr_mntr_cntr.id)
@@ -108,8 +108,28 @@ class AlrMntrCntrsController < ApplicationController
     @alr_mntr_cntr.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Alr mntr cntr was successfully deleted.' }
+      format.html { redirect_to :back, notice: t('forms.delalarms.notice') }
       format.json { head :no_content }
     end
   end
+
+  def state
+    @alr_mntr_cntr = nil
+    if params[:alr_cat]=='qos'
+      @alr_mntr_cntr = Atr.find(params[:atr_id]).qos_mon
+    else
+      @alr_mntr_cntr = Atr.find(params[:atr_id]).alr_mon
+    end
+    if @alr_mntr_cntr.state == 'act'
+      @alr_mntr_cntr.state='inact'
+    else
+      @alr_mntr_cntr.state='act'
+    end
+    @alr_mntr_cntr.save
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+    end
+  end
+
 end

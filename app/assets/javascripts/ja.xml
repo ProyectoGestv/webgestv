@@ -29,7 +29,7 @@
     <desc></desc>
     <name>ma2</name>
     <ref-prot/>
-    <type>compuesto</type>
+    <type>composite</type>
     <atrs>
       <atr>
         <desc/>
@@ -48,6 +48,23 @@
         <type>Integer</type>
         <value/>
         <wtbl>false</wtbl>
+      </atr>
+    </atrs>
+  </mcr-atr>
+  <mcr-atr>
+    <desc></desc>
+    <name>ma3</name>
+    <ref-prot/>
+    <type>setup</type>
+    <atrs>
+      <atr>
+        <desc/>
+        <name>atributo 1</name>
+        <rdbl>true</rdbl>
+        <ref-prot/>
+        <type>Integer</type>
+        <value>100</value>
+        <wtbl>true</wtbl>
       </atr>
     </atrs>
   </mcr-atr>

@@ -47,7 +47,6 @@
                 -impacto=alrt.atr.alr_mon.impact
               -else
                 -impacto='ninguno'
-          -else
-            -localizado="grupo de atributos #{alrt.mcr_atr.name}"
-          /%a.btn{:class => "popover-test", :rel => "popover", :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}"} Detalle
+          -elsif alrt.mcr_atr
+            -localizado="grupo de atributos #{alrt.mcr_atr.name}, Recurso: #{alrt.mcr_atr.man_rsc.name}"
           = link_to('Detalle', '#', :class => "popover-test", :rel => "popover", :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}")

@@ -54,7 +54,7 @@ class AlrMntrFrmlsController < ApplicationController
 
     respond_to do |format|
       if @alr_mntr_frml.save
-        format.html { redirect_to session[:return_to], notice: 'Alr mntr frml was successfully created.' }
+        format.html { redirect_to session[:return_to], notice: t('alarms.create.notice') }
         format.json { render json: @alr_mntr_frml, status: :created, location: @alr_mntr_frml }
       else
         @url=man_rsc_mcr_atr_alr_mntr_frmls_path
@@ -71,7 +71,7 @@ class AlrMntrFrmlsController < ApplicationController
 
     respond_to do |format|
       if @alr_mntr_frml.update_attributes(params[:alr_mntr_frml])
-        format.html { redirect_to session[:return_to], notice: 'Alr mntr frml was successfully updated.' }
+        format.html { redirect_to session[:return_to], notice: t('alarms.update.notice') }
         format.json { head :no_content }
       else
         @url=man_rsc_mcr_atr_alr_mntr_frml_path(@alr_mntr_frml.id)
@@ -88,8 +88,24 @@ class AlrMntrFrmlsController < ApplicationController
     @alr_mntr_frml.destroy
 
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Alr mntr frml was successfully deleted.' }
+      format.html { redirect_to :back, notice: t('forms.delalarms.notice') }
       format.json { head :no_content }
     end
   end
+
+  def state
+    puts '//////////////////////////////////////////////////////'
+    @alr_mntr_frml = McrAtr.find(params[:mcr_atr_id]).alr_mon
+    if @alr_mntr_frml.state == 'act'
+      @alr_mntr_frml.state='inact'
+    else
+      @alr_mntr_frml.state='act'
+    end
+    @alr_mntr_frml.save
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.json { head :no_content }
+    end
+  end
+
 end
