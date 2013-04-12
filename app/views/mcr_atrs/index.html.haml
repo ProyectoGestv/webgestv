@@ -52,7 +52,9 @@
                     %td= atr.name
                     %td= atr.desc
                     -if mcr_atr.tipo == 'setup'
-                      %td= atr.value
+                      %td
+                        =atr.value
+                        =link_to image_tag('editar.png', {:title => t('forms.changeValue')}) , '#', :onclick => "$('#confValue').modal({tipo:'#{atr.tipo}', val:'#{atr.value}', aid:'#{atr._id}', maid:'#{mcr_atr._id}', mrid:'#{mcr_atr.man_rsc._id}'})", :class => "links"
                     %td= atr.ref_prot
                     %td= atr.tipo
                     -if mcr_atr.tipo == 'simple'
@@ -94,7 +96,20 @@
       .modal-body2
         =link_to 'Counter' , '#', :id => "conmon", :class => "links2"
         =link_to 'Gauge' ,'#', :id => "gaumon", :class => "links2"
+    #confValue.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "confValueLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h3#confValueLabel Modificar valor del atributo
+      .modal-body
+        =simple_form_for(:atr, :method => :put, :wrapper => :bootstrap, :html => {:id => 'formo', :class => 'form-horizontal' }) do |f|
+          /=f.input :value, label: 'Valor', :input_html => {:type => 'number', :step => '0.01', :required => true, :class => "span4" }, :hint => "Valor del atributo"
+          /=f.input :value, :label => 'Valor', :collection => [['Verdadero', 'true'], ['Falso', 'false']], :as => :select, :include_blank => false, :hint => "Valor del atributo NOO."
+          #valco
+          .modal-footer2
+            %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cerrar
+            %button.btn.btn-primary#submit{:type => "submit"}='Guardar'
     :javascript
+      $(function () { $("input").not("[type=submit]").jqBootstrapValidation(); } );
       $('#myMntr').on('show', function(e){
         aid1 = $(e.currentTarget).data('modal').options.aid
         maid1 = $(this).data('modal').options.maid
@@ -104,6 +119,42 @@
       });
       $('#myMntr').on('hidden', function(){
           $(this).data('modal', null);
+      });
+      $('#confValue').on('show', function(){
+        mrid = $(this).data('modal').options.mrid;
+        maid = $(this).data('modal').options.maid;
+        aid = $(this).data('modal').options.aid;
+        val = $(this).data('modal').options.val;
+        tipo = $(this).data('modal').options.tipo;
+        var itype,idvrm,idvrr;
+
+        atr=document.getElementById("valco");
+        if (tipo==="Integer") {
+          itype="text"
+          idvrm="Valor debe ser un número entero"
+          idvrr="^\\d+$"
+          atr.innerHTML = "<div class=\"control-group string required atr_value\"><label class=\"string required control-label\" for=\"atr_value\"><abbr title=\"required\">*</abbr> Valor</label><div class=\"controls\"><input class=\"string required span4\" id=\"atr_value\" name=\"atr[value]\" data-validation-regex-regex=\""+idvrr+"\" data-validation-regex-message=\""+idvrm+"\" data-validation-required-message=\""+idvrm+"\" required size=\"50\" step=\"0.01\" type=\""+itype+"\" aria-invalid=\"false\"><p class=\"help-block\">Valor del atributo</p></div></div>";
+        } else if (tipo==="Float") {
+         itype="text"
+         idvrm="Valor debe ser un número decimal"
+         idvrr="^[-]?(0|[1-9][0-9]*)(\\.[0-9]+)?([eE][+-]?[0-9]+)?$"
+         atr.innerHTML = "<div class=\"control-group string required atr_value\"><label class=\"string required control-label\" for=\"atr_value\"><abbr title=\"required\">*</abbr> Valor</label><div class=\"controls\"><input class=\"string required span4\" id=\"atr_value\" name=\"atr[value]\" data-validation-regex-regex=\""+idvrr+"\" data-validation-regex-message=\""+idvrm+"\" data-validation-required-message=\""+idvrm+"\" required size=\"50\" step=\"0.01\" type=\""+itype+"\" aria-invalid=\"false\"><p class=\"help-block\">Valor del atributo</p></div></div>";
+        } else if (tipo==="String") {
+         itype="text"
+         idvrm="Valor no puede estar vacío"
+         idvrr="[a-zA-Z0-9][\\sa-zA-Z0-9]{0,19}"
+         atr.innerHTML = "<div class=\"control-group string required atr_value\"><label class=\"string required control-label\" for=\"atr_value\"><abbr title=\"required\">*</abbr> Valor</label><div class=\"controls\"><input class=\"string required span4\" id=\"atr_value\" name=\"atr[value]\" data-validation-regex-regex=\""+idvrr+"\" data-validation-regex-message=\""+idvrm+"\" data-validation-required-message=\""+idvrm+"\" required size=\"50\" step=\"0.01\" type=\""+itype+"\" aria-invalid=\"false\"><p class=\"help-block\">Valor del atributo</p></div></div>";
+        } else if (tipo==="Boolean") {
+         itype="text"
+         idvrm="Valor no puede estar vacío"
+         atr.innerHTML = "<div class=\"control-group select required atr_value\"><label class=\"select required control-label\" for=\"atr_value\"><abbr title=\"required\">*</abbr> Valor</label><div class=\"controls\"><select class=\"select required\" id=\"atr_value\" name=\"atr[value]\"><option value=\"true\">Verdadero</option><option value=\"false\">Falso</option></select><p class=\"help-block\">Valor del atributo.</p></div></div>";
+        }
+        $("input").not("[type=submit]").jqBootstrapValidation();
+        document.getElementById("formo").action = "/man_rscs/"+mrid+"/mcr_atrs/"+maid+"/atrs/"+aid;
+        document.getElementById("atr_value").value = val;
+      });
+      $('#confValue').on('hidden', function(){
+        $(this).data('modal', null);
       });
 %br
 .form-actions

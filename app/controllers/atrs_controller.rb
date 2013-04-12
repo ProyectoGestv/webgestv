@@ -80,10 +80,11 @@ class AtrsController < ApplicationController
   # PUT /atrs/1.json
   def update
     @atr = Atr.find(params[:id])
-
+    puts params
+    puts '/////////////////////////////////////////////////////'
     respond_to do |format|
       if @atr.update_attributes(params[:atr])
-        format.html { redirect_to @atr, notice: 'Atr was successfully updated.' }
+        format.html { redirect_to :back }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

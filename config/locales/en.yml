@@ -49,6 +49,7 @@ en:
       show:        "Ver"
       edit:        "Editar"
       destroy:     "Eliminar"
+      changeValue:      "Cambiar valor"
       back:        "Volver"
       save:        "Guardar"
       addparam:    "Agregar parámetros"
