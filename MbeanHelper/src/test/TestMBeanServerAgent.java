@@ -24,7 +24,7 @@ import mbean.DynamicMBeanFactory;
 public class TestMBeanServerAgent {
 
 	public TestMBeanServerAgent() {
-		String domain = "gestv";
+		String domain = "broadcaster";
 		String name = "attrs1";
 		String type = "Webservices";
 		java.net.URL r = this.getClass().getResource("/");
@@ -39,7 +39,7 @@ public class TestMBeanServerAgent {
 	        System.in.read();
 	        Attribute attr = new Attribute("notificaciones", 3);
 			try {
-				mbeanServer.setAttribute(new ObjectName(domain+":type="+type+":name="+name), attr);
+				mbeanServer.setAttribute(new ObjectName(domain+":type="+type+",name="+name), attr);
 			} catch (InstanceNotFoundException e) {
 				e.printStackTrace();
 			} catch (InvalidAttributeValueException e) {

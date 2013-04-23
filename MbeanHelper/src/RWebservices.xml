@@ -1,4 +1,4 @@
-<myManRes domain="gestv" name="webservices" referenceProtocol="" description="">
+<myManRes domain="gestv" name="Webservices" referenceProtocol="" description="">
 	<macroAttributes length="1">
 		<myMBeanInfo className="mbean.MyDynamicMBean" description="Property Manager MBean" name="ga1" referenceProtocol="" type="simple">
 		   <attributes length="61">
