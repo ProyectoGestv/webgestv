@@ -42,6 +42,7 @@ class LaynetElesController < ApplicationController
   # POST /laynet_eles
   # POST /laynet_eles.json
   def create
+    params[:laynet_ele][:domain]='SNMPIntegrationServer'
     @laynet_ele = LaynetEle.new(params[:laynet_ele])
     @conn=Conn.new(params[:laynet_ele][:conn])
     @laynet_ele.conn=@conn

@@ -52,12 +52,16 @@ class ServsController < ApplicationController
   # POST /servs
   # POST /servs.json
   def create
+    #params[:serv][:domain]=params[:serv][:name]
     @serv = Serv.new(params[:serv])
     if @serv.mother
+      @serv.domain=@serv.mother.name
       params[:serv][:conn][:ip]=@serv.mother.conn.ip
+      puts params
     end
     @conn=Conn.new(params[:serv][:conn])
     @serv.conn=@conn
+    puts '///////////////////////////////////////'
     respond_to do |format|
       if @serv.save
         format.html { redirect_to servs_url, notice: t('servs.create.notice')  }
@@ -77,9 +81,11 @@ class ServsController < ApplicationController
     @conn = @serv.conn
     @serv2 = Serv.new(params[:serv])
     if @serv2.mother
+      params[:serv][:domain]= @serv2.mother.name
       params[:serv][:mother]=@serv2.mother
       params[:serv][:conn][:ip]=@serv2.mother.conn.ip
     else
+      params[:serv][:domain]=nil
       params[:serv][:mother]=nil
       params[:serv][:conn][:ip]=nil
     end

@@ -14,13 +14,13 @@ Atr.delete_all
 Alrt.delete_all
 (1..5).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
-  laynetele = LaynetEle.create(name: "nle#{i}", desc: "network layer element #{i}")
+  laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPServerIntegration', desc: "network layer element #{i}")
   laynetele.conn=conn0
   conn1= Conn.new(ip: "1.1.1.#{i}", port: i)
-  netele = NetEle.create(name: "n#{i}", desc: "network element #{i}")
+  netele = NetEle.create(name: "n#{i}", domain:'SNMPServerIntegration', desc: "network element #{i}")
   netele.conn=conn1
   conn2=Conn.new(ip: "1.1.1.#{i}", port: 100+i)
-  serv=Serv.create(name:"s#{i}", desc: "service #{i}", mother: netele._id)
+  serv=Serv.create(name:"s#{i}",  domain: netele.name, desc: "service #{i}", mother: netele._id)
   serv.conn=conn2
   ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
   serv.mcr_atrs << ma

@@ -43,6 +43,7 @@ class NetElesController < ApplicationController
   # POST /net_eles
   # POST /net_eles.json
   def create
+    params[:net_ele][:domain]='SNMPIntegrationServer'
     @conn=Conn.new(params[:net_ele][:conn])
     @net_ele = NetEle.new(params[:net_ele])
     @net_ele.conn=@conn
