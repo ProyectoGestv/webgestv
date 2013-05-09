@@ -68,6 +68,7 @@ class NetElesController < ApplicationController
     respond_to do |format|
       if pass1 and pass2
         @net_ele.children.each do |h|
+          h.domain=@net_ele.name
           h.conn.ip=@conn.ip
           h.save
         end

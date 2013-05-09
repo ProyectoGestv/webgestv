@@ -50,7 +50,7 @@
                               .accordion-inner
                                 =f2.input :name, label: 'Nombre', :input_html => { :class => "span4" }, :hint => "Nombre del Atributo"
                                 =f2.input :desc, label: 'Descripción', :input_html => { :class => "span4" }, :hint => "Descripción del Atributo"
-                                =f2.input :tipo, :label => 'Tipo', :collection => [['Integer', 'Integer'], ['String', 'String'], ['Float', 'Float'], ['Double', 'Double']], :as => :select, :include_blank => false, :hint => "Tipo de dato del Atributo"
+                                =f2.input :tipo, :label => 'Tipo', :collection => [['Integer', 'Integer'], ['String', 'String'], ['Float', 'Float'], ['Double', 'Double'], ['Boolean', 'Boolean']], :as => :select, :include_blank => false, :hint => "Tipo de dato del Atributo"
                                 =f2.input :value, label: 'Valor inicial', :input_html => { :class => "span4" }, :hint => "Valor inicial del Atributo"
                                 =f2.input :rdbl, :label => 'Lectura', :collection => [['Si', 'true'], ['No', 'false']], :as => :radio_buttons, :item_wrapper_class => 'inline'
                                 =f2.input :wtbl, :label => 'Escritura', :collection => [['Si', 'true'], ['No', 'false']], :as => :radio_buttons, :item_wrapper_class => 'inline'
