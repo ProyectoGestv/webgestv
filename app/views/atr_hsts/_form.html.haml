@@ -1,0 +1,16 @@
+= form_for @atr_hst do |f|
+  - if @atr_hst.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@atr_hst.errors.count, "error")} prohibited this atr_hst from being saved:"
+      %ul
+        - @atr_hst.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :value
+    = f.text_field :value
+  .field
+    = f.label :tstamp
+    = f.number_field :tstamp
+  .actions
+    = f.submit 'Save'

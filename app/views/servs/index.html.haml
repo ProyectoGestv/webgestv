@@ -7,6 +7,9 @@
 
 %table.table.table-striped
   %thead
+    %th Estado
+    %th Alertable
+    %th Gestionable
     %th Nombre
     %th Descripción
     %th Ver
@@ -16,6 +19,19 @@
   %tbody
     - @servs.each do |mr|
       %tr
+        -if mr.on == true
+          %td= image_tag('icon_act.png', {:title => 'On'})
+        -else
+          %td= image_tag('icon_dis.png', {:title => 'Off'})
+        -if mr.alrtbl == true
+          %td= image_tag('icon_act.png', {:title => 'On'})
+        -else
+          %td= image_tag('icon_dis.png', {:title => 'Off'})
+        -if mr.mngbl == true
+          %td= image_tag('icon_act.png', {:title => 'On'})
+        -else
+          %td= image_tag('icon_dis.png', {:title => 'Off'})
+
         -if mr.mcr_atrs?
           %td= link_to mr.name, man_rsc_mcr_atrs_path(mr)
         -else

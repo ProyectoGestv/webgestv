@@ -10,6 +10,7 @@ class ManRsc
   field :mngbl, type:Boolean, default: false
   field :alrtbl, type:Boolean, default:false
   field :ref_prot, type: String
+  field :on, type:Boolean, default: false
   embeds_one :conn
   has_many :mcr_atrs
   accepts_nested_attributes_for :conn

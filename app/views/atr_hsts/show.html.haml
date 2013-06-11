@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Value:
+  = @atr_hst.value
+%p
+  %b Tstamp:
+  = @atr_hst.tstamp
+
+= link_to 'Edit', edit_atr_hst_path(@atr_hst)
+\|
+= link_to 'Back', atr_hsts_path

@@ -36,8 +36,8 @@
                     %td=link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}), "mcr_atrs/#{mcr_atr._id}/alr_mntr_frmls/new"
           %div{:id => "collapse#{i}", :class => "accordion-body collapse in"}
             .accordion-inner
-              %table
-                %tr
+              %table.table.table-striped
+                %thead
                   %th Nombre
                   %th Descripción
                   -if mcr_atr.tipo == 'setup'
@@ -47,47 +47,48 @@
                   -if mcr_atr.tipo == 'simple'
                     %th Monitor QoS
                     %th Monitor Alarma
-                  - mcr_atr.atrs.order_by(:name.asc).each do |atr|
+                %tbody
+                  -mcr_atr.atrs.order_by(:name.asc).each do |atr|
                     %tr
-                    %td= atr.name
-                    %td= atr.desc
-                    -if mcr_atr.tipo == 'setup'
-                      %td
-                        =atr.value
-                        =link_to image_tag('editar.png', {:title => t('forms.changeValue')}) , '#', :onclick => "$('#confValue').modal({tipo:'#{atr.tipo}', val:'#{atr.value}', aid:'#{atr._id}', maid:'#{mcr_atr._id}', mrid:'#{mcr_atr.man_rsc._id}'})", :class => "links"
-                    %td= atr.ref_prot
-                    %td= atr.tipo
-                    -if mcr_atr.tipo == 'simple'
-                      %td
-                        -if atr.qos_mon
-                          -tipo=''
-                          -if atr.qos_mon._type == 'AlrMntrCntr'
-                            -tipo='alr_mntr_cntrs'
+                      %td= atr.name
+                      %td= atr.desc
+                      -if mcr_atr.tipo == 'setup'
+                        %td
+                          =atr.value
+                          =link_to image_tag('editar.png', {:title => t('forms.changeValue')}) , '#', :onclick => "$('#confValue').modal({tipo:'#{atr.tipo}', val:'#{atr.value}', aid:'#{atr._id}', maid:'#{mcr_atr._id}', mrid:'#{mcr_atr.man_rsc._id}'})", :class => "links"
+                      %td= atr.ref_prot
+                      %td= atr.tipo
+                      -if mcr_atr.tipo == 'simple'
+                        %td
+                          -if atr.qos_mon
+                            -tipo=''
+                            -if atr.qos_mon._type == 'AlrMntrCntr'
+                              -tipo='alr_mntr_cntrs'
+                            -else
+                              -tipo='alr_mntr_rngs'
+                            -if atr.qos_mon.state == 'act'
+                              = link_to image_tag('alr_stop.png', {:title => t('forms.stopqos')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=qos"
+                            -else
+                              = link_to image_tag('alr_play.png', {:title => t('forms.playqos')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=qos"
+                            = link_to image_tag('alr_edit.png', {:title => t('forms.editqos')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.qos_mon._id}/edit?alr_cat=qos"
+                            = link_to image_tag('alr_delete.png', {:title => t('forms.delqos')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.qos_mon._id}?alr_cat=qos", :method => :delete, :data => { :confirm => t('forms.delalarms.confirm') }
                           -else
-                            -tipo='alr_mntr_rngs'
-                          -if atr.qos_mon.state == 'act'
-                            = link_to image_tag('alr_stop.png', {:title => t('forms.stopalarm')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=qos"
+                            = link_to image_tag('alr_add.png', {:title => t('forms.addqos')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'qos'})"
+                        %td
+                          -if atr.alr_mon
+                            -tipo=''
+                            -if atr.alr_mon._type == 'AlrMntrCntr'
+                              -tipo='alr_mntr_cntrs'
+                            -else
+                              -tipo='alr_mntr_rngs'
+                            -if atr.alr_mon.state == 'act'
+                              =link_to image_tag('alr_stop.png', {:title => t('forms.stopalarm')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=alr"
+                            -else
+                              =link_to image_tag('alr_play.png', {:title => t('forms.playalarm')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=alr"
+                            = link_to image_tag('alr_edit.png', {:title => t('forms.editalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.alr_mon._id}/edit?alr_cat=alr"
+                            = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.alr_mon._id}?alr_cat=alr", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
                           -else
-                            = link_to image_tag('alr_play.png', {:title => t('forms.playalarm')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=qos"
-                          = link_to image_tag('alr_edit.png', {:title => t('forms.editalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.qos_mon._id}/edit?alr_cat=qos"
-                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.qos_mon._id}?alr_cat=qos", :method => :delete, :data => { :confirm => t('forms.delalarms.confirm') }
-                        -else
-                          = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'qos'})"
-                      %td
-                        -if atr.alr_mon
-                          -tipo=''
-                          -if atr.alr_mon._type == 'AlrMntrCntr'
-                            -tipo='alr_mntr_cntrs'
-                          -else
-                            -tipo='alr_mntr_rngs'
-                          -if atr.alr_mon.state == 'act'
-                            =link_to image_tag('alr_stop.png', {:title => t('forms.stopalarm')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=alr"
-                          -else
-                            =link_to image_tag('alr_play.png', {:title => t('forms.playalarm')}), "/#{tipo}/state?atr_id=#{atr._id}&alr_cat=alr"
-                          = link_to image_tag('alr_edit.png', {:title => t('forms.editalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.alr_mon._id}/edit?alr_cat=alr"
-                          = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.alr_mon._id}?alr_cat=alr", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
-                        -else
-                          = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'alr'})"
+                            = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'alr'})"
 
     #myMntr.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myMntrLabel", :role => "dialog", :tabindex => "-1"}
       .modal-header

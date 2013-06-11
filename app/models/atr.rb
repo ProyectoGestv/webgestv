@@ -13,6 +13,7 @@ class Atr
   field :wtbl, type: Boolean, default: false
   belongs_to :mcr_atr
   has_many :alrts
+  has_many :atr_hsts
   embeds_one :qos_mon, :class_name => 'AlrMntr'
   embeds_one :alr_mon, :class_name => 'AlrMntr'
   accepts_nested_attributes_for :qos_mon, :alr_mon

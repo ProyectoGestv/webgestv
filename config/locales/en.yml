@@ -55,8 +55,13 @@ en:
       addparam:    "Agregar parámetros"
       delparam:    "Eliminar parámetros"
       addalarm:    "Agregar monitor de alarma"
+      addqos:      "Agregar monitor de QoS"
+      delqos:    "Eliminar monitor de QoS"
+      editqos:   "Editar monitor de QoS"
       delalarm:    "Eliminar monitor de alarma"
       editalarm:   "Editar monitor de alarma"
+      stopqos:   "Cesar monitor de QoS"
+      playqos:   "Iniciar monitor de QoS"
       stopalarm:   "Cesar monitor de alarma"
       playalarm:   "Iniciar monitor de alarma"
       delalarms:

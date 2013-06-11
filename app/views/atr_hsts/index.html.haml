@@ -1,0 +1,27 @@
+%h1 Listing atr_hsts
+
+%table
+  %tr
+    %th Attribute
+    %th Value
+    %th Tstamp
+    %th
+    %th
+    %th
+
+  - @atr_hsts.each do |atr_hst|
+    %tr
+      - require 'date'
+      - if(atr_hst.atr)
+        %td= atr_hst.atr.name
+      - else
+        %td= 'none'
+      %td= atr_hst.value
+      %td= Time.at(atr_hst.tstamp)
+      %td= link_to 'Show', atr_hst
+      %td= link_to 'Edit', edit_atr_hst_path(atr_hst)
+      %td= link_to 'Destroy', atr_hst, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Atr hst', new_atr_hst_path

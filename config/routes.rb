@@ -1,6 +1,9 @@
 # -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
 
+  resources :atr_hsts
+
+
   resources :alrts
 
 
