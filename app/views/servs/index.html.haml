@@ -24,13 +24,13 @@
         -else
           %td= image_tag('icon_dis.png', {:title => 'Off'})
         -if mr.alrtbl == true
-          %td= image_tag('icon_act.png', {:title => 'On'})
+          %td=link_to image_tag('icon_act.png', {:title => 'Desactivar'}), "/man_rscs/alrtable?man_rsc_id=#{mr._id}&act=false"
         -else
-          %td= image_tag('icon_dis.png', {:title => 'Off'})
+          %td=link_to image_tag('icon_ina.png', {:title => 'Activar'}), "/man_rscs/alrtable?man_rsc_id=#{mr._id}&act=true"
         -if mr.mngbl == true
-          %td= image_tag('icon_act.png', {:title => 'On'})
+          %td=link_to image_tag('icon_act.png', {:title => 'Desactivar'}), "/man_rscs/mngable?man_rsc_id=#{mr._id}&act=false"
         -else
-          %td= image_tag('icon_dis.png', {:title => 'Off'})
+          %td=link_to image_tag('icon_ina.png', {:title => 'Activar'}), "/man_rscs/mngable?man_rsc_id=#{mr._id}&act=true"
 
         -if mr.mcr_atrs?
           %td= link_to mr.name, man_rsc_mcr_atrs_path(mr)

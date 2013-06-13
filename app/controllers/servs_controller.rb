@@ -61,7 +61,7 @@ class ServsController < ApplicationController
     end
     @conn=Conn.new(params[:serv][:conn])
     @serv.conn=@conn
-    puts '///////////////////////////////////////'
+
     respond_to do |format|
       if @serv.save
         format.html { redirect_to servs_url, notice: t('servs.create.notice')  }

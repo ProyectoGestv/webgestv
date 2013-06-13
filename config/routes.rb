@@ -18,6 +18,8 @@ Webgestv::Application.routes.draw do
   match "/frmls/state" => "alr_mntr_frmls#state", :via => :get
   match "/alr_mntr_cntrs/state" => "alr_mntr_cntrs#state"
   match "/alr_mntr_rngs/state" => "alr_mntr_rngs#state"
+  match "/man_rscs/mngable" => "man_rscs#mngable"
+  match "/man_rscs/alrtable" => "man_rscs#alrtable"
 
   resources :uploads do
     post :new, on: :member
