@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
 
+  get "reports/index"
+
   resources :alrts
 
 

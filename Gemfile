@@ -1,6 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.11'
+gem 'mongoid', '3.1.4'
+gem 'bson'
+gem 'bson_ext'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -36,7 +39,7 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
-gem "mongoid", "~> 3.1.2"
+
 gem 'bson'
 gem 'bson_ext'
 
