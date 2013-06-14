@@ -9,7 +9,8 @@ class ReportsController < ApplicationController
   @integro = @parser.to_i
   @integrob = @parserb.to_i
   #@historicosdia = Hst.find_by(created_at: @integro)
-  @historicosdia = Hst.all.or(:fecha.lte => @integro) 
+  @historicosb = Hst.all.or(:tstamp.lte => @integrob)
+
   end
 
 

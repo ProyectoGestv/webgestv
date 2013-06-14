@@ -10,9 +10,10 @@ Serv.delete_all
 NetEle.delete_all
 LaynetEle.delete_all
 McrAtr.delete_all
-Atr.delete_all
+#Atr.delete_all
 Alrt.delete_all
 (1..5).each do |i|
+
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
   laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPServerIntegration', desc: "network layer element #{i}")
   laynetele.conn=conn0
@@ -26,6 +27,8 @@ Alrt.delete_all
   serv.mcr_atrs << ma
   a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", tipo: "integer")
   ma.atrs << a1
+  h1 = Hst.create(value: 10+i , tstamp: 1371142800+i)
+  a1.hsts << h1
   al1=Alrt.create(title:"notif #{i}", msg:"alerta de notificacion #{i}", tipo:'notif')
   a1.alrts << al1
   al2=Alrt.create(title:"anmly #{i}", msg:"alerta de anomalia #{i}", tipo:'anmly')
@@ -34,4 +37,5 @@ Alrt.delete_all
   a1.alrts << al3
 end
 
-
+ 
+  
