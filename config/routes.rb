@@ -7,7 +7,7 @@ Webgestv::Application.routes.draw do
   #match 'users/:id' => 'users#destroy', :via => :delete
   resources :users
   resources :atr_hsts
-  get "reports/index"
+  match "/reports/index" => "reports#index"
 
   resources :topologies
   resources :alrts

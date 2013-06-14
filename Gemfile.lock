@@ -35,7 +35,6 @@ GEM
     bson_ext (1.8.2)
       bson (~> 1.8.2)
     builder (3.0.4)
-    cancan (1.6.10)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -43,13 +42,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
-    d3-rails (0.0.5)
-      railties (>= 3.1)
-    devise (2.2.4)
-      bcrypt-ruby (~> 3.0)
-      orm_adapter (~> 0.1)
-      railties (~> 3.1)
-      warden (~> 1.2.1)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -74,17 +66,16 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.21)
-    mongoid (3.1.2)
+    mongoid (3.1.4)
       activemodel (~> 3.2)
-      moped (~> 1.4.2)
+      moped (~> 1.4)
       origin (~> 1.0)
       tzinfo (~> 0.3.22)
-    moped (1.4.3)
+    moped (1.5.0)
     multi_json (1.5.0)
     nokogiri (1.5.6)
     nokogiri (1.5.6-x86-mingw32)
-    origin (1.0.11)
-    orm_adapter (0.4.0)
+    origin (1.1.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -137,27 +128,21 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    warden (1.2.1)
-      rack (>= 1.0)
 
 PLATFORMS
   ruby
   x86-mingw32
 
 DEPENDENCIES
-  bcrypt-ruby!
   bootstrap-sass (~> 2.3.0.1)
   bson
   bson_ext
-  cancan
   coffee-rails (~> 3.2.1)
-  d3-rails
-  devise
   haml
   haml-rails
   jquery-rails
   magic_encoding
-  mongoid (~> 3.1.2)
+  mongoid (= 3.1.4)
   nokogiri
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
