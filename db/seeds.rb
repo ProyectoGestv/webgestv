@@ -38,7 +38,9 @@ User.delete_all
   al2=Alrt.create(tipo: 'anmly', title:'THRESHOLD_VALUE_EXCEEDED', msg:"warning de notificacion #{i}", tstamp_ini: tsini, tstamp_last: tsini, count: 1, state: 'noAtt')
   al3=Alrt.create(tipo: 'notif', title:'RESOURCE_ALIVE', msg:"info de notificacion #{i}", tstamp_ini: tsini, tstamp_last: tsini, count: 1, state: 'noAtt')
   a1.alrts << al1
+  al2=Alrt.create(title:"anmly #{i}", msg:"alerta de anomalia #{i}", tipo:'anmly')
   a1.alrts << al2
+  al3=Alrt.create(title:"alarm #{i}", msg:"alerta de alarma #{i}", tipo:'alarm')
   a1.alrts << al3
 end
 

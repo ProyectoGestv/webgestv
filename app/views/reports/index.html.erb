@@ -9,10 +9,7 @@
 <h2> fecha de hoy en entero : <%=@integro%></h2>
 <h2> fecha consultada : <%=@integrob%></h2>
 
-<% @historicosdia.each do |n| %>
-
-<p> consultado nombre :<%= n.nombreh %> </p>
-<p> consultado valor :<%= n.valorh %> </p> 
-<p> consultado fecha :<%= n.fecha %> </p>
-
+<% @historicosb.each do |n| %>
+<p> consultado valor :<%= n.value %> </p> 
+<p> consultado fecha :<%= n.tstamp %> </p>
 <%end%>
