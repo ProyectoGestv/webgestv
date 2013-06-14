@@ -1,0 +1,18 @@
+<h1>Consulta de Diferentes Historicos</h1>
+<%= form_tag :action => 'index' do %>
+<p>Digita un dia: 
+<%= text_field_tag 'dia' , @dia %>
+</p>
+<%= submit_tag 'enviar' %>
+<%end%>
+
+<h2> fecha de hoy en entero : <%=@integro%></h2>
+<h2> fecha consultada : <%=@integrob%></h2>
+
+<% @historicosdia.each do |n| %>
+
+<p> consultado nombre :<%= n.nombreh %> </p>
+<p> consultado valor :<%= n.valorh %> </p> 
+<p> consultado fecha :<%= n.fecha %> </p>
+
+<%end%>

@@ -1,12 +1,15 @@
 # -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
 
-  get "reports/index"
+ match "/reports/index" => "reports#index"
+  
 
   resources :alrts
-
+  
+ 
 
   resources :alr_mntr_frmls
+
 
 
   match 'laynet_ele/testconn' => 'laynet_eles#testconn', :via => :get
