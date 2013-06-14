@@ -7,7 +7,6 @@
 
 %table.table.table-striped
   %thead
-    %th Estado
     %th Alertable
     %th Gestionable
     %th Nombre
@@ -19,10 +18,6 @@
   %tbody
     - @servs.each do |mr|
       %tr
-        -if mr.on == true
-          %td= image_tag('icon_act.png', {:title => 'On'})
-        -else
-          %td= image_tag('icon_dis.png', {:title => 'Off'})
         -if mr.alrtbl == true
           %td=link_to image_tag('icon_act.png', {:title => 'Desactivar'}), "/man_rscs/alrtable?man_rsc_id=#{mr._id}&act=false"
         -else

@@ -115,15 +115,25 @@ class AlrMntrCntrsController < ApplicationController
 
   def state
     @alr_mntr_cntr = nil
+    atr=Atr.find(params[:atr_id])
     if params[:alr_cat]=='qos'
-      @alr_mntr_cntr = Atr.find(params[:atr_id]).qos_mon
+      @alr_mntr_cntr = atr.qos_mon
     else
-      @alr_mntr_cntr = Atr.find(params[:atr_id]).alr_mon
+      @alr_mntr_cntr = atr.alr_mon
     end
+    ma=atr.mcr_atr
+    mr=ma.man_rsc
+    http = Net::HTTP.new("192.168.119.35",9999)
     if @alr_mntr_cntr.state == 'act'
       @alr_mntr_cntr.state='inact'
+
+      request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/off")
+      response = http.request(request)
     else
       @alr_mntr_cntr.state='act'
+
+      request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/on")
+      response = http.request(request)
     end
     @alr_mntr_cntr.save
     respond_to do |format|

@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
 class AlrMntrRngsController < ApplicationController
   # GET /alr_mntr_rngs
   # GET /alr_mntr_rngs.json
@@ -115,15 +116,23 @@ class AlrMntrRngsController < ApplicationController
 
   def state
     @alr_mntr_rng = nil
+    atr=Atr.find(params[:atr_id])
     if params[:alr_cat]=='qos'
-      @alr_mntr_rng = Atr.find(params[:atr_id]).qos_mon
+      @alr_mntr_rng = atr.qos_mon
     else
-      @alr_mntr_rng = Atr.find(params[:atr_id]).alr_mon
+      @alr_mntr_rng = atr.alr_mon
     end
+    ma=atr.mcr_atr
+    mr=ma.man_rsc
+    http = Net::HTTP.new("192.168.119.35",9999)
     if @alr_mntr_rng.state == 'act'
       @alr_mntr_rng.state='inact'
+      request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/off")
+      response = http.request(request)
     else
       @alr_mntr_rng.state='act'
+      request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/on")
+      response = http.request(request)
     end
     @alr_mntr_rng.save
     respond_to do |format|

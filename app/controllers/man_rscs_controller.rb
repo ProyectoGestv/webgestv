@@ -68,6 +68,16 @@ class ManRscsController < ApplicationController
     act=params[:act]
     @man_rsc.alrtbl=act
     @man_rsc.save
+
+    http = Net::HTTP.new("192.168.119.35",9999)
+    if act == 'true'
+      request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/act")
+      response = http.request(request)
+    else
+      request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/inact")
+      response = http.request(request)
+    end
+
     respond_to do |format|
       format.html { redirect_to :back }
       format.json { head :no_content }
