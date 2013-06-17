@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style>
+</style>
+
+
+
+<body>
 <h1>Consulta de Diferentes Historicos</h1>
 <%= form_tag :action => 'index' do %>
 <p>Digita un dia: 
@@ -8,8 +21,49 @@
 
 <h2> fecha de hoy en entero : <%=@integro%></h2>
 <h2> fecha consultada : <%=@integrob%></h2>
+<h1> TE VAMOS A MOSTRAR UN GRAFICO</h1>
+<div id="myfirstchart" style="height: 250px;"></div>
+
+
+ <%= javascript_tag do %>
+
+ function datos()
+ {
+ var ret=[];
+ <% @historicosb.each do |variable| %>
+ var a =  <%=Time.at(variable.tstamp).sec%>
+ var b =  <%=variable.value%>
+ ret.push({
+  x: a,
+  y: b
+ });
+ 
+ <%end%>
+ 
+ console.log (ret);
+ console.log (a);
+ console.log (b);
+ return ret;
+ }
+
+  new Morris.Line({
+  element: 'myfirstchart',
+  data:datos(),
+  xkey: ['x'],
+  ykeys: ['y'],
+  parseTime: false,
+  labels: ['Valores']
+  });
+ 
+  <%end%>
+
+
+
+
 
 <% @historicosb.each do |n| %>
 <p> consultado valor :<%= n.value %> </p> 
-<p> consultado fecha :<%= n.tstamp %> </p>
+<p> consultado fecha :<%= Time.at(n.tstamp) %> </p>
 <%end%>
+
+</body>
