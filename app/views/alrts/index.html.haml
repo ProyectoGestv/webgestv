@@ -6,47 +6,45 @@
     })
   });
 
-%table
-  %tr
+%table.table.table-striped
+  %thead
     %th
     %th Título
     %th Mensaje
     %th Fecha/Hora
     %th
-
-  - @alrts.each do |alrt|
-    %tr
-      -if alrt.tipo=='notif'
+  %tbody
+    -@alrts.each do |alrt|
+      %tr
         %td
-          =image_tag "notif.png"
-          %span.label.label-info Información
-      -elsif alrt.tipo=='anmly'
-        %td
+        -if alrt.tipo=='anmly'
           =image_tag "anml.png"
           %span.label.label-warning Anomalía
-      -else
-        %td
+        -elsif alrt.tipo=='alarm'
           =image_tag "alrm.png"
           %span.label.label-important Alarma
-      %td= alrt.title
-      %td= alrt.msg
-      %td= alrt.created_at
-      %td
-        -if alrt.tipo=='anmly' or alrt.tipo=='alarm'
-          -localizado=""
-          -impacto=""
-          -if alrt.atr
-            -localizado="atributo: #{alrt.atr.name}, Grupo de Atributos: #{alrt.atr.mcr_atr.name}, Recurso: #{alrt.atr.mcr_atr.man_rsc.name}"
-            -if alrt.tipo=='anmly'
-              -if alrt.atr.qos_mon
-                -impacto=alrt.atr.qos_mon.impact
+        -else
+          =image_tag "notif.png"
+          %span.label.label-info Información
+        %td= alrt.title
+        %td= alrt.msg
+        %td= Time.at(alrt.tstamp)
+        %td
+          -if alrt.tipo=='anmly' or alrt.tipo=='alarm'
+            -localizado=""
+            -impacto=""
+            -if alrt.atr
+              -localizado="atributo: #{alrt.atr.name}, Grupo de Atributos: #{alrt.atr.mcr_atr.name}, Recurso: #{alrt.atr.mcr_atr.man_rsc.name}"
+              -if alrt.tipo=='anmly'
+                -if alrt.atr.qos_mon
+                  -impacto=alrt.atr.qos_mon.impact
+                -else
+                  -impacto='ninguno'
               -else
-                -impacto='ninguno'
-            -else
-              -if alrt.atr.alr_mon
-                -impacto=alrt.atr.alr_mon.impact
-              -else
-                -impacto='ninguno'
-          -elsif alrt.mcr_atr
-            -localizado="grupo de atributos #{alrt.mcr_atr.name}, Recurso: #{alrt.mcr_atr.man_rsc.name}"
-          = link_to('Detalle', '#', :class => "popover-test", :rel => "popover", :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}")
+                -if alrt.atr.alr_mon
+                  -impacto=alrt.atr.alr_mon.impact
+                -else
+                  -impacto='ninguno'
+            -elsif alrt.mcr_atr
+              -localizado="grupo de atributos #{alrt.mcr_atr.name}, Recurso: #{alrt.mcr_atr.man_rsc.name}"
+            = link_to('Detalle', '#', :class => "popover-test", :rel => "popover", :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}")

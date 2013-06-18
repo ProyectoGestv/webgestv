@@ -22,14 +22,10 @@
                   ="Configuración"
                   %b.caret
                 %ul.dropdown-menu
-                  %li.dropdown-submenu
-                    %a{:href => root_path}
-                      ="Recursos Gestionables"
-                    %ul.dropdown-menu
-                      %li= link_to "Elementos de Capa de Red", laynet_eles_path
-                      %li= link_to "Elementos de Red", net_eles_path
-                      %li= link_to "Servicios", servs_path
-                      %li= link_to "Conexiones", links_path
+                  %li= link_to "Elementos de Capa de Red", laynet_eles_path
+                  %li= link_to "Elementos de Red", net_eles_path
+                  %li= link_to "Servicios", servs_path
+                  %li= link_to "Conexiones", links_path
               %li
                 %a{ :href => root_path}
                   ="Desempeño"
