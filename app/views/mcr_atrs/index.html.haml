@@ -59,7 +59,7 @@
                       %td= atr.ref_prot
                       %td= atr.tipo
                       -if mcr_atr.tipo == 'simple'
-                        %td
+                        %td.sidebyside
                           -if atr.qos_mon
                             -tipo=''
                             -if atr.qos_mon._type == 'AlrMntrCntr'
@@ -74,7 +74,7 @@
                             = link_to image_tag('alr_delete.png', {:title => t('forms.delqos')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.qos_mon._id}?alr_cat=qos", :method => :delete, :data => { :confirm => t('forms.delalarms.confirm') }
                           -else
                             = link_to image_tag('alr_add.png', {:title => t('forms.addqos')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'qos'})"
-                        %td
+                        %td.sidebyside
                           -if atr.alr_mon
                             -tipo=''
                             -if atr.alr_mon._type == 'AlrMntrCntr'

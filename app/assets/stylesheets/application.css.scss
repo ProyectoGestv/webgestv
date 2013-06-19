@@ -29,12 +29,24 @@ body{
 }
 .content {
     padding: 0 0 0 40px;
-    width: 50%;
+    width: 96%;
 }
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+.imgmain{
+  display:block;
+  text-align:center;
+  padding-top: 5%;
+}
+
+.imgmain img{
+  background: #dddddd no-repeat top center;
+  height: 50%;
+  width: 50%;
 }
 
 
@@ -279,6 +291,31 @@ a.accordion-toggle {
 }
 .input-large {
   width: 92%;
+}
+
+.sidebyside {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width:  15%;
+}
+.sidebyside a {
+  float: center;
+  display: inline;
+}
+.downbydown {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width:  1%;
+}
+
+.downbydown img,span {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 1px;
 }
 
 /////////////

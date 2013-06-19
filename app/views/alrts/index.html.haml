@@ -16,16 +16,16 @@
   %tbody
     -@alrts.each do |alrt|
       %tr
-        %td
-        -if alrt.tipo=='anmly'
-          =image_tag "anml.png"
-          %span.label.label-warning Anomalía
-        -elsif alrt.tipo=='alarm'
-          =image_tag "alrm.png"
-          %span.label.label-important Alarma
-        -else
-          =image_tag "notif.png"
-          %span.label.label-info Información
+        %td.downbydown
+          -if alrt.tipo=='anmly'
+            =image_tag "anml.png"
+            %span.label.label-warning Anomalía
+          -elsif alrt.tipo=='alarm'
+            =image_tag "alrm.png"
+            %span.label.label-important Alarma
+          -else
+            =image_tag "notif.png"
+            %span.label.label-info Información
         %td= alrt.title
         %td= alrt.msg
         %td= Time.at(alrt.tstamp)
@@ -47,4 +47,5 @@
                   -impacto='ninguno'
             -elsif alrt.mcr_atr
               -localizado="grupo de atributos #{alrt.mcr_atr.name}, Recurso: #{alrt.mcr_atr.man_rsc.name}"
-            = link_to('Detalle', '#', :class => "popover-test", :rel => "popover", :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}")
+              -impacto='alto'
+            = link_to('Detalle', '#', :class => "popover-test", :rel => "popover", :'data-placement' => 'top', :'data-content' => "Localizado en #{localizado} <br> Impacto: #{impacto}")
