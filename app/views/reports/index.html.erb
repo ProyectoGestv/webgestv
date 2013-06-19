@@ -9,28 +9,49 @@
 </style>
 
 
-
 <body>
-<h1>Consulta de Diferentes Historicos</h1>
+
+<div>
+<table border="0">
+<tittle><h2>Filtros</h2></tittle>
+<tr>
+    <th></th>
+    <th></th>
+</tr>
+
 <%= form_tag :action => 'index' do %>
-<p>Digita un dia: 
-<%= text_field_tag 'dia' , @dia %>
-</p>
-<%= submit_tag 'enviar' %>
+<tr>
+<td>Opcion</td>
+<td> 
+<%=select_tag 'opcion', "<option>Rango fechas</option><option>Rango tiempo</option>".html_safe%>
+</td>
+</tr>
+<tr>
+<td>Seleccion rango de tiempo</td>
+<td> 
+<%=select_tag 'dia', "<option>last year</option><option>last month</option><option>last week</option><option>last day</option><option>last hour</option><option>last minute</option>".html_safe%>
+</td>
+</tr>
+<tr>
+<td>Seleccion rango de fechas</td> 
+<td></td>
+</tr>
+<tr>
+<td><%= submit_tag 'enviar' %></td>
+<td></td>
+</tr>
 <%end%>
+</table>
+</div>
 
-<h2> fecha de hoy en entero : <%=@integro%></h2>
-<h2> fecha consultada : <%=@integrob%></h2>
-<h1> TE VAMOS A MOSTRAR UN GRAFICO</h1>
-<div id="myfirstchart" style="height: 250px;"></div>
-
-
+<h2>GRAFICO</h2>
+<div id="myfirstchart" align="center" style="height: 300px;"></div>
  <%= javascript_tag do %>
 
  function datos()
  {
  var ret=[];
- <% @historicosb.each do |variable| %>
+ <% @historicos.each do |variable| %>
  var a =  <%=Time.at(variable.tstamp).sec%>
  var b =  <%=variable.value%>
  ret.push({
@@ -57,13 +78,29 @@
  
   <%end%>
 
-
-
-
-
-<% @historicosb.each do |n| %>
-<p> consultado valor :<%= n.value %> </p> 
-<p> consultado fecha :<%= Time.at(n.tstamp) %> </p>
-<%end%>
-
+  <div>
+  <table border="1">
+  <tittle><h2>HISTORICOS</h2></tittle>
+  <tr>
+    <th>Valor</th>
+    <th>Año</th>
+    <th>Mes</th>
+    <th>Dia</th>
+    <th>Hora</th>
+    <th>Minuto</th>
+    <th>Segundo</th>
+  </tr>
+   <% @historicos.each do |n| %>
+   <tr>
+   <td><%= n.value %> </td> 
+   <td><%= Time.at(n.tstamp).year %> </td>
+   <td><%= Time.at(n.tstamp).month %> </td>
+   <td><%= Time.at(n.tstamp).day %> </td>
+   <td><%= Time.at(n.tstamp).hour %> </td>
+   <td><%= Time.at(n.tstamp).min %> </td>
+   <td><%= Time.at(n.tstamp).sec %> </td>
+   </tr>
+   <%end%>
+  </table>
+  </div>
 </body>
