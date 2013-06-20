@@ -1,0 +1,25 @@
+<div>
+  <table border="1">
+  <tittle><h2>HISTORICOS</h2></tittle>
+  <tr>
+    <th>Valor</th>
+    <th>Año</th>
+    <th>Mes</th>
+    <th>Dia</th>
+    <th>Hora</th>
+    <th>Minuto</th>
+    <th>Segundo</th>
+  </tr>
+   <% @historicos.each do |n| %>
+   <tr>
+   <td><%= n.value %> </td> 
+   <td><%= Time.at(n.tstamp).year %> </td>
+   <td><%= Time.at(n.tstamp).month %> </td>
+   <td><%= Time.at(n.tstamp).day %> </td>
+   <td><%= Time.at(n.tstamp).hour %> </td>
+   <td><%= Time.at(n.tstamp).min %> </td>
+   <td><%= Time.at(n.tstamp).sec %> </td>
+   </tr>
+   <%end%>
+  </table>
+  </div>

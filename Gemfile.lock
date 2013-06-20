@@ -43,6 +43,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.4.0)
+    descriptive-statistics (2.0.0)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -140,6 +141,7 @@ DEPENDENCIES
   bson_ext
   chronic
   coffee-rails (~> 3.2.1)
+  descriptive-statistics
   haml
   haml-rails
   jquery-rails

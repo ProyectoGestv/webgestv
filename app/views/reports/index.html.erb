@@ -1,106 +1,59 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap combined.min.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+</script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script>
+
 <style>
 </style>
 
 
 <body>
 
-<div>
-<table border="0">
-<tittle><h2>Filtros</h2></tittle>
-<tr>
-    <th></th>
-    <th></th>
-</tr>
+<%= render 'form' %>
 
-<%= form_tag :action => 'index' do %>
-<tr>
-<td>Opcion</td>
-<td> 
-<%=select_tag 'opcion', "<option>Rango fechas</option><option>Rango tiempo</option>".html_safe%>
-</td>
-</tr>
-<tr>
-<td>Seleccion rango de tiempo</td>
-<td> 
-<%=select_tag 'tiempo', "<option>last year</option><option>last month</option><option>last week</option><option>last day</option><option>last hour</option><option>last minute</option>".html_safe%>
-</td>
-</tr>
-<tr>
-<td>Seleccion rango de fechas</td> 
-<td></td>
-</tr>
-<tr>
-<td><%= submit_tag 'enviar' %></td>
-<td></td>
-</tr>
-<%end%>
-</table>
-</div>
+
+<p><%=@fechaa%></p>
+<p><%=@atr%></p>
+
 
 <h2>GRAFICO</h2>
-<div id="myfirstchart" align="center" style="height: 300px;"></div>
- <%= javascript_tag do %>
 
- function datos()
- {
- var ret=[];
- <% @historicos.each do |variable| %>
- var a =  <%=Time.at(variable.tstamp).sec%>
- var b =  <%=variable.value%>
- ret.push({
-  x: a,
-  y: b
- });
- 
- <%end%>
- 
- console.log (ret);
- console.log (a);
- console.log (b);
- return ret;
- }
+<script>
+function render_partial() {
+  $('#partial').html('<%= escape_javascript(render :partial => "hst") %>')
+}
 
-  new Morris.Line({
-  element: 'myfirstchart',
-  data:datos(),
-  xkey: ['x'],
-  ykeys: ['y'],
-  parseTime: false,
-  labels: ['Valores']
-  });
- 
-  <%end%>
+function render_partialb() {
+  $('#partial').html('<%= escape_javascript(render :partial => "statistic") %>')
+}
 
-  <div>
-  <table border="1">
-  <tittle><h2>HISTORICOS</h2></tittle>
-  <tr>
-    <th>Valor</th>
-    <th>Año</th>
-    <th>Mes</th>
-    <th>Dia</th>
-    <th>Hora</th>
-    <th>Minuto</th>
-    <th>Segundo</th>
-  </tr>
-   <% @historicos.each do |n| %>
-   <tr>
-   <td><%= n.value %> </td> 
-   <td><%= Time.at(n.tstamp).year %> </td>
-   <td><%= Time.at(n.tstamp).month %> </td>
-   <td><%= Time.at(n.tstamp).day %> </td>
-   <td><%= Time.at(n.tstamp).hour %> </td>
-   <td><%= Time.at(n.tstamp).min %> </td>
-   <td><%= Time.at(n.tstamp).sec %> </td>
-   </tr>
-   <%end%>
-  </table>
-  </div>
+
+function render_partialc() {
+  $('#partial').html('<%= escape_javascript(render :partial => "graph") %>')
+}
+
+</script>
+
+
+
+<button type="submit" onclick="render_partial()">Graph</button>
+<button type="button" onclick="render_partialb()">Statistic</button>
+<button type="button" onclick="render_partialc()">Statistic</button>
+
+<div id="partial" align="center"> 
+ <%= render 'hst' %>
+</div>
+
+
+
+
 </body>

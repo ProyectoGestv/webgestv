@@ -1,0 +1,33 @@
+
+<div id="myfirstchart" align="center" style="height: 300px;"></div>
+<%= javascript_tag do %>
+
+ function datos()
+ {
+ var ret=[];
+ <% @historicos.each do |variable| %>
+ var a =  <%=Time.at(variable.tstamp).sec%>
+ var b =  <%=variable.value%>
+ ret.push({
+  x: a,
+  y: b
+ });
+ 
+ <%end%>
+ 
+ console.log (ret);
+ console.log (a);
+ console.log (b);
+ return ret;
+ }
+
+  new Morris.Line({
+  element: 'myfirstchart',
+  data:datos(),
+  xkey: ['x'],
+  ykeys: ['y'],
+  parseTime: false,
+  labels: ['Valores']
+  });
+ 
+  <%end%>
