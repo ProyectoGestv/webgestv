@@ -5,6 +5,7 @@ gem 'mongoid', '3.1.4'
 gem 'bson'
 gem 'bson_ext'
 gem 'chronic'
+gem 'descriptive-statistics'
 
 
 # Bundle edge Rails instead:
