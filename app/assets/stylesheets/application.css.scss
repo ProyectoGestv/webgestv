@@ -251,6 +251,10 @@ a.accordion-toggle {
   font-size: 16px;
 }
 
+.modal.fade.in {
+  top: 30%;
+}
+
 .modal-header h3 {
   margin: 0;
   line-height: 30px;

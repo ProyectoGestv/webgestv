@@ -159,6 +159,10 @@
       });
 %br
 .form-actions
-  =link_to t('forms.back'), session[:return_to], {:class => "links"}
-
+  -if @back=='Serv'
+    =link_to t('forms.back'), servs_path, {:class => "links"}
+  -elsif @back=='NetEle'
+    =link_to t('forms.back'), net_eles_path, {:class => "links"}
+  -else
+    =link_to t('forms.back'), laynet_eles_path, {:class => "links"}
 

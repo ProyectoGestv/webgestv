@@ -126,14 +126,18 @@ class AlrMntrCntrsController < ApplicationController
     http = Net::HTTP.new("192.168.119.35",9999)
     if @alr_mntr_cntr.state == 'act'
       @alr_mntr_cntr.state='inact'
-
       request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/off")
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     else
       @alr_mntr_cntr.state='act'
-
       request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/on")
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     end
     @alr_mntr_cntr.save
     respond_to do |format|

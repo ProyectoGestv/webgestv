@@ -128,11 +128,17 @@ class AlrMntrRngsController < ApplicationController
     if @alr_mntr_rng.state == 'act'
       @alr_mntr_rng.state='inact'
       request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/off")
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     else
       @alr_mntr_rng.state='act'
       request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/on")
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     end
     @alr_mntr_rng.save
     respond_to do |format|

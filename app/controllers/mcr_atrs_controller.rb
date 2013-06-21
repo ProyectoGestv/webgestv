@@ -3,11 +3,10 @@ class McrAtrsController < ApplicationController
   # GET /mcr_atrs
   # GET /mcr_atrs.json
   def index
-    session[:return_to]=request.referer
     mr=ManRsc.find(params[:man_rsc_id])
     @mcr_atrs=mr.mcr_atrs.order_by(:tipo.asc)
     @mr_name=mr.name
-
+    @back=mr._type
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @mcr_atrs }

@@ -49,12 +49,18 @@ class ManRscsController < ApplicationController
       #resp = Net::HTTP.post_form URI('http://192.168.119.35:9999/mbs/register'), post_params
       request = Net::HTTP::Post.new("/mbs/register")
       request.set_form_data(post_params)
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     else
       post_params = {'ip' => @man_rsc.conn.ip, 'port' => @man_rsc.conn.port}
       request = Net::HTTP::Delete.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}")
       request.set_form_data(post_params)
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     end
 
     respond_to do |format|
@@ -72,10 +78,16 @@ class ManRscsController < ApplicationController
     http = Net::HTTP.new("192.168.119.35",9999)
     if act == 'true'
       request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/act")
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     else
       request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/inact")
-      response = http.request(request)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     end
 
     respond_to do |format|
