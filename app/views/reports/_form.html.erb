@@ -15,7 +15,7 @@
 
 <div>
 <table border="0">
-<tittle><h2>Filtros</h2></tittle>
+<tittle><h2 class="the-legend">FILTROS</h2></tittle>
 <tr>
     <th></th>
     <th></th>
@@ -27,7 +27,7 @@
 <tr>
 <td>Opcion</td>
 <td> 
-<%=select_tag 'atr', options_from_collection_for_select(Atr.all , "id", "name"), :prompt => "Select something" %>
+<%=select_tag 'atr', options_from_collection_for_select(Atr.all , "id", "name"), :prompt => "Atributos" %>
 </td>
 <td></td>
 </tr>
@@ -69,7 +69,7 @@
 </tr>
 
 <tr>
-<td><%= submit_tag 'enviar' %></td>
+<td><%= submit_tag 'Generar' , :class => 'btn-primary' %></td>
 <td></td>
 <td></td>
 </tr>

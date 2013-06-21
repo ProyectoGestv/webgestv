@@ -21,11 +21,8 @@
 <%= render 'form' %>
 
 
-<p><%=@fechaa%></p>
-<p><%=@atr%></p>
 
-
-<h2>GRAFICO</h2>
+<h2 class="the-legend">VISTAS</h2>
 
 <script>
 function render_partial() {
@@ -45,9 +42,9 @@ function render_partialc() {
 
 
 
-<button type="submit" onclick="render_partial()">Graph</button>
-<button type="button" onclick="render_partialb()">Statistic</button>
-<button type="button" onclick="render_partialc()">Statistic</button>
+<button type="submit" onclick="render_partial()" class="btn-primary">Historicos</button>
+<button type="button" onclick="render_partialb()"class="btn-primary">Estadisticos</button>
+<button type="button" onclick="render_partialc()" class="btn-primary">Grafico</button>
 
 <div id="partial" align="center"> 
  <%= render 'hst' %>

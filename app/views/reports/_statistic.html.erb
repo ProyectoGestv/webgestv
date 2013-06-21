@@ -1,11 +1,27 @@
+  <h2 class="the-legend"> ESTADISTICOS</h2>
   <div> 
-   <p>array => <%=@stats%></p>
 
-   <p>Rango =><%=@stats.range%></p>
-   <p>Minimo => <%=@stats.min%></p>
-   <p>Maximo  => <%=@stats.max%></p>
-   <p>Varianza => <%=@stats.variance%></p>
-   <p>Media => <%=@stats.median%></p>
-   <p>Moda => <%=@stats.mode%></p>
-   <p>Promedio => <%=@stats.mean%></p>
+  <table border="1" class="table">
+  <tr>
+    <th>Rango</th>
+    <th>Minimo</th>
+    <th>Maximo</th>
+    <th>Varianza</th>
+    <th>Media</th>
+    <th>Moda</th>
+    <th>Promedio</th>
+  </tr>
+  <tr>
+   <td><%= @stats.range %></td> 
+   <td><%= @stats.min %> </td>
+   <td><%= @stats.max %> </td>
+   <td><%= @stats.variance%> </td>
+   <td><%= @stats.median%> </td>
+   <td><%= @stats.mode%> </td>
+   <td><%= @stats.mean%> </td>
+  </tr>
+  </table>
+
+
   </div>
+
