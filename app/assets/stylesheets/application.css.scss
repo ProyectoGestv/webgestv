@@ -391,3 +391,23 @@ abbr[title], abbr[data-original-title] {
   border-color: #d0d0d0 #d0d0d0 #d0d0d0;
 }
 
+.link line {
+  stroke: #696969;
+}
+
+.link line.separator {
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+.node circle {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 30px sans-serif;
+  pointer-events: none;
+  stroke     : #000000;
+  fill       : #00ff00;
+}

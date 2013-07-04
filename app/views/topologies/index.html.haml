@@ -1,0 +1,68 @@
+%h1 Topología de red
+#topo{ :data => { :nodos => @nodos, :enlaces => @enlaces } }
+:javascript
+    var nodos = $('#topo').data('nodos');
+    var enlaces = $('#topo').data('enlaces');
+    function pageWidth() {
+        return window.innerWidth != null? window.innerWidth : document.documentElement && document.documentElement.clientWidth ?       document.documentElement.clientWidth : document.body != null ? document.body.clientWidth : null;
+    }
+
+    function pageHeight() {
+        return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;
+    }
+
+    var width = pageWidth(), height = pageHeight();
+
+    var svg = d3.select("#topo").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    var force = d3.layout.force()
+        .size([width, height])
+        .charge(-800)
+        .linkDistance(100);
+
+    var graph = {
+      nodes: nodos,
+      links: enlaces
+    };
+
+      force
+          .nodes(graph.nodes)
+          .links(graph.links)
+          .on("tick", tick)
+          .start();
+
+      var link = svg.selectAll(".link")
+          .data(graph.links)
+        .enter().append("g")
+          .attr("class", "link");
+
+      link.append("line")
+          .style("stroke-width", "2px");
+
+      var node = svg.selectAll(".node")
+          .data(graph.nodes)
+        .enter().append("g")
+          .attr("class", "node")
+          .call(force.drag);
+
+      node.append("circle")
+          .attr("r", 20)
+          .style("fill", function(d) { if (d._type==="LaynetEle") return "blue"; else if (d._type==="NetEle") return "green"; else return "red"; });
+
+      node.append("text")
+          .attr("dy", "-22px")
+          .attr("text-anchor", "middle")
+          .text(function(d) { return d.name; });
+
+      function tick() {
+        link.selectAll("line")
+            .attr("x1", function(d) { return d.source.x; })
+            .attr("y1", function(d) { return d.source.y; })
+            .attr("x2", function(d) { return d.target.x; })
+            .attr("y2", function(d) { return d.target.y; });
+
+        node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+      }
+

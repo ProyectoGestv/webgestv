@@ -48,3 +48,4 @@ gem "simple_form", "~> 2.1.0"
 gem "nokogiri"
 
 gem 'railroady'
+gem 'd3-rails'

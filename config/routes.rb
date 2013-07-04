@@ -3,7 +3,7 @@ Webgestv::Application.routes.draw do
 
   resources :atr_hsts
 
-
+  resources :topologies
   resources :alrts
 
 
