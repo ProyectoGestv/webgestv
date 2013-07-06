@@ -17,7 +17,7 @@
 
 <%= form_tag :action => 'index' do %>
 <tr>
-<td>Opción</td>
+<td><h5  style="margin-right: 10px">Opción</h5></td>
 <td> 
 <%=select_tag 'atr', options_from_collection_for_select(Atr.all , "id", "name"), :prompt => "Atributos" %>
 </td>
@@ -26,7 +26,7 @@
 </tr>
 
 <tr>
-<td>Rango de verificación</td>
+<td><h5 style="margin-right: 10px">Rango de verificación</h5></td>
 <td> 
 <%=select_tag 'opcion', "<option>Rango fechas</option><option>Rango tiempo</option>".html_safe%>
 </td>
@@ -35,7 +35,7 @@
 </tr>
 
 <tr>
-<td>Selección rango de tiempo</td>
+<td><h5 style="margin-right: 10px">Selección rango de tiempo</h5></td>
 <td> 
 <%=select_tag 'tiempo', "<option>last year</option><option>last month</option><option>last week</option><option>last day</option><option>last hour</option><option>last minute</option>".html_safe%>
 </td>
@@ -44,7 +44,7 @@
 </tr>
 
 <tr>
-<td>Selección rango de fechas</td>
+<td><h5 style="margin-right: 10px">Selección rango de fechas</h5></td>
 <td>
 <div id="datetimepicker" class="input-append date">
       <%=text_field_tag 'fechaa'%>
