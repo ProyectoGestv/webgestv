@@ -23,7 +23,7 @@ end
 gem 'jquery-rails'
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', git: 'https://github.com/codahale/bcrypt-ruby.git', :require => 'bcrypt'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -47,5 +47,5 @@ gem 'magic_encoding'
 gem "simple_form", "~> 2.1.0"
 gem "nokogiri"
 
-gem 'railroady'
 gem 'd3-rails'
+gem 'devise'

@@ -1,2 +1,7 @@
-.imgmain
-  =image_tag "banner.png"
+%h3 Home
+
+-@users.each do |user|
+  %p
+    ="User : #{user.name}"
+    =link_to user.name, user
+= link_to 'Cerrar sesión', '/users/sign_out', :method => :delete

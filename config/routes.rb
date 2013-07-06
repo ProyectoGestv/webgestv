@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
 
+  devise_for :users
+  resources :users
   resources :atr_hsts
 
   resources :topologies

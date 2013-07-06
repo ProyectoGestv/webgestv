@@ -11,7 +11,7 @@
         return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;
     }
 
-    var width = pageWidth(), height = pageHeight();
+    var width = pageWidth()*2/3, height = pageHeight()*2/3;
 
     var svg = d3.select("#topo").append("svg")
         .attr("width", width)
@@ -20,7 +20,7 @@
     var force = d3.layout.force()
         .size([width, height])
         .charge(-800)
-        .linkDistance(100);
+        .linkDistance(140);
 
     var graph = {
       nodes: nodos,

@@ -36,6 +36,9 @@
               %li
                 %a{ :href => root_path}
                   ="Usuarios"
+            %ul.nav.pull-right
+              = render 'devise/menu/login_items'
+
       .content
         = yield
       #push

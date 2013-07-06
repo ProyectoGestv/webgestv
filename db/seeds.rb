@@ -45,4 +45,11 @@ conn3=Conn.new(ip: "192.168.119.35", port: 10001)
 serv=Serv.create(name:"Webservices",  domain: netele.name, desc: "webservices", mother: netele._id)
 serv.conn=conn3
 
+puts 'SETTING UP DEFAULT USER LOGIN'
+user = User.create! :name => 'juan', :email => 'juan@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
+puts 'New user created: ' << user.name
+user2 = User.create! :name => 'cho', :email => 'cho@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
+puts 'New user created: ' << user2.name
+
+
 

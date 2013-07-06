@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/codahale/bcrypt-ruby.git
+  revision: c4a7a65e55b498c4e26d4d939082eeb4c2041ea6
+  specs:
+    bcrypt-ruby (3.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -44,6 +50,11 @@ GEM
     coffee-script-source (1.4.0)
     d3-rails (0.0.5)
       railties (>= 3.1)
+    devise (2.2.4)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (~> 3.1)
+      warden (~> 1.2.1)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -78,6 +89,7 @@ GEM
     nokogiri (1.5.6)
     nokogiri (1.5.6-x86-mingw32)
     origin (1.0.11)
+    orm_adapter (0.4.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -86,7 +98,6 @@ GEM
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
-    railroady (1.1.0)
     rails (3.2.11)
       actionmailer (= 3.2.11)
       actionpack (= 3.2.11)
@@ -131,24 +142,27 @@ GEM
     uglifier (1.3.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    warden (1.2.1)
+      rack (>= 1.0)
 
 PLATFORMS
   ruby
   x86-mingw32
 
 DEPENDENCIES
+  bcrypt-ruby!
   bootstrap-sass (~> 2.3.0.1)
   bson
   bson_ext
   coffee-rails (~> 3.2.1)
   d3-rails
+  devise
   haml
   haml-rails
   jquery-rails
   magic_encoding
   mongoid (~> 3.1.2)
   nokogiri
-  railroady
   rails (= 3.2.11)
   sass-rails (~> 3.2.3)
   simple_form (~> 2.1.0)
