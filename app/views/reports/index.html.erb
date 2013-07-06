@@ -1,56 +1,47 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-
-<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap combined.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-</script>
-<script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script>
-
-<style>
-</style>
-
+<html>
+<head>
+  <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap combined.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+  <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+  <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
+  <script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
+  <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script>
+</head>
 
 <body>
 
+<div class="partial" align="left">
 <%= render 'form' %>
+</div>
 
-
-
-<h2 class="the-legend">VISTAS</h2>
+<h2 class="the-legend">Análisis de datos</h2>
 
 <script>
-function render_partial() {
-  $('#partial').html('<%= escape_javascript(render :partial => "hst") %>')
-}
+    function render_partialh() {
+        $('#partial').html('<%= escape_javascript(render :partial => "hst") %>') ;
+    }
 
-function render_partialb() {
-  $('#partial').html('<%= escape_javascript(render :partial => "statistic") %>')
-}
+    function render_partials() {
+        $('#partial').html('<%= escape_javascript(render :partial => "statistic") %>') ;
+    }
 
 
-function render_partialc() {
-  $('#partial').html('<%= escape_javascript(render :partial => "graph") %>')
-}
-
+    function render_partialg() {
+        $('#partial').html('<%= escape_javascript(render :partial => "graph") %>');
+    }
 </script>
 
+<button type="submit" onclick="render_partialh()" class="btn-primary"> Historicos</button>
+<button type="button" onclick="render_partials()"class="btn-primary">Estadisticas</button>
+<button type="button" onclick="render_partialg()" class="btn-primary">Grafico</button>
 
 
-<button type="submit" onclick="render_partial()" class="btn-primary">Historicos</button>
-<button type="button" onclick="render_partialb()"class="btn-primary">Estadisticos</button>
-<button type="button" onclick="render_partialc()" class="btn-primary">Grafico</button>
-
-<div id="partial" align="center"> 
+<div id="partial" align="left">
  <%= render 'hst' %>
 </div>
 
-
-
-
 </body>
+</html>

@@ -1,6 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
 <div>
-  <table border="1" class="table">
-  <tittle><h2 class="the-legend">HISTORICOS</h2></tittle>
+  <table class="table table-bordered" style="width: 500px">
+  <tittle><h2 class="the-legend">Historicos</h2></tittle>
   <tr>
     <th>Valor</th>
     <th>Año</th>
@@ -11,7 +15,7 @@
     <th>Segundo</th>
   </tr>
    <% @historicos.each do |n| %>
-   <tr>
+   <tr class="success">
    <td><%= n.value %> </td> 
    <td><%= Time.at(n.tstamp).year %> </td>
    <td><%= Time.at(n.tstamp).month %> </td>
@@ -23,3 +27,5 @@
    <%end%>
   </table>
   </div>
+</body>
+</html>

@@ -28,13 +28,25 @@ body{
   height: 40px;
 }
 .content {
-    padding: 0 0 0 40px;
-    width: 50%;
+  padding: 0 0 0 40px;
+  width: 96%;
 }
 p, ol, ul, td {
   font-family: verdana, arial, helvetica, sans-serif;
   font-size: 13px;
   line-height: 18px;
+}
+
+.imgmain{
+  display:block;
+  text-align:center;
+  padding-top: 5%;
+}
+
+.imgmain img{
+  background: #dddddd no-repeat top center;
+  height: 50%;
+  width: 50%;
 }
 
 
@@ -176,12 +188,19 @@ input[type="number"]:focus,{
   border-color: rgba(208,208,208,1);
   outline: 0;
   outline: thin dotted \9; /* IE6-9 */
-  @include box-shadow(#{inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(#8cb44e, 1)});
+  //@include box-shadow(#{inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(#8cb44e, 1)});
 }
+
+.table-striped thead th, .table-striped td{
+  text-align: center;
+  vertical-align:middle;
+}
+
 .table-striped tbody > tr:nth-child(odd) > td,
 .table-striped tbody > tr:nth-child(odd) > th {
   background-color: #e8f9e7;
 }
+
 .show.title{
   padding: 10 0 0 0;
   font-size: 19.5px;
@@ -232,6 +251,10 @@ a.accordion-toggle {
   font-size: 16px;
 }
 
+.modal.fade.in {
+  top: 30%;
+}
+
 .modal-header h3 {
   margin: 0;
   line-height: 30px;
@@ -272,6 +295,31 @@ a.accordion-toggle {
 }
 .input-large {
   width: 92%;
+}
+
+.sidebyside {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width:  15%;
+}
+.sidebyside a {
+  float: center;
+  display: inline;
+}
+.downbydown {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width:  1%;
+}
+
+.downbydown img,span {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 1px;
 }
 
 /////////////
@@ -342,4 +390,3 @@ abbr[title], abbr[data-original-title] {
   background-color: rgb(241, 241, 241);
   border-color: #d0d0d0 #d0d0d0 #d0d0d0;
 }
-

@@ -1,49 +1,50 @@
-<h2 class="the-legend">GRAFICO</h2>
-<div id="myfirstchart" align="center" style="height: 300px;"></div>
+<!DOCTYPE html>
+<html>
+<head>
+  <%= javascript_tag do %>
+
+      function datos()
+      {
+      var a;
+      var tiempo = "<%=@tiempo%>"
+      var ret=[];
+      <% @historicos.each do |variable| %>
+          if (tiempo == "last year")
+          { a =  <%=Time.at(variable.tstamp).month%>}
+          if (tiempo == "last month")
+          { a =  <%=Time.at(variable.tstamp).day%> }
+          if (tiempo == "last week")
+          { a =  <%=Time.at(variable.tstamp).day%>}
+          if (tiempo == "last day")
+          { a =  <%=Time.at(variable.tstamp).hour%>}
+          if (tiempo == "last hour")
+          { a =  <%=Time.at(variable.tstamp).min%>}
+          if (tiempo == "last minute")
+          { a =  <%=Time.at(variable.tstamp).sec%>}
 
 
-<%= javascript_tag do %>
+          var b =  <%=variable.value%>
+          ret.push({
+          x: a,
+          y: b
+          });
+      <%end%>
 
- function datos()
- {
- var a;
- var tiempo = "<%=@tiempo%>"
- var ret=[];
- <% @historicos.each do |variable| %>
- 
+      return ret;
+      }
 
- if (tiempo == "last year")
- { a =  <%=Time.at(variable.tstamp).month%>}
- if (tiempo == "last month")
- { a =  <%=Time.at(variable.tstamp).day%> }
- if (tiempo == "last week")
- { a =  <%=Time.at(variable.tstamp).day%>}
- if (tiempo == "last day")
- { a =  <%=Time.at(variable.tstamp).hour%>}
- if (tiempo == "last hour")
- { a =  <%=Time.at(variable.tstamp).min%>}
- if (tiempo == "last minute")
- { a =  <%=Time.at(variable.tstamp).sec%>}
-
-
- var b =  <%=variable.value%>
- ret.push({
-  x: a,
-  y: b
- });
- <%end%>
- 
- return ret;
- }
-
-  new Morris.Line({
-  element: 'myfirstchart',
-  data:datos(),
-  xkey: ['x'],
-  ykeys: ['y'],
-  parseTime: false,
-  labels: ['Valores']
-  });
- 
+      new Morris.Line({
+      element: 'myfirstchart',
+      data:datos(),
+      xkey: ['x'],
+      ykeys: ['y'],
+      parseTime: false,
+      labels: ['Valores']
+      });
   <%end%>
-
+</head>
+<body>
+<h2 class="the-legend">Grafico</h2>
+<div id="myfirstchart" align="center" style="width: 500px ; height: 300px;"></div>
+</body>
+</html>
