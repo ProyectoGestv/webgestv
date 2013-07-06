@@ -1,68 +1,64 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
-
-<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap combined.min.css" rel="stylesheet">
-<link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
-<link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
-</script>
-<script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script>
-
-
+<html>
+<head>
+</head>
+<body>
 <div>
-<table border="0">
-<tittle><h2 class="the-legend">FILTROS</h2></tittle>
+
+<table>
+<tittle><h2 class="the-legend">Filtros de selección</h2></tittle>
+
 <tr>
+    <th></th>
     <th></th>
     <th></th>
     <th></th>
 </tr>
 
 <%= form_tag :action => 'index' do %>
-
 <tr>
-<td>Opcion</td>
+<td>Opción</td>
 <td> 
 <%=select_tag 'atr', options_from_collection_for_select(Atr.all , "id", "name"), :prompt => "Atributos" %>
 </td>
 <td></td>
+<td></td>
 </tr>
 
 <tr>
-<td>Opcion</td>
+<td>Rango de verificación</td>
 <td> 
 <%=select_tag 'opcion', "<option>Rango fechas</option><option>Rango tiempo</option>".html_safe%>
 </td>
 <td></td>
-</tr>
-
-<tr>
-<td>Seleccion rango de tiempo</td>
-<td> 
-<%=select_tag 'tiempo', "<option>last year</option><option>last month</option><option>last week</option><option>last day</option><option>last hour</option><option>last minute</option>".html_safe%>
-</td>
 <td></td>
 </tr>
 
 <tr>
-<td>Seleccion rango de fechas</td> 
+<td>Selección rango de tiempo</td>
+<td> 
+<%=select_tag 'tiempo', "<option>last year</option><option>last month</option><option>last week</option><option>last day</option><option>last hour</option><option>last minute</option>".html_safe%>
+</td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Selección rango de fechas</td>
 <td>
 <div id="datetimepicker" class="input-append date">
       <%=text_field_tag 'fechaa'%>
       <span class="add-on">
-        <p>Cal</p>
+      <i data-time-icon="icon-time" data-date-icon= "icon-calendar"> </i>
       </span>
 </div>
 </td>
+<td><h5 style="margin-right: 20px ; margin-left: 20px"> hasta </h5></td>
 <td>
 <div id="datetimepickerb" class="input-append date">
       <%=text_field_tag 'fechab'%>
       <span class="add-on">
-        <p>Cal</p>
+        <i data-time-icon="icon-time" data-date-icon= "icon-calendar"> </i>
       </span>
 </div>
 </td>
@@ -76,20 +72,17 @@
 <%end%>
 </table>
 
-
-<script type="text/javascript">
+  <script>
       $('#datetimepicker').datetimepicker({
-        format: 'dd/MM/yyyy hh:mm:ss',
+          format: 'dd/MM/yyyy hh:mm:ss'
       });
 
       $('#datetimepickerb').datetimepicker({
-        format: 'dd/MM/yyyy hh:mm:ss',
+          format: 'dd/MM/yyyy hh:mm:ss'
       });
-</script>
-
-
-
+  </script>
 
 
 </div>
-
+</body>
+</html>

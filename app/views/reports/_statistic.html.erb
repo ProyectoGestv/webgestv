@@ -1,7 +1,13 @@
-  <h2 class="the-legend"> ESTADISTICOS</h2>
+  <!DOCTYPE html>
+  <html>
+  <head>
+  </head>
+  <body>
+
+  <h2 class="the-legend"> Estadisticos</h2>
   <div> 
 
-  <table border="1" class="table">
+  <table class="table table-bordered" style="width: 500px">
   <tr>
     <th>Rango</th>
     <th>Minimo</th>
@@ -11,7 +17,7 @@
     <th>Moda</th>
     <th>Promedio</th>
   </tr>
-  <tr>
+  <tr class="success">
    <td><%= @stats.range %></td> 
    <td><%= @stats.min %> </td>
    <td><%= @stats.max %> </td>
@@ -25,3 +31,5 @@
 
   </div>
 
+  </body>
+  </html>
