@@ -1,0 +1,20 @@
+<h2>Autenticación</h2>
+- unless notice.blank? && alert.blank?
+  #flash
+    .wrapper
+      - unless notice.blank?
+        .alert.alert-success
+          %a.close{"data-dismiss" => "alert"} ×
+          = notice
+      - unless alert.blank?
+        .alert.alert-error
+          %a.close{"data-dismiss" => "alert"} ×
+          = alert
+
+= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+  .form-inputs
+    = f.input :email, :required => false, :autofocus => true
+    = f.input :password, label: 'Contraseña', :required => false
+
+  .form-actions
+    = f.button :submit, "Entrar"

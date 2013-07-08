@@ -1,7 +1,10 @@
 # -*- encoding : utf-8 -*-
 Webgestv::Application.routes.draw do
 
-  devise_for :users
+  #devise_for :users
+  devise_for :users, :controllers => {:registrations => "users" }
+  #match 'users' => 'users#index', :via => :get
+  #match 'users/:id' => 'users#destroy', :via => :delete
   resources :users
   resources :atr_hsts
 

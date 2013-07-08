@@ -1,3 +1,5 @@
+# -*- encoding : utf-8 -*-
+
 class User
   include Mongoid::Document
   # Include default devise modules. Others available are:
@@ -7,8 +9,8 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   ## Database authenticatable
-  field :email,              :type => String, :default => ""
-  field :encrypted_password, :type => String, :default => ""
+  field :email,              :type => String
+  field :encrypted_password, :type => String
   
   ## Recoverable
   field :reset_password_token,   :type => String
@@ -23,6 +25,8 @@ class User
   field :last_sign_in_at,    :type => Time
   field :current_sign_in_ip, :type => String
   field :last_sign_in_ip,    :type => String
+  field :name,               :type => String
+  field :role,               :type => String
 
   ## Confirmable
   # field :confirmation_token,   :type => String
@@ -37,9 +41,9 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
-  field :name
-  validates_presence_of :name
+
+  validates_presence_of :name, :email, :password, :password_confirmation
   validates_uniqueness_of :name, :email, :case_sensitive => false
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+  attr_accessible :name, :email, :role, :password, :password_confirmation, :remember_me
 
 end

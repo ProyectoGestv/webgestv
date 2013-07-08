@@ -44,6 +44,22 @@ en:
           attributes:
             conn:
               invalid: "Los parámetros de conexión no son válidos"
+        user:
+          attributes:
+            email:
+              blank: "Escriba una dirección de correo."
+              taken: "La dirección de correo ya está tomada."
+              invalid: "Escriba una dirección de correo válida"
+            password:
+              blank: "Escriba una contraseña"
+              confirmation: "Las contraseñas no coinciden."
+              too_short: "Mínimo 6 caracteres."
+              too_long: "Máximo 128 caracteres."
+            password_confirmation:
+              blank: "Escriba la confirmación de la Contraseña"
+            name:
+              taken: "El nombre ya existe."
+              blank: "Escriba un nombre."
 
   forms:
       show:        "Ver"
@@ -166,3 +182,4 @@ en:
       notice:     "La conexión fue creada satisfactoriamente."
     delete:
       notice:     "La conexión fue eliminada satisfactoriamente."
+

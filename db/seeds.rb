@@ -12,6 +12,7 @@ LaynetEle.delete_all
 McrAtr.delete_all
 Atr.delete_all
 Alrt.delete_all
+User.delete_all
 (1..5).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
   laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPServerIntegration', desc: "network layer element #{i}")
@@ -46,9 +47,9 @@ serv=Serv.create(name:"Webservices",  domain: netele.name, desc: "webservices", 
 serv.conn=conn3
 
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'juan', :email => 'juan@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
+user = User.create! :name => 'juan', :role => 'admin', :email => 'juan@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
 puts 'New user created: ' << user.name
-user2 = User.create! :name => 'cho', :email => 'cho@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
+user2 = User.create! :name => 'cho', :role => 'oper', :email => 'cho@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
 puts 'New user created: ' << user2.name
 
 

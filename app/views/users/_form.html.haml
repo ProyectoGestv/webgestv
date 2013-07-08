@@ -1,13 +1,13 @@
-= form_for @user do |f|
-  - if @user.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@user.errors.count, "error")} prohibited this user from being saved:"
-      %ul
-        - @user.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for(@user, :url => users_url(@user), :method => :post, :wrapper => :bootstrap, :html => {:class => 'form-horizontal' }) do |f|
+  %fieldset#mainform
+    %legend.the-legend
+      Datos
+      =f.input :name, label: 'nombre', :input_html => { :class => "span4" }, :hint => "Nombre del servicio"
+      =f.input :email, label: 'email', :input_html => { :class => "span4" }, :hint => "Nombre del servicio"
+      =f.input :role, :label => 'Rol', :collection => [['Operador', 'oper'],['Administrador', 'admin']], :as => :select, :include_blank => false, :hint => "Rol."
+      =f.input :password, label: 'contraseña', :input_html => { :class => "span4" }, :hint => "Nombre del servicio"
+      =f.input :password_confirmation, label: 'confirmación contraseña', :input_html => { :class => "span4" }, :hint => "Nombre del servicio"
 
-  .field
-    = f.label :show
-    = f.text_field :show
-  .actions
-    = f.submit 'Save'
+    .form-actions
+      %button.btn.btn-primary{:type => "submit"}=t('forms.save')
+      =link_to t('forms.back'), users_path, {:class => "links"}

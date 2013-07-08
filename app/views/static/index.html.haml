@@ -1,7 +1,13 @@
-%h3 Home
-
--@users.each do |user|
-  %p
-    ="User : #{user.name}"
-    =link_to user.name, user
-= link_to 'Cerrar sesión', '/users/sign_out', :method => :delete
+- unless notice.blank? && alert.blank?
+  #flash
+    .wrapper
+      - unless notice.blank?
+        .alert.alert-success
+          %a.close{"data-dismiss" => "alert"} ×
+          = notice
+      - unless alert.blank?
+        .alert.alert-error
+          %a.close{"data-dismiss" => "alert"} ×
+          = alert
+.imgmain
+  =image_tag "banner.png"
