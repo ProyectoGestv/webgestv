@@ -1,7 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <%= javascript_tag do %>
+
+  var parametro;
+
+      var selectmenu=document.getElementById("grafi");
+      selectmenu.onchange=function()
+      {
+
+      var chosenoption=this.options[this.selectedIndex]
+      if (chosenoption.value!="nothing")
+      {
+      parametro = chosenoption.value;
+      }
+      }
 
       function datos()
       {
@@ -10,22 +24,43 @@
       var ret=[];
       <% @historicos.each do |variable| %>
           if (tiempo == "last year")
-          { a =  <%=Time.at(variable.tstamp).month%>}
+          {
+          a =  <%=Time.at(variable.tstamp).month%>
+          parametro = 'month';
+          }
           if (tiempo == "last month")
-          { a =  <%=Time.at(variable.tstamp).day%> }
+          {
+          a =  <%=Time.at(variable.tstamp).day%>
+          parametro = 'day';
+          }
           if (tiempo == "last week")
-          { a =  <%=Time.at(variable.tstamp).day%>}
+          {
+          a =  <%=Time.at(variable.tstamp).day%>
+          parametro = 'day';
+          }
           if (tiempo == "last day")
-          { a =  <%=Time.at(variable.tstamp).hour%>}
+          {
+          a =  <%=Time.at(variable.tstamp).hour%>
+          parametro = 'hour';
+          }
           if (tiempo == "last hour")
-          { a =  <%=Time.at(variable.tstamp).min%>}
+          {
+          a =  <%=Time.at(variable.tstamp).min%>
+          parametro = 'minute';
+          }
           if (tiempo == "last minute")
-          { a =  <%=Time.at(variable.tstamp).sec%>}
+          {
+          a =  <%=Time.at(variable.tstamp).sec%>
+          parametro = 'second';
+          }
 
-
+          var  p = <%=variable.tstamp%>
+          var c = new Date(p*1000).getTime();
           var b =  <%=variable.value%>
+
           ret.push({
-          x: a,
+       // parametro: a,
+          parametro: c ,
           y: b
           });
       <%end%>
@@ -33,18 +68,38 @@
       return ret;
       }
 
-      new Morris.Line({
+      new Morris.Line(
+      {
       element: 'myfirstchart',
       data:datos(),
-      xkey: ['x'],
+      xkey: 'parametro' ,
       ykeys: ['y'],
-      parseTime: false,
-      labels: ['Valores']
-      });
+      parseTime: true,
+      labels: ['Valor']
+      }
+      );
   <%end%>
+
 </head>
 <body>
 <h2 class="the-legend">Grafico</h2>
 <div id="myfirstchart" align="center" style="width: 500px ; height: 300px;"></div>
+
+<select id="grafi" size="1">
+  <option value="año" selected="selected">Años</option>
+  <option value="mes">Meses</option>
+  <option value="dia">Dias</option>
+  <option value="hora">Horas</option>
+  <option value="minuto">Minutos</option>
+  <option value="segundo">Segundos</option>
+</select>
+
+<script type="text/javascript">
+
+
+
+</script>
+
+
 </body>
 </html>
