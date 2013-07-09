@@ -62,5 +62,31 @@ puts 'New user created: ' << user.name
 user2 = User.create! :name => 'cho', :role => 'oper', :email => 'cho@example.com', :password => 'jajaja', :password_confirmation => 'jajaja'
 puts 'New user created: ' << user2.name
 
+  h1 = Hst.create(valuee: 10+i , tstamp: Chronic.parse('today').to_i)
+  a1.hsts << h1
+
+  h2 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('tomorrow').to_i)
+  a1.hsts << h2
+
+  h3 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('this second').to_i)
+  a1.hsts << h3
+
+  h4 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('this morning').to_i)
+  a1.hsts << h4
+
+  h5 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('last week').to_i)
+  a1.hsts << h5
+
+  h6 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('last month').to_i)
+  a1.hsts << h6
+
+  al1=Alrt.create(title:"notif #{i}", msg:"alerta de notificacion #{i}", tipo:'notif')
+  a1.alrts << al1
+  al2=Alrt.create(title:"anmly #{i}", msg:"alerta de anomalia #{i}", tipo:'anmly')
+  a1.alrts << al2
+  al3=Alrt.create(title:"alarm #{i}", msg:"alerta de alarma #{i}", tipo:'alarm')
+  a1.alrts << al3
 
 
+ 
+  

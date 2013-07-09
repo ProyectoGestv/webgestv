@@ -5,6 +5,7 @@
   <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+  <script src="https://raw.github.com/DmitryBaranovskiy/g.raphael/master/min/g.raphael-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
   <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
   <script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
@@ -32,12 +33,18 @@
     function render_partialg() {
         $('#partial').html('<%= escape_javascript(render :partial => "graph") %>');
     }
+
+    function render_partialj() {
+        $('#partial').html('<%= escape_javascript(render :partial => "realtime") %>');
+    }
+
+
 </script>
 
 <button type="submit" onclick="render_partialh()" class="btn-primary"> Historicos</button>
 <button type="button" onclick="render_partials()"class="btn-primary">Estadisticas</button>
 <button type="button" onclick="render_partialg()" class="btn-primary">Grafico</button>
-
+<button type="button" onclick="render_partialj()" class="btn-primary">Grafico tiempo real</button>
 
 <div id="partial" align="left">
  <%= render 'hst' %>

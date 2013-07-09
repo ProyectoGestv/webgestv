@@ -8,12 +8,15 @@ Webgestv::Application.routes.draw do
   resources :users
   resources :atr_hsts
   match "/reports/index" => "reports#index"
+  match 'reports/getdatos/:tstamp' => 'reports#getdatos' ,:as => :getdatos
 
   resources :topologies
   resources :alrts
-
+  
+ 
 
   resources :alr_mntr_frmls
+
 
 
   match 'laynet_ele/testconn' => 'laynet_eles#testconn', :via => :get

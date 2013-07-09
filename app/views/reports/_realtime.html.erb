@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <script type="text/javascript">
+
+      $(function ()
+      {
+
+          var ret = new String();
+          new Highcharts.Chart({
+              chart: { renderTo: 'container',
+
+                  type: 'spline',
+                  animation: Highcharts.svg, // don't animate in old IE
+                  marginRight: 10,
+                  events: {
+                      load: function()
+                      {
+
+                          // set up the updating of the chart each second
+                          var series = this.series[0];
+                          //console.log("hola mundo" + series);
+
+                          setInterval(function()
+                          {
+                              $.get("http://localhost:3000/reports/getdatos/"+ parseInt(ret),function(data,status)
+                              {
+                                  var a , b ;
+                                  console.log(data)
+                                  b = new Date(data.tstamp *1000).getTime();
+                                  a =  parseInt(data.valuee);
+                                  ret = data.tstamp
+                                  series.addPoint([b,a],true,true);
+                              });
+                          }, 2000);
+
+
+
+
+                      }
+                  }
+              } ,
+
+              title: {
+                  text: 'Live random data'
+              },
+              xAxis: {
+                  type: 'datetime',
+                  tickPixelInterval: 500
+              },
+              yAxis: {
+                  title: {
+                      text: 'Value'
+                  },
+                  plotLines: [{
+                      value: 0,
+                      width: 1,
+                      color: '#808080'
+                  }]
+              },
+              tooltip: {
+                  formatter: function() {
+                      return '<b>'+ this.series.name +'</b><br/>'+
+                              Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+                              Highcharts.numberFormat(this.y, 2);
+                  }
+              },
+              legend: {
+                  enabled: false
+              },
+              exporting: {
+                  enabled: true
+              },
+              series: [{
+                  name: 'Random data',
+                  data: (function()
+                  {
+                      var data = [];
+                      <% @historicos.each do |dat| %>
+                      var  y = <%=dat.tstamp%>
+                      var z = new Date(y*1000).getTime();
+
+                      data.push({
+                          x:  z ,
+                          y: <%= dat.valuee%>
+                      });
+                      <% end %>
+
+
+                      return data;
+
+                  })()
+              }]
+
+          });
+      });
+
+
+  </script>
+</head>
+<body>
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+</body>
+</html>
