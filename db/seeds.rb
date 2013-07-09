@@ -26,13 +26,13 @@ User.delete_all
   ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
   serv.mcr_atrs << ma
   a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", tipo: "integer")
-  ma.atrs << a1
-  al1=Alrt.create(title:"notif #{i}", msg:"alerta de notificacion #{i}", tipo:'notif')
-  a1.alrts << al1
-  al2=Alrt.create(title:"anmly #{i}", msg:"alerta de anomalia #{i}", tipo:'anmly')
-  a1.alrts << al2
-  al3=Alrt.create(title:"alarm #{i}", msg:"alerta de alarma #{i}", tipo:'alarm')
-  a1.alrts << al3
+  #ma.atrs << a1
+  #al1=Alrt.create(title:"notif #{i}", msg:"alerta de notificacion #{i}", tipo:'notif')
+  #a1.alrts << al1
+  #al2=Alrt.create(title:"anmly #{i}", msg:"alerta de anomalia #{i}", tipo:'anmly')
+  #a1.alrts << al2
+  #al3=Alrt.create(title:"alarm #{i}", msg:"alerta de alarma #{i}", tipo:'alarm')
+  #a1.alrts << al3
 end
 
 conn1= Conn.new(ip: "192.168.119.35", port: 1)
@@ -47,9 +47,9 @@ serv=Serv.create(name:"Webservices",  domain: netele.name, desc: "webservices", 
 serv.conn=conn3
 
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'juan', :role => 'admin', :email => 'juan@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
+user = User.create! :name => 'juan', :role => 'admin', :email => 'juan@example.com', :password => 'jajaja', :password_confirmation => 'jajaja'
 puts 'New user created: ' << user.name
-user2 = User.create! :name => 'cho', :role => 'oper', :email => 'cho@example.com', :password => 'jajajaja', :password_confirmation => 'jajajaja'
+user2 = User.create! :name => 'cho', :role => 'oper', :email => 'cho@example.com', :password => 'jajaja', :password_confirmation => 'jajaja'
 puts 'New user created: ' << user2.name
 
 

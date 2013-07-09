@@ -49,3 +49,4 @@ gem "nokogiri"
 
 gem 'd3-rails'
 gem 'devise'
+gem 'cancan'

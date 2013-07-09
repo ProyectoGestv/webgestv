@@ -4,21 +4,34 @@
   .alert.alert-success
     %a.close{"data-dismiss" => "alert"} ×
     = notice
+- if alert
+  .alert.alert-error
+    %a.close{"data-dismiss" => "alert"} ×
+    = alert
 
 %table.table.table-striped
   %thead
     %th Nombre
     %th Email
     %th Rol
-    %th Eliminar
+    -if can? :update, @users
+      %th Eliminar
   %tbody
     - @users.each do |user|
       %tr
         %td= user.name
         %td= user.email
-        %td= user.role
-        %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), user, :method => :delete, :data => { :confirm => 'Esta seguro de querer eliminar el usuario?' }
+        %td
+          -rol=''
+          -if user.role=='admin'
+            -rol='Administrador'
+          -else
+            -rol='Operador'
+          =rol
+        -if can? :update, @users
+          %td= link_to image_tag('eliminar.png', {:title => t('forms.destroy')}), user, :method => :delete, :data => { :confirm => 'Esta seguro de querer eliminar el usuario?' }
 
-%br
-.form-actions
-  = link_to 'Nuevo Usuario', new_user_path, {:class => "links"}
+-if can? :update, @users
+  %br
+  .form-actions
+    = link_to 'Nuevo Usuario', new_user_path, {:class => "links"}

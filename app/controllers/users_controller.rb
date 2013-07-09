@@ -1,5 +1,4 @@
-
-
+# -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
   # GET /users
   # GET /users.json
@@ -14,7 +13,6 @@ class UsersController < ApplicationController
 
   # GET /users/1
   # GET /users/1.json
-  before_filter :authenticate_user!
   def show
     @user = User.find(params[:id])
 
@@ -76,11 +74,34 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'Usuario eliminado satisfactoriamente.' }
-      format.json { head :no_content }
+    count=0
+    User.all.each do |user|
+      if user.role=='admin'
+        count+=1
+      end
+    end
+    puts '////////////////////////////////'
+    puts count
+    puts @user.role
+    puts '////////////////////////////////'
+    if current_user._id==@user._id
+      respond_to do |format|
+        format.html { redirect_to users_url, alert: 'No puede eliminar su propia cuenta.' }
+        format.json { head :no_content }
+      end
+    else
+      if count==1 && @user.role=="admin"
+        respond_to do |format|
+          format.html { redirect_to users_url, alert: 'No se puede borrar el último administrador.' }
+          format.json { head :no_content }
+        end
+      else
+        @user.destroy
+        respond_to do |format|
+          format.html { redirect_to users_url, notice: 'Usuario eliminado satisfactoriamente.' }
+          format.json { head :no_content }
+        end
+      end
     end
   end
 end
