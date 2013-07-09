@@ -1,24 +1,30 @@
 class Hst
   include Mongoid::Document
   
-  validates_presence_of :value , :tstamp
-  field :value, type: String
+  validates_presence_of :valuee , :tstamp
+  field :valuee, type: String
   field :tstamp, type: Integer
   belongs_to :atr
-  attr_accessible :value , :tstamp
+  attr_accessible :valuee , :tstamp
 
   def self.consultahistoricos(dia,atr)
   @parser = Chronic.parse(dia).to_i
-  @historicos = self.where(:atr_id => atr , :tstamp.gte => @parser)
+  @historicos = self.where(:atr_id => atr , :tstamp.gte => @parser)..sort({tstamp: 1})
   return @historicos
-  end 
+  end
+
+
+  def self.consultatodos(atr)
+  @historicos = self.where(:atr_id => atr).sort({tstamp: 1})
+  return @historicos
+  end
 
 
   def self.calcularestadisticos(hst)
   @todosdatos = hst
   @ret= Array.new
   @todosdatos.each do |variable|
-  @ret.push(variable.value.to_i)
+  @ret.push(variable.valuee.to_i)
   end
   @stats = DescriptiveStatistics::Stats.new(@ret)
   return @stats
@@ -29,8 +35,22 @@ class Hst
   
   @parserfechaa = Chronic.parse(fechaa).to_i
   @parserfechab = Chronic.parse(fechab).to_i
-  @historicos = self.where(:atr_id => atr ,:tstamp.gte => @parserfechaa, :tstamp.lte => @parserfechab)
+  @historicos = self.where(:atr_id => atr ,:tstamp.gte => @parserfechaa, :tstamp.lte => @parserfechab).sort({tstamp: 1})
   return @historicos
-  end 
+  end
+
+
+  def self.tstamptiemporeal(hst , atr)
+    @historico = self.where( :tstamp.gt => hst , :atr_id => atr).sort({tstamp: -1}).last
+    return @historico
+  end
+
+  def self.tstampultimo(atr)
+
+    @historico = self.where(:atr_id => atr).sort({tstamp: 1}).last
+    return @historico
+
+  end
+
 
 end

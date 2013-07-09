@@ -2,9 +2,11 @@
 Webgestv::Application.routes.draw do
 
  match "/reports/index" => "reports#index"
-  
+ match 'reports/getdatos/:tstamp' => 'reports#getdatos' ,:as => :getdatos
 
-  resources :alrts
+
+
+ resources :alrts
   
  
 
