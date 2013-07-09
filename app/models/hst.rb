@@ -8,8 +8,22 @@ class Hst
   attr_accessible :valuee , :tstamp
 
   def self.consultahistoricos(dia,atr)
-  @parser = Chronic.parse(dia).to_i
-  @historicos = self.where(:atr_id => atr , :tstamp.gte => @parser)..sort({tstamp: 1})
+  if dia == 'ultimo ano'
+  @consulta = "last year"
+  elsif dia == 'ultimo mes'
+  @consulta = "last month"
+  elsif dia == 'ultima semana'
+  @consulta = "last week"
+  elsif dia == 'ultimo dia'
+  @consulta = "last day"
+  elsif dia == 'ultima hora'
+  @consulta = "last hour"
+  else
+  @consulta = "last minute"
+  end
+
+  @parser = Chronic.parse(@consulta).to_i
+  @historicos = self.where(:atr_id => atr , :tstamp.gte => @parser).sort({tstamp: 1})
   return @historicos
   end
 

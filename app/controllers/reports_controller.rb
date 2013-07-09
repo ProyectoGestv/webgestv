@@ -35,10 +35,3 @@ class ReportsController < ApplicationController
   end
 
 
-
-  #@historicos = Hst.all
-  #@parser = Chronic.parse(@dia)
-  #@integro = @parser.to_i
-  #@historicos=Hst.all.or(:tstamp.lte => @integro)
-
-  #

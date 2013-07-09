@@ -10,7 +10,6 @@
           var ret = new String();
           new Highcharts.Chart({
               chart: { renderTo: 'container',
-
                   type: 'spline',
                   animation: Highcharts.svg, // don't animate in old IE
                   marginRight: 10,
@@ -43,7 +42,9 @@
               } ,
 
               title: {
-                  text: 'Live random data'
+                  text: 'Análisis en tiempo real'
+
+
               },
               xAxis: {
                   type: 'datetime',
@@ -51,7 +52,7 @@
               },
               yAxis: {
                   title: {
-                      text: 'Value'
+                      text: 'Valor'
                   },
                   plotLines: [{
                       value: 0,
@@ -73,7 +74,8 @@
                   enabled: true
               },
               series: [{
-                  name: 'Random data',
+                  name: 'Historicos',
+                  color: '#006600',
                   data: (function()
                   {
                       var data = [];
@@ -100,6 +102,6 @@
   </script>
 </head>
 <body>
-<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+<div id="container" style="min-width: 500px; height: 350px; margin: 0 auto"></div>
 </body>
 </html>
