@@ -10,15 +10,38 @@
   <script src="http://cdn.oesmith.co.uk/morris-0.4.3.min.js"></script>
   <script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
   <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
 </head>
 
 <body>
 
-<div class="partial" align="left">
+<div class="partial" style="float: left">
 <%= render 'form' %>
 </div>
 
-<h2 class="the-legend">Análisis de datos</h2>
+<div id="info" style="float: left ; margin-left: 30px">
+<table class="table table-bordered" style="width: 400px">
+<tittle><h2 class="the-legend">Parametros</h2></tittle>
+    <tr class="success">
+     <td>Opcion seleccionada</td>
+     <td><%= @opcion %> </td>
+    </tr>
+  <tr class="success">
+    <td>Rango Tiempo</td>
+    <td><%= @tiempo %> </td>
+  </tr>
+</table>
+<table class="table table-bordered" style="width: 400px">
+  <tr class="success">
+    <td>Rango Fechas</td>
+    <td><%= @fechaa %> </td>
+    <td><%= @fechab %> </td>
+  </tr>
+</table>
+</div>
+
+
+
 
 <script>
     function render_partialh() {
@@ -41,14 +64,23 @@
 
 </script>
 
+<div style="clear:both ; margin: 10px">
+
+  <h2 class="the-legend">Análisis de datos</h2>
+
 <button type="submit" onclick="render_partialh()" class="btn-primary"> Historicos</button>
 <button type="button" onclick="render_partials()"class="btn-primary">Estadisticas</button>
 <button type="button" onclick="render_partialg()" class="btn-primary">Grafico</button>
 <button type="button" onclick="render_partialj()" class="btn-primary">Grafico tiempo real</button>
 
-<div id="partial" align="left">
+ <div id="partial" style="min-width: 400px" align="center">
  <%= render 'hst' %>
+ </div>
 </div>
+
+
+
+
 
 </body>
 </html>
