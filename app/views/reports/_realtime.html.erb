@@ -1,9 +1,16 @@
-<!--
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <script type="text/javascript">
+
+      Highcharts.setOptions({
+          global: {
+              useUTC: false
+          }
+      });
+
 
       $(function ()
       {
@@ -80,15 +87,15 @@
                   data: (function()
                   {
                       var data = [];
-                      <%# @historicos.each do |dat| %>
-                      var  y = <#%=dat.tstamp%>
+                      <% @historicos.each do |dat| %>
+                      var  y = <%=dat.tstamp%>
                       var z = new Date(y*1000).getTime();
 
                       data.push({
                           x:  z ,
-                          y: <#%= dat.valuee%>
+                          y: <%= dat.valuee%>
                       });
-                      <%# end %>
+                      <% end %>
 
 
                       return data;
