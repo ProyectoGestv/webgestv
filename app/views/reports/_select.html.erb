@@ -1,0 +1,27 @@
+<h2 class="the-legend">Análisis de datos</h2>
+
+<button type="submit" onclick="render_partialh()" class="btn-primary"> Historicos</button>
+<button type="button" onclick="render_partials()"class="btn-primary">Estadisticas</button>
+<button type="button" onclick="render_partialg()" class="btn-primary">Grafico</button>
+<button type="button" onclick="render_partialj()" class="btn-primary">Grafico tiempo real</button>
+
+
+<div id="ver"></div>
+
+<script>
+    function render_partials() {
+        $('#ver').html('<%= escape_javascript (render :partial => "statistic") %>') ;
+    }
+    function render_partialh() {
+        $('#ver').html('<%= escape_javascript(render :partial => "hst") %>') ;
+    }
+
+    function render_partialg() {
+        $('#ver').html('<%= escape_javascript(render :partial => "graph") %>');
+    }
+
+
+</script>
+
+
+

@@ -1,7 +1,9 @@
+<!--
 <!DOCTYPE html>
 <html>
 <head>
  <!-- <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap combined.min.css" rel="stylesheet">  -->
+
   <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
   <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
@@ -11,12 +13,14 @@
   <script type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
   <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script>
   <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+<!--
 </head>
 
 <body>
 
 <div class="partial" style="float: left">
-<%= render 'form' %>
+<%#= render 'form' %>
 </div>
 
 <div id="info" style="float: left ; margin-left: 30px">
@@ -24,18 +28,18 @@
 <tittle><h2 class="the-legend">Parametros</h2></tittle>
     <tr class="success">
      <td>Opcion seleccionada</td>
-     <td><%= @opcion %> </td>
+     <td><#%= @opcion %> </td>
     </tr>
   <tr class="success">
     <td>Rango Tiempo</td>
-    <td><%= @tiempo %> </td>
+    <td><#%= @tiempo %> </td>
   </tr>
 </table>
 <table class="table table-bordered" style="width: 400px">
   <tr class="success">
     <td>Rango Fechas</td>
-    <td><%= @fechaa %> </td>
-    <td><%= @fechab %> </td>
+    <td><#%= @fechaa %> </td>
+    <td><#%= @fechab %> </td>
   </tr>
 </table>
 </div>
@@ -45,20 +49,20 @@
 
 <script>
     function render_partialh() {
-        $('#partial').html('<%= escape_javascript(render :partial => "hst") %>') ;
+        $('#partial').html('<#%= escape_javascript(render :partial => "hst") %>') ;
     }
 
     function render_partials() {
-        $('#partial').html('<%= escape_javascript(render :partial => "statistic") %>') ;
+        $('#partial').html('<#%= escape_javascript(render :partial => "statistic") %>') ;
     }
 
 
     function render_partialg() {
-        $('#partial').html('<%= escape_javascript(render :partial => "graph") %>');
+        $('#partial').html('<#%= escape_javascript(render :partial => "graph") %>');
     }
 
     function render_partialj() {
-        $('#partial').html('<%= escape_javascript(render :partial => "realtime") %>');
+        $('#partial').html('<#%= escape_javascript(render :partial => "realtime") %>');
     }
 
 
@@ -74,7 +78,7 @@
 <button type="button" onclick="render_partialj()" class="btn-primary">Grafico tiempo real</button>
 
  <div id="partial" style="min-width: 400px" align="center">
- <%= render 'hst' %>
+ <#%= render 'hst' %>
  </div>
 </div>
 
@@ -84,3 +88,17 @@
 
 </body>
 </html>
+
+-->
+
+<h1>hola mundo</h1>
+
+<div>
+
+  <%=render 'form'%>
+
+</div>
+
+<div id="informacion"></div>
+
+
