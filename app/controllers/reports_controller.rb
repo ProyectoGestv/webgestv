@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+
+=begin
  $atrr
 
   def index
@@ -32,6 +34,76 @@ class ReportsController < ApplicationController
       format.json { render json: @dat }
     end
   end
+
+=end
+
+  def index
+  $report = Report.new
+  @mcrsearch=McrAtr.where(:tipo.all => ['simple'])
+  respond_to do |format|
+    format.html # new.html.erb
+    format.json { render json: @report }
   end
+
+  end
+
+
+  def buscaratr
+    @atrsearch= Atr.where(:mcr_atr_id => params[:mcr])
+     respond_to do |format|
+     format.html { render partial: 'buscaratr'}
+     end
+  end
+
+
+  def rango
+
+   @option = (params[:id]).to_i
+   respond_to do |format|
+
+   case @option
+
+     when 1
+       format.html { render partial: 'fechas' }
+     when 2
+       format.html { render partial: 'tiempo'}
+     when 3
+       format.html { render partial: 'hst'}
+     else
+      format.html { render partial: 'hst' }
+   end
+  end
+  end
+
+
+  def actualizar
+  $report = Report.new(params[:report])
+
+  respond_to do |format|
+    if $report.valid?
+      format.html { render partial: 'select'}
+      #aqui va la logica para consultar los historicos y estadisticos
+      @historicos = Hst.gethst($report)
+      @stats = Hst.calcularestadisticos(@historicos)
+      @tiempo = $report.time.to_i
+
+     else
+      format.html { render partial:'error' }
+
+    end
+  end
+  end
+
+
+
+
+
+
+
+
+
+
+  end
+
 
 

@@ -1,0 +1,4 @@
+
+<%= simple_fields_for $report do |f| %>
+<%= f.input :atrsim, label: 'Atributo', :collection => @atrsearch.map{ |c| [c.name, c.id] }, include_blank: 'Seleccione atributo'%>
+<% end %>

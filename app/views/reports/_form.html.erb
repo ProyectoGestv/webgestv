@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +16,11 @@
     <th></th>
 </tr>
 
-<%= form_tag :action => 'index' do %>
+<%#= form_tag :action => 'index' do %>
 <tr>
 <td><h5  style="margin-right: 10px">Opción</h5></td>
 <td> 
-<%=select_tag 'atr', options_from_collection_for_select(Atr.all , "id", "name"), :prompt => "Atributos" %>
+<#%=select_tag 'atr', options_from_collection_for_select(Atr.all , "id", "name"), :prompt => "Atributos" %>
 </td>
 <td></td>
 <td></td>
@@ -28,7 +29,7 @@
 <tr>
 <td><h5 style="margin-right: 10px">Rango de verificación</h5></td>
 <td> 
-<%=select_tag 'opcion', "<option>Rango fechas</option><option>Rango tiempo</option><option>Todos</option>".html_safe%>
+<#%=select_tag 'opcion', "<option>Rango fechas</option><option>Rango tiempo</option><option>Todos</option>".html_safe%>
 </td>
 <td></td>
 <td></td>
@@ -36,8 +37,8 @@
 
 <tr>
 <td><h5 style="margin-right: 10px">Selección rango de tiempo</h5></td>
-<td> 
-<%=select_tag 'tiempo', "<option>ultimo ano</option><option>ultimo mes</option><option>ultima semana</option><option>ultimo dia</option><option>ultima hora</option><option>ultimo minuto</option>".html_safe%>
+<td>
+<#%=select_tag 'tiempo', "<option>ultimo ano</option><option>ultimo mes</option><option>ultima semana</option><option>ultimo dia</option><option>ultima hora</option><option>ultimo minuto</option>".html_safe%>
 </td>
 <td></td>
 <td></td>
@@ -47,7 +48,7 @@
 <td><h5 style="margin-right: 10px">Selección rango de fechas</h5></td>
 <td>
 <div id="datetimepicker" class="input-append date">
-      <%=text_field_tag 'fechaa'%>
+      <#%=text_field_tag 'fechaa'%>
       <span class="add-on">
       <i data-time-icon="icon-time" data-date-icon= "icon-calendar"> </i>
       </span>
@@ -56,7 +57,7 @@
 <td><h5 style="margin-right: 20px ; margin-left: 20px"> hasta </h5></td>
 <td>
 <div id="datetimepickerb" class="input-append date">
-      <%=text_field_tag 'fechab'%>
+      <#%=text_field_tag 'fechab'%>
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon= "icon-calendar"> </i>
       </span>
@@ -65,11 +66,11 @@
 </tr>
 
 <tr>
-<td><%= submit_tag 'Generar' , :class => 'btn-primary' %></td>
+<td><#%= submit_tag 'Generar' , :class => 'btn-primary' %></td>
 <td></td>
 <td></td>
 </tr>
-<%end%>
+<%#end%>
 </table>
 
   <script>
@@ -86,3 +87,42 @@
 </div>
 </body>
 </html>
+-->
+
+
+
+
+<%= simple_form_for $report , :id => 'formu', :remote => true , :html => {:id =>'formu'} , :url => {action:'actualizar'}  do |f| %>
+
+    <% if $report.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize($report.errors.count, "error") %> prohibited this report from being saved:</h2>
+
+      <ul>
+      <% $report.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+  <%=f.input :parasim, label: 'Parámetros Simples', :collection => @mcrsearch.map{ |c| [c.name,c.id] }, include_blank: 'Seleccione un parámetro', :input_html => {:onchange => "reload_mcr(this.value)"} %>
+  </div>
+
+  <div id="atrr"></div>
+
+  <div class="field">
+      <%= f.input :option, label: 'Rangos', :collection => [['Rango fechas ', 1], ['Rango tiempo ', 2], ['Todos', 3]] , include_blank: 'Seleccione un tipo de rango', :input_html => {:onchange => "select_time(this.value)"} %>
+  </div>
+
+   <div id="rango"></div>
+
+  <div class="actions">
+    <button id="enviar" type="submit" onclick="clickear()">Realizar consulta</button>
+  </div>
+<% end %>
+
+
+
+

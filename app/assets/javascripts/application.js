@@ -15,3 +15,21 @@
 //= require bootstrap
 //= require jqBootstrapValidation
 //= require_tree .
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

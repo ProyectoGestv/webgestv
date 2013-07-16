@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,28 +12,28 @@
 
       var tiempo = "<%=@tiempo%>"
       var ret=[];
-      <% @historicos.each do |variable| %>
-          if (tiempo == "last year")
+      <%@historicos.each do |variable| %>
+          if (tiempo = 1)
           {
           parametro = 'month';
           }
-          if (tiempo == "last month")
+          if (tiempo = 2)
           {
           parametro = 'day';
           }
-          if (tiempo == "last week")
+          if (tiempo = 3)
           {
           parametro = 'day';
           }
-          if (tiempo == "last day")
+          if (tiempo = 4)
           {
           parametro = 'hour';
           }
-          if (tiempo == "last hour")
+          if (tiempo = 5)
           {
           parametro = 'minute';
           }
-          if (tiempo == "last minute")
+          if (tiempo >= 6)
           {
           parametro = 'second';
           }
