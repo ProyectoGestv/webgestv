@@ -20,22 +20,11 @@ class ReportsController < ApplicationController
    @stats = Hst.calcularestadisticos(@historicos)
   end
 
-  def getdatos
-
-    if (params[:tstamp]) != 'NaN'
-       @ts = params[:tstamp]
-       @dat = Hst.tstamptiemporeal(@ts,$atrr)
-      #@dat = Dat.find_by_tstamp(params[:tstamp])
-      #@datt = Hst.where("tstamp > #{params[:tstamp]}")
-    else
-       @dat = Hst.tstampultimo($atrr)
-    end
-      respond_to do |format|
-      format.json { render json: @dat }
-    end
-  end
-
 =end
+
+
+
+
 
   def index
   $report = Report.new
@@ -85,23 +74,25 @@ class ReportsController < ApplicationController
       #aqui va la logica para consultar los historicos y estadisticos
       @historicos = Hst.gethst($report)
       @stats = Hst.calcularestadisticos(@historicos)
-      @tiempo = $report.time.to_i
-
-     else
+      else
       format.html { render partial:'error' }
 
     end
   end
   end
 
+  def getdatos
 
-
-
-
-
-
-
-
+    if (params[:tstamp]) != 'NaN'
+      @ts = params[:tstamp]
+      @dat = Hst.tstamptiemporeal(@ts,$report.atrsim)
+    else
+      @dat = Hst.tstampultimo($report.atrsim)
+    end
+    respond_to do |format|
+      format.json { render json: @dat }
+    end
+  end
 
   end
 

@@ -2,8 +2,8 @@ class Hst
   include Mongoid::Document
   
   validates_presence_of :valuee , :tstamp
-  field :valuee, type: String
-  field :tstamp, type: Integer
+  field :valuee, type:String
+  field :tstamp, type:Integer
   belongs_to :atr
   attr_accessible :valuee , :tstamp
 
