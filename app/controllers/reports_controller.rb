@@ -38,22 +38,24 @@ class ReportsController < ApplicationController
 
 
   def buscaratr
+    @report = Report.new
     @atrsearch= Atr.where(:mcr_atr_id => params[:mcr])
      respond_to do |format|
-     format.html { render partial: 'buscaratr'}
+     #format.json {render json: @atrsearch}
+     format.html { render partial: 'buscaratr' , :link => @atrsearch}
      end
   end
 
 
   def rango
-
+   @report = Report.new
    @option = (params[:id]).to_i
    respond_to do |format|
 
    case @option
 
      when 1
-       format.html { render partial: 'fechas' }
+       format.html { render partial: 'fechas'}
      when 2
        format.html { render partial: 'tiempo'}
      when 3
@@ -67,7 +69,6 @@ class ReportsController < ApplicationController
 
   def actualizar
   @report = Report.new(params[:report])
-
   respond_to do |format|
     if @report.valid?
       format.html { render partial: 'select'}
