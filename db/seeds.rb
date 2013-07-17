@@ -6,15 +6,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Serv.delete_all
-NetEle.delete_all
-LaynetEle.delete_all
-McrAtr.delete_all
-Atr.delete_all
-Alrt.delete_all
-Hst.delete_all
+#Serv.delete_all
+#NetEle.delete_all
+#LaynetEle.delete_all
+#McrAtr.delete_all
+#Atr.delete_all
+#Alrt.delete_all
+#Hst.delete_all
 
-a1=Atr.create(name:"a60", desc: "attribute5", tipo: "integer")
+a1=Atr.create(name:"a62", desc: "attribute5", tipo: "integer")
 
 
 i = 12
@@ -28,7 +28,8 @@ i = 12
   conn2=Conn.new(ip: "1.1.1.#{i}", port: 100+i)
   serv=Serv.create(name:"s#{i}",  domain: netele.name, desc: "service #{i}", mother: netele._id)
   serv.conn=conn2
-  ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
+  #ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
+  ma=McrAtr.find_by(:name=> 'ma12')
   serv.mcr_atrs << ma
   ma.atrs << a1
 

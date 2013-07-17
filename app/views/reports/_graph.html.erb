@@ -10,7 +10,7 @@
       function datos()
       {
 
-      var tiempo = "<%=$report.time.to_i%>"
+      var tiempo = "<%=@report.time.to_i%>"
       var ret=[];
       <%@historicos.each do |variable| %>
           if (tiempo = 1)
