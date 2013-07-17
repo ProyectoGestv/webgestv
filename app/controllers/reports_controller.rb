@@ -27,7 +27,7 @@ class ReportsController < ApplicationController
 
 
   def index
-  $report = Report.new
+  @report = Report.new
   @mcrsearch=McrAtr.where(:tipo.all => ['simple'])
   respond_to do |format|
     format.html # new.html.erb
@@ -66,13 +66,13 @@ class ReportsController < ApplicationController
 
 
   def actualizar
-  $report = Report.new(params[:report])
+  @report = Report.new(params[:report])
 
   respond_to do |format|
-    if $report.valid?
+    if @report.valid?
       format.html { render partial: 'select'}
       #aqui va la logica para consultar los historicos y estadisticos
-      @historicos = Hst.gethst($report)
+      @historicos = Hst.gethst(@report)
       @stats = Hst.calcularestadisticos(@historicos)
       else
       format.html { render partial:'error' }
@@ -85,9 +85,10 @@ class ReportsController < ApplicationController
 
     if (params[:tstamp]) != 'NaN'
       @ts = params[:tstamp]
-      @dat = Hst.tstamptiemporeal(@ts,$report.atrsim)
+      @atr = params[:atr]
+      @dat = Hst.tstamptiemporeal(@ts,@atr)
     else
-      @dat = Hst.tstampultimo($report.atrsim)
+      @dat = Hst.tstampultimo(@atr)
     end
     respond_to do |format|
       format.json { render json: @dat }
