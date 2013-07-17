@@ -44,3 +44,23 @@ function select_time(id) {
         }
     });
 }
+
+
+function visible(valor)
+{
+ console.log(valor);
+    var fecha = document.getElementById('rangof');
+    var tiempo = document.getElementById('rangot');
+
+ if (valor == 1)
+ {
+  fecha.style.display = 'inline'
+  tiempo.style.display = 'none'
+ }
+ if (valor == 2)
+ {
+  fecha.style.display = 'none'
+  tiempo.style.display = 'inline'
+ }
+
+}
