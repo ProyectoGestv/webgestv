@@ -11,7 +11,9 @@
     %th
     %th Título
     %th Mensaje
-    %th Fecha/Hora
+    %th Errores
+    %th Fecha/Hora Inicial
+    %th Fecha/Hora Última
     %th
   %tbody
     -@alrts.each do |alrt|
@@ -28,7 +30,9 @@
             %span.label.label-info Información
         %td= alrt.title
         %td= alrt.msg
-        %td= Time.at(alrt.tstamp)
+        %td= alrt.count
+        %td= Time.at(alrt.tstamp_ini)
+        %td= Time.at(alrt.tstamp_last)
         %td
           -if alrt.tipo=='anmly' or alrt.tipo=='alarm'
             -localizado=""

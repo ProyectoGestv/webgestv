@@ -26,8 +26,8 @@ User.delete_all
   ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
   serv.mcr_atrs << ma
   a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", tipo: "integer")
-  #ma.atrs << a1
-  #al1=Alrt.create(title:"notif #{i}", msg:"alerta de notificacion #{i}", tipo:'notif')
+  ma.atrs << a1
+  #al1=Alrt.create(tipo: 'anmly', title:'THRESHOLD_VALUE_EXCEEDED', msg:"alerta de notificacion #{i}", tipo:'notif')
   #a1.alrts << al1
   #al2=Alrt.create(title:"anmly #{i}", msg:"alerta de anomalia #{i}", tipo:'anmly')
   #a1.alrts << al2

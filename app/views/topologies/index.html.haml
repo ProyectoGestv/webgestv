@@ -11,7 +11,7 @@
         return  window.innerHeight != null? window.innerHeight : document.documentElement && document.documentElement.clientHeight ?  document.documentElement.clientHeight : document.body != null? document.body.clientHeight : null;
     }
 
-    var width = pageWidth()*2/3, height = pageHeight()*2/3;
+    var width = pageWidth()*8/10, height = pageHeight()*8/10;
 
     var svg = d3.select("#topo").append("svg")
         .attr("width", width)
