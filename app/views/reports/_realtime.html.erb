@@ -14,7 +14,7 @@
 
       $(function ()
       {
-
+          var atr = new String();
           var ret = new String();
           new Highcharts.Chart({
               chart: { renderTo: 'container',
@@ -31,13 +31,15 @@
 
                           setInterval(function()
                           {
-                              $.get("http://localhost:3000/reports/getdatos/"+ parseInt(ret),function(data,status)
+                              $.get("http://localhost:3000/reports/getdatos/"+parseInt(ret),function(data,status)
                               {
                                   var a , b ;
                                   console.log(data)
                                   b = new Date(data.tstamp *1000).getTime();
                                   a =  parseInt(data.valuee);
                                   ret = data.tstamp
+                                  atr = data.atr_id
+                                  console.log(atr)
                                   series.addPoint([b,a],true,true);
                               });
                           }, 2000);
@@ -87,15 +89,18 @@
                   data: (function()
                   {
                       var data = [];
+
                       <% @historicos.each do |dat| %>
+                      atr = <%=dat[:atr_id]%>
+                      console.log(atr);
                       var  y = <%=dat.tstamp%>
                       var z = new Date(y*1000).getTime();
-
                       data.push({
                           x:  z ,
                           y: <%= dat.valuee%>
                       });
                       <% end %>
+
 
 
                       return data;
@@ -107,7 +112,7 @@
       });
 
 
-  </script>
+</script>
 </head>
 <body>
 <div id="container" style="min-width: 500px; height: 350px; margin: 0 auto"></div>
