@@ -1,7 +1,7 @@
 
 
 
-function clickear (){
+function sendd (){
 
     console.log("holaa");
     var valuesToSubmit = $('#formu').serialize();
@@ -33,15 +33,15 @@ function reload_mcr(id,report) {
     });
 }
 
-function select_time(id) {
+function getdata (id,atr) {
     jQuery.ajax({
-        url: "/rango",
+        url: "/getdatos",
         type: "GET",
-        data: {"id" : id},
-        dataType: "html",
+        data: {"tstamp" : id , "atr":atr},
+        dataType: "json",
         success: function(data)
         {
-            $('#rango').html(data);
+         return data;
         }
     });
 }
