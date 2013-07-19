@@ -1,20 +1,26 @@
 
-
-
 function sendd (){
 
-    console.log("holaa");
     var valuesToSubmit = $('#formu').serialize();
-    console.log(valuesToSubmit);
     jQuery.ajax({
         url: '/actualizar', //sumbits it to the given url of the form
         data: valuesToSubmit,
         dataType: "html" , // you want a difference between normal and ajax-calls, and json is standard
-        success: function(data)
+        success: function(data, request)
         {
         $('#informacion').html(data);
-        console.log(data);
-        }});
+
+        },
+        error: function(data)
+        {
+        $('#formulario').html(data.responseText)
+
+        var e = document.getElementById("report_option");
+        var strUser = e.options[e.selectedIndex].value;
+        visible(strUser);
+
+        }
+        });
 
 
 };
@@ -49,7 +55,6 @@ function getdata (id,atr) {
 
 function visible(valor)
 {
- console.log(valor);
     var fecha = document.getElementById('rangof');
     var tiempo = document.getElementById('rangot');
     if (valor == 1)
@@ -62,5 +67,18 @@ function visible(valor)
     fecha.style.display = 'none'
     tiempo.style.display = 'inline'
     }
+    if(valor == 3)
+    {
+    fecha.style.display = 'none'
+    tiempo.style.display = 'none'
+    }
+
+}
+
+
+function llamar()
+{
+
+alert("llamar");
 
 }

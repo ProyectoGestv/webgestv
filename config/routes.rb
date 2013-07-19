@@ -2,7 +2,7 @@
 Webgestv::Application.routes.draw do
 
  match "/reports/index" => "reports#index"
- match 'reports/getdatos/:tstamp' => 'reports#getdatos' ,:as => :getdatos
+ match '/reports/getdatos' => 'reports#getdatos'
  match '/actualizar' => 'reports#actualizar'
  match '/buscaratr' => 'reports#buscaratr'
  match '/rango' => 'reports#rango'

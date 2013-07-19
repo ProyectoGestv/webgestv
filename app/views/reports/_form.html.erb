@@ -1,5 +1,5 @@
 
-<div style="background-color: #F2F2F2">
+<div style="background-color: #F2F2F2" onload="llamar()">
 
 
 <h2 class="the-legend"> Formulario Filtrado</h2>
@@ -7,18 +7,6 @@
 
 <%= simple_form_for @report , :id => 'formu', :remote => true , :html => {:id =>'formu'} , :url => {action:'actualizar'}  do |f| %>
 
-  <% if @report.errors.any? %>
-  <div id="error_explanation">
-      <h2><%= pluralize(@report.errors.count, "error") %> prohibited this report from being saved:</h2>
-
-      <ul>
-      <% $report.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-
-  </div>
-  <% end %>
 
 
   <div class="field">
@@ -26,34 +14,30 @@
   </div>
 
 
-  <div id="atrr"></div>
+  <div id="atrr">
+    <%=render 'reports/buscaratr'%>
+  </div>
 
 
   <div class="field">
-      <%= f.input :option, label: 'Rangos', :collection => [['Rango fechas ', 1], ['Rango tiempo ', 2], ['Todos', 3]] , include_blank: 'Seleccione un tipo de rango', :input_html => {:onchange => "visible(this.value)"} %>
+      <%= f.input :option, label: 'Rangos', :collection => [['Rango fechas ', 1], ['Rango tiempo ', 2], ['Todos', 3]] ,:id => 'rango', include_blank: 'Seleccione un tipo de rango', :input_html => {:onchange => "visible(this.value)"} %>
   </div>
 
   <div id="rangot" style='display: none'>
-     <%= f.label 'Rango de tiempo' %>
-     <%= f.select :time , [['Ultimo anio ', 1], ['Ultimo mes', 2] , ['Ultima semana', 3] , ['Ultimo dia', 4], ['Ultima hora', 5] , ['Ultimo minuto', 6]]%>
+     <%= f.input :time , label: 'Rango tiempo', :collection => [['Ultimo anio ', 1], ['Ultimo mes', 2] , ['Ultima semana', 3] , ['Ultimo dia', 4], ['Ultima hora', 5] , ['Ultimo minuto', 6]] , include_blank: 'Seleccione rango tiempo'%>
   </div>
 
   <div id="rangof" style='display: none'>
 
-      <%=f.label 'Fechas'%>
-
         <div id="datetimepicker" class="input-append date">
-        <%=f.label 'Desde'%>
-        <%=f.text_field :fechaa%>
+        <%=f.input :fechaa , label: 'Desde'%>
         <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon= "icon-calendar"> </i>
         </span>
         </div>
 
-
         <div id="datetimepickerb" class="input-append date">
-        <%=f.label 'hasta'%>
-        <%=f.text_field :fechab %>
+        <%=f.input :fechab , label: 'Hasta' %>
         <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon= "icon-calendar"> </i>
         </span>
@@ -78,5 +62,3 @@
 <% end %>
 
 </div>
-
-
