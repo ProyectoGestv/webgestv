@@ -5,6 +5,12 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <script type="text/javascript">
 
+
+
+
+
+
+
       Highcharts.setOptions({
           global: {
               useUTC: false
@@ -14,8 +20,12 @@
 
       $(function ()
       {
-          var atr = new String();
+          var atr = '<%= @atrr %>';
+
+          console.log(atr);
+
           var ret = new String();
+
           new Highcharts.Chart({
               chart: { renderTo: 'container',
                   type: 'spline',
@@ -31,15 +41,13 @@
 
                           setInterval(function()
                           {
-                              $.get("http://localhost:3000/reports/getdatos/"+parseInt(ret),function(data,status)
+                              $.get("http://localhost:3000/reports/getdatos/?atr="+atr+"&tstamp="+parseInt(ret),function(data,status)
                               {
                                   var a , b ;
-                                  console.log(data)
+                                  //console.log(data)
                                   b = new Date(data.tstamp *1000).getTime();
                                   a =  parseInt(data.valuee);
                                   ret = data.tstamp
-                                  atr = data.atr_id
-                                  console.log(atr)
                                   series.addPoint([b,a],true,true);
                               });
                           }, 2000);
@@ -90,18 +98,20 @@
                   {
                       var data = [];
 
+
+
+
                       <% @historicos.each do |dat| %>
-                      atr = <%=dat[:atr_id]%>
-                      console.log(atr);
+
+
                       var  y = <%=dat.tstamp%>
                       var z = new Date(y*1000).getTime();
                       data.push({
                           x:  z ,
                           y: <%= dat.valuee%>
                       });
+
                       <% end %>
-
-
 
                       return data;
 
