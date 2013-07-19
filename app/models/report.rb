@@ -12,6 +12,7 @@ class Report
   validates_presence_of :time ,:if => :rango_tiempo?
   validates_presence_of :fechaa ,:if => :rango_fechas?
   validates_presence_of :fechab ,:if => :rango_fechas?
+  validate :integridad_fecha
 
   def rango_tiempo?
     option == '2'
@@ -31,6 +32,17 @@ class Report
 
   def persisted?
     false
+  end
+
+
+  private
+  def integridad_fecha
+
+    fechamayor = Chronic.parse(fechab).to_i
+    fechamenor = Chronic.parse(fechaa).to_i
+    errors.add(:fechab, "esta fecha debe ser mayor") if
+        fechamenor>fechamayor
+
   end
 
 
