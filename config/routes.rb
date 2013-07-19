@@ -19,6 +19,7 @@ Webgestv::Application.routes.draw do
   match 'net_ele/testconn' => 'net_eles#testconn', :via => :get
   match 'serv/testconn' => 'servs#testconn', :via => :get
   match "/update_linksb" => "links#update_linksb"
+  match "/update_alerts" => "alrts#update_alerts"
 
   match "/frmls/state" => "alr_mntr_frmls#state", :via => :get
   match "/alr_mntr_cntrs/state" => "alr_mntr_cntrs#state"

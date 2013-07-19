@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-tooltip.js
+//= require bootstrap-popover.js
 //= require jqBootstrapValidation
 //= require d3
-//= require_tree .

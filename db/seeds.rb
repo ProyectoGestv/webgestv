@@ -33,6 +33,13 @@ User.delete_all
   #a1.alrts << al2
   #al3=Alrt.create(title:"alarm #{i}", msg:"alerta de alarma #{i}", tipo:'alarm')
   #a1.alrts << al3
+  tsini=Time.now.to_i+i
+  al1=Alrt.create(tipo: 'alarm', title:'GENERAL_TEST_ERROR', msg:"alerta de notificacion #{i}", tstamp_ini: tsini, tstamp_last: tsini, count: 1, state: 'noAtt')
+  al2=Alrt.create(tipo: 'anmly', title:'THRESHOLD_VALUE_EXCEEDED', msg:"warning de notificacion #{i}", tstamp_ini: tsini, tstamp_last: tsini, count: 1, state: 'noAtt')
+  al3=Alrt.create(tipo: 'notif', title:'RESOURCE_ALIVE', msg:"info de notificacion #{i}", tstamp_ini: tsini, tstamp_last: tsini, count: 1, state: 'noAtt')
+  a1.alrts << al1
+  a1.alrts << al2
+  a1.alrts << al3
 end
 
 conn1= Conn.new(ip: "192.168.119.35", port: 1)

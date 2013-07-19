@@ -80,4 +80,15 @@ class AlrtsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def update_alerts
+    filtro=params[:filter]
+    if filtro=='all'
+      @alrts = Alrt.all.order_by(:tstamp_ini.desc)
+    else
+      @alrts=Alrt.where(tipo: filtro).order_by(:tstamp_ini.desc)
+    end
+    render :partial => "alertas", :link => @alrts
+  end
+
 end
