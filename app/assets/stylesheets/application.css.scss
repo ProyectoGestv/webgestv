@@ -390,3 +390,55 @@ abbr[title], abbr[data-original-title] {
   background-color: rgb(241, 241, 241);
   border-color: #d0d0d0 #d0d0d0 #d0d0d0;
 }
+///////////////////////////////////////////////////////////////////////////////////
+//////////////// REPORTES ////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+#formulario
+{
+ float: left;
+}
+
+#informacion
+{
+ clear: both;
+ margin: 10px;
+}
+
+#parcialformulario
+{
+ background-color: #F2F2F2
+}
+
+#parcialhistorico
+{
+  width: 1000px;
+}
+
+#tablaparcialhistorico
+{
+ width: 800px;
+}
+
+#graficoestatico
+{
+ min-width: 500px;
+ height: 300px;
+}
+
+#graficodinamico
+{
+ min-width: 500px;
+ height: 350px;
+ margin: 0 auto;
+}
+
+#parcialestadisticos
+{
+  width: 1000px;
+}
+
+#tablaparcialestadisticos
+{
+width: 800px;
+}

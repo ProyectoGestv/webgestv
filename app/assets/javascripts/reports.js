@@ -1,3 +1,4 @@
+src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"
 
 function sendd (){
 
@@ -82,3 +83,6 @@ function llamar()
 alert("llamar");
 
 }
+
+
+
