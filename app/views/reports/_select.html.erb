@@ -1,7 +1,7 @@
 <h2 class="the-legend">Análisis de datos</h2>
 
 <button type="submit" onclick="render_partialh()" class="btn-primary"> Historicos</button>
-<button type="button" onclick="render_partials()"class="btn-primary">Estadisticas</button>
+<button type="button" onclick="render_partials()"class="btn-primary" >Estadisticas</button>
 <button type="button" onclick="render_partialg()" class="btn-primary">Grafico</button>
 <button type="button" onclick="render_partialj()" class="btn-primary">Grafico tiempo real</button>
 
@@ -23,8 +23,6 @@
     function render_partialj() {
         $('#ver').html('<%= escape_javascript(render :partial => "realtime") %>');
     }
-
-
 </script>
 
 
