@@ -1,14 +1,14 @@
 
 <div id="parcialformulario" onload="llamar()">
 <h2 class="the-legend"> Formulario Filtrado</h2>
-<%= simple_form_for @report , id:'formu', remote:true , :html => {:id =>'formu'} , :url => {:action => 'actualizar'}  do |f| %>
+<%= simple_form_for @reporte , id:'formu', remote:true , :html => {:id =>'formu'} , :url => {:action => 'actualizartabla'}  do |f| %>
 
    <div class="field">
-   <%=f.input :parasim, label:'Parámetros Simples', :collection => @@busquedamacroatributo.map{ |c| [c.name,c.id] }, :include_blank => 'Seleccione un parámetro',:input_html => {:onchange => "recargar_atributo(this.value)"} %>
+   <%=f.input :parasim, label:'Parámetros Simples', :collection => @busquedamacroatributo.map{ |c| [c.name,c.id] }, :include_blank => 'Seleccione un parámetro',:input_html => {:onchange => "recargaratributo(this.value)"} %>
    </div>
 
    <div id="divatributoformulario">
-   <%=render 'reports/buscaratributo'%>
+   <%=render 'reports/buscaratr'%>
    </div>
 
    <div class="field">

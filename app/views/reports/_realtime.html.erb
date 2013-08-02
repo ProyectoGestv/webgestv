@@ -33,7 +33,7 @@
                               {
                                   var a,b ;
                                   b = new Date(data.tstamp *1000).getTime();
-                                  a =  parseInt('data.value');
+                                  a =  parseInt(data.valuee);
                                   ret = data.tstamp
                                   series.addPoint([b,a],true,true);
                               });
@@ -95,7 +95,7 @@
                       var z = new Date(y*1000).getTime();
                       data.push({
                           x:  z ,
-                          y: <%=dat.value%>
+                          y: <%=dat.valuee%>
                       });
 
                       <% end %>

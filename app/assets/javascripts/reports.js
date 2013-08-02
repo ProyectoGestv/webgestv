@@ -25,7 +25,7 @@ function enviarinformacion(){
 
 };
 
-function recargar_atributo(id) {
+function recargaratributo(id){
 
     jQuery.ajax({
         url: "/buscaratributo",
@@ -39,7 +39,7 @@ function recargar_atributo(id) {
     });
 }
 
-function datostiemporeal (id,atributo) {
+function datostiemporeal(id,atributo) {
     jQuery.ajax({
         url: "/datostiemporeal",
         type: "GET",
