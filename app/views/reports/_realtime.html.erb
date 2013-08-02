@@ -8,7 +8,7 @@
 
       $(function ()
       {
-          var atr = '<%= @atrr %>';
+          var atr = '<%= @atributo%>';
 
           console.log(atr);
 
@@ -29,12 +29,11 @@
 
                           setInterval(function()
                           {
-                              $.get("http://localhost:3000/reports/getdatos/?atr="+atr+"&tstamp="+parseInt(ret),function(data,status)
+                              $.get("http://localhost:3000/reports/datostiemporeal/?atr="+atr+"&tstamp="+parseInt(ret),function(data,status)
                               {
-                                  var a , b ;
-                                  //console.log(data)
+                                  var a,b ;
                                   b = new Date(data.tstamp *1000).getTime();
-                                  a =  parseInt(data.valuee);
+                                  a =  parseInt('data.value');
                                   ret = data.tstamp
                                   series.addPoint([b,a],true,true);
                               });
@@ -96,7 +95,7 @@
                       var z = new Date(y*1000).getTime();
                       data.push({
                           x:  z ,
-                          y: <%= dat.valuee%>
+                          y: <%=dat.value%>
                       });
 
                       <% end %>

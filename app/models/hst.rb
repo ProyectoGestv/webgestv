@@ -1,51 +1,51 @@
 class Hst
   include Mongoid::Document
   
-  validates_presence_of :valuee , :tstamp
-  field :valuee, type:String
+  validates_presence_of :value , :tstamp
+  field :value, type:String
   field :tstamp, type:Integer
   belongs_to :atr
-  attr_accessible :valuee , :tstamp
+  attr_accessible :value , :tstamp
 
 
   def self.calcularestadisticos(hst)
   @todosdatos = hst
   @ret= Array.new
   @todosdatos.each do |variable|
-  @ret.push(variable.valuee.to_i)
+  @arraydatos.push(variable.value.to_i)
   end
-  @stats = DescriptiveStatistics::Stats.new(@ret)
-  return @stats
+  @estadisticos = DescriptiveStatistics::Stats.new(@arraydatos)
+  return @estadisticos
   end
   
 
-  def self.tstamptiemporeal(hst , atr)
-    @historico = self.where( :tstamp.gt => hst , :atr_id => atr).sort({tstamp: -1}).last
+  def self.tstamptiemporeal(tstamp , atributo)
+    @historico = self.where( :tstamp.gt => tstamp , :atr_id => atributo).sort({tstamp: -1}).last
     return @historico
   end
 
-  def self.tstampultimo(atr)
+  def self.tstampultimohistorico(atributo)
 
-    @historico = self.where(:atr_id => atr).sort({tstamp: 1}).last
+    @historico = self.where(:atr_id => atributo).sort({tstamp: 1}).last
     return @historico
 
   end
 
 
-  def self.gethst(report)
+  def self.consultarhistoricos(reporte)
 
-  case report.option.to_i
+  case reporte.option.to_i
 
     when 1
 
-    @parserfechaa = Chronic.parse(report.fechaa).to_i
-    @parserfechab = Chronic.parse(report.fechab).to_i
-    @historicos = self.where(:atr_id => report.atrsim ,:tstamp.gte => @parserfechaa, :tstamp.lte => @parserfechab).sort({tstamp: 1})
+    @parserfechaa = Chronic.parse(reporte.fechaa).to_i
+    @parserfechab = Chronic.parse(reporte.fechab).to_i
+    @historicos = self.where(:atr_id => reporte.atrsim ,:tstamp.gte => @parserfechaa, :tstamp.lte => @parserfechab).sort({tstamp: 1})
 
     when 2
 
 
-      case report.time.to_i
+      case reporte.time.to_i
 
         when 1
 
@@ -74,15 +74,11 @@ class Hst
       end
 
       @parser = Chronic.parse(@consulta).to_i
-      puts  ( @parser)
-      @historicos = self.where(:atr_id => report.atrsim  , :tstamp.gte => @parser).sort({tstamp: 1})
+      @historicos = self.where(:atr_id => reporte.atrsim  , :tstamp.gte => @parser).sort({tstamp: 1})
+      else
 
-  else
-
-      @historicos = self.where(:atr_id => report.atrsim ).sort({tstamp: 1})
-
-
-  end
+      @historicos = self.where(:atr_id => reporte.atrsim ).sort({tstamp: 1})
+      end
 
    return @historicos
 

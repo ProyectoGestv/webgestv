@@ -1,12 +1,11 @@
-src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"
 
-function sendd (){
+function enviarinformacion(){
 
-    var valuesToSubmit = $('#formu').serialize();
+    var valoresenviar = $('#formu').serialize();
     jQuery.ajax({
-        url: '/actualizar', //sumbits it to the given url of the form
-        data: valuesToSubmit,
-        dataType: "html" , // you want a difference between normal and ajax-calls, and json is standard
+        url: '/actualizartabla',
+        data: valoresenviar,
+        dataType: "html",
         success: function(data, request)
         {
         $('#informacion').html(data);
@@ -18,7 +17,7 @@ function sendd (){
 
         var e = document.getElementById("report_option");
         var strUser = e.options[e.selectedIndex].value;
-        visible(strUser);
+        visibletiempo_o_fecha(strUser);
 
         }
         });
@@ -26,25 +25,25 @@ function sendd (){
 
 };
 
-function reload_mcr(id,report) {
+function recargar_atributo(id) {
 
     jQuery.ajax({
-        url: "/buscaratr",
+        url: "/buscaratributo",
         type: "GET",
         data: {"mcr" : id},
         dataType: "html",
         success: function(data)
         {
-         $('#atrr').html(data);
+         $('#divatributoformulario').html(data);
         }
     });
 }
 
-function getdata (id,atr) {
+function datostiemporeal (id,atributo) {
     jQuery.ajax({
-        url: "/getdatos",
+        url: "/datostiemporeal",
         type: "GET",
-        data: {"tstamp" : id , "atr":atr},
+        data: {"tstamp" : id , "atr":atributo},
         dataType: "json",
         success: function(data)
         {
@@ -54,10 +53,10 @@ function getdata (id,atr) {
 }
 
 
-function visible(valor)
+function visibletiempo_o_fecha(valor)
 {
-    var fecha = document.getElementById('rangof');
-    var tiempo = document.getElementById('rangot');
+    var fecha = document.getElementById('rangofecha');
+    var tiempo = document.getElementById('rangotiempo');
     if (valor == 1)
     {
     fecha.style.display = 'inline'
@@ -73,14 +72,6 @@ function visible(valor)
     fecha.style.display = 'none'
     tiempo.style.display = 'none'
     }
-
-}
-
-
-function llamar()
-{
-
-alert("llamar");
 
 }
 

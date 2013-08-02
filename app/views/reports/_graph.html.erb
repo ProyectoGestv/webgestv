@@ -1,13 +1,11 @@
-  <%= javascript_tag do %>
-
-  var parametro;
+<script>
+      var parametro;
 
       function datos()
       {
-
-      var tiempo = "<%=@report.time.to_i%>"
+      var tiempo = '<%=@reporte.time.to_i%>'
       var ret=[];
-      <%@historicos.each do |variable| %>
+      '<%@historicos.each do |variable| %>'
           if (tiempo = 1)
           {
           parametro = 'month';
@@ -33,16 +31,16 @@
           parametro = 'second';
           }
 
-          var  p = <%=variable.tstamp%>
+          var  p = '<%=variable.tstamp%>'
           var c = new Date(p*1000).getTime();
-          var b =  <%=variable.valuee%>
+          var b =  '<%=variable.valuee%>'
 
           ret.push({
-       // parametro: a,
+          // parametro: a,
           parametro: c ,
           y: b
           });
-      <%end%>
+      '<%end%>'
 
       return ret;
       }
@@ -58,9 +56,8 @@
       labels: ['Valor']
       }
       );
-  <%end%>
+</script>
 
-</head>
-<body>
+
 <h2 class="the-legend">Grafico</h2>
 <div id="graficoestatico" align="center"></div>
