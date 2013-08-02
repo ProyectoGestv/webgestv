@@ -1,3 +1,22 @@
+<script>
+    function render_partials()
+    {
+        $('#tablainformacion').html('<%= escape_javascript(render(:partial => "statistic"))%>');
+    }
+    function render_partialh() {
+        $('#tablainformacion').html('<%= escape_javascript(render(:partial => "hst")) %>') ;
+    }
+
+    function render_partialg() {
+        $('#tablainformacion').html('<%= escape_javascript(render :partial => "graph") %>');
+    }
+
+    function render_partialj() {
+        $('#tablainformacion').html('<%= escape_javascript(render :partial => "realtime") %>');
+    }
+</script>
+
+
 <h2 class="the-legend">Análisis de datos</h2>
 
 <button type="submit" onclick="render_partialh()" class="btn-primary"> Historicos</button>
@@ -6,23 +25,10 @@
 <button type="button" onclick="render_partialj()" class="btn-primary">Grafico tiempo real</button>
 
 
-<div id="ver"></div>
+<div id="tablainformacion"></div>
 
 <script>
-    function render_partials() {
-        $('#ver').html('<%= escape_javascript (render :partial => "statistic") %>') ;
-    }
-    function render_partialh() {
-        $('#ver').html('<%= escape_javascript(render :partial => "hst") %>') ;
-    }
 
-    function render_partialg() {
-        $('#ver').html('<%= escape_javascript(render :partial => "graph") %>');
-    }
-
-    function render_partialj() {
-        $('#ver').html('<%= escape_javascript(render :partial => "realtime") %>');
-    }
 </script>
 
 
