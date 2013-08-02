@@ -1,14 +1,16 @@
 class ReportsController < ApplicationController
 
-     def index
+  def index
 
      @reporte = Report.new
      @busquedamacroatributo=McrAtr.where(:tipo.all => ['simple'])
+     @busquedaatributo = []
      respond_to do |format|
+     format.html
      format.json { render json: @reporte}
      end
 
-     end
+   end
 
 
   def buscaratributo
@@ -27,7 +29,7 @@ class ReportsController < ApplicationController
    if @reporte.valid?
       @atributo = @reporte.atrsim.to_s
       #aqui va la logica para consultar los historicos y estadisticos
-      @historicos = Hst.gethst(@reporte)
+      @historicos = Hst.consultarhistoricos(@reporte)
       @estadisticos = Hst.calcularestadisticos(@historicos)
       format.html { render partial: 'select'}
      else
