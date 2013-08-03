@@ -6,19 +6,17 @@ function enviarinformacion(){
         url: '/actualizartabla',
         data: valoresenviar,
         dataType: "html",
-        success: function(data, request)
+        success: function(data,request)
         {
         $('#informacion').html(data);
 
         },
-        error: function(data)
+        error:function(data)
         {
-        $('#formulario').html(data.responseText)
-
+        $('#formularioconsulta').html(data.responseText);
         var e = document.getElementById("report_option");
         var strUser = e.options[e.selectedIndex].value;
-        visibletiempo_o_fecha(strUser);
-
+        visibletiempofecha(strUser);
         }
         });
 
@@ -53,7 +51,7 @@ function datostiemporeal(id,atributo) {
 }
 
 
-function visibletiempo_o_fecha(valor)
+function visibletiempofecha(valor)
 {
     var fecha = document.getElementById('rangofecha');
     var tiempo = document.getElementById('rangotiempo');
