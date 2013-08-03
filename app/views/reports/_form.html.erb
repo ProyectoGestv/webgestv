@@ -1,5 +1,7 @@
+<link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+<script  type="text/javascript"src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script>
 
-<div id="parcialformulario" onload="llamar()">
+<div id="parcialformulario">
 <h2 class="the-legend"> Formulario Filtrado</h2>
 <%= simple_form_for @reporte , id:'formu', remote:true , :html => {:id =>'formu'} , :url => {:action => 'actualizartabla'}  do |f| %>
 
@@ -12,7 +14,7 @@
    </div>
 
    <div class="field">
-      <%= f.input :option, label:'Rangos', :collection => [['Rango fechas ', 1], ['Rango tiempo ', 2], ['Todos', 3]] ,:id => 'rango' ,:include_blank => 'Seleccione un tipo de rango', :input_html => {:onchange => "visibletiempo_o_fecha(this.value)"} %>
+      <%= f.input :option, label:'Rangos', :collection => [['Rango fechas ', 1], ['Rango tiempo ', 2], ['Todos', 3]] ,:id => 'rango' ,:include_blank => 'Seleccione un tipo de rango', :input_html => {:onchange => "visibletiempofecha(this.value)"} %>
    </div>
 
    <div id="rangotiempo" style='display: none'>
@@ -34,17 +36,15 @@
         <i data-time-icon="icon-time" data-date-icon= "icon-calendar"> </i>
         </span>
         </div>
+        <script>
+         $('#datetimepicker').datetimepicker({
+             format: 'dd/MM/yyyy hh:mm:ss'
+         });
 
-      <script>
-          $('#datetimepicker').datetimepicker({
-              format:'dd/MM/yyyy hh:mm:ss'
-          });
-
-          $('#datetimepickerb').datetimepicker({
-              format:'dd/MM/yyyy hh:mm:ss'
-          });
-
-      </script>
+         $('#datetimepickerb').datetimepicker({
+             format: 'dd/MM/yyyy hh:mm:ss'
+         });
+         </script>
 
    </div>
 
