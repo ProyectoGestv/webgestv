@@ -1,0 +1,38 @@
+
+#parcialformulario
+%h2.the-legend Formulario Filtrado
+= simple_form_for @reporte , id:'formu', remote:true , :html => {:id =>'formu'} , :url => {:action => 'actualizartabla'}  do |f|
+ .field
+  = f.input :parasim, label:'Parámetros Simples', :collection => @busquedamacroatributo.map{ |c| [c.name,c.id] }, :include_blank => 'Seleccione un parámetro',:input_html => {:onchange => "recargaratributo(this.value)"}
+
+ #divatributoformulario
+  = render 'reports/buscaratr'
+
+ .field
+  = f.input :option, label:'Rangos', :collection => [['Rango fechas ', 1], ['Rango tiempo ', 2], ['Todos', 3]] ,:id => 'rango' ,:include_blank => 'Seleccione un tipo de rango', :input_html => {:onchange => "visibletiempofecha(this.value)"}
+
+ #rangotiempo{:style => "display: none"}
+  = f.input :time , label:'Rango tiempo', :collection => [['Ultimo anio ', 1], ['Ultimo mes', 2] , ['Ultima semana', 3] , ['Ultimo dia', 4], ['Ultima hora', 5] , ['Ultimo minuto', 6]] , :include_blank => 'Seleccione rango tiempo'
+
+ #rangofecha{:style => "display: none"}
+  #datetimepicker.input-append.date
+   = f.input :fechaa , label:'Desde'
+   %span.add-on
+   %i{"data-date-icon" => "icon-calendar", "data-time-icon" => "icon-time"}
+
+  #datetimepickerb.input-append.date
+   = f.input :fechab , label:'Hasta'
+   %span.add-on
+   %i{"data-date-icon" => "icon-calendar", "data-time-icon" => "icon-time"}
+
+:javascript
+
+ $('#datetimepicker').datetimepicker({
+ format: 'dd/MM/yyyy hh:mm:ss'
+ });
+
+ $('#datetimepickerb').datetimepicker({
+ format: 'dd/MM/yyyy hh:mm:ss'
+ });
+.actions
+%button#enviar{:onclick => " enviarinformacion()", :type => "submit"} Realizar consulta

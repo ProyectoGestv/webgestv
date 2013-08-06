@@ -1,0 +1,24 @@
+#parcialhistorico
+%table#tablaparcialhistorico.table.table-bordered
+ %tittle
+  %h2.the-legend Historicos
+  %tr
+  %th Valor
+  %th Año
+  %th Mes
+  %th Dia
+  %th Hora
+  %th Minuto
+  %th Segundo
+  - @historicos.each do |n|
+   %tr.success
+    %td= n.valuee
+    %td= Time.at(n.tstamp).year
+    %td= Time.at(n.tstamp).month
+    %td= Time.at(n.tstamp).day
+    %td= Time.at(n.tstamp).hour
+    %td= Time.at(n.tstamp).min
+    %td= Time.at(n.tstamp).sec
+
+
+
