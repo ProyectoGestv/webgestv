@@ -1,0 +1,20 @@
+%h2.the-legend#parcialestadisticos Estadisticos
+
+%table.table.table-bordered#tablaparcialestadisticos
+ %tr
+  %th Rango
+  %th Minimo
+  %th Maximo
+  %th Varianza
+  %th Media
+  %th Moda
+  %th Promedio
+  %tr.success
+   %td= @estadisticos.range
+   %td= @estadisticos.min
+   %td= @estadisticos.max
+   %td= @estadisticos.variance
+   %td= @estadisticos.median
+   %td= @estadisticos.mode
+   %td= @estadisticos.mean
+

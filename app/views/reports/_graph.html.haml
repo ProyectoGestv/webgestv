@@ -1,0 +1,59 @@
+%script(type="text/javascript")
+
+ var parametro;
+ function datos(){
+ var tiempo = '#{@reporte.time.to_i}'
+ var ret=[];
+ - @historicos.each do |variable|
+  if (tiempo = 1)
+  {
+  parametro = 'month';
+  }
+  if (tiempo = 2)
+  {
+  parametro = 'day';
+  }
+  if (tiempo = 3)
+  {
+  parametro = 'day';
+  }
+  if (tiempo = 4)
+  {
+  parametro = 'hour';
+  }
+  if (tiempo = 5)
+  {
+  parametro = 'minute';
+  }
+  if (tiempo >= 6)
+  {
+  parametro = 'second';
+  }
+
+  var  p = #{variable.tstamp};
+  var c = new Date(p*1000).getTime();
+  var b =  #{variable.valuee};
+  ret.push({
+  parametro: c ,
+  y: b
+  });
+
+
+ return ret;
+ }
+
+ new Morris.Line(
+ {
+ element: 'graficoestatico',
+ data:datos(),
+ lineColors: ['#009900'],
+ xkey: 'parametro' ,
+ ykeys: ['y'],
+ parseTime: true,
+ labels: ['Valor']
+ }
+ );
+
+
+%h2.the-legend Grafico
+#graficoestatico{:align => "center"}

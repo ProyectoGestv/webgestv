@@ -1,0 +1,32 @@
+:javascript
+
+   function render_partials()
+   {
+      $('#tablainformacion').html('#{escape_javascript(render :partial => "statistic")}');
+   }
+   function render_partialh() {
+     $('#tablainformacion').html('#{escape_javascript(render :partial => "hst")}');
+   }
+
+   function render_partialg() {
+     $('#tablainformacion').html('#{escape_javascript(render :partial => "graph")}');
+   }
+
+   function render_partialj() {
+     $('#tablainformacion').html('#{escape_javascript(render :partial => "realtime")}');
+   }
+
+
+
+%h2.the-legend Análisis de datos
+%button.btn-primary{:onclick => "render_partialh()", :type => "submit"} Historicos
+%button.btn-primary{:onclick => "render_partials()", :type => "button"} Estadisticas
+%button.btn-primary{:onclick => "render_partialg()", :type => "button"} Grafico
+%button.btn-primary{:onclick => "render_partialj()", :type => "button"} Grafico tiempo real
+#tablainformacion
+
+
+
+
+
+
