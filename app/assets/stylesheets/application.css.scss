@@ -188,7 +188,7 @@ input[type="number"]:focus,{
   border-color: rgba(208,208,208,1);
   outline: 0;
   outline: thin dotted \9; /* IE6-9 */
-  //@include box-shadow(#{inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(#8cb44e, 1)});
+  @include box-shadow(#{inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(#8cb44e, 1)});
 }
 
 .table-striped thead th, .table-striped td{
@@ -442,3 +442,5 @@ abbr[title], abbr[data-original-title] {
 {
 width: 800px;
 }
+
+

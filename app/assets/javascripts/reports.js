@@ -1,15 +1,17 @@
+var valoresenviar;
 
 function enviarinformacion(){
 
-    var valoresenviar = $('#formu').serialize();
-    jQuery.ajax({
+
+
+    valoresenviar = $('#formu').serialize();
+     jQuery.ajax({
         url: '/actualizartabla',
         data: valoresenviar,
         dataType: "html",
         success: function(data,request)
         {
         $('#informacion').html(data);
-
         },
         error:function(data)
         {
