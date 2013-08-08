@@ -38,8 +38,8 @@ class Hst
 
     when 1
 
-    @parserfechaa = Chronic.parse(reporte.fechaa).to_i
-    @parserfechab = Chronic.parse(reporte.fechab).to_i
+    @parserfechaa = Chronic.parse(reporte.fechaa , :endian_precedence => :little).to_i
+    @parserfechab = Chronic.parse(reporte.fechab , :endian_precedence => :little).to_i
     @historicos = self.where(:atr_id => reporte.atrsim ,:tstamp.gte => @parserfechaa, :tstamp.lte => @parserfechab).sort({tstamp: 1})
 
     when 2

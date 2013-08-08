@@ -38,8 +38,12 @@ class Report
   private
   def integridad_fecha
 
-    fechamayor = Chronic.parse(fechab).to_i
-    fechamenor = Chronic.parse(fechaa).to_i
+    fechamayor = Chronic.parse(fechab,:endian_precedence => :little).to_i
+    puts(fechab)
+    puts(fechamayor)
+    fechamenor = Chronic.parse(fechaa,:endian_precedence => :little).to_i
+    puts(fechaa)
+    puts(fechamenor)
     errors.add(:fechab, "esta fecha debe ser mayor") if
         fechamenor>fechamayor
 
