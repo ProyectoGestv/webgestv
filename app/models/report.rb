@@ -7,11 +7,11 @@ class Report
 
 
   validates_presence_of :option , message: "debe seleccionar uno"
-  validates_presence_of :atrsim
-  validates_presence_of :parasim
-  validates_presence_of :time ,:if => :rango_tiempo?
-  validates_presence_of :fechaa ,:if => :rango_fechas?
-  validates_presence_of :fechab ,:if => :rango_fechas?
+  validates_presence_of :atrsim , message: "debe seleccionar uno"
+  validates_presence_of :parasim , message: "debe seleccionar uno"
+  validates_presence_of :time ,:if => :rango_tiempo?  ,  message: "debe seleccionar uno"
+  validates_presence_of :fechaa ,:if => :rango_fechas? , message: "debe seleccionar una fecha"
+  validates_presence_of :fechab ,:if => :rango_fechas? , message: "debe seleccionar una fecha"
   validate :integridad_fecha  , :if => :rango_fechas?
 
   def rango_tiempo?
