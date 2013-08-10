@@ -1,25 +1,33 @@
 var valoresenviar;
 
-function enviarinformacion(){
-
-
-
+function enviarinformacion()
+{
     valoresenviar = $('#formu').serialize();
      jQuery.ajax({
         url: '/actualizartabla',
         data: valoresenviar,
-        dataType: "html",
+        dataType: "json",
         success: function(data,request)
         {
-        $('#informacion').html(data);
+        $('#formularioconsulta').change();
+        $('#formularioconsulta').html(data.formm);
+        $('#rangofecha').change();
+        $('#rangotiempo').change();
+        var e = document.getElementById("report_option");
+        var strUser = e.options[e.selectedIndex].value;
+        visibletiempofecha(strUser);
+        $('#informacion').html(data.selectt);
+
         },
         error:function(data)
         {
+        $('#formularioconsulta').change();
         $('#formularioconsulta').html(data.responseText);
         var e = document.getElementById("report_option");
         var strUser = e.options[e.selectedIndex].value;
         visibletiempofecha(strUser);
         }
+
         });
 
 
@@ -59,12 +67,14 @@ function visibletiempofecha(valor)
     var tiempo = document.getElementById('rangotiempo');
     if (valor == 1)
     {
+
     fecha.style.display = 'inline'
     tiempo.style.display = 'none'
     }
     if (valor == 2)
     {
     fecha.style.display = 'none'
+
     tiempo.style.display = 'inline'
     }
     if(valor == 3)

@@ -33,10 +33,8 @@ class ReportsController < ApplicationController
       #aqui va la logica para consultar los historicos y estadisticos
       @historicos = Hst.consultarhistoricos(@reporte)
       @estadisticos = Hst.calcularestadisticos(@historicos)
+      format.js { render :json => { :selectt => render_to_string(:partial => "reports/select") , :formm => render_to_string(:partial => "form") } }
 
-      format.html{
-      render partial: 'select'
-      }
    else
       @busquedaatributo= Atr.where(:mcr_atr_id => @reporte.parasim)
       @busquedamacroatributo=McrAtr.where(:tipo.all => ['simple'])
@@ -47,11 +45,13 @@ class ReportsController < ApplicationController
   end
 
   def datostiemporeal
-
       @atributo = params[:atr]
       if (params[:tstamp]) != 'NaN'
       @tstamp = params[:tstamp]
       @datos = Hst.tstamptiemporeal(@tstamp,@atributo)
+      if @datos == nil
+      @datos = Hst.tstampultimohistorico(@atributo);
+      end
       else
       @datos = Hst.tstampultimohistorico(@atributo)
       end
