@@ -6,13 +6,13 @@ class Report
   attr_accessor :option , :parasim , :atrsim , :time , :fechaa , :fechab
 
 
-  validates_presence_of :option
+  validates_presence_of :option , message: "debe seleccionar uno"
   validates_presence_of :atrsim
   validates_presence_of :parasim
   validates_presence_of :time ,:if => :rango_tiempo?
   validates_presence_of :fechaa ,:if => :rango_fechas?
   validates_presence_of :fechab ,:if => :rango_fechas?
-  validate :integridad_fecha
+  validate :integridad_fecha  , :if => :rango_fechas?
 
   def rango_tiempo?
     option == '2'
