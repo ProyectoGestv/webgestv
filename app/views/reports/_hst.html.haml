@@ -12,7 +12,7 @@
   %th Segundo
   - @historicos.each do |n|
    %tr.success
-    %td= n.valuee
+    %td= n['valuee']
     %td= Time.at(n.tstamp).year
     %td= Time.at(n.tstamp).month
     %td= Time.at(n.tstamp).day
