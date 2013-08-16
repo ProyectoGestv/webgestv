@@ -1,18 +1,18 @@
 class Hst
   include Mongoid::Document
   
-  validates_presence_of :valuee , :tstamp
-  field :valuee, type:String
+  validates_presence_of :value , :tstamp
+  field :value, type:String
   field :tstamp, type:Integer
   belongs_to :atr
-  attr_accessible :valuee , :tstamp
+  attr_accessible :value , :tstamp
 
 
   def self.calcularestadisticos(historicos)
   @todosdatos = historicos
   @arraydatos= Array.new
   @todosdatos.each do |variable|
-  @arraydatos.push(variable.valuee.to_i)
+  @arraydatos.push(variable.value.to_i)
   end
   @estadisticos = DescriptiveStatistics::Stats.new(@arraydatos)
   return @estadisticos
