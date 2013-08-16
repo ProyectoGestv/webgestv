@@ -1,0 +1,3 @@
+<%= simple_fields_for @composite do |f| %>
+    <%=f.input :atrcomp, label: 'Atributo variable', :collection => @atrsearch.map{ |c| [c.name, c.id] }, include_blank: 'Seleccione un atributo' , :input_html => {:onchange => "reload_atr(this.value)"}%>
+<% end %>
