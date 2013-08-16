@@ -3,7 +3,11 @@
 %h2.the-legend Formulario Filtrado
 = simple_form_for @reporte , id:'formu', remote:true , :html => {:id =>'formu'} , :url => {:action => 'actualizartabla'}  do |f|
  .field
-  = f.input :parasim, label:'Parámetros Simples', :collection => @busquedamacroatributo.map{ |c| [c.name,c.id] }, :include_blank => 'Seleccione un parámetro',:input_html => {:onchange => "recargaratributo(this.value)"}
+  = f.input :manrsc, label:'Recursos', :collection => @busquedarecurso.map{ |c| [c.name,c.id] }, :include_blank => 'Seleccione un recurso',:input_html => {:onchange => "recargarmacroatributo(this.value)"}
+
+ #divmacroatributoformulario
+  = render 'reports/buscarmcr'
+
 
  #divatributoformulario
   = render 'reports/buscaratr'

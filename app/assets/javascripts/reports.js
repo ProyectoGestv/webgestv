@@ -47,6 +47,23 @@ function recargaratributo(id){
     });
 }
 
+
+
+function recargarmacroatributo(id){
+
+    jQuery.ajax({
+        url: "/buscarmacroatributo",
+        type: "GET",
+        data: {"manrsc" : id},
+        dataType: "html",
+        success: function(data)
+        {
+            $('#divmacroatributoformulario').html(data);
+        }
+    });
+}
+
+
 function datostiemporeal(id,atributo) {
     jQuery.ajax({
         url: "/datostiemporeal",
