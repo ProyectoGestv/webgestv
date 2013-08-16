@@ -5,6 +5,7 @@ Webgestv::Application.routes.draw do
  match '/reports/datostiemporeal' => 'reports#datostiemporeal'
  match '/actualizartabla' => 'reports#actualizartabla'
  match '/buscaratributo' => 'reports#buscaratributo'
+ match '/buscarmacroatributo' => 'reports#buscarmacroatr'
  match '/rango' => 'reports#rango'
 
 

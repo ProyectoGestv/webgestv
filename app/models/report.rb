@@ -3,12 +3,13 @@ class Report
   include ActiveModel::Validations
   include ActiveModel::Conversion
   extend ActiveModel::Naming
-  attr_accessor :option , :parasim , :atrsim , :time , :fechaa , :fechab
+  attr_accessor :option , :parasim , :atrsim , :manrsc,:time , :fechaa , :fechab
 
 
   validates_presence_of :option , message: "debe seleccionar uno"
   validates_presence_of :atrsim , message: "debe seleccionar uno"
   validates_presence_of :parasim , message: "debe seleccionar uno"
+  validates_presence_of :manrsc , message: "debe seleccionar uno"
   validates_presence_of :time ,:if => :rango_tiempo?  ,  message: "debe seleccionar uno"
   validates_presence_of :fechaa ,:if => :rango_fechas? , message: "debe seleccionar una fecha"
   validates_presence_of :fechab ,:if => :rango_fechas? , message: "debe seleccionar una fecha"
