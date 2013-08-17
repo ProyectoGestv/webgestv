@@ -16,4 +16,26 @@
 //= require bootstrap-tooltip.js
 //= require bootstrap-popover.js
 //= require jqBootstrapValidation
+//= require raphael
+//= require morris
+//= require bootstrap-datetimepicker
+//= require highcharts
+//= require highcharts/highcharts-more
+//= require highcharts/modules/exporting
 //= require d3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
