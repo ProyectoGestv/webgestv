@@ -12,6 +12,10 @@ class CompositesController < ApplicationController
     end
   end
 
+  def show
+    @composite = Composite.find(params[:id])
+  end
+
   def searchatr
     @composite = Composite.new
     @atrsearch= Atr.where(:mcr_atr_id => params[:mcr])
@@ -21,7 +25,6 @@ class CompositesController < ApplicationController
      format.html { render partial: 'searchatr' , :link => @atrsearch}
     end
   end
-
 
   def items   #historicos
     @composite = Composite.new
@@ -44,6 +47,10 @@ class CompositesController < ApplicationController
     else
       render "index"
     end
+  end
+
+  def search_field_tag(name, value = nil, options = {})
+    text_field_tag(name, value, options.stringify_keys.update("type" => "search"))
   end
 
   def update_items

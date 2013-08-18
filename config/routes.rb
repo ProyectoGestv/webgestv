@@ -4,8 +4,6 @@ Webgestv::Application.routes.draw do
   resources :alrts
 
 
-
-
   resources :alr_mntr_frmls
 
 
@@ -22,6 +20,7 @@ Webgestv::Application.routes.draw do
   match '/searchatr' => 'composites#searchatr'
   match '/actualizar' => 'composites#actualizar'
   match '/items' => 'composites#items'
+  match '/items/searchatr' => 'composites#items'
 
   resources :uploads do
     post :new, on: :member
