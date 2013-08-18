@@ -45,4 +45,8 @@ class CompositesController < ApplicationController
       render "index"
     end
   end
+
+  def update_items
+
+  end
 end

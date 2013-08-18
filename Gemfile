@@ -40,6 +40,8 @@ gem "mongoid", "~> 3.1.2"
 gem 'bson'
 gem 'bson_ext'
 
+gem 'active_attr'
+
 gem 'haml'
 gem 'haml-rails'
 

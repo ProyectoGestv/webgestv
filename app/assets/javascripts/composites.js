@@ -24,7 +24,6 @@ function reload_atr(id,composite) {
         dataType: "html",
         success: function(data)
         {
-            alert(data)
             $('#atrhst').html(data);
         }
     });
