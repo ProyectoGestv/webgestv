@@ -25,6 +25,7 @@
     <orderEntry type="library" scope="PROVIDED" name="activeresource (v3.2.11, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="activesupport (v3.2.11, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="arel (v3.0.2, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="bootstrap-datetimepicker-rails (v0.0.11, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootstrap-sass (v2.3.0.1, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bson (v1.8.2, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bson_ext (v1.8.2, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
@@ -51,6 +52,7 @@
     <orderEntry type="library" scope="PROVIDED" name="mime-types (v1.21, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mongoid (v3.1.2, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="moped (v1.4.3, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="morrisjs-rails (v0.4.3, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="multi_json (v1.5.0, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.5.6, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="origin (v1.0.11, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
@@ -62,6 +64,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rails (v3.2.11, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v3.2.11, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v10.0.3, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="raphael-rails (v2.1.1, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v3.12.1, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ref (v1.0.2, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sass (v3.2.5, RVM: ruby-2.0.0-p195 [rails3-mongoid-omniauth]) [gem]" level="application" />
