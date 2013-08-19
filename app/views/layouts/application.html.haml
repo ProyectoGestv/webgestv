@@ -39,9 +39,12 @@
               %li
                 %a{ :href => root_path}
                   ="Usuarios"
+              %li
+                %a{:href => reports_index_path}
+                  ="Reportes"
       .content
         = yield
       #push
     #footer
-      %p.pp="©2013 GESTV | Universidad del Cauca."
+      %p.pp=""
 

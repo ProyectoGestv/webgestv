@@ -3,7 +3,7 @@ class Composite
 
   attribute :paracomp
   attribute :atrcomp
-  attribute :datostabla
+  attribute :hst_id
 
   attr_accessible :paracomp, :atrcomp
   validates_presence_of :paracomp

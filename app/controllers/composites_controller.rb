@@ -4,6 +4,7 @@ class CompositesController < ApplicationController
     @atrsearch = []
     @atrsearchc = []
     @refreshatr = []
+    @historicos = []
     @composite = Composite.new
     @mcrsearch=McrAtr.where(:tipo.all => ['composite'])
     respond_to do |format|
@@ -49,9 +50,14 @@ class CompositesController < ApplicationController
     end
   end
 
-  def search_field_tag(name, value = nil, options = {})
-    text_field_tag(name, value, options.stringify_keys.update("type" => "search"))
+  def search
+    @historicos = Hst.search params[:hst1]
+    @atr = params[:hst1]
+    puts '/////////////////////'
+    puts @historicos.as_json
   end
+
+
 
   def update_items
 

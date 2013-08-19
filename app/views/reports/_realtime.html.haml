@@ -1,0 +1,105 @@
+%script(type="text/javascript")
+
+ var total;
+
+ Highcharts.setOptions
+ ({
+ global:
+ {
+ useUTC: false
+ }
+ });
+
+
+ $(function()
+ {
+ var atr = '#{@atributo}';
+ console.log(atr);
+
+ var ret = new String();
+
+ new Highcharts.Chart({
+ chart: { renderTo: 'graficodinamico',
+ type: 'spline',
+ animation: Highcharts.svg, // don't animate in old IE
+ marginRight: 10,
+ events: {
+ load: function()
+ {
+ var series = this.series[0];
+ console.log(series)
+ setInterval(function()
+ {
+ $.get("http://localhost:3000/reports/datostiemporeal/?atr="+atr+"&tstamp="+parseInt(ret),function(data,status)
+ {
+ var a,b ;
+ var d = new Date();
+ b = d.getTime();
+ a = parseInt(data['value']);;
+ ret = data.tstamp;
+ series.addPoint([b,a],true,true);
+ });
+ }, 1000);
+ }
+ }
+ },
+ title:
+ {
+ text: 'Análisis en tiempo real'
+ },
+ xAxis:
+ {
+ type: 'datetime',
+ tickPixelInterval: 500
+ },
+ yAxis:
+ {
+ title:
+ {
+ text: 'Valor'
+ },
+ plotLines:
+ [{
+ value: 0,
+ width: 1,
+ color: '#808080'
+ }]
+ },
+ tooltip:
+ {
+ formatter: function() {
+ return '<b>'+ this.series.name +'</b><br/>'+
+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+ Highcharts.numberFormat(this.y, 2);
+ }
+ },
+ legend:
+ {
+ enabled: false
+ },
+ exporting:
+ {
+ enabled: true
+ },
+ series:
+ [{
+ name: 'Historicos',
+ color: '#006600',
+ data: (function()
+ {
+ var data = [];
+ -@historicos.each do |dat|
+  var  y = #{dat.tstamp}
+  total = #{dat['value']}
+  var z = new Date(y*1000).getTime();
+  data.push({
+  x:  z ,
+  y: #{dat['value']}
+  });
+ return data;
+ })()
+ }]
+ });
+ });
+
+#graficodinamico

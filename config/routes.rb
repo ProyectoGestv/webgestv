@@ -2,8 +2,6 @@
 Webgestv::Application.routes.draw do
 
   resources :alrts
-
-
   resources :alr_mntr_frmls
 
 
@@ -13,14 +11,22 @@ Webgestv::Application.routes.draw do
   match "/update_linksb" => "links#update_linksb"
 
   match "/frmls/state" => "alr_mntr_frmls#state", :via => :get
-  match "/alr_mntr_cntrs/state" => "alr_mntr_cntrs#state"
+  match "/alr_mntr_cntrs/state" => "alrtrs#state"
   match "/alr_mntr_rngs/state" => "alr_mntr_rngs#state"
+
+  match "/reports/index" => "reports#index"
+  match '/reports/datostiemporeal' => 'reports#datostiemporeal'
+  match '/actualizartabla' => 'reports#actualizartabla'
+  match '/buscaratributo' => 'reports#buscaratributo'
+  match '/buscarmacroatributo' => 'reports#buscarmacroatr'
+  match '/rango' => 'reports#rango'
 
   match "/composites/index" => "composites#index"
   match '/searchatr' => 'composites#searchatr'
   match '/actualizar' => 'composites#actualizar'
   match '/items' => 'composites#items'
-  match '/items/searchatr' => 'composites#items'
+  match '/search' => 'composites#search'
+
 
   resources :uploads do
     post :new, on: :member

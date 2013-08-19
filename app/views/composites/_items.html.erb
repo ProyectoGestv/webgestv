@@ -17,15 +17,17 @@
     <% @refreshatr.each do |n| %>
 
         <tr class="success">
-          <td><%= check_box_tag "atr_ids[]", n.id%></td>
+          <td><%= check_box_tag "Hst_ids[]", n.id%></td>
           <td><%=h n.name %> </td>
-          <td><%=h text_field_tag 'search', nil, :placeholder => 'Enter search term...'%> </td>
-          <td><%=h text_field_tag 'search', nil, :placeholder => 'Enter search term...'%> </td>
-          <td><%=h text_field_tag 'search', nil, :placeholder => 'Enter search term...'%> </td>
-          <td><%=h text_field_tag 'search', nil, :placeholder => 'Enter search term...'%> </td>
+          <td><%= select_tag "inf_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "cota inferior" %></td>
+          <td><%= select_tag "sup_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "cota superior"%></td>
+          <td><%= select_tag "igual_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "igualar"%></td>
+          <td><%= select_tag "dif_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "excluir"%></td>
         </tr>
+
     <%end%>
-  </table>
+    <td><%= submit_tag 'Generar' , :class => 'btn-primary' %></td>
+    </table>
 </div>
 </body>
 </html>
