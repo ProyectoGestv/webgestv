@@ -35,7 +35,7 @@
  var a,b ;
  var d = new Date();
  b = d.getTime();
- a = parseInt(data['value']);;
+ a = parseInt(data['valuee']);;
  ret = data.tstamp;
  series.addPoint([b,a],true,true);
  });
@@ -90,11 +90,11 @@
  var data = [];
  -@historicos.each do |dat|
   var  y = #{dat.tstamp}
-  total = #{dat['value']}
+  total = #{dat['valuee']}
   var z = new Date(y*1000).getTime();
   data.push({
   x:  z ,
-  y: #{dat['value']}
+  y: #{dat['valuee']}
   });
  return data;
  })()

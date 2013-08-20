@@ -5,6 +5,9 @@ class CompositesController < ApplicationController
     @atrsearchc = []
     @refreshatr = []
     @historicos = []
+    @filter3 = []
+    @busquedaatributo = []
+    @reporte = Report.new
     @composite = Composite.new
     @mcrsearch=McrAtr.where(:tipo.all => ['composite'])
     respond_to do |format|
@@ -14,7 +17,7 @@ class CompositesController < ApplicationController
   end
 
   def show
-    @composite = Composite.find(params[:id])
+    @historicos = Hst.where(:atr_id =>params[:Hst_ids])
   end
 
   def searchatr
@@ -33,7 +36,6 @@ class CompositesController < ApplicationController
     @atrsearchc= Atr.find(params[:atrhst])
     @mcrcapturado = McrAtr.find(params[:mcr])
     @refreshatr=Atr.where(:mcr_atr_id => @mcrcapturado.id).excludes(id: @atrsearchc)
-
     respond_to do |format|
       format.html { render partial: 'items' , :link => @refreshatr}
     end
@@ -41,23 +43,30 @@ class CompositesController < ApplicationController
 
   def actualizar
     @composite = Composite.new(params[:composite])
-    if @composite.valid?
-      # TODO send message here
+    @filter1 = params[:inf_id]
+    @filter2 = params[:sup_id]
+    @filter3 = params[:Hst_ids]
 
-      redirect_to root_url, notice: "Mensaje enviado. Gracias por contactarnos"
-    else
-      render "index"
-    end
+
+    puts @filter1.as_json
+    puts @filter2.as_json
+    puts @filter3.as_json
+    #if @composite.valid?
+      respond_to do |format|
+        format.html { render partial: 'edit_multiple' , :link => @filter3}
+      end
+   # else
+    #  render "index"
+    #end
   end
 
   def search
     @historicos = Hst.search params[:hst1]
-    @atr = params[:hst1]
-    puts '/////////////////////'
-    puts @historicos.as_json
   end
 
-
+  def edit_multiple
+    @historicos = Hst.where(:atr_id =>params[:Hst_ids])
+  end
 
   def update_items
 

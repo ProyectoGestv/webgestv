@@ -16,7 +16,7 @@ class ReportsController < ApplicationController
 
   def buscarmacroatr
     @reporte = Report.new
-    @busquedamacroatributo=McrAtr.where(:tipo.all => ['simple'],:man_rsc_id => params[:manrsc])
+    @busquedamacroatributo=McrAtr.where(:tipo.all => ['composite'],:man_rsc_id => params[:manrsc])
 
     respond_to do |format|
       format.html { render partial: 'buscarmcr' , :link => @busquedamacroatributo}
@@ -41,7 +41,7 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @reporte.valid?
         @busquedaatributo= Atr.where(:mcr_atr_id => @reporte.parasim)
-        @busquedamacroatributo=McrAtr.where(:tipo.all => ['simple'] , :man_rsc_id => @reporte.manrsc)
+        @busquedamacroatributo=McrAtr.where(:tipo.all => ['composite'] , :man_rsc_id => @reporte.manrsc)
         @busquedarecurso = ManRsc.all
         @atributo = @reporte.atrsim.to_s
         #aqui va la logica para consultar los historicos y estadisticos
@@ -51,7 +51,7 @@ class ReportsController < ApplicationController
 
       else
         @busquedaatributo= Atr.where(:mcr_atr_id => @reporte.parasim)
-        @busquedamacroatributo=McrAtr.where(:tipo.all => ['simple'] , :man_rsc_id => @reporte.manrsc)
+        @busquedamacroatributo=McrAtr.where(:tipo.all => ['composite'] , :man_rsc_id => @reporte.manrsc)
         @busquedarecurso = ManRsc.all
         format.html { render partial:'form' , :status => 500 }
 

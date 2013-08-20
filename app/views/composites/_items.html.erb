@@ -1,8 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head></head>
-<body>
-<div style="width: 1000px">
+
+
+
+
+
+  <div class="field">
   <table id="condicional" class="table table-bordered" style="width: 800px">
     <tittle><h2 class="the-legend">Atributos de condición</h2></tittle>
     <tr>
@@ -11,26 +12,27 @@
       <th>Mayor que</th>
       <th>Menor que</th>
       <th>Igual a</th>
-      <th>Diferente a</th>
 
     </tr>
+
     <% @refreshatr.each do |n| %>
 
         <tr class="success">
-          <td><%= check_box_tag "Hst_ids[]", n.id%></td>
+         <td><%= check_box_tag "Hst_ids[]", n.id%></td>
           <td><%=h n.name %> </td>
-          <td><%= select_tag "inf_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "cota inferior" %></td>
+          <td><%= select_tag "inf_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "cota inferior"%></td>
           <td><%= select_tag "sup_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "cota superior"%></td>
-          <td><%= select_tag "igual_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "igualar"%></td>
-          <td><%= select_tag "dif_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "excluir"%></td>
+          <td><%= select_tag "igual_id[]", options_from_collection_for_select(Hst.where(:atr_id => n.id), "id", "valuee"), :prompt => "igualar", :input_html => {:onchange=> "reload_hsts(this.value)"}%></td>
         </tr>
-
     <%end%>
-    <td><%= submit_tag 'Generar' , :class => 'btn-primary' %></td>
+
+    <td><%= submit_tag 'Generar', :input_html => {:onclick => "reload_hsts(this.value)"}, :class => 'btn-primary' %></td>
     </table>
+
 </div>
-</body>
-</html>
+
+
+
 
 
 

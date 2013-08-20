@@ -4,7 +4,6 @@ Webgestv::Application.routes.draw do
   resources :alrts
   resources :alr_mntr_frmls
 
-
   match 'laynet_ele/testconn' => 'laynet_eles#testconn', :via => :get
   match 'net_ele/testconn' => 'net_eles#testconn', :via => :get
   match 'serv/testconn' => 'servs#testconn', :via => :get
@@ -26,7 +25,7 @@ Webgestv::Application.routes.draw do
   match '/actualizar' => 'composites#actualizar'
   match '/items' => 'composites#items'
   match '/search' => 'composites#search'
-
+  match '/edit_multiple' => 'composites#edit_multiple'
 
   resources :uploads do
     post :new, on: :member

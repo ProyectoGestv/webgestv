@@ -17,7 +17,7 @@ class LaynetElesController < ApplicationController
     @laynet_ele = LaynetEle.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # _edit_multiple.html.erb
       format.json { render json: @laynet_ele }
     end
   end

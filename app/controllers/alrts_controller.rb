@@ -16,7 +16,7 @@ class AlrtsController < ApplicationController
     @alrt = Alrt.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # _edit_multiple.html.erb
       format.json { render json: @alrt }
     end
   end
