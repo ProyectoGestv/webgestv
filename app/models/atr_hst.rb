@@ -1,4 +1,4 @@
-class Hst
+class AtrHst
   include Mongoid::Document
   
   validates_presence_of :value , :tstamp
