@@ -45,8 +45,8 @@ class ReportsController < ApplicationController
       @busquedarecurso = ManRsc.all
       @atributo = @reporte.atrsim.to_s
       #aqui va la logica para consultar los historicos y estadisticos
-      @historicos = Hst.consultarhistoricos(@reporte)
-      @estadisticos = Hst.calcularestadisticos(@historicos)
+      @historicos = AtrHst.consultarhistoricos(@reporte)
+      @estadisticos = AtrHst.calcularestadisticos(@historicos)
       format.js { render :json => { :selectt => render_to_string(:partial => "reports/select") , :formm => render_to_string(:partial => "form") } }
 
    else
@@ -63,12 +63,12 @@ class ReportsController < ApplicationController
       @atributo = params[:atr]
       if (params[:tstamp]) != 'NaN'
       @tstamp = params[:tstamp]
-      @datos = Hst.tstamptiemporeal(@tstamp,@atributo)
+      @datos = AtrHst.tstamptiemporeal(@tstamp,@atributo)
       if @datos == nil
-      @datos = Hst.tstampultimohistorico(@atributo);
+      @datos = AtrHst.tstampultimohistorico(@atributo);
       end
       else
-      @datos = Hst.tstampultimohistorico(@atributo)
+      @datos = AtrHst.tstampultimohistorico(@atributo)
       end
       respond_to do |format|
       format.json { render json: @datos}

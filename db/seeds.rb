@@ -6,13 +6,13 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-#Serv.delete_all
-#NetEle.delete_all
-#LaynetEle.delete_all
-#McrAtr.delete_all
-#Atr.delete_all
-#Alrt.delete_all
-#Hst.delete_all
+Serv.delete_all
+NetEle.delete_all
+LaynetEle.delete_all
+McrAtr.delete_all
+Atr.delete_all
+Alrt.delete_all
+AtrHst.delete_all
 
 a1=Atr.create(name:"a62", desc: "attribute5", tipo: "integer")
 
@@ -33,22 +33,22 @@ i = 12
   serv.mcr_atrs << ma
   ma.atrs << a1
 
-  h1 = Hst.create(valuee: 10+i , tstamp: Chronic.parse('today').to_i)
+  h1 = AtrHst.create(value: 10+i , tstamp: Chronic.parse('today').to_i)
   a1.hsts << h1
 
-  h2 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('tomorrow').to_i)
+  h2 = AtrHst.create(value: 1+i , tstamp: Chronic.parse('tomorrow').to_i)
   a1.hsts << h2
 
-  h3 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('this second').to_i)
+  h3 = AtrHst.create(value: 1+i , tstamp: Chronic.parse('this second').to_i)
   a1.hsts << h3
 
-  h4 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('this morning').to_i)
+  h4 = AtrHst.create(value: 1+i , tstamp: Chronic.parse('this morning').to_i)
   a1.hsts << h4
 
-  h5 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('last week').to_i)
+  h5 = AtrHst.create(value: 1+i , tstamp: Chronic.parse('last week').to_i)
   a1.hsts << h5
 
-  h6 = Hst.create(valuee: 1+i , tstamp: Chronic.parse('last month').to_i)
+  h6 = AtrHst.create(value: 1+i , tstamp: Chronic.parse('last month').to_i)
   a1.hsts << h6
 
   al1=Alrt.create(title:"notif #{i}", msg:"alerta de notificacion #{i}", tipo:'notif')
