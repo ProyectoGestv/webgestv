@@ -5,7 +5,7 @@
     %title GESTV
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
-    = javascript_include_tag params[:controller]
+    = javascript_include_tag params[:controller] unless controller.controller_name == 'sessions'
     = csrf_meta_tags
 
 
@@ -34,8 +34,8 @@
                     %li= link_to "Conexiones", links_path
                     %li= link_to "Topología", topologies_path
                 %li
-                  %a{ :href => root_path}
-                    ="Desempeño"
+                  %a{:href => reports_index_path}
+                    ="Reportes"
                 %li
                   %a{ :href => alrts_path}
                     ="Alertas"
@@ -45,9 +45,6 @@
             %ul.nav.pull-right
               = render 'devise/menu/login_items'
 
-              %li
-                %a{:href => reports_index_path}
-                  ="Reportes"    
       .content
         = yield
       #push
