@@ -1,0 +1,42 @@
+<myManRes domain="broadcaster" name="Parrilla" referenceProtocol="" description="">
+	<macroAttributes length="1">
+		<myMBeanInfo className="mbean.MyDynamicMBean" description="Property Manager MBean" name="ga1" referenceProtocol="" type="simple">
+		   <attributes length="2">
+			  <myMBeanAttributeInfo name="playing" type="java.lang.Boolean" description="Se encuentra en emisión o no." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>false</value></myMBeanAttributeInfo>   
+			  <myMBeanAttributeInfo name="uptime" type="java.lang.String" description="Fecha y hora de inicio del servicio." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>	  
+		   </attributes>
+		   <notifications length="6">
+			   <MyMBeanNotificationInfo name="attributeChanged" description="cambio el valor del atributo">
+			   		<notifTypes length="1">
+			   			<String>jmx.attribute.change</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+			   <MyMBeanNotificationInfo name="audioVideoOutOfSynchronization" description="se ha perdido la sincronización de audio/video">
+			   		<notifTypes length="1">
+			   			<String>gestv.error.audioVideoOutOfSynchronization</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+			   <MyMBeanNotificationInfo name="databaseConnectionRefused" description="No pudo conectarse a la base de datos.">
+			   		<notifTypes length="1">
+			   			<String>gestv.error.databaseConnectionRefused</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+			   <MyMBeanNotificationInfo name="contentRepositoryNotFound" description="No pudo conectarse al repositorio de contenidos.">
+			   		<notifTypes length="1">
+			   			<String>gestv.error.contentRepositoryNotFound</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+			   <MyMBeanNotificationInfo name="modulatorCardNotWorking" description="No pudo usar la tarjeta moduladora.">
+			   		<notifTypes length="1">
+			   			<String>gestv.error.modulatorCardNotWorking</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+			   <MyMBeanNotificationInfo name="modulatorMissconfigured" description="Parámetros de modulación incorrectos.">
+			   		<notifTypes length="1">
+			   			<String>gestv.error.modulatorMissconfigured</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+		   </notifications>   
+		</myMBeanInfo>
+	</macroAttributes>
+</myManRes>

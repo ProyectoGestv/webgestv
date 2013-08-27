@@ -5,7 +5,8 @@
     %title GESTV
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
-    = javascript_include_tag params[:controller] unless controller.controller_name == 'sessions'
+    = javascript_include_tag params[:controller] unless controller.controller_name == 'sessions' or controller.controller_name == 'uploads'
+    = javascript_include_tag 'upload_new' if controller.controller_name == 'uploads'
     = csrf_meta_tags
 
 

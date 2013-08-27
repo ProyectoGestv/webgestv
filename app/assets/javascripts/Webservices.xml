@@ -1,0 +1,94 @@
+<myManRes domain="broadcaster" name="Webservices" referenceProtocol="" description="">
+	<macroAttributes length="2">
+		<myMBeanInfo className="mbean.MyDynamicMBean" description="Property Manager MBean" name="ga1" referenceProtocol="" type="simple">
+		   <attributes length="61">
+		      <myMBeanAttributeInfo name="notificaciones" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de notificaciones." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="notificacionLeidos" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de notificaciones leídas." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="notificacionMensaje" type="java.lang.Integer" description="Número de peticiones al servicio de notificación de un mensaje." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="notificacion" type="java.lang.Integer" description="Número de peticiones al servicio de lectura de una notificación." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="actualizarPerfil" type="java.lang.Integer" description="Número de peticiones al servicio de actualizar perfil." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="perfil" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de perfil." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="busquedaPersonas" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de personas." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="miembros" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de miembros." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="chatPost" type="java.lang.Integer" description="Número de peticiones al servicio de publicación de un mensaje en el chat." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="chat" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de mensajes en el chat." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="tablonComentarioPost" type="java.lang.Integer" description="Número de peticiones al servicio de publicación de un comentario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="tablonComentario" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de comentarios." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="tablonComentarios" type="java.lang.Integer" description="Número de peticiones al servicio de consulta del número de comentarios." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="comentarioMensaje" type="java.lang.Integer" description="Número de peticiones al servicio de consulta un comentario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="tablonPost" type="java.lang.Integer" description="Número de peticiones al servicio de publicación de un mensaje en el tablón." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="tablonMensaje" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de un mensaje en el tablón." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="tablon" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de los mensajes de un tablón." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="epgTop" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de los programas más votados en el epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="epgFavoritos" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de los favoritos de un usuario en el epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="epgBusqueda" type="java.lang.Integer" description="Número de peticiones al servicio de búsqueda de la programación del epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="programacion" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de la programación del epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="preferencias" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de las preferencias de programas de un usuario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="infoAsociada" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de información asociada a un programa." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="voto" type="java.lang.Integer" description="Número de peticiones al servicio de votación de programas." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="valida" type="java.lang.Integer" description="Número de peticiones al servicio de validación de un usuario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="miembrosComunidad" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de miembros de una comunidad." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="comunidad" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de los datos de una comunidad." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="comunidades" type="java.lang.Integer" description="Número de peticiones al servicio de consulta de las comunidades de un usuario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="busquedaComunidades" type="java.lang.Integer" description="Número de peticiones al servicio de búsqueda de comunidades." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+			  <myMBeanAttributeInfo name="regComunidad" type="java.lang.Integer" description="Número de peticiones al servicio de registro/remoción de una comunidad." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""><value>0</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="notificacionesTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de notificaciones." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="notificacionLeidosTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de notificaciones leídas." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="notificacionMensajeTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de notificación de un mensaje." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="notificacionTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de lectura de una notificación." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="actualizarPerfilTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de actualizar perfil." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="perfilTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de perfil." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="busquedaPersonasTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de personas." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="miembrosTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de miembros." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="chatPostTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de publicación de un mensaje en el chat." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="chatTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de mensajes en el chat." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="tablonComentarioPostTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de publicación de un comentario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="tablonComentarioTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de comentarios." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="tablonComentariosTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta del número de comentarios." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="comentarioMensajeTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta un comentario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="tablonPostTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de publicación de un mensaje en el tablón." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+		      <myMBeanAttributeInfo name="tablonMensajeTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de un mensaje en el tablón." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="tablonTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de los mensajes de un tablón." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="epgTopTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de los programas más votados en el epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="epgFavoritosTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de los favoritos de un usuario en el epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="epgBusquedaTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de búsqueda de la programación del epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="programacionTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de la programación del epg." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>	  
+			  <myMBeanAttributeInfo name="preferenciasTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de las preferencias de programas de un usuario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>	  
+			  <myMBeanAttributeInfo name="infoAsociadaTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de información asociada a un programa." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>	  	  	                    
+			  <myMBeanAttributeInfo name="votoTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de votación de programas." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="validaTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de validación de un usuario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="miembrosComunidadTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de miembros de una comunidad." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="comunidadTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de los datos de una comunidad." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="comunidadesTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de consulta de las comunidades de un usuario." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>	  	  	  
+			  <myMBeanAttributeInfo name="busquedaComunidadesTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de búsqueda de comunidades." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="regComunidadTime" type="java.lang.Double" description="Tiempo de atención de peticiones al servicio de registro/remoción de una comunidad." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>
+			  <myMBeanAttributeInfo name="uptime" type="java.lang.String" description="Fecha y hora de inicio del servicio." isReadable="true" isWritable="false" isIs="false" referenceProtocol=""/>	  
+		   </attributes>
+		   <notifications length="3">
+			   <MyMBeanNotificationInfo name="attributeChanged" description="cambio el valor del atributo">
+			   		<notifTypes length="1">
+			   			<String>jmx.attribute.change</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+			   <MyMBeanNotificationInfo name="InetAddressInUse" description="la direccion ya esta en uso">
+			   		<notifTypes length="1">
+			   			<String>gestv.error.addressInUse</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+			   <MyMBeanNotificationInfo name="databaseConnectionRefused" description="No pudo conectarse a la base de datos.">
+			   		<notifTypes length="1">
+			   			<String>gestv.error.databaseConnectionRefused</String>
+			   		</notifTypes>
+			   </MyMBeanNotificationInfo>
+		   </notifications>   
+		</myMBeanInfo>
+		<myMBeanInfo className="mbean.MyDynamicMBean" description="Property Manager MBean" name="ga2" referenceProtocol="" type="config">
+		   <attributes length="4">
+		      <myMBeanAttributeInfo name="ipdb" type="java.lang.String" description="Dirección IP DB." isReadable="true" isWritable="true" isIs="false" referenceProtocol=""><value>192.168.119.2</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="pwddb" type="java.lang.String" description="Password DB." isReadable="true" isWritable="true" isIs="false" referenceProtocol=""><value>st</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="logindb" type="java.lang.String" description="Usuario DB." isReadable="true" isWritable="true" isIs="false" referenceProtocol=""><value>root</value></myMBeanAttributeInfo>
+		      <myMBeanAttributeInfo name="dbname" type="java.lang.String" description="Nombre DB." isReadable="true" isWritable="true" isIs="false" referenceProtocol=""><value>stcav1</value></myMBeanAttributeInfo>
+		   </attributes>
+		</myMBeanInfo>		
+	</macroAttributes>
+</myManRes>

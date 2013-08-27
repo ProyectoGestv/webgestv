@@ -1,6 +1,13 @@
 # -*- encoding : utf-8 -*-
 class UploadsController < ApplicationController
+
   def new
+    java_types = { 'java.lang.Boolean' => 'Boolean',
+                   'java.lang.String' => 'String',
+                   'java.lang.Integer' => 'Integer',
+                   'java.lang.Double' => 'Double',
+                   'java.lang.Float' => 'Float'
+    }
     session[:return_to]=request.referer
     tmp = params[:mr][:file].tempfile
     f=File.open(tmp)
@@ -9,36 +16,24 @@ class UploadsController < ApplicationController
     @mr = nil
     if doc.errors.empty?
       @mr=ManRsc.find(params[:id])
-      doc.xpath('//mcr-atrs/mcr-atr').each do |n1|
+      doc.xpath('//myManRes/macroAttributes/myMBeanInfo').each do |n1|
         mcr=McrAtr.new
+        mcr.name=n1.attribute('name')
+        mcr.desc=n1.attribute('description')
+        mcr.ref_prot=n1.attribute('referenceProtocol')
+        mcr.tipo=n1.attribute('type')
         n1.elements.each do |n2|
-          if n2.name == 'name'
-            mcr.name=n2.text
-          elsif n2.name == 'desc'
-            mcr.desc=n2.text
-          elsif n2.name == 'ref-prot'
-            mcr.ref_prot=n2.text
-          elsif n2.name == 'type'
-            mcr.tipo=n2.text
-          elsif n2.name == 'atrs'
+          if n2.name == 'attributes'
             n2.elements.each do |n3|
               atr=Atr.new
+              atr.name=n3.attribute('name')
+              atr.desc=n3.attribute('description')
+              atr.ref_prot=n3.attribute('referenceProtocol')
+              atr.tipo=java_types["#{n3.attribute('type')}"]
+              atr.rdbl=n3.attribute('isReadable')
+              atr.wtbl=n3.attribute('isWritable')
               n3.elements.each do |n4|
-                if n4.name == 'name'
-                  atr.name=n4.text
-                elsif n4.name == 'desc'
-                  atr.desc=n4.text
-                elsif n4.name == 'ref-prot'
-                  atr.ref_prot=n4.text
-                elsif n4.name == 'type'
-                  atr.tipo=n4.text
-                elsif n4.name == 'rdbl'
-                  atr.rdbl=n4.text
-                elsif n4.name == 'wtbl'
-                  atr.wtbl=n4.text
-                elsif n4.name == 'value'
-                  atr.value=n4.text
-                end
+                atr.value=n4.text if n4.name == 'value'
               end
               atr.mcr_atr=mcr
             end
@@ -53,21 +48,19 @@ class UploadsController < ApplicationController
     end
   end
 
+
+
   def load
     puts params
-    puts '////////////////////////////'
     @mr = ManRsc.find(params[:id])
     mcr_atrs=nil
     params.each do |key, value|
-      #if ['serv', 'net_ele', 'laynet_ele'].include?(key)
       if %w{serv net_ele laynet_ele}.include?(key)
         mcr_atrs=params[key][:mcr_atrs_attributes]
         break
       end
     end
-    #mcr_atrs=params[:serv][:mcr_atrs_attributes]
     puts mcr_atrs.to_xml(:include => :atrs)
-    puts '////////////////////////////'
     @mr.mcr_atrs_attributes=mcr_atrs
     pass=true
     @mr.mcr_atrs.each do |mcr|
