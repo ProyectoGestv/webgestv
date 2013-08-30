@@ -80,8 +80,19 @@ class AtrsController < ApplicationController
   # PUT /atrs/1.json
   def update
     @atr = Atr.find(params[:id])
-    puts params
+    puts '//////////////////////// actualizando atributo'
     puts '/////////////////////////////////////////////////////'
+    @mcr_atr=@atr.mcr_atr
+    @man_rsc=@mcr_atr.man_rsc
+    http = Net::HTTP.new("192.168.119.35",9999)
+    post_params = {'value' => @atr.value}
+    request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/#{@mcr_atr.name}/#{@atr.name}")
+    request.set_form_data(post_params)
+     begin
+       response = http.request(request)
+     rescue Errno::ECONNREFUSED
+     end
+
     respond_to do |format|
       if @atr.update_attributes(params[:atr])
         format.html { redirect_to :back }
