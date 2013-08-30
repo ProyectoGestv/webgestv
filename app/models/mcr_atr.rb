@@ -9,16 +9,27 @@ class McrAtr
   field :ref_prot, type: String
   field :tipo, type: String
   belongs_to :man_rsc
-  has_many :alrt
+  has_many :alrts
   has_many :atrs
   embeds_one :alr_mon, :class_name => 'AlrMntr'
   accepts_nested_attributes_for :atrs, :alr_mon
-  before_destroy :delete_atrs
-  attr_accessible :name, :desc, :ref_prot, :tipo, :atrs_attributes, :alrt
+  before_destroy :delete_atrs, :delete_alrts
+  attr_accessible :name, :desc, :ref_prot, :tipo, :atrs_attributes, :alrts
+
   private
+
   def delete_atrs
+    puts 'borrando atrs'
     self.atrs.each do |atr|
       atr.destroy
     end
   end
+
+  def delete_alrts
+    puts 'borrando mcratr alrts'
+    self.alrts.each do |alrt|
+      alrt.destroy
+    end
+  end
+
 end

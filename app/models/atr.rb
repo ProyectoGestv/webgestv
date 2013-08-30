@@ -17,5 +17,23 @@ class Atr
   embeds_one :qos_mon, :class_name => 'AlrMntr'
   embeds_one :alr_mon, :class_name => 'AlrMntr'
   accepts_nested_attributes_for :qos_mon, :alr_mon
-  attr_accessible :name, :desc, :ref_prot, :tipo, :rdbl, :wtbl, :value, :mcr_atr, :alrt
+  attr_accessible :name, :desc, :ref_prot, :tipo, :rdbl, :wtbl, :value, :mcr_atr, :alrts
+  before_destroy :delete_atr_hsts, :delete_alrts
+
+  private
+
+  def delete_atr_hsts
+    puts 'borrando atr_hsts'
+    self.atr_hsts.each do |hst|
+      hst.destroy
+    end
+  end
+
+  def delete_alrts
+    puts 'borrando atr alrts'
+    self.alrts.each do |alrt|
+      alrt.destroy
+    end
+  end
+
 end

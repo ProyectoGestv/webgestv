@@ -20,6 +20,7 @@ class ManRsc
 
   private
   def delete_mcr_atrs
+    puts 'borrando mcr_atrs'
     self.mcr_atrs.each do |mcratr|
       mcratr.destroy
     end
