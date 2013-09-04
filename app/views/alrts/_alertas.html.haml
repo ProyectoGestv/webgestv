@@ -7,14 +7,19 @@
     %th
     %th Título
     %th Mensaje
-    %th Conteo
-    %th Fecha/Hora Inicial
-    %th Fecha/Hora Última
+    -if @filtro != 'notif'
+      %th Conteo
+    -if @filtro != 'notif'
+      %th Fecha/Hora Inicial
+      %th Fecha/Hora Última
+    -else
+      %th Fecha/Hora
     -if @filtro != 'notif'
       %th Detalle
     -else
       %th
-    %th
+    -if @filtro == 'alarm' || @filtro == 'all'
+      %th Estado
   %tbody
     -@alrts.each do |alrt|
       %tr
@@ -30,9 +35,11 @@
             %span.label.label-info Información
         %td= alrt.title
         %td= alrt.msg
-        %td= alrt.count
+        -if @filtro != 'notif'
+          %td= alrt.count
         %td= Time.at(alrt.tstamp_ini)
-        %td= Time.at(alrt.tstamp_last)
+        -if @filtro != 'notif'
+          %td= Time.at(alrt.tstamp_last)
         %td
           -if alrt.tipo=='anmly' or alrt.tipo=='alarm'
             -localizado=""
@@ -58,5 +65,5 @@
                 %br
                 Impacto: #{impacto}
         %td
-          -if alrt.tipo=='alarm'
-            =link_to 'Asignar', alrts_path, {:class => "links"}
+          -if alrt.tipo=='alarm' && alrt.state=='noAtt'
+            =link_to 'Atender', alrts_path, {:class => "links"}
