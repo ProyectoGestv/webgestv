@@ -83,12 +83,28 @@ class AlrtsController < ApplicationController
 
   def update_alerts
     @filtro=params[:filter]
+    @alrts=[]
     if @filtro=='all'
       @alrts = Alrt.all.order_by(:tstamp_ini.desc)
-    else
+    elsif ['alarm','anmly', 'notif'].include?(@filtro)
       @alrts=Alrt.where(tipo: @filtro).order_by(:tstamp_ini.desc)
+    elsif ['noAtt', 'solved'].include?(@filtro)
+      @alrts=Alrt.where(:tipo.ne => 'notif').where(state: @filtro).order_by(:tstamp_ini.desc)
+      puts @alrts.to_json
+    elsif @filtro=='myAtt'
+      @alrts=Alrt.where(state: 'att').where(user_id: current_user.id).order_by(:tstamp_ini.desc)
     end
     render :partial => "alertas", :link => @alrts, :link => @filtro
   end
+
+  def attend_alert
+    @alrt=Alrt.find(params[:alrt_id])
+    @user=User.find(current_user.id)
+    @alrt.user=@user
+    @alrt.state='att'
+    @alrt.save!
+    render :partial => "alert_state", :link => @alrt
+  end
+
 
 end

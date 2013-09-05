@@ -175,6 +175,13 @@ input[type="color"],
   text-decoration: none;
   color: #57bb37;
 }
+.alrt_links {
+  text-decoration: underline;
+  padding: 0 0 0 0;
+  color: #57bb37;
+  text-align: center;
+  font-size: 14;
+}
 .testconnnetele:hover, .testconnserv:hover, .testconnlaynetele:hover,
 .testconnnetele:before, .testconnserv:before, .testconnlaynetele:before{
   text-decoration: none;

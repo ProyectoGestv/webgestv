@@ -18,11 +18,11 @@
       %th Detalle
     -else
       %th
-    -if @filtro == 'alarm' || @filtro == 'all'
+    -if @filtro != 'notif'
       %th Estado
   %tbody
     -@alrts.each do |alrt|
-      %tr
+      %tr{:id => "alrt_#{alrt.id.to_s}"}
         %td.downbydown
           -if alrt.tipo=='anmly'
             =image_tag "anml.png"
@@ -64,6 +64,11 @@
               -if !impacto.empty?
                 %br
                 Impacto: #{impacto}
-        %td
-          -if alrt.tipo=='alarm' && alrt.state=='noAtt'
-            =link_to 'Atender', alrts_path, {:class => "links"}
+        %td{ :id => "state_#{alrt.id.to_s}" }
+          -if alrt.tipo!='notif'
+            -if alrt.state=='noAtt'
+              =link_to 'Atender', '#', :onclick => "attend_alert('#{alrt.id.to_s}','#{@filtro}')", :class => "alrt_links"
+            -elsif alrt.state=='att'
+              -@alrt=alrt
+              =render :partial => "alert_state"
+

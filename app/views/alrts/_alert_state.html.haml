@@ -1,0 +1,6 @@
+%div
+  Atendida por:
+  "#{@alrt.user.name}"
+  %br
+  -if @alrt.user.id==current_user.id
+    =link_to 'Solucionar', alrts_path, {:class => "alrt_links"}

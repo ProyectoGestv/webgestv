@@ -13,6 +13,15 @@ $(document).ready(function() {
     $('#notif').on('click', function (e) {
         update_alerts('notif')
     });
+    $('#myAtt').on('click', function (e) {
+        update_alerts('myAtt')
+    });
+    $('#noAtt').on('click', function (e) {
+        update_alerts('noAtt')
+    });
+    $('#solved').on('click', function (e) {
+        update_alerts('solved')
+    });
 
     $('#all').button('toggle')
     update_alerts('all');
@@ -31,3 +40,16 @@ function update_alerts(filtro) {
     });
 }
 
+function attend_alert(alrt_id, filtro) {
+    jQuery.ajax({
+        url: "/attend_alert",
+        type: "GET",
+        data: {"alrt_id" : alrt_id},
+        dataType: "html",
+        success: function(data) {
+            if(filtro=='noAtt')
+                document.getElementById('alrt_'+alrt_id).remove();
+            document.getElementById('state_'+alrt_id).innerHTML=data;
+        }
+    });
+}
