@@ -6,7 +6,7 @@ class NetElesController < ApplicationController
     @net_eles = NetEle.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @net_eles }
     end
   end

@@ -5,7 +5,7 @@ class AtrHstsController < ApplicationController
     @atr_hsts = AtrHst.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @atr_hsts }
     end
   end

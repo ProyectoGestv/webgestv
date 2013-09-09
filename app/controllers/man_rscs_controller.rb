@@ -7,7 +7,7 @@ class ManRscsController < ApplicationController
     @man_rscs = ManRsc.all.order_by(:name.asc)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @man_rscs }
     end
   end

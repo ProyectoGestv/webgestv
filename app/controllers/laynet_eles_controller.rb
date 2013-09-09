@@ -6,7 +6,7 @@ class LaynetElesController < ApplicationController
     @laynet_eles = LaynetEle.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @laynet_eles }
     end
   end

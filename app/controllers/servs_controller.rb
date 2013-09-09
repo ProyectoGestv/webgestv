@@ -6,7 +6,7 @@ class ServsController < ApplicationController
     @servs = Serv.all.order_by(:name.asc)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @servs }
     end
   end

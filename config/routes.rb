@@ -7,6 +7,15 @@ Webgestv::Application.routes.draw do
   #match 'users/:id' => 'users#destroy', :via => :delete
   resources :users
   resources :atr_hsts
+
+
+  match '/monitors/index' => 'monitors#index'
+  match '/search_mcr_atr' => 'monitors#search_mcr_atr'
+  match '/updateresource'=> 'monitors#updateresource'
+
+
+
+
   match "/reports/index" => "reports#index"
   match '/reports/datostiemporeal' => 'reports#datostiemporeal'
   match '/actualizartabla' => 'reports#actualizartabla'

@@ -1,0 +1,2 @@
+= simple_fields_for @monit do |f|
+ = f.input :paracom, label:'Macro Atributo', :collection => @search_mcr_atr.map{ |c| [c.name, c.id] }, include_blank:'Seleccione macroatributo'
