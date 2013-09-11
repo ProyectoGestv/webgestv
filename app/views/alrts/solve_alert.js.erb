@@ -1,0 +1,7 @@
+$('#myModal').modal('hide');
+filtro='<%= @filtro %>';
+if(filtro=='myAtt'){
+    $('#alrt_<%= @alert.id %>').fadeOut(500, function(){ $(this).remove();});
+}else{
+    document.getElementById('state_<%= @alert.id %>').innerHTML= "<%= escape_javascript(render :partial => 'alert_solved', :locals => {:alrt => @alert}) %>"
+}

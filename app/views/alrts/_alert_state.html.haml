@@ -3,4 +3,17 @@
   "#{@alrt.user.name}"
   %br
   -if @alrt.user.id==current_user.id
-    =link_to 'Solucionar', alrts_path, {:class => "alrt_links"}
+    =link_to 'Solucionar','#', :onclick => "openModal('#{@alrt.id}','#{@filtro}');", :class => 'alrt_links'
+    #myModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+        %h3#myModalLabel Solución al problema
+      .modal-body2
+        =simple_form_for(:solve_alert, url: '/solve_alert', method: :post, :remote => true, :wrapper => :bootstrap, :html => {:id => 'solform', :class => 'form-horizontal' }) do |f|
+          =f.input :solution, :as => :text, label: 'Solución', :hint => "Solución del problema."
+          =f.hidden_field :alert_id, value: ''
+          =f.hidden_field :filtro, value: ''
+          #valco
+          .modal-footer3
+            %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} Cerrar
+            %button.btn.btn-primary#submit{:type => "submit"}='Guardar'

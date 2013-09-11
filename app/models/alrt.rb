@@ -10,4 +10,5 @@ class Alrt
   belongs_to :mcr_atr
   belongs_to :atr
   belongs_to :user
+  embeds_one :alrt_sol
 end

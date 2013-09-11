@@ -15,8 +15,8 @@ Webgestv::Application.routes.draw do
   match '/rango' => 'reports#rango'
   resources :topologies
   resources :alrts
-  
- 
+
+
 
   resources :alr_mntr_frmls
 
@@ -28,6 +28,7 @@ Webgestv::Application.routes.draw do
   match "/update_linksb" => "links#update_linksb"
   match "/update_alerts" => "alrts#update_alerts"
   match "/attend_alert" => "alrts#attend_alert"
+  match "/solve_alert" => "alrts#solve_alert"
 
   match "/frmls/state" => "alr_mntr_frmls#state", :via => :get
   match "/alr_mntr_cntrs/state" => "alr_mntr_cntrs#state"

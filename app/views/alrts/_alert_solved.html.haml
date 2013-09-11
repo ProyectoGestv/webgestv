@@ -1,0 +1,10 @@
+%div
+  Solucionada
+  %br
+  %br
+  #{alrt.alrt_sol.username}
+  %br
+  #{Time.at(alrt.alrt_sol.tstamp)}
+  %br
+    %br
+  =link_to 'Ver solución','#', :onclick => "alert('#{escape_javascript(alrt.alrt_sol.descr)}');", :class => 'alrt_links'

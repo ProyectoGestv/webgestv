@@ -66,9 +66,11 @@
                 Impacto: #{impacto}
         %td{ :id => "state_#{alrt.id.to_s}" }
           -if alrt.tipo!='notif'
+            -@alrt=alrt
             -if alrt.state=='noAtt'
-              =link_to 'Atender', '#', :onclick => "attend_alert('#{alrt.id.to_s}','#{@filtro}')", :class => "alrt_links"
+              =link_to 'Atender', '#', :onclick => "attend_alert('#{alrt.id.to_s}','#{@filtro}')", :class => 'alrt_links'
             -elsif alrt.state=='att'
-              -@alrt=alrt
               =render :partial => "alert_state"
+            -elsif alrt.state=='solved'
+              =render :partial => "alert_solved", :locals => {:alrt => @alrt}
 

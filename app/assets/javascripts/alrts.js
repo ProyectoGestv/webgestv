@@ -27,6 +27,12 @@ $(document).ready(function() {
     update_alerts('all');
 });
 
+function openModal(alert_id,filtro) {
+    document.getElementById("solve_alert_alert_id").value = alert_id;
+    document.getElementById("solve_alert_filtro").value = filtro;
+    $('#myModal').modal();
+}
+
 function update_alerts(filtro) {
     jQuery.ajax({
         url: "/update_alerts",
@@ -48,7 +54,7 @@ function attend_alert(alrt_id, filtro) {
         dataType: "html",
         success: function(data) {
             if(filtro=='noAtt')
-                document.getElementById('alrt_'+alrt_id).remove();
+                $('#alrt_'+alrt_id).fadeOut(500, function(){ $(this).remove();});
             document.getElementById('state_'+alrt_id).innerHTML=data;
         }
     });

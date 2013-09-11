@@ -106,5 +106,20 @@ class AlrtsController < ApplicationController
     render :partial => "alert_state", :link => @alrt
   end
 
-
+  def solve_alert
+    @filtro=params[:solve_alert][:filtro]
+    @alrtsol=AlrtSol.new
+    tstamp=Chronic.parse('this second').to_i
+    sol=params[:solve_alert][:solution]
+    @alert=Alrt.find(params[:solve_alert][:alert_id])
+    @alrtsol.tstamp=tstamp
+    @alrtsol.descr=sol
+    @alrtsol.username=current_user.name
+    @alert.alrt_sol=@alrtsol
+    @alert.state='solved'
+    @alert.save!
+    respond_to do |format|
+      format.js
+    end
+  end
 end
