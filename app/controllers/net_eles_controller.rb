@@ -62,11 +62,14 @@ class NetElesController < ApplicationController
   # PUT /net_eles/1.json
   def update
     @net_ele = NetEle.find(params[:id])
+    oldname=@net_ele.name
     @conn = @net_ele.conn
     pass1=@conn.update_attributes(params[:net_ele][:conn])
     pass2=@net_ele.update_attributes(params[:net_ele])
     respond_to do |format|
       if pass1 and pass2
+        newname=@net_ele.name
+        modify_links(oldname,newname)
         @net_ele.children.each do |h|
           h.domain=@net_ele.name
           h.conn.ip=@conn.ip
@@ -127,6 +130,19 @@ class NetElesController < ApplicationController
     rescue Timeout::Error
     end
     return false
+  end
+
+  def modify_links(oldname,newname)
+    Link.all.each do |link|
+      if link.link_a==oldname
+        link.link_a=newname
+        link.save!
+      end
+      if link.link_b==oldname
+        link.link_b=newname
+        link.save!
+      end
+    end
   end
 
 end

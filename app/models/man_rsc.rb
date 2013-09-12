@@ -15,14 +15,23 @@ class ManRsc
   has_many :mcr_atrs
   accepts_nested_attributes_for :conn
   accepts_nested_attributes_for :mcr_atrs
-  attr_accessible :name, :desc, :domain, :mcr_atrs_attributes
-  before_destroy :delete_mcr_atrs
+  attr_accessible :name, :desc, :domain, :mcr_atrs_attributes, :mngbl
+  before_destroy :delete_mcr_atrs, :delete_links
 
   private
   def delete_mcr_atrs
     puts 'borrando mcr_atrs'
     self.mcr_atrs.each do |mcratr|
       mcratr.destroy
+    end
+  end
+
+  def delete_links
+    puts 'borrando conexiones'
+    Link.all.each do |link|
+      if link.link_a==self.name || link.link_b==self.name
+        link.destroy
+      end
     end
   end
 end

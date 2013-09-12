@@ -89,10 +89,14 @@ class UploadsController < ApplicationController
   end
 
   def destroy
-    mcratrs = ManRsc.find(params[:id]).mcr_atrs
+    man_rsc=ManRsc.find(params[:id])
+    mcratrs = man_rsc.mcr_atrs
     mcratrs.each do |mcratr|
       mcratr.destroy
     end
+    man_rsc.mngbl=false
+    man_rsc.alrtbl=false
+    man_rsc.save
     respond_to do |format|
       format.html { redirect_to :back, notice: t('forms.delparams.notice')   }
       format.json { head :no_content }

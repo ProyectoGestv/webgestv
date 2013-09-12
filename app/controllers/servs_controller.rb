@@ -78,6 +78,7 @@ class ServsController < ApplicationController
   # PUT /servs/1.json
   def update
     @serv = Serv.find(params[:id])
+    oldname=@serv.name
     @conn = @serv.conn
     @serv2 = Serv.new(params[:serv])
     if @serv2.mother
@@ -93,6 +94,8 @@ class ServsController < ApplicationController
     pass2=@serv.update_attributes(params[:serv])
     respond_to do |format|
       if pass1 and pass2
+        newname=@serv.name
+        modify_links(oldname,newname)
         format.html { redirect_to servs_url, notice: t('servs.update.notice')  }
         format.json { head :no_content }
       else
@@ -147,6 +150,19 @@ class ServsController < ApplicationController
     rescue Timeout::Error
     end
     return false
+  end
+
+  def modify_links(oldname,newname)
+    Link.all.each do |link|
+      if link.link_a==oldname
+        link.link_a=newname
+        link.save!
+      end
+      if link.link_b==oldname
+        link.link_b=newname
+        link.save!
+      end
+    end
   end
 
 end

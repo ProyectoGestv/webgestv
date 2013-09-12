@@ -61,11 +61,14 @@ class LaynetElesController < ApplicationController
   # PUT /laynet_eles/1.json
   def update
     @laynet_ele = LaynetEle.find(params[:id])
+    oldname=@laynet_ele.name
     @conn = @laynet_ele.conn
     pass1=@conn.update_attributes(params[:laynet_ele][:conn])
     pass2=@laynet_ele.update_attributes(params[:laynet_ele])
     respond_to do |format|
       if pass1 and pass2
+        newname=@laynet_ele.name
+        modify_links(oldname,newname)
         format.html { redirect_to laynet_eles_url, notice: t('laynet_eles.update.notice') }
         format.json { head :no_content }
       else
@@ -115,6 +118,19 @@ class LaynetElesController < ApplicationController
     rescue Timeout::Error
     end
     return false
+  end
+
+  def modify_links(oldname,newname)
+    Link.all.each do |link|
+      if link.link_a==oldname
+        link.link_a=newname
+        link.save!
+      end
+      if link.link_b==oldname
+        link.link_b=newname
+        link.save!
+      end
+    end
   end
 
 end

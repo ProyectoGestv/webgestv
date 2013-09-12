@@ -5,11 +5,17 @@ class TopologiesController < ApplicationController
     nodes=ManRsc.all
     links=Link.all
     @nodos=nodes.to_json(:only => [ :name , :_type ])
-    @enlaces = links.map do |u|
-      { :source => look_index(nodes,u.link_a), :target => look_index(nodes,u.link_b) }
+    @enlaces = []
+    links.each do |u|
+      @enlaces << { :source => look_index(nodes, u.link_a), :target => look_index(nodes, u.link_b) }
     end
     @enlaces = @enlaces.to_json
 
+    puts '///////////////////////////////'
+    puts @nodos.to_json
+    puts '///////////////////////////////'
+    puts @enlaces
+    puts '///////////////////////////////'
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @topologies }
@@ -17,8 +23,13 @@ class TopologiesController < ApplicationController
   end
 
   def look_index(nodes, word)
-    nodes.each.with_index do |node, index|
+    puts word
+    nodes.each_with_index do |node, index|
       if node.name==word
+        puts '///////////////////////////////'
+        puts word
+        puts index
+        puts '///////////////////////////////'
         return index
       end
     end
