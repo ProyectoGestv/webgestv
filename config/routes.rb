@@ -11,6 +11,7 @@ Webgestv::Application.routes.draw do
 
   match '/monitors/index' => 'monitors#index'
   match '/search_mcr_atr' => 'monitors#search_mcr_atr'
+  match '/search_atr_variable' => 'monitors#search_atr_variable'
   match '/updateresource'=> 'monitors#updateresource'
 
 

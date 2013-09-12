@@ -6,13 +6,14 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Serv.delete_all
-NetEle.delete_all
-LaynetEle.delete_all
-McrAtr.delete_all
-Atr.delete_all
-Alrt.delete_all
-User.delete_all
+#Serv.delete_all
+#NetEle.delete_all
+#LaynetEle.delete_all
+#McrAtr.delete_all
+#Atr.delete_all
+#Alrt.delete_all
+#User.delete_all
+
 (1..5).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
   laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPServerIntegration', desc: "network layer element #{i}")

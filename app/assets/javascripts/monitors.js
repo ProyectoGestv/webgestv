@@ -14,4 +14,22 @@ function reload_mcr_atr(id){
 }
 
 
+
+function reload_atr_variable(id)
+{
+    jQuery.ajax({
+        url: "/search_atr_variable",
+        type: "GET",
+        data: {"paracom" : id},
+        dataType: "html",
+        success: function(data)
+        {
+            $('#div_atr_variable_form').html(data);
+        }
+    });
+
+
+}
+
+
 function enviarinformacion(id){}

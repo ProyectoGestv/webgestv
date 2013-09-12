@@ -1,0 +1,10 @@
+= simple_fields_for @mon_atr do |f|
+ = f.input :variable , :as => :radio, item_wrapper_class: 'inline'
+ = f.check_box :filter
+ = f.input :equal_to, label:'Igual a'
+ = f.input :different_to,  label:'Diferente a'
+ = f.input :higher_to, label:'Mayor que'
+ = f.input :less_to ,label:'Menor que'
+
+
+

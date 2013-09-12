@@ -5,8 +5,16 @@ class Monitor_composite
 
   attribute :manrsc
   attribute :paracom
-  attr_accessor :manrsc, :paracom
-  validates_presence_of :manrsc
+  attribute :monitors_atr_composite
+  attribute :atr_variable
+  attr_accessor :manrsc , :paracom , :atr_variable
+
+
+  def monitor_atr_composite_attributes=(attr)
+    attr.each do |mon_atr_composite|
+      mon_atr_composite << Monitor_atr_composite.new(attr)
+    end
+  end
 
 
 
