@@ -65,6 +65,7 @@ class AlrMntrCntrsController < ApplicationController
 
     respond_to do |format|
       if @alr_mntr_cntr.save
+        message_state(atr.mcr_atr.man_rsc, atr.mcr_atr, atr, session[:alr_cat], 'on')
         format.html { redirect_to session[:return_to], notice: t('alarms.create.notice') }
         format.json { render json: @alr_mntr_cntr, status: :created, location: @alr_mntr_cntr }
       else
@@ -78,14 +79,17 @@ class AlrMntrCntrsController < ApplicationController
   # PUT /alr_mntr_cntrs/1
   # PUT /alr_mntr_cntrs/1.json
   def update
+    atr=Atr.find(session[:atr_id])
     if session[:alr_cat]=='qos'
-      @alr_mntr_cntr = Atr.find(session[:atr_id]).qos_mon
+      @alr_mntr_cntr = atr.qos_mon
     else
-      @alr_mntr_cntr = Atr.find(session[:atr_id]).alr_mon
+      @alr_mntr_cntr = atr.alr_mon
     end
 
     respond_to do |format|
       if @alr_mntr_cntr.update_attributes(params[:alr_mntr_cntr])
+        message_state(atr.mcr_atr.man_rsc, atr.mcr_atr, atr, session[:alr_cat], 'off')
+        message_state(atr.mcr_atr.man_rsc, atr.mcr_atr, atr, session[:alr_cat], 'on')
         format.html { redirect_to session[:return_to], notice: t('alarms.update.notice') }
         format.json { head :no_content }
       else
@@ -100,13 +104,14 @@ class AlrMntrCntrsController < ApplicationController
   # DELETE /alr_mntr_cntrs/1.json
   def destroy
     @alr_mntr_cntr = nil
+    atr=Atr.find(params[:atr_id])
     if params[:alr_cat]=='qos'
-      @alr_mntr_cntr = Atr.find(params[:atr_id]).qos_mon
+      @alr_mntr_cntr = atr.qos_mon
     else
-      @alr_mntr_cntr = Atr.find(params[:atr_id]).alr_mon
+      @alr_mntr_cntr = atr.alr_mon
     end
     @alr_mntr_cntr.destroy
-
+    message_state(atr.mcr_atr.man_rsc, atr.mcr_atr, atr, params[:alr_cat], 'off')
     respond_to do |format|
       format.html { redirect_to :back, notice: t('forms.delalarms.notice') }
       format.json { head :no_content }
@@ -123,26 +128,30 @@ class AlrMntrCntrsController < ApplicationController
     end
     ma=atr.mcr_atr
     mr=ma.man_rsc
-    http = Net::HTTP.new("192.168.119.35",9999)
     if @alr_mntr_cntr.state == 'act'
       @alr_mntr_cntr.state='inact'
-      request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/off")
-      begin
-        response = http.request(request)
-      rescue Errno::ECONNREFUSED
-      end
+      message_state(mr, ma, atr, params[:alr_cat], 'off')
     else
       @alr_mntr_cntr.state='act'
-      request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{params[:alr_cat]}/on")
-      begin
-        response = http.request(request)
-      rescue Errno::ECONNREFUSED
-      end
+      message_state(mr, ma, atr, params[:alr_cat], 'on')
     end
     @alr_mntr_cntr.save
     respond_to do |format|
       format.html { redirect_to :back }
       format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def message_state(mr, ma, atr, alr_cat, state)
+    if mr.mngbl && mr.alrtbl
+      http = Net::HTTP.new("192.168.119.35",9999)
+      request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{alr_cat}/#{state}")
+      begin
+        http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
     end
   end
 
