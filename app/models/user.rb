@@ -11,7 +11,7 @@ class User
   ## Database authenticatable
   field :email,              :type => String
   field :encrypted_password, :type => String
-  
+
   ## Recoverable
   field :reset_password_token,   :type => String
   field :reset_password_sent_at, :type => Time
@@ -45,5 +45,16 @@ class User
   validates_presence_of :name, :email, :password, :password_confirmation
   validates_uniqueness_of :name, :email, :case_sensitive => false
   attr_accessible :name, :email, :role, :password, :password_confirmation, :remember_me
+  before_destroy :change_alerts
 
+  private
+
+  def change_alerts
+    alrts=Alrt.where(:state => 'att', :user_id => self.id)
+    alrts.each do |alrt|
+      alrt.unset('user_id')
+      alrt.state='noAtt'
+      alrt.save!
+    end
+  end
 end
