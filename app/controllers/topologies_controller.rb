@@ -12,13 +12,13 @@ class TopologiesController < ApplicationController
     @enlaces = @enlaces.to_json
 
     puts '///////////////////////////////'
-    puts @nodos.to_json
+    puts @nodos
     puts '///////////////////////////////'
     puts @enlaces
     puts '///////////////////////////////'
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @topologies }
+      format.json { render :json => { :nodos => @nodos, :enlaces => @enlaces } }
     end
   end
 

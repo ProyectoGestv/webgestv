@@ -1,7 +1,3 @@
-:javascript
-  $(document).ready(function() {
-      $('.popover-test').popover(placement="bottom", trigger= "hover");
-  });
 %table.table.table-striped
   %thead
     %th
@@ -64,6 +60,14 @@
               -if !impacto.empty?
                 %br
                 Impacto: #{impacto}
+                %br
+                =link_to 'Localizar','#', :onclick => "openModalLoc('#{alrt.atr.mcr_atr.man_rsc.name}');", :class => 'alrt_links'
+                #modalLoc.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "modalLocLabel", :role => "dialog", :tabindex => "-1"}
+                  .modal-header
+                    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+                    %h3#modalLocLabel Topo
+                  .modal-body3
+                    #topo
         %td{ :id => "state_#{alrt.id.to_s}" }
           -if alrt.tipo!='notif'
             -@alrt=alrt
