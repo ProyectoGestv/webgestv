@@ -71,22 +71,25 @@ class ManRscsController < ApplicationController
 
   def alrtable
     @man_rsc = ManRsc.find(params[:man_rsc_id])
+
     act=params[:act]
     @man_rsc.alrtbl=act
     @man_rsc.save
 
-    http = Net::HTTP.new("192.168.119.35",9999)
-    if act == 'true'
-      request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/act")
-      begin
-        response = http.request(request)
-      rescue Errno::ECONNREFUSED
-      end
-    else
-      request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/inact")
-      begin
-        response = http.request(request)
-      rescue Errno::ECONNREFUSED
+    if @man_rsc.mngbl
+      http = Net::HTTP.new("192.168.119.35",9999)
+      if act == 'true'
+        request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/act")
+        begin
+          response = http.request(request)
+        rescue Errno::ECONNREFUSED
+        end
+      else
+        request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/inact")
+        begin
+          response = http.request(request)
+        rescue Errno::ECONNREFUSED
+        end
       end
     end
 
