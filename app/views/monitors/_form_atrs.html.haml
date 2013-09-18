@@ -1,10 +1,21 @@
-= simple_fields_for @mon_atr do |f|
- = f.input :variable , :as => :radio, item_wrapper_class: 'inline'
- = f.check_box :filter
- = f.input :equal_to, label:'Igual a'
- = f.input :different_to,  label:'Diferente a'
- = f.input :higher_to, label:'Mayor que'
- = f.input :less_to ,label:'Menor que'
 
+%table#table_monitor_atr.table.table-bordered
+ %tittle
+  %h2.the-legend Filtros
+  %th Variable
+  %th Item
+  %th Filtro
+  %th Mayor que
+  %th Menor que
+  %th Igual a
+  %th Diferente a
+  %tr.success
+  %td
+   %p hola
+  %td= f.check_box :filter , label: false
+  %td= f.input :higher_to  , label: false
+  %td= f.input :less_to  , label: false
+  %td= f.input :equal_to  , label: false
+  %td= f.input :different_to  , label: false
 
 

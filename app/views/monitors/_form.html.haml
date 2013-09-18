@@ -12,8 +12,8 @@
  #div_atr_variable_form
   = render 'monitors/search_atr_variable'
 
- #form_data_atrs
-  = render 'form_atrs'
+ =f.fields_for :monitor_atr_composite do |p|
+  =render :partial => "form_atrs" , :locals => { :f => p}
 
 .actions
 %button.btn.btn-primary#enviar{:onclick => " enviarinformacion()", :type => "submit"} Realizar consulta
