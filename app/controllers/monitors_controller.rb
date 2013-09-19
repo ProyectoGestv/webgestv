@@ -6,10 +6,10 @@ def index
   @search_mcr_atr = []
   @search_atr_variable = []
   @atr_simple = Atr.all
-  @monitor = FormReportComposite.new
+  @monitor = CompositeReportConfigurator.new
   fatrs=[]
   @atr_simple.each do |atr|
-    frca=FormReportAtrComposite.new
+    frca=Filter.new
     frca.atributte=atr
     fatrs << frca
   end
@@ -25,8 +25,8 @@ def index
 end
 
 def search_mcr_atr
-  @monitor = FormReportComposite.new
-  @mon_atr = FormReportAtrComposite.new
+  @monitor = CompositeReportConfigurator.new
+  @mon_atr = Filter.new
   @search_mcr_atr=McrAtr.where(:tipo.all => ['composite'],:man_rsc_id => params[:manrsc])
 
 respond_to do |format|
@@ -36,8 +36,8 @@ end
 
 
 def search_atr_variable
-  @monitor = FormReportComposite.new
-  @mon_atr = FormReportAtrComposite.new
+  @monitor = CompositeReportConfigurator.new
+  @mon_atr = Filter.new
   @search_atr_variable =  Atr.where(:mcr_atr_id => params[:paracom])
   respond_to do |format|
     format.html { render partial: 'search_atr_variable' , :link => @search_atr_variable}
@@ -46,7 +46,7 @@ end
 
 
 def updateresource
-  @monitor = FormReportComposite.new
+  @monitor = CompositeReportConfigurator.new
 end
 
 
