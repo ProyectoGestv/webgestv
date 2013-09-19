@@ -1,18 +1,19 @@
 class MonitorsController < ApplicationController
 
 def index
-  @monitor = FormReportsComposite.new
+
   @search_resource=ManRsc.all
   @search_mcr_atr = []
   @search_atr_variable = []
   @atr_simple = Atr.all
-
+  @monitor = FormReportComposite.new
   fatrs=[]
   @atr_simple.each do |atr|
     frca=FormReportAtrComposite.new
-    frca.atr = atr
+    frca.atributte=atr
     fatrs << frca
   end
+  puts fatrs.as_json
   @monitor.form_report_composite_attrs=fatrs
 
   respond_to do |format|
@@ -24,7 +25,7 @@ def index
 end
 
 def search_mcr_atr
-  @monitor = FormReportsComposite.new
+  @monitor = FormReportComposite.new
   @mon_atr = FormReportAtrComposite.new
   @search_mcr_atr=McrAtr.where(:tipo.all => ['composite'],:man_rsc_id => params[:manrsc])
 
@@ -35,7 +36,7 @@ end
 
 
 def search_atr_variable
-  @monitor = FormReportsComposite.new
+  @monitor = FormReportComposite.new
   @mon_atr = FormReportAtrComposite.new
   @search_atr_variable =  Atr.where(:mcr_atr_id => params[:paracom])
   respond_to do |format|
@@ -45,7 +46,7 @@ end
 
 
 def updateresource
-  @monitor = FormReportsComposite.new
+  @monitor = FormReportComposite.new
 end
 
 

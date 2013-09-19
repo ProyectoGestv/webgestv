@@ -12,7 +12,7 @@
  #div_atr_variable_form
   = render 'monitors/search_atr_variable'
 
- =f.fields_for :monitor_atr_composite do |p|
+ =f.fields_for :form_report_composite_attrs do |p|
   =render :partial => "form_atrs" , :locals => { :f => p}
 
 .actions
