@@ -9,20 +9,20 @@ Webgestv::Application.routes.draw do
   resources :atr_hsts
 
 
-  match '/monitors/index' => 'monitors#index'
-  match '/search_mcr_atr' => 'monitors#search_mcr_atr'
-  match '/search_atr_variable' => 'monitors#search_atr_variable'
-  match '/updateresource'=> 'monitors#updateresource'
-
-
-
-
   match "/reports/index" => "reports#index"
   match '/reports/datostiemporeal' => 'reports#datostiemporeal'
   match '/actualizartabla' => 'reports#actualizartabla'
   match '/buscaratributo' => 'reports#buscaratributo'
   match '/buscarmacroatributo' => 'reports#buscarmacroatr'
   match '/rango' => 'reports#rango'
+
+
+  match '/report_composite/index' => 'comp_report_configs#index'
+  match '/search_mcr_atr' => 'comp_report_configs#search_mcr_atr'
+  match '/search_atr_variable' => 'comp_report_configs#search_atr_variable'
+  match '/updateresource'=> 'comp_report_configs#updateresource'
+
+
   resources :topologies
   resources :alrts
   

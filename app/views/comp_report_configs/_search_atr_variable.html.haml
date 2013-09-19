@@ -1,0 +1,2 @@
+= simple_fields_for @monitor do |f|
+  =f.input :variable_atr, :collection => @search_atr_variable.map{ |c| [c.id,c.name] }, :label_method => :last, :value_method => :first, :as => :radio , :label =>'Atributo Variable'

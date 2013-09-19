@@ -1,2 +1,0 @@
-= simple_fields_for @monitor do |f|
- = f.input :paracom, label:'Macro Atributo', :collection => @search_mcr_atr.map{ |c| [c.name, c.id] }, include_blank:'Seleccione macroatributo', :input_html => {:onchange => "reload_atr_variable(this.value)"}

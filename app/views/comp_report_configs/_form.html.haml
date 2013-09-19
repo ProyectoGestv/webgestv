@@ -1,0 +1,20 @@
+#partial_form_composite
+%h2.the-legend Formulario Para los Parametros Compuestos
+
+= simple_form_for @monitor , id:'form_composite', remote:true , :html => {:id =>'form_composite'} , :url => {:action => 'updateresource'}  do |f|
+
+ .field
+  = f.input :management_resource, label:'Recursos', :collection => @search_resource.map{ |c| [c.name,c.id] }, :include_blank => 'Seleccione un recurso',:input_html => {:onchange => "reload_mcr_atr(this.value)"}
+
+ #div_mcr_atr_form
+  = render 'comp_report_configs/search_mcr'
+
+ #div_atr_variable_form
+  = render 'comp_report_configs/search_atr_variable'
+
+ #div_filters
+  =f.simple_fields_for @prueba do |p|
+   =render :partial => "form_atrs" , :locals => { :p => p}
+
+.actions
+%button.btn.btn-primary#enviar{:onclick => " enviarinformacion()", :type => "submit"} Realizar consulta

@@ -1,4 +1,4 @@
-class MonitorsController < ApplicationController
+class CompReportConfigsController < ApplicationController
 
 def index
 
@@ -6,16 +6,15 @@ def index
   @search_mcr_atr = []
   @search_atr_variable = []
   @atr_simple = Atr.all
-  @monitor = CompositeReportConfigurator.new
+  @monitor = Reports::Composite::CompositeReportConfigurator.new
   fatrs=[]
   @atr_simple.each do |atr|
-    frca=Filter.new
-    frca.atributte=atr
+    frca=Reports::Composite::Filter.new
+    frca.associate_attribute=atr
     fatrs << frca
   end
   puts fatrs.as_json
-  @monitor.form_report_composite_attrs=fatrs
-
+  @prueba = @monitor.filters =fatrs
   respond_to do |format|
     format.html
     format.json { render json: @monitor}
