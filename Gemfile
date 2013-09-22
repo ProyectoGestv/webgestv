@@ -58,7 +58,7 @@ gem "simple_form", "~> 2.1.0"
 gem "nokogiri"
 
 gem 'd3-rails'
-gem 'devise'
+gem 'devise', "~> 2.2.3"
 gem 'cancan'
 
 group :development do
