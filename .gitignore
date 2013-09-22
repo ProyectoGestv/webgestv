@@ -15,7 +15,6 @@
 /tmp
 .idea
 .idea/
-Gemfile.lock
 *.orig
 public/
 
