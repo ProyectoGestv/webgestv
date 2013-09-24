@@ -18,9 +18,7 @@ Webgestv::Application.routes.draw do
 
 
   match '/report_composite/index' => 'comp_report_configs#index'
-  match '/search_mcr_atr' => 'comp_report_configs#search_mcr_atr'
-  match '/search_atr_variable' => 'comp_report_configs#search_atr_variable'
-  match '/updateresource'=> 'comp_report_configs#updateresource'
+  match '/send_form'=> 'comp_report_configs#search_information'
 
 
   resources :topologies

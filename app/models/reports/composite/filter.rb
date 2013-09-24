@@ -2,17 +2,22 @@ class Reports::Composite::Filter
 
   include ActiveAttr::Model
 
-  attribute :associate_attribute
-  attribute :filter
+  attribute :variable_attribute
+  attribute :associated_attribute
+  attribute :filter_attribute
   attribute :equal_to
   attribute :different_to
   attribute :higher_to
   attribute :less_to
   attribute :name_attribute
-  attr_accessor :filter , :equal , :different_to , :higher_to , :less_to , :name_attribute , :associate_attribute
+  attr_accessor :filter_attribute , :equal , :different_to , :higher_to , :less_to , :name_attribute , :associated_attribute, :variable_attribute
 
-  def self.associate_attribute=(attribut)
-    :associate_attribute << attribut
+
+
+  def associated_attribute_attributes=(attributes)
+    @associated_attribute = Atr.find(attributes)
   end
+
+
 
 end

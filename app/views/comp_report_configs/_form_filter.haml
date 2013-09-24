@@ -1,0 +1,8 @@
+%tr
+ %td= p.radio_button :variable_attribute , label:false
+ %td= p.input :name_attribute, label: false , :input_html => { :value => p.object.associated_attribute.name , :disabled => true}
+ %td= p.check_box :filter_attribute , label: false ,:input_html => { onclick: "verify_input('#{p.object.associated_attribute.tipo.to_s}')"}
+ %td= p.input :higher_to  , label: false , :input_html=> {:class => "integer_composite_report"}
+ %td= p.input :less_to  , label: false , :input_html => {:class => "integer_composite_report"}
+ %td= p.input :equal_to  , label: false , :input_html => {:class => "integer_string_composite_report"}
+ %td= p.input :different_to  , label: false , :input_html => {:class => "integer_string_composite_report"}

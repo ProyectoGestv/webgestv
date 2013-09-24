@@ -6,14 +6,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-#Serv.delete_all
-#NetEle.delete_all
-#LaynetEle.delete_all
-#McrAtr.delete_all
-#Atr.delete_all
-#Alrt.delete_all
-#User.delete_all
+Serv.delete_all
+NetEle.delete_all
+LaynetEle.delete_all
+McrAtr.delete_all
+Atr.delete_all
+Alrt.delete_all
+User.delete_all
 
+macomposite=McrAtr.create(name:"ma12", desc: "macro attribute composite", tipo: "composite")
 (1..5).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
   laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPServerIntegration', desc: "network layer element #{i}")
@@ -25,8 +26,15 @@
   serv=Serv.create(name:"s#{i}",  domain: netele.name, desc: "service #{i}", mother: netele._id)
   serv.conn=conn2
   ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
+
   serv.mcr_atrs << ma
+  serv.mcr_atrs << macomposite
+  (10..20).each do |t|
+  a5=Atr.create(name:"a#{t+20}", desc: "attribute #{t+20}", tipo: "integer")
+  macomposite.atrs << a5
+  end
   a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", tipo: "integer")
+  a2=Atr.create(name:"a#{i+20}", desc: "attribute #{i+20}", tipo: "integer")
   ma.atrs << a1
 
   tsini=Time.now.to_i+i

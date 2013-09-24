@@ -1,35 +1,36 @@
-
-function reload_mcr_atr(id){
-
-    jQuery.ajax({
-        url: "/search_mcr_atr",
-        type: "GET",
-        data: {"manrsc" : id},
-        dataType: "html",
-        success: function(data)
-        {
-            $('#div_mcr_atr_form').html(data);
-        }
-    });
-}
-
-
-
-function reload_atr_variable(id)
+function send_form(id)
 {
+    // falta por arreglar
     jQuery.ajax({
-        url: "/search_atr_variable",
+        url: "/set_form",
         type: "GET",
         data: {"paracom" : id},
         dataType: "html",
         success: function(data)
         {
-            $('#div_atr_variable_form').html(data);
+            $('#div_filters').html(data);
         }
     });
-
-
 }
 
 
-function enviarinformacion(id){}
+function verify_input(data)
+{
+
+   console.log("hola mundo");
+
+
+  if(data = 'integer_composite_report')
+  {
+   var elements = document.getElementsByClassName("integer_string_composite_report");
+
+   for (var i = 0; i < elements.length; i++)
+   {
+          elements[i].disabled = true;
+   }
+
+
+  }
+
+
+}
