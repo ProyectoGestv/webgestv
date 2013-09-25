@@ -2,7 +2,6 @@ class Reports::Composite::Filter
 
   include ActiveAttr::Model
 
-  attribute :variable_attribute
   attribute :associated_attribute
   attribute :filter_attribute
   attribute :equal_to
@@ -10,7 +9,7 @@ class Reports::Composite::Filter
   attribute :higher_to
   attribute :less_to
   attribute :name_attribute
-  attr_accessor :filter_attribute , :equal , :different_to , :higher_to , :less_to , :name_attribute , :associated_attribute, :variable_attribute
+  attr_accessor :filter_attribute , :equal , :different_to , :higher_to , :less_to , :name_attribute , :associated_attribute
 
 
 

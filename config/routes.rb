@@ -18,7 +18,7 @@ Webgestv::Application.routes.draw do
 
 
   match '/report_composite/index' => 'comp_report_configs#index'
-  match '/send_form'=> 'comp_report_configs#search_information'
+  match '/send_form'=> 'comp_report_configs#search_information' , :via => :post
 
 
   resources :topologies

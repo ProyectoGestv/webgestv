@@ -1,13 +1,17 @@
 #partial_form_composite
 %h2.the-legend Formulario Para los Parametros Compuestos
 
-= simple_form_for @report_configurator , id:'form_composite', remote:true , :html => {:id =>'form_composite'} , :url => {:action => 'search_information'}  do |f|
+= simple_form_for @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
+
+ #div_radio_atr_variable
+  %h2.the-legend Seleccion Atributo Variable
+  =f.input :variable_atr , :collection => @search_attributes.map{ |c| [c.name] } , :as => :radio_buttons , :item_wrapper_class => 'inline' , :label => false , :input_html => {:onclick => "lock_fields(this.value)"}
+
 
  #div_filters
   %table#table_monitor_atr.table.table-bordered
    %tittle
    %h2.the-legend Filtros
-   %th Variable
    %th Item
    %th Filtro
    %th Mayor que
@@ -18,4 +22,4 @@
     =render :partial => 'form_filter' , :locals => {:p => p}
 
 .actions
-%button.btn.btn-primary#enviar{:onclick => 'enviarinformacion()', :type => 'submit'} Realizar consulta
+%button.btn.btn-primary#enviar{:onclick => 'send_form()', :type => 'submit'} Realizar consulta
