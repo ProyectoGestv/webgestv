@@ -26,21 +26,31 @@ function send_form(id)
 }
 
 
-function verify_input(data)
+function verify_input(datas , id )
 {
-   console.log("hola mundo");
-  if(data = 'integer_composite_report')
-  {
-   var elements = document.getElementsByClassName("integer_composite_report");
+   var a = 'string'
 
-   for (var i = 0; i < elements.length; i++)
-   {      console.log(elements[i].name)
-          elements[i].disabled = true;
-   }
+  if (datas.toString() == a )
+  {
+   var mayor = document.getElementById(id.toString() + "higher_to");
+   var igual = document.getElementById(id.toString() + "equal_to");
+   var menor = document.getElementById(id.toString() + "less_to");
+   var diferente = document.getElementById(id.toString() + "different_to");
+
+   mayor.disabled = true ;
+   menor.disabled = true ;
+
   }
 }
 
-function lock_fields(data)
+function lock_fields(datos)
 {
-console.log(data);
+console.log(datos);
+
+    var elements = document.getElementsByClassName("integer_composite_report");
+    for (var i = 0; i < elements.length; i++)
+    {
+        console.log(elements[i].id);
+        elements[i].disabled = true;
+    }
 }
