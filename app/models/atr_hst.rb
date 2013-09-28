@@ -1,11 +1,14 @@
 class AtrHst
   include Mongoid::Document
-  
+
   validates_presence_of :value , :tstamp
   field :value, type:String
   field :tstamp, type:Integer
   belongs_to :atr
   attr_accessible :value , :tstamp
+
+  scope :by_mcr_attr_and_ts, lambda{|mcr_attr_id, ts| where(:atr_id.in => McrAtr.find_by(id: mcr_attr_id).atrs.map(&:id), tstamp: ts)}
+  scope :by_mcr_attr_and_ts_range, lambda{|mcr_attr_id, below_ts, above_ts| where(:atr_id.in => McrAtr.find_by(id: mcr_attr_id).atrs.map(&:id), :tstamp.gte => below_ts, :tstamp.lte => above_ts)}
 
 
   def self.calcularestadisticos(historicos)
