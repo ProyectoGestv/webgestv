@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
+
 class ServsController < ApplicationController
   # GET /servs
   # GET /servs.json
@@ -26,7 +28,7 @@ class ServsController < ApplicationController
   # GET /servs/new.json
   def new
     @serv = Serv.new
-    @conn=Conn.new
+    @serv.conn=Conn.new
     @net_eles = NetEle.all
     if @net_eles.count > 0
       respond_to do |format|
@@ -52,15 +54,11 @@ class ServsController < ApplicationController
   # POST /servs
   # POST /servs.json
   def create
-    #params[:serv][:domain]=params[:serv][:name]
     @serv = Serv.new(params[:serv])
     if @serv.mother
+      @serv.conn.ip=@serv.mother.conn.ip
       @serv.domain=@serv.mother.name
-      params[:serv][:conn][:ip]=@serv.mother.conn.ip
-      puts params
     end
-    @conn=Conn.new(params[:serv][:conn])
-    @serv.conn=@conn
 
     respond_to do |format|
       if @serv.save
@@ -78,8 +76,10 @@ class ServsController < ApplicationController
   # PUT /servs/1.json
   def update
     @serv = Serv.find(params[:id])
+    olddomain=@serv.domain
     oldname=@serv.name
-    @conn = @serv.conn
+    oldip=@serv.conn.ip
+    oldport=@serv.conn.port
     @serv2 = Serv.new(params[:serv])
     if @serv2.mother
       params[:serv][:domain]= @serv2.mother.name
@@ -88,12 +88,32 @@ class ServsController < ApplicationController
     else
       params[:serv][:domain]=nil
       params[:serv][:mother]=nil
-      params[:serv][:conn][:ip]=nil
+      params[:serv][:conn][:ip]=''
     end
-    pass1=@conn.update_attributes(params[:serv][:conn])
-    pass2=@serv.update_attributes(params[:serv])
+    pass=@serv.update_attributes(params[:serv])
+
+    if pass
+      if @serv.mngbl
+        #Si se modifico algo se reinicia el MR a través de los llamados a webservices registrar y remover del núcleo
+        http = Net::HTTP.new("192.168.119.35",9999)
+        post_params = {'ip' => oldip, 'port' => oldport}
+        request = Net::HTTP::Delete.new("/mbs/#{olddomain}/#{oldname}")
+        request.set_form_data(post_params)
+        begin
+          response = http.request(request)
+        rescue Errno::ECONNREFUSED
+        end
+        post_params = {'ip' => @serv.conn.ip, 'port' => @serv.conn.port, 'domain' => @serv.domain, 'type' => @serv.name}
+        request = Net::HTTP::Post.new("/mbs/register")
+        request.set_form_data(post_params)
+        begin
+          response = http.request(request)
+        rescue Errno::ECONNREFUSED
+        end
+      end
+    end
     respond_to do |format|
-      if pass1 and pass2
+      if pass
         newname=@serv.name
         modify_links(oldname,newname)
         format.html { redirect_to servs_url, notice: t('servs.update.notice')  }
@@ -110,6 +130,17 @@ class ServsController < ApplicationController
   # DELETE /servs/1.json
   def destroy
     @serv = Serv.find(params[:id])
+    if @serv.mngbl
+      #Remueve el MR a través de una llamada al webservice del núcleo
+      http = Net::HTTP.new("192.168.119.35",9999)
+      post_params = {'ip' => @serv.conn.ip, 'port' => @serv.conn.port}
+      request = Net::HTTP::Delete.new("/mbs/#{@serv.domain}/#{@serv.name}")
+      request.set_form_data(post_params)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
+    end
     @serv.destroy
 
     respond_to do |format|

@@ -1,4 +1,5 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
 class UploadsController < ApplicationController
 
   def new
@@ -91,6 +92,18 @@ class UploadsController < ApplicationController
   def destroy
     man_rsc=ManRsc.find(params[:id])
     mcratrs = man_rsc.mcr_atrs
+
+    if man_rsc.mngbl
+      #Remueve el MR a través de una llamada al webservice del núcleo
+      http = Net::HTTP.new("192.168.119.35",9999)
+      post_params = {'ip' => man_rsc.conn.ip, 'port' => man_rsc.conn.port}
+      request = Net::HTTP::Delete.new("/mbs/#{man_rsc.domain}/#{man_rsc.name}")
+      request.set_form_data(post_params)
+      begin
+        response = http.request(request)
+      rescue Errno::ECONNREFUSED
+      end
+    end
     mcratrs.each do |mcratr|
       mcratr.destroy
     end

@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
+
 class NetElesController < ApplicationController
   # GET /net_eles
   # GET /net_eles.json
@@ -26,7 +28,7 @@ class NetElesController < ApplicationController
   # GET /net_eles/new.json
   def new
     @net_ele = NetEle.new
-    @conn=Conn.new
+    @net_ele.conn=Conn.new
 #    @net_ele.conn=@conn
     respond_to do |format|
       format.html # new.html.erb
@@ -44,9 +46,7 @@ class NetElesController < ApplicationController
   # POST /net_eles.json
   def create
     params[:net_ele][:domain]='SNMPIntegrationServer'
-    @conn=Conn.new(params[:net_ele][:conn])
     @net_ele = NetEle.new(params[:net_ele])
-    @net_ele.conn=@conn
     respond_to do |format|
       if @net_ele.save
         format.html { redirect_to net_eles_url, notice: t('net_eles.create.notice')  }
@@ -63,17 +63,55 @@ class NetElesController < ApplicationController
   def update
     @net_ele = NetEle.find(params[:id])
     oldname=@net_ele.name
-    @conn = @net_ele.conn
-    pass1=@conn.update_attributes(params[:net_ele][:conn])
-    pass2=@net_ele.update_attributes(params[:net_ele])
+    oldip=@net_ele.conn.ip
+    oldport=@net_ele.conn.port
+    pass=@net_ele.update_attributes(params[:net_ele])
     respond_to do |format|
-      if pass1 and pass2
+      if pass
+        if @net_ele.mngbl
+          #Si se modifico algo se reinicia el MR a través de los llamados a webservices registrar y remover del núcleo
+          http = Net::HTTP.new("192.168.119.35",9999)
+          post_params = {'ip' => oldip, 'port' => oldport}
+          request = Net::HTTP::Delete.new("/mbs/#{@net_ele.domain}/#{oldname}")
+          request.set_form_data(post_params)
+          begin
+            response = http.request(request)
+          rescue Errno::ECONNREFUSED
+          end
+          post_params = {'ip' => @net_ele.conn.ip, 'port' => @net_ele.conn.port, 'domain' => @net_ele.domain, 'type' => @net_ele.name}
+          request = Net::HTTP::Post.new("/mbs/register")
+          request.set_form_data(post_params)
+          begin
+            response = http.request(request)
+          rescue Errno::ECONNREFUSED
+          end
+        end
         newname=@net_ele.name
         modify_links(oldname,newname)
         @net_ele.children.each do |h|
-          h.domain=@net_ele.name
-          h.conn.ip=@conn.ip
+          if h.mngbl
+            #Si se modifico algo se remueve el MR hijo a través del llamado al webservice remover del núcleo
+            http = Net::HTTP.new("192.168.119.35",9999)
+            post_params = {'ip' => h.conn.ip, 'port' => h.conn.port}
+            request = Net::HTTP::Delete.new("/mbs/#{h.domain}/#{h.name}")
+            request.set_form_data(post_params)
+            begin
+              response = http.request(request)
+            rescue Errno::ECONNREFUSED
+            end
+          end
+          h.conn.ip=@net_ele.conn.ip
           h.save
+          if h.mngbl
+            #Si se modifico algo se registra de nuevo el MR hijo a través del llamado al webservice registrar del núcleo
+            post_params = {'ip' => h.conn.ip, 'port' => h.conn.port, 'domain' => h.domain, 'type' => h.name}
+            request = Net::HTTP::Post.new("/mbs/register")
+            request.set_form_data(post_params)
+            begin
+              response = http.request(request)
+            rescue Errno::ECONNREFUSED
+            end
+          end
         end
         format.html { redirect_to net_eles_url, notice: t('net_eles.update.notice')  }
         format.json { head :no_content }

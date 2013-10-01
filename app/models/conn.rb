@@ -13,4 +13,7 @@ class Conn
   field :ip, type: String
   field :port, type: Integer
   embedded_in :man_rsc
+  accepts_nested_attributes_for :man_rsc
+  attr_accessible :man_rsc, :ip, :port
+
 end

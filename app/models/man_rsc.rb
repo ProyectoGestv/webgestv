@@ -15,7 +15,7 @@ class ManRsc
   has_many :mcr_atrs
   accepts_nested_attributes_for :conn
   accepts_nested_attributes_for :mcr_atrs
-  attr_accessible :name, :desc, :domain, :mcr_atrs_attributes, :mngbl
+  attr_accessible :name, :desc, :domain, :mcr_atrs_attributes, :mngbl, :conn
   before_destroy :delete_mcr_atrs, :delete_links
 
   private

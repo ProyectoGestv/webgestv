@@ -5,6 +5,7 @@ class Serv < ManRsc
   belongs_to :mother, :class_name => 'NetEle', inverse_of: :children
   attr_accessible :mother, :on, :active
   validates_presence_of :mother, message: 'Debe seleccionar un repositorio'
+  validate :repovalid, :conn
   after_create :create_link
 
   private
@@ -15,4 +16,9 @@ class Serv < ManRsc
     link=Link.new(desc: "Cx #{linka}-#{linkb}", link_a: linka, link_b: linkb)
     link.save!
   end
+
+  def repovalid
+    self.conn.errors.messages.delete(:ip) if self.conn.ip == ''
+  end
+
 end

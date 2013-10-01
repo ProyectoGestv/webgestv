@@ -8,7 +8,8 @@
         %legend.the-legend2
           Conexión
           =f.input :mother, label: 'Repositorio', :collection => @net_eles.map{ |c| [c.name, c.id] }, :hint => "Elemento de red que contiene al servicio", selected: "#{@serv.mother ? @serv.mother.id : ''}", include_blank: 'Seleccione un repositorio'
-          =f.simple_fields_for @conn do |f|
+          =f.simple_fields_for @serv.conn do |f|
+            =f.input :ip, :as => :hidden
             =f.input :port, :as => :integer, label: t('.port'), :input_html => { placeholder: 1000, min: 1, :class => "span2" }, :hint => "Puerto de gestión en que escucha el servicio"
             .links=link_to  'Probar Conexión', '/serv/testconn', :id => "testconnserv", :remote => true, :class => "testconnserv"
             %p#succon

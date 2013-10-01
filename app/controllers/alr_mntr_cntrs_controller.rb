@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
+
 class AlrMntrCntrsController < ApplicationController
   # GET /alr_mntr_cntrs
   # GET /alr_mntr_cntrs.json

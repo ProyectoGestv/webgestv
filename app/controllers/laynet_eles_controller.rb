@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
+
 class LaynetElesController < ApplicationController
   # GET /laynet_eles
   # GET /laynet_eles.json
@@ -26,7 +28,7 @@ class LaynetElesController < ApplicationController
   # GET /laynet_eles/new.json
   def new
     @laynet_ele = LaynetEle.new
-    @conn=Conn.new
+    @laynet_ele.conn=Conn.new
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @laynet_ele }
@@ -44,8 +46,6 @@ class LaynetElesController < ApplicationController
   def create
     params[:laynet_ele][:domain]='SNMPIntegrationServer'
     @laynet_ele = LaynetEle.new(params[:laynet_ele])
-    @conn=Conn.new(params[:laynet_ele][:conn])
-    @laynet_ele.conn=@conn
     respond_to do |format|
       if @laynet_ele.save
         format.html { redirect_to laynet_eles_url, notice: t('laynet_eles.create.notice') }
@@ -62,13 +62,32 @@ class LaynetElesController < ApplicationController
   def update
     @laynet_ele = LaynetEle.find(params[:id])
     oldname=@laynet_ele.name
-    @conn = @laynet_ele.conn
-    pass1=@conn.update_attributes(params[:laynet_ele][:conn])
-    pass2=@laynet_ele.update_attributes(params[:laynet_ele])
+    oldip=@laynet_ele.conn.ip
+    oldport=@laynet_ele.conn.port
+
+    pass=@laynet_ele.update_attributes(params[:laynet_ele])
     respond_to do |format|
-      if pass1 and pass2
+      if pass
         newname=@laynet_ele.name
         modify_links(oldname,newname)
+        if @laynet_ele.mngbl
+          #Si se modifico algo se reinicia el MR a través de los llamados a webservices registrar y remover del núcleo
+          http = Net::HTTP.new("192.168.119.35",9999)
+          post_params = {'ip' => oldip, 'port' => oldport}
+          request = Net::HTTP::Delete.new("/mbs/#{@laynet_ele.domain}/#{oldname}")
+          request.set_form_data(post_params)
+          begin
+            response = http.request(request)
+          rescue Errno::ECONNREFUSED
+          end
+          post_params = {'ip' => @laynet_ele.conn.ip, 'port' => @laynet_ele.conn.port, 'domain' => @laynet_ele.domain, 'type' => @laynet_ele.name}
+          request = Net::HTTP::Post.new("/mbs/register")
+          request.set_form_data(post_params)
+          begin
+            response = http.request(request)
+          rescue Errno::ECONNREFUSED
+          end
+        end
         format.html { redirect_to laynet_eles_url, notice: t('laynet_eles.update.notice') }
         format.json { head :no_content }
       else

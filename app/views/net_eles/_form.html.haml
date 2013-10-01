@@ -7,7 +7,7 @@
       %fieldset#subform1
         %legend.the-legend2
           Conexión
-          =f.simple_fields_for @conn do |f|
+          =f.simple_fields_for @net_ele.conn do |f|
             =f.input :ip, label: t('.ip'), :input_html => { maxlength: 15, size: 20, placeholder: "1.0.0.0", :class => "span4" }, :hint => "Dirección IP del elemento de red"
             =f.input :port, :as => :integer, label: t('.port'), :input_html => { placeholder: 1000, min: 1, :class => "span2" }, :hint => "Puerto de gestión en que escucha el servicio"
             .links=link_to  'Probar Conexión', '/net_ele/testconn', :id => "testconnnetele", :remote => true, :class => "testconnnetele"

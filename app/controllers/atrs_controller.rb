@@ -1,4 +1,6 @@
 # -*- encoding : utf-8 -*-
+require 'net/http'
+
 class AtrsController < ApplicationController
   # GET /atrs
   # GET /atrs.json
@@ -26,7 +28,6 @@ class AtrsController < ApplicationController
     puts params
     #params[:mcr_atr_id]
     puts params['mcr_atr_id']
-    puts '//////////////////////////////////////////////'
     @atrs = Atr.where({'mcr_atr_id' => Moped::BSON::ObjectId(params['mcr_atr_id'])})
     #.find_by(:type => 'simple')
     respond_to do |format|
@@ -80,8 +81,6 @@ class AtrsController < ApplicationController
   # PUT /atrs/1.json
   def update
     @atr = Atr.find(params[:id])
-    puts '//////////////////////// actualizando atributo'
-    puts '/////////////////////////////////////////////////////'
     @mcr_atr=@atr.mcr_atr
     @man_rsc=@mcr_atr.man_rsc
     http = Net::HTTP.new("192.168.119.35",9999)
