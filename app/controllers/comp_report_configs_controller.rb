@@ -20,7 +20,12 @@ end
 
 
 def search_information
+  @report_configurator = Reports::Composite::Configurator.new(params[:reports_composite_configurator])
+  filter=  (params[:reports_composite_configurator][:filters_attributes])
 
+  respond_to do |format|
+    format.html { render partial:'grafico'}
+  end
 end
 
 

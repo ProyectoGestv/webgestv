@@ -10,4 +10,5 @@ class Reports::Composite::Configurator
   def filters_attributes=(attributes)
        @filters = Reports::Composite::Filter.new(attributes)
   end
+
 end

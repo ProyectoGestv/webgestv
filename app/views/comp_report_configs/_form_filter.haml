@@ -1,9 +1,10 @@
 %tr
- %td= p.input :name_attribute, label: false , :input_html => { :value => p.object.associated_attribute.name , :disabled => true}
+
+ %td= p.input :name_attribute, label: false , :input_html => { :value => p.object.associated_attribute.name}
  %td= p.check_box :filter_attribute , label: false
- %td= p.input :higher_to  , label: false ,:input_html =>{:id => "#{p.object.associated_attribute.id}" + "higher_to"}
- %td= p.input :less_to  , label: false ,:input_html =>{:id => "#{p.object.associated_attribute.id}" + "less_to"}
- %td= p.input :equal_to  , label: false  ,:input_html =>{:id => "#{p.object.associated_attribute.id}" + "equal_to"}
- %td= p.input :different_to  , label: false ,:input_html =>{:id => "#{p.object.associated_attribute.id}" + "different_to"}
-%script verify_input("#{p.object.associated_attribute.tipo}","#{p.object.associated_attribute.id}");
+ %td= p.input :higher_to  , label: false
+ %td= p.input :less_to  , label: false
+ %td= p.input :equal_to  , label: false
+ %td= p.input :different_to  , label: false
+= p.hidden_field :associated_attribute ,label:false , :value => p.object.associated_attribute.id
 

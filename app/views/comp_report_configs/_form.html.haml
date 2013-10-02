@@ -1,7 +1,7 @@
 #partial_form_composite
 %h2.the-legend Formulario Para los Parametros Compuestos
 
-= simple_form_for @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
+= simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
 
  #div_radio_atr_variable
   %h2.the-legend Seleccion Atributo Variable
@@ -21,5 +21,5 @@
    =f.simple_fields_for :filters do |p|
     =render :partial => 'form_filter' , :locals => {:p => p}
 
-.actions
-%button.btn.btn-primary#enviar{:onclick => 'send_form()', :type => 'submit'} Realizar consulta
+ .actions
+  =f.button :submit , 'Realizar Consulta'
