@@ -1,25 +1,44 @@
-#partial_form_composite
-%h2.the-legend Formulario Para los Parametros Compuestos
 
-= simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
-
- #div_radio_atr_variable
-  %h2.the-legend Seleccion Atributo Variable
-  =f.input :variable_atr , :collection => @search_attributes.map{ |c| [c.name] } , :as => :radio_buttons , :item_wrapper_class => 'inline' , :label => false , :input_html => {:onclick => "lock_fields(this.value)"}
-
-
- #div_filters
-  %table#table_monitor_atr.table.table-bordered
-   %tittle
+#div_visible_form
+ %table#table_visible_form.table.table-bordered
+  %tittle
    %h2.the-legend Filtros
-   %th Item
-   %th Filtro
-   %th Mayor que
-   %th Menor que
-   %th Igual a
-   %th Diferente a
-   =f.fields_for :filters do |p|
-    =render :partial => 'form_filter' , :locals => {:p => p}
+  %th Variable
+  %th Item
+  %th Filtro
+  %th Mayor que
+  %th Menor que
+  %th Igual a
+  %th Diferente a
+  -@search_attributes.each do |atr|
+   %tr
+   %td
+    =label_tag("radio_#{atr.id}",atr.name)
+    =radio_button_tag "radio", atr.id
+   %td
+    =text_field_tag "input_text_higher#{atr.id}" , atr.name
+   %td
+    =check_box_tag "check_#{atr.id}"
+   %td
+    =text_field_tag "input_text_higher#{atr.id}"
+   %td
+    =text_field_tag "input_text_less_to#{atr.id}"
+   %td
+    =text_field_tag "input_text_equal_to#{atr.id}"
+   %td
+    =text_field_tag "input_text_different_to#{atr.id}"
 
+
+#div_invisible_form
+=simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
+ =f.hidden_field :variable_atr
+ =f.fields_for :filters do |p|
+  = p.hidden_field :name_attribute, label: false , :input_html => { :value => p.object.associated_attribute.name}
+  = p.hidden_field :filter_attribute , label: false
+  = p.hidden_field :higher_to  , label: false
+  = p.hidden_field :less_to  , label: false
+  = p.hidden_field :equal_to  , label: false
+  = p.hidden_field :different_to  , label: false
+  = p.hidden_field :associated_attribute ,label:false , :value => p.object.associated_attribute.id
  .actions
-  =f.button :submit , 'Realizar Consulta'
+ =f.button :submit , 'Realizar Consulta'
