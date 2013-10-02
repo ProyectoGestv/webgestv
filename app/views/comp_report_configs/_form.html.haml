@@ -18,7 +18,7 @@
    %th Menor que
    %th Igual a
    %th Diferente a
-   =f.simple_fields_for :filters do |p|
+   =f.fields_for :filters do |p|
     =render :partial => 'form_filter' , :locals => {:p => p}
 
  .actions
