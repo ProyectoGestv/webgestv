@@ -4,11 +4,15 @@ class Reports::Composite::Configurator
 
 
   attribute :variable_atr
-  attr_accessor  :variable_atr , :filters
+  attribute :filters
+  attr_accessor  :variable_atr, :filters
 
 
-  def filters_attributes=(attributes)
-       @filters = Reports::Composite::Filter.new(attributes)
+  def filters_attributes=(filters)
+    @filters = []
+    filters.keys.each do |index|
+     @filters << Reports::Composite::Filter.new(filters[index])
+    end
   end
 
 end
