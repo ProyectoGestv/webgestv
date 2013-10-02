@@ -2,8 +2,9 @@ class CompReportConfigsController < ApplicationController
 
 def index
   #busqueda de atributos recibe un param pero inicialmente lo busco directamente en bd
-  @search_mcr_atr=McrAtr.where(:tipo.all => ['composite'], :id=> '52445293d1b39c7327000001')
-  @search_attributes =  Atr.where(:mcr_atr_id => @search_mcr_atr.first())
+  #@search_mcr_atr=McrAtr.where(:tipo.all => ['composite'], :id=> '523a4a32759b7410af000008')
+  @search_mcr_atr = McrAtr.all.first
+  @search_attributes =  Atr.where(:mcr_atr_id => @search_mcr_atr)
   ####################################################################################
   @report_configurator = Reports::Composite::Configurator.new
   filters = []
@@ -18,11 +19,9 @@ def index
   end
 end
 
-
 def search_information
   @report_configurator = Reports::Composite::Configurator.new(params[:reports_composite_configurator])
-  filter=  (params[:reports_composite_configurator][:filters_attributes])
-
+  puts '--> Report Configurator: ', @report_configurator
   respond_to do |format|
     format.html { render partial:'grafico'}
   end
