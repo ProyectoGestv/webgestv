@@ -83,7 +83,3 @@ puts 'New user created: ' << user.name
 user2 = User.create! :name => 'cho', :role => 'oper', :email => 'cho@example.com', :password => 'jajaja', :password_confirmation => 'jajaja'
 puts 'New user created: ' << user2.name
 
-
-
- 
-  
