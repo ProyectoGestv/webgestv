@@ -61,8 +61,16 @@ gem 'd3-rails'
 gem 'devise'
 gem 'cancan'
 
-group :development do
-  gem 'better_errors'
+
+group :development, :test do
+  gem 'ruby-prof'
   gem 'binding_of_caller'
-  gem 'meta_request'
+  gem 'meta_request' #uncomment for use with rails pannel
+  gem 'awesome_print'
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'pry-nav'
+  gem 'debugger'
+  gem 'haml-rails'
+  gem 'better_errors'
 end
