@@ -7,6 +7,8 @@
 
 %table.table.table-striped
   %thead
+    %th Alertable
+    %th Gestionable
     %th Nombre
     %th Descripción
     %th Ver
@@ -16,6 +18,18 @@
   %tbody
     - @net_eles.each do |mr|
       %tr
+        -if mr.mcr_atrs?
+          -if mr.alrtbl == true
+            %td=link_to image_tag('icon_act.png', {:title => 'Desactivar'}), "/man_rscs/alrtable?man_rsc_id=#{mr._id}&act=false"
+          -else
+            %td=link_to image_tag('icon_ina.png', {:title => 'Activar'}), "/man_rscs/alrtable?man_rsc_id=#{mr._id}&act=true"
+          -if mr.mngbl == true
+            %td=link_to image_tag('icon_act.png', {:title => 'Desactivar'}), "/man_rscs/mngable?man_rsc_id=#{mr._id}&act=false"
+          -else
+            %td=link_to image_tag('icon_ina.png', {:title => 'Activar'}), "/man_rscs/mngable?man_rsc_id=#{mr._id}&act=true"
+        -else
+          %td=image_tag 'icon_dis.png'
+          %td=image_tag 'icon_dis.png'
         -if mr.mcr_atrs?
           %td= link_to mr.name, man_rsc_mcr_atrs_path(mr)
         -else
