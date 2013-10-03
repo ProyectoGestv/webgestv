@@ -44,7 +44,7 @@ class LaynetElesController < ApplicationController
   # POST /laynet_eles
   # POST /laynet_eles.json
   def create
-    params[:laynet_ele][:domain]='SNMPIntegrationServer'
+    params[:laynet_ele][:domain]='SNMPInstrumentingServer'
     @laynet_ele = LaynetEle.new(params[:laynet_ele])
     respond_to do |format|
       if @laynet_ele.save

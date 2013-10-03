@@ -45,7 +45,7 @@ class NetElesController < ApplicationController
   # POST /net_eles
   # POST /net_eles.json
   def create
-    params[:net_ele][:domain]='SNMPIntegrationServer'
+    params[:net_ele][:domain]='SNMPInstrumentingServer'
     @net_ele = NetEle.new(params[:net_ele])
     respond_to do |format|
       if @net_ele.save

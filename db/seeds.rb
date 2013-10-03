@@ -15,10 +15,10 @@ Alrt.delete_all
 User.delete_all
 (1..5).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
-  laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPServerIntegration', desc: "network layer element #{i}")
+  laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPInstrumentingServer', desc: "network layer element #{i}")
   laynetele.conn=conn0
   conn1= Conn.new(ip: "1.1.1.#{i}", port: i)
-  netele = NetEle.create(name: "n#{i}", domain:'SNMPServerIntegration', desc: "network element #{i}")
+  netele = NetEle.create(name: "n#{i}", domain:'SNMPInstrumentingServer', desc: "network element #{i}")
   netele.conn=conn1
   conn2=Conn.new(ip: "1.1.1.#{i}", port: 100+i)
   serv=Serv.create(name:"s#{i}",  domain: netele.name, desc: "service #{i}", mother: netele._id)
@@ -53,7 +53,7 @@ User.delete_all
 end
 
 conn1= Conn.new(ip: "192.168.119.35", port: 1)
-netele = NetEle.create(name: "broadcaster", domain:'SNMPServerIntegration', desc: "broadcaster")
+netele = NetEle.create(name: "broadcaster", domain:'SNMPInstrumentingServer', desc: "broadcaster")
 netele.conn=conn1
 
 conn2=Conn.new(ip: "192.168.119.35", port: 10000)
@@ -71,5 +71,4 @@ puts 'New user created: ' << user2.name
 
 
 
- 
-  
+
