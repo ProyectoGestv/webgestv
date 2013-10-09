@@ -11,11 +11,6 @@ class TopologiesController < ApplicationController
     end
     @enlaces = @enlaces.to_json
 
-    puts '///////////////////////////////'
-    puts @nodos
-    puts '///////////////////////////////'
-    puts @enlaces
-    puts '///////////////////////////////'
     respond_to do |format|
       format.html # index.html.erb
       format.json { render :json => { :nodos => @nodos, :enlaces => @enlaces } }
@@ -26,10 +21,6 @@ class TopologiesController < ApplicationController
     puts word
     nodes.each_with_index do |node, index|
       if node.name==word
-        puts '///////////////////////////////'
-        puts word
-        puts index
-        puts '///////////////////////////////'
         return index
       end
     end

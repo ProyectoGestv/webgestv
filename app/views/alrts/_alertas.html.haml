@@ -61,7 +61,10 @@
                 %br
                 Impacto: #{impacto}
                 %br
-                =link_to 'Localizar','#', :onclick => "openModalLoc('#{alrt.atr.mcr_atr.man_rsc.name}');", :class => 'alrt_links'
+                -if alrt.atr.nil?
+                  =link_to 'Localizar','#', :onclick => "openModalLoc('#{ alrt.mcr_atr.man_rsc.name }');", :class => 'alrt_links'
+                -else
+                  =link_to 'Localizar','#', :onclick => "openModalLoc('#{ alrt.atr.mcr_atr.man_rsc.name }');", :class => 'alrt_links'
                 #modalLoc.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "modalLocLabel", :role => "dialog", :tabindex => "-1"}
                   .modal-header
                     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
