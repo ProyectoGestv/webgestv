@@ -1,44 +1,46 @@
-
 #div_visible_form
  %table#table_visible_form.table.table-bordered
   %tittle
    %h2.the-legend Filtros
   %th Variable
   %th Item
+  %th Tipo
   %th Filtro
   %th Mayor que
   %th Menor que
   %th Igual a
   %th Diferente a
-  -@search_attributes.each do |atr|
+  -@report_configurator.filters.each_with_index do |atr , index|
    %tr
    %td
-    =label_tag("radio_#{atr.id}",atr.name)
-    =radio_button_tag "radio", atr.id
+    =radio_button_tag "radio", atr.associated_attribute.id , false , id: "radio_#{index}" , :onclick=> "radio_click_change(this.value , this.id)"
    %td
-    =text_field_tag "input_text_higher#{atr.id}" , atr.name
+    =text_field_tag "input_text_name_#{index}" , atr.associated_attribute.name
    %td
-    =check_box_tag "check_#{atr.id}"
+    =text_field_tag "input_text_type_#{index}" , atr.associated_attribute.tipo
    %td
-    =text_field_tag "input_text_higher#{atr.id}"
+    =check_box_tag "check_#{index}" , "1" , false
    %td
-    =text_field_tag "input_text_less_to#{atr.id}"
+    =text_field_tag "input_text_higher_#{index}" , nil , :onchange => "input_text_higher_change(this.value , this.id)"
    %td
-    =text_field_tag "input_text_equal_to#{atr.id}"
+    =text_field_tag "input_text_less_to_#{index}" , nil, :onchange => "input_text_less_change(this.value , this.id)"
    %td
-    =text_field_tag "input_text_different_to#{atr.id}"
+    =text_field_tag "input_text_equal_to_#{index}" , nil , :onchange => "input_text_equal_change(this.value , this.id)"
+   %td
+    =text_field_tag "input_text_different_to_#{index}" , nil , :onchange => "input_text_different_change(this.value , this.id)"
 
 
 #div_invisible_form
-=simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
+= simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
  =f.hidden_field :variable_atr
  =f.fields_for :filters do |p|
-  = p.hidden_field :name_attribute, label: false , :input_html => { :value => p.object.associated_attribute.name}
-  = p.hidden_field :filter_attribute , label: false
+  = p.hidden_field :name_attribute, label: false , :value => p.object.associated_attribute.name
+  = p.hidden_field :filter_attribute , label: false ,  :value => 0
   = p.hidden_field :higher_to  , label: false
   = p.hidden_field :less_to  , label: false
   = p.hidden_field :equal_to  , label: false
   = p.hidden_field :different_to  , label: false
   = p.hidden_field :associated_attribute ,label:false , :value => p.object.associated_attribute.id
  .actions
- =f.button :submit , 'Realizar Consulta'
+ =f.button :submit , 'Realizar Consulta'  , :onclick => "send_form()"
+
