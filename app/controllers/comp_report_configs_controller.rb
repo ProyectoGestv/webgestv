@@ -29,12 +29,7 @@ def search_information
 
     format.html { render partial:'grafico'}
 
-
-
-
-
-
-   else
+  else
      #busqueda de atributos recibe un param pero inicialmente lo busco directamente en bd
      @search_mcr_atr = McrAtr.all.first
      @search_attributes =  Atr.where(:mcr_atr_id => @search_mcr_atr)

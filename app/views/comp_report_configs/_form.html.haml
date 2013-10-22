@@ -13,7 +13,7 @@
   -@report_configurator.filters.each_with_index do |atr , index|
    %tr
    %td
-    =radio_button_tag "radio", atr.associated_attribute.id , false , id: "radio_#{index}" , :onclick=> "radio_click_change(this.value , this.id)"
+    =radio_button_tag "radio", atr.associated_attribute.id , false , id: "radio_#{index}" , :onclick=> "radio_click_change(this.value , this.id)" , :data => {target: 'reports_composite_configurator_variable_atr'}
    %td
     =text_field_tag "input_text_name_#{index}" , atr.associated_attribute.name
    %td
@@ -21,26 +21,28 @@
    %td
     =check_box_tag "check_#{index}" , "1" , false
    %td
-    =text_field_tag "input_text_higher_#{index}" , nil , :onchange => "input_text_higher_change(this.value , this.id)"
+    =text_field_tag "input_text_higher_#{index}" , nil , :onchange => "input_text_higher_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_higher_to"}
    %td
-    =text_field_tag "input_text_less_to_#{index}" , nil, :onchange => "input_text_less_change(this.value , this.id)"
+    =text_field_tag "input_text_less_to_#{index}" , nil, :onchange => "input_text_less_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_less_to"}
    %td
-    =text_field_tag "input_text_equal_to_#{index}" , nil , :onchange => "input_text_equal_change(this.value , this.id)"
+    =text_field_tag "input_text_equal_to_#{index}" , nil , :onchange => "input_text_equal_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_equal_to"}
    %td
-    =text_field_tag "input_text_different_to_#{index}" , nil , :onchange => "input_text_different_change(this.value , this.id)"
+    =text_field_tag "input_text_different_to_#{index}" , nil , :onchange => "input_text_different_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_different_to"}
 
 
 #div_invisible_form
 = simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
  =f.hidden_field :variable_atr
- =f.fields_for :filters do |p|
-  = p.hidden_field :name_attribute, label: false , :value => p.object.associated_attribute.name
-  = p.hidden_field :filter_attribute , label: false ,  :value => 0
-  = p.hidden_field :higher_to  , label: false
-  = p.hidden_field :less_to  , label: false
-  = p.hidden_field :equal_to  , label: false
-  = p.hidden_field :different_to  , label: false
-  = p.hidden_field :associated_attribute ,label:false , :value => p.object.associated_attribute.id
+ -var = 0
+ =f.fields_for :filters do |p,index|
+  = p.hidden_field :name_attribute, label: false , :value => p.object.associated_attribute.name , :class => "row_#{var}"
+  = p.hidden_field :filter_attribute , label: false ,  :value => 0 , :class => "row_#{var}"
+  = p.hidden_field :higher_to  , label: false , :class => "row_#{var}"
+  = p.hidden_field :less_to  , label: false , :class => "row_#{var}"
+  = p.hidden_field :equal_to  , label: false , :class => "row_#{var}"
+  = p.hidden_field :different_to  , label: false  , :class => "row_#{var}"
+  = p.hidden_field :associated_attribute ,label:false , :value => p.object.associated_attribute.id , :class => "row_#{var}"
+  -var = var + 1
  .actions
  =f.button :submit , 'Realizar Consulta'  , :onclick => "send_form()"
 
