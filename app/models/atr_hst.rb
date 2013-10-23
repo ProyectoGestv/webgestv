@@ -2,10 +2,17 @@ class AtrHst
   include Mongoid::Document
   
   validates_presence_of :value , :tstamp
-  field :value, type:String
+  field :value , type:String
   field :tstamp, type:Integer
   belongs_to :atr
   attr_accessible :value , :tstamp
+
+  scope :by_mcr_attr_and_ts, lambda{|mcr_attr_id, ts| where(:atr_id.in => McrAtr.find_by(id: mcr_attr_id).atrs.map(&:id), tstamp: ts)}
+  scope :by_mcr_attr_and_ts_range, lambda{|mcr_attr_id, below_ts, above_ts| where(:atr_id.in => McrAtr.find_by(id: mcr_attr_id).atrs.map(&:id), :tstamp.gte => below_ts, :tstamp.lte => above_ts)}
+
+
+  scope :by_attr_and_value_range, lambda{|attr_id, below_ts, above_ts| where(:atr_id => Atr.find_by(id: attr_id), :value.gt => below_ts.to_i, :value.lt => above_ts.to_i )}
+  scope :by_attr_and_value_equal, lambda{|attr_id, equal_to| where(:atr_id => Atr.find_by(id: attr_id), :value => equal_to)}
 
 
   def self.calcularestadisticos(historicos)
@@ -85,6 +92,7 @@ class AtrHst
   end
 
 
+  #################################   consultas para realizar el "monitor de parametros compuestos" ####################################
 
 
 end
