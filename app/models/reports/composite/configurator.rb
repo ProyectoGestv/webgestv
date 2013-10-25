@@ -30,6 +30,8 @@ class Reports::Composite::Configurator
 
   def self.find_values_filters(filters)
   values_tstamp = []
+
+
   filters.each do |filter|
 
   puts 'atributo asociado'
@@ -37,24 +39,37 @@ class Reports::Composite::Configurator
 
   if (filter.less_to && filter.higher_to)
    @hsts_rank =   AtrHst.by_attr_and_value_range(filter.associated_attribute , filter.higher_to , filter.less_to)
+   array_rank =[]
    puts 'historicos:'
    puts @hsts_rank.as_json
-   filter_rank = []
    @hsts_rank.each do |hst|
-     filter_rank << hst.tstamp
+     array_rank << hst.tstamp
    end
-   values_tstamp << filter_rank
+   values_tstamp << array_rank
   end
 
   if (filter.equal_to)
     @hsts_equal = AtrHst.by_attr_and_value_equal(filter.associated_attribute , filter.equal_to)
+    array_equal =[]
     puts 'historicos:'
     puts @hsts_equal.as_json
-    filter_equal = []
     @hsts_equal.each do |hst|
-      filter_equal << hst.tstamp
+      array_equal << hst.tstamp
     end
-    values_tstamp << filter_equal
+   values_tstamp << array_equal
+  end
+
+  if (filter.different_to)
+    @hsts_different = AtrHst.by_attr_and_value_different(filter.associated_attribute , filter.different_to)
+    array_different =[]
+    puts 'historicos:'
+    puts @hsts_different.as_json
+    @hsts_different.each do |hst|
+      array_different << hst.tstamp
+    end
+    values_tstamp << array_different
+  end
+
   end
 
 
@@ -63,7 +78,6 @@ class Reports::Composite::Configurator
 
   #consultas para determinar los valores de los filtros
 
-  end
 
   end
 

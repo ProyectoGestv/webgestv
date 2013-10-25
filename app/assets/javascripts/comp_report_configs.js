@@ -185,6 +185,7 @@ function send_form()
         dataType: "json",
         success: function(data)
         {
+        $('#table_composite').html(data.selectt);
         },
         error:function(data)
         {

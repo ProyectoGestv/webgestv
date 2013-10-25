@@ -13,7 +13,7 @@ class AtrHst
 
   scope :by_attr_and_value_range, lambda{|attr_id, below_ts, above_ts| where(:atr_id => Atr.find_by(id: attr_id), :value.gt => below_ts.to_i, :value.lt => above_ts.to_i )}
   scope :by_attr_and_value_equal, lambda{|attr_id, equal_to| where(:atr_id => Atr.find_by(id: attr_id), :value => equal_to)}
-
+  scope :by_attr_and_value_different, lambda{|attr_id, equal_to| where(:atr_id => Atr.find_by(id: attr_id), :value => equal_to)}
 
   def self.calcularestadisticos(historicos)
   @todosdatos = historicos

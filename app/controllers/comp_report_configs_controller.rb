@@ -27,8 +27,8 @@ def search_information
   if @report_configurator.valid?
    @variable_atr = Reports::Composite::Configurator.find_values_variable_atr(@report_configurator.variable_atr);
    @values_filters = Reports::Composite::Configurator.find_values_filters(@report_configurator.filters);
-
-    format.html { render partial:'grafico'}
+   @hst_filtered = AtrHst.all
+   format.js { render :json => { :selectt => render_to_string(:partial => "comp_report_configs/grafico")}}
 
   else
      #busqueda de atributos recibe un param pero inicialmente lo busco directamente en bd
