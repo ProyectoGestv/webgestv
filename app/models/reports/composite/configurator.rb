@@ -17,68 +17,132 @@ class Reports::Composite::Configurator
   end
 
 
-  # encontramos los valores del atributo variable
-
-  def self.find_values_variable_atr(variable_atr)
-   @variable_atr = Atr.find_by(id: variable_atr)
-   return @variable_atr
-  end
-
-
-
   # encontrar los valores de los filtros en un array
 
-  def self.find_values_filters(filters)
-  values_tstamp = []
+  def self.find_values_filters(filters , variable_atr)
+
+  @values_tstamp = Array.new
+  @data = 0
+  @hst
 
 
   filters.each do |filter|
 
-  puts 'atributo asociado'
-  puts filter.associated_attribute
-
   if (filter.less_to && filter.higher_to)
-   @hsts_rank =   AtrHst.by_attr_and_value_range(filter.associated_attribute , filter.higher_to , filter.less_to)
-   array_rank =[]
-   puts 'historicos:'
-   puts @hsts_rank.as_json
-   @hsts_rank.each do |hst|
-     array_rank << hst.tstamp
-   end
-   values_tstamp << array_rank
+
+     if(@data == 0)
+      @hst =   AtrHst.by_attr_and_value_range(filter.associated_attribute , filter.higher_to , filter.less_to)
+     end
+
+     if (@data == 1)
+     @hst =  AtrHst.by_attr_and_value_range_ts(filter.associated_attribute , filter.higher_to , filter.less_to , @values_tstamp)
+     end
+
+     puts 'historicos rango'
+     puts @hst.as_json
+
+     if (@hst != nil )
+       @values_tstamp = capture_values_array(@hst)
+       @data = 1
+     else
+       break
+     end
+
+     puts 'cambio de la variable'
+     puts @data
+     puts @values_tstamp
   end
 
   if (filter.equal_to)
-    @hsts_equal = AtrHst.by_attr_and_value_equal(filter.associated_attribute , filter.equal_to)
-    array_equal =[]
-    puts 'historicos:'
-    puts @hsts_equal.as_json
-    @hsts_equal.each do |hst|
-      array_equal << hst.tstamp
+    if(@data == 0)
+      @hst = AtrHst.by_attr_and_value_equal(filter.associated_attribute , filter.equal_to)
     end
-   values_tstamp << array_equal
+    if(@data == 1)
+    @hst = AtrHst.by_attr_and_value_equal_ts(filter.associated_attribute , filter.equal_to , @values_tstamp)
+    @values_tstamp.clear
+    end
+
+    puts 'historicos igual '
+    puts @hst.as_json
+    puts @data
+    if (@hst != nil)
+      @values_tstamp = capture_values_array(@hst)
+      @data = 1
+    else
+      break
+    end
+
+
+    puts @values_tstamp
+
   end
 
   if (filter.different_to)
-    @hsts_different = AtrHst.by_attr_and_value_different(filter.associated_attribute , filter.different_to)
-    array_different =[]
-    puts 'historicos:'
-    puts @hsts_different.as_json
-    @hsts_different.each do |hst|
-      array_different << hst.tstamp
+    if(@data == 0)
+      @hst = AtrHst.by_attr_and_value_different(filter.associated_attribute , filter.different_to)
     end
-    values_tstamp << array_different
-  end
+    if(@data == 1)
+      @hst = AtrHst.by_attr_and_value_different_ts(filter.associated_attribute , filter.different_to, @values_tstamp)
+      @values_tstamp.clear
+    end
+
+    puts 'historicos diferente'
+    puts @hst.as_json
+    puts @data
+    if (@hst != nil)
+      @values_tstamp = capture_values_array(@hst)
+      @data = 1
+    else
+      break
+    end
+
+    puts @values_tstamp
+
 
   end
 
+  end
 
   puts 'values_tstamp'
-  puts values_tstamp
+  puts @values_tstamp
 
   #consultas para determinar los valores de los filtros
 
+  puts 'este es mi atributo variable'
+  puts variable_atr
+
+
+  @hst_variable_atr = AtrHst.atr_hst_variable_atr(variable_atr , @values_tstamp )
+
+  puts 'valores con filtro de atr variable'
+  puts @hst_variable_atr.as_json
+  puts @hst_variable_atr
+
+  if(@hst_variable_atr.blank?)
+
+   @hst_variable_atr = AtrHst.atr_hst_only_variable_atr(variable_atr)
+   puts 'valores sin filtro de atr variable'
+   puts @hst_variable_atr.as_json
 
   end
 
+  return @hst_variable_atr
+
+  end
+
+  def self.capture_values_array( hsts )
+
+    @array_hst = Array.new
+    hsts.each do |hst|
+    @array_hst << hst.tstamp
+    end
+    @array_hst.uniq!
+    return @array_hst
+
+  end
+
+
 end
+
+
+

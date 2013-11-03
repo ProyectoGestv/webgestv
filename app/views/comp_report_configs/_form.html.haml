@@ -1,3 +1,15 @@
+#div_errors
+ - if @report_configurator.errors.any?
+  #errorExplanation
+   %h2
+    = pluralize(@report_configurator.errors.count, "error")
+    Revise los campos del formulario:
+    %ul
+     - @report_configurator.errors.full_messages.each do |msg|
+      %li
+       = msg
+
+
 #div_visible_form
  %table#table_visible_form.table.table-bordered
   %tittle
@@ -31,7 +43,7 @@
 
 
 #div_invisible_form
-= simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
+=simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
  =f.hidden_field :variable_atr
  -var = 0
  =f.fields_for :filters do |p,index|
@@ -43,6 +55,6 @@
   = p.hidden_field :different_to  , label: false  , :class => "row_#{var}"
   = p.hidden_field :associated_attribute ,label:false , :value => p.object.associated_attribute.id , :class => "row_#{var}"
   -var = var + 1
- .actions
- =f.button :submit , 'Realizar Consulta'  , :onclick => "send_form()"
+
+ %button{onclick: "send_form()", type: "button" , class: "btn btn-default"} Realizar Consulta
 

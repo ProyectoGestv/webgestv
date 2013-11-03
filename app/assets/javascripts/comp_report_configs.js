@@ -1,4 +1,7 @@
-$(document).ready(function()
+$(document).ready(create_options_form);
+
+
+function create_options_form()
 {
    var  prev_checked_radio;
    /* capture de last row  seleccionando uno de los campos*/
@@ -27,7 +30,6 @@ $(document).ready(function()
         prev_checked_radio = id_row_str;
    });
 
-
    $('input[type=checkbox]').on("click",function()
    {
       var   value_check = 1 ;
@@ -47,7 +49,7 @@ $(document).ready(function()
           $('#reports_composite_configurator_filters_attributes_'+id_row_str_uncheck+'_filter_attribute').val(value_check);
       }
    });
-   });
+   }
 
 
 
@@ -106,6 +108,11 @@ function unblock_row_by_type(rownumber)
 function remove_row(rownumber)
 {
   $('.row_'+rownumber+'').attr("disabled",true);
+}
+
+function enable_row(rownumber)
+{
+$('.row_'+rownumber+'').attr("disabled",false);
 }
 
 function verify_fields_and_remove(rownumber)
@@ -189,7 +196,17 @@ function send_form()
         },
         error:function(data)
         {
+         $('#form_composite').change();
+         $('#form_composite').html(data.responseText);
+         create_options_form();
         }
     });
+
+    for(i=0;i<=integer_radio;i++)
+    {
+     enable_row(i);
+    }
+
+
 
 }

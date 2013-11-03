@@ -27,7 +27,6 @@ function enviarinformacion()
         var strUser = e.options[e.selectedIndex].value;
         visibletiempofecha(strUser);
         }
-
         });
 
 
