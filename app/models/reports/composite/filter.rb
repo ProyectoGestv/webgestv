@@ -9,7 +9,14 @@ class Reports::Composite::Filter
   attribute :higher_to
   attribute :less_to
   attribute :name_attribute
+
   attr_accessor :filter_attribute , :equal , :different_to , :higher_to , :less_to , :name_attribute , :associated_attribute
+
+  validates_presence_of :less_to
+  validates_presence_of :higher_to
+  validates_presence_of :different_to
+
+
 
 
   def associated_attribute_attributes=(attributes)
