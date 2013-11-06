@@ -12,11 +12,9 @@ class Reports::Composite::Filter
   attr_accessor :filter_attribute , :equal , :different_to , :higher_to , :less_to , :name_attribute , :associated_attribute
 
 
-
   def associated_attribute_attributes=(attributes)
     @associated_attribute = Atr.find(attributes)
   end
-
 
 
 end

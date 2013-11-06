@@ -7,7 +7,6 @@ class Reports::Composite::Configurator
   attribute :filters
   attr_accessor  :variable_atr, :filters
 
-  validates_presence_of :variable_atr , message: "debe seleccionar uno"
 
   def filters_attributes=(filters)
     @filters = []
@@ -15,6 +14,9 @@ class Reports::Composite::Configurator
      @filters << Reports::Composite::Filter.new(filters[index])
     end
   end
+
+
+  validates_presence_of :variable_atr , message: "debe seleccionar un Atributo variable"
 
 
   # encontrar los valores de los filtros en un array
