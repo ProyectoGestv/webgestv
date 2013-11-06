@@ -17,8 +17,18 @@ class Reports::Composite::Configurator
 
 
   validates_presence_of :variable_atr , message: "debe seleccionar un Atributo variable"
+  validates_presence_of :filters
+  validate :filters_validity
 
-
+  def filters_validity
+    if filters.empty?
+      errors.add(:filters, 'You must setting up at least one filter')
+    else
+      filters.each do |filter|
+        errors.add(:filters, "the filter with id: #{filter.associated_attribute.id} is invalid")  unless filter.present? && filter.filter_attribute == 1 &&filter.valid?
+      end
+    end
+  end
   # encontrar los valores de los filtros en un array
 
   def self.find_values_filters(filters , variable_atr)
