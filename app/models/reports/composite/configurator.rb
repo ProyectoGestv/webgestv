@@ -25,7 +25,10 @@ class Reports::Composite::Configurator
       errors.add(:filters, 'You must setting up at least one filter')
     else
       filters.each do |filter|
-        errors.add(:filters, "the filter with id: #{filter.associated_attribute.id} is invalid")  unless filter.present? && filter.filter_attribute == 1 &&filter.valid?
+        unless filter.valid?
+          errors.add(:filters, "the filter with id: #{filter.associated_attribute.id} is invalid")  unless filter.valid?
+          filter.errors.messages.each {|message| puts message}
+        end
       end
     end
   end
