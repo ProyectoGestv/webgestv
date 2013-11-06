@@ -26,7 +26,7 @@ class Reports::Composite::Configurator
     else
       filters.each do |filter|
         unless filter.valid?
-          errors.add(:filters, "the filter with id: #{filter.associated_attribute.id} is invalid")  unless filter.valid?
+          errors.add(:filters, "the filter with id: #{filter.associated_attribute.id} is invalid")
           filter.errors.messages.each {|message| puts message}
         end
       end
