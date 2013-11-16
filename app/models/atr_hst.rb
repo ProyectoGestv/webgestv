@@ -10,20 +10,18 @@ class AtrHst
   scope :by_mcr_attr_and_ts, lambda{|mcr_attr_id, ts| where(:atr_id.in => McrAtr.find_by(id: mcr_attr_id).atrs.map(&:id), tstamp: ts)}
   scope :by_mcr_attr_and_ts_range, lambda{|mcr_attr_id, below_ts, above_ts| where(:atr_id.in => McrAtr.find_by(id: mcr_attr_id).atrs.map(&:id), :tstamp.gte => below_ts, :tstamp.lte => above_ts)}
 
-
   scope :by_attr_and_value_range, lambda{|attr_id, below_ts, above_ts| where(:atr_id => Atr.find_by(id: attr_id), :value.gt => below_ts.to_i, :value.lt => above_ts.to_i )}
   scope :by_attr_and_value_equal, lambda{|attr_id, equal_to| where(:atr_id => Atr.find_by(id: attr_id), :value => equal_to)}
   scope :by_attr_and_value_different, lambda{|attr_id, different_to| where(:atr_id => Atr.find_by(id: attr_id) , :value.ne => different_to )}
-
 
   scope :by_attr_and_value_range_ts, lambda{|attr_id, below_ts, above_ts , ts| where(:atr_id => Atr.find_by(id: attr_id), :value.gt => below_ts.to_i, :value.lt => above_ts.to_i , :tstamp.in => ts )}
   scope :by_attr_and_value_equal_ts, lambda{|attr_id, equal_to , ts| where(:atr_id => Atr.find_by(id: attr_id), :value => equal_to , :tstamp.in => ts)}
   scope :by_attr_and_value_different_ts, lambda{|attr_id, different_to , ts| where(:atr_id => Atr.find_by(id: attr_id), :value.ne => different_to , :tstamp.in => ts )}
 
+  scope :by_attr_and_value, lambda{|attr_id, query| where(:atr_id => Atr.find_by(id: attr_id)).where(*query)}
 
   scope :atr_hst_variable_atr , lambda{|attr_id , ts | where(:atr_id => Atr.find_by(id: attr_id ) , :tstamp.in => ts )}
   scope :atr_hst_only_variable_atr , lambda{|attr_id| where(:atr_id => Atr.find_by(id: attr_id ))}
-
   scope :by_time_array , lambda{|ts| where(:tstamp => ts)}
 
   def self.calcularestadisticos(historicos)
