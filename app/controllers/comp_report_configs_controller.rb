@@ -41,7 +41,7 @@ def search_information
 
   @report_configurator_params = Reports::Composite::Configurator.new(params[:reports_composite_configurator])
 
-  @report_configurator= Reports::Composite::Configurator.update_attributes( @report_configurator , @report_configurator_params)
+  @report_configurator= Reports::Composite::Configurator.update_attributes(@report_configurator , @report_configurator_params)
 
   puts 'actualizados'
   puts  @report_configurator.as_json

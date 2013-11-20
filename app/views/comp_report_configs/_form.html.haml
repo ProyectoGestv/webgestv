@@ -24,35 +24,35 @@
   -@report_configurator.filters.each_with_index do |filter , index|
    %tr
    %td
-    =radio_button_tag "radio", filter.associated_attribute , false , id: "radio_#{index}" , :onclick=> "radio_click_change(this.value , this.id)" , :data => {target: 'reports_composite_configurator_variable_atr'}  , :class => "row_visible_#{index}"
+    =radio_button_tag "radio", filter.associated_attribute , false , id: "radio_#{index}" , :onclick=> "radio_click_change(this.value , this.id)" , :data => {target: 'reports_composite_configurator_variable_atr'}  , :class => "row_visible_#{index} input_radio_visible"
    %td
     =text_field_tag "input_text_name_#{index}" , filter.name_attribute  , :class => "row_visible_#{index}"
    %td
-    =text_field_tag "input_text_type_#{index}" , filter.tipo_attribute , :class => "row_visible_#{index}"
+    =text_field_tag "input_text_type_#{index}" , filter.tipo_attribute , :class => "row_visible_#{index} "
    %td
-    =check_box_tag "check_#{index}" , "1" , false , :class => "row_visible_#{index}" , :onclick=> "check_change(this.value , this.id)"
+    =check_box_tag "check_#{index}" , "1" , false , :class => "row_visible_#{index} input_check_visible " , :onclick=> "check_change(this.value , this.id)"
    %td
-    =text_field_tag "input_text_higher_#{index}" , nil , :onchange => "input_text_higher_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_higher_to"} , :class => "row_visible_#{index} text_field_v_#{index}"
+    =text_field_tag "input_text_higher_#{index}" , nil , :onchange => "input_text_higher_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_higher_to"} , :class => "row_visible_#{index} text_field_v_#{index} input_text_field"
    %td
-    =text_field_tag "input_text_less_to_#{index}" , nil, :onchange => "input_text_less_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_less_to"} , :class => "row_visible_#{index} text_field_v_#{index}"
+    =text_field_tag "input_text_less_to_#{index}" , nil, :onchange => "input_text_less_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_less_to"} , :class => "row_visible_#{index} text_field_v_#{index} input_text_field"
    %td
-    =text_field_tag "input_text_equal_to_#{index}" , nil , :onchange => "input_text_equal_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_equal_to"} , :class => "row_visible_#{index} text_field_v_#{index}"
+    =text_field_tag "input_text_equal_to_#{index}" , nil , :onchange => "input_text_equal_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_equal_to"} , :class => "row_visible_#{index} text_field_v_#{index} input_text_field"
    %td
-    =text_field_tag "input_text_different_to_#{index}" , nil , :onchange => "input_text_different_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_different_to"} , :class => "row_visible_#{index} text_field_v_#{index}"
+    =text_field_tag "input_text_different_to_#{index}" , nil , :onchange => "input_text_different_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_different_to"} , :class => "row_visible_#{index} text_field_v_#{index} input_text_field"
 
 
 #div_invisible_form
 =simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
- =f.hidden_field :variable_atr , :value => f.object.variable_atr
+ =f.hidden_field :variable_atr , :value => f.object.variable_atr , :class => "input_radio"
  -var = 0
  =f.fields_for :filters do |p,index|
   = p.hidden_field :name_attribute, label: false , :value => p.object.name_attribute , :class => "row_#{var}"
   = p.hidden_field :tipo_attribute, label: false , :value => p.object.tipo_attribute , :class => "row_#{var}"
-  = p.hidden_field :filter_attribute , label: false ,  :value => p.object.filter_attribute , :class => "row_#{var}"
-  = p.hidden_field :higher_to  , label: false , :class => "row_#{var} text_field#{var}" , :value => p.object.higher_to
-  = p.hidden_field :less_to  , label: false , :class => "row_#{var} text_field#{var}" , :value => p.object.less_to
-  = p.hidden_field :equal_to  , label: false , :class => "row_#{var} text_field#{var}" , :value => p.object.equal_to
-  = p.hidden_field :different_to  , label: false  , :class => "row_#{var} text_field#{var}" , :value => p.object.different_to
+  = p.hidden_field :filter_attribute , label: false ,  :value => p.object.filter_attribute , :class => "row_#{var}  input_check"
+  = p.hidden_field :higher_to  , label: false , :class => "row_#{var} text_field#{var} input_field" , :value => p.object.higher_to
+  = p.hidden_field :less_to  , label: false , :class => "row_#{var} text_field#{var} input_field" , :value => p.object.less_to
+  = p.hidden_field :equal_to  , label: false , :class => "row_#{var} text_field#{var} input_field" , :value => p.object.equal_to
+  = p.hidden_field :different_to  , label: false  , :class => "row_#{var} text_field#{var} input_field" , :value => p.object.different_to
   = p.hidden_field :associated_attribute ,label:false , :value => p.object.associated_attribute, :class => "row_#{var}"
   -var = var + 1
  %button{onclick: "send_form()", type: "button" , class: "btn btn-default"} Realizar Consulta
