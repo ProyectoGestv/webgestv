@@ -32,9 +32,9 @@ class Reports::Composite::Configurator
 
 
   def self.update_attributes(report_configurator, params)
-
     report_configurator.variable_atr = params.variable_atr
     report_configurator.filters.each do |filter|
+      if params.filters != nil
       params.filters.each do |filter_param|
         if filter_param.associated_attribute.to_s == filter.associated_attribute.to_s
           filter.different_to = filter_param.different_to
@@ -44,6 +44,7 @@ class Reports::Composite::Configurator
           filter.less_to = filter_param.less_to
         end
       end
+      end
     end
     return report_configurator
   end
@@ -51,104 +52,77 @@ class Reports::Composite::Configurator
 
   def self.find_values_filters(filters, variable_atr)
 
-    @values_tstamp = Array.new
-    flag = 0
-    @hst
+    values_tstamp = Array.new
+    first_filter = nil
 
     filters.each do |filter|
 
-      if filter.less_to && filter.higher_to
+      puts 'problemas filter', filter.filter_attribute.nil?
 
-        if flag == 0
-          @hst = AtrHst.by_attr_and_value_range(filter.associated_attribute, filter.higher_to, filter.less_to)
+      if !filter.filter_attribute.nil?
+
+        puts 'entro'
+
+      if  first_filter != nil && values_tstamp   #van por rango de tiempos
+
+        if filter.less_to && filter.higher_to
+          hst =  AtrHst.by_attr_and_value(filter.associated_attribute , ([{:value.gt => filter.higher_to, :value.lt => filter.less_to , :tstamp.in => values_tstamp}]).to_a)
         end
 
-        if flag == 1
-          @hst = AtrHst.by_attr_and_value_range_ts(filter.associated_attribute, filter.higher_to, filter.less_to, @values_tstamp)
+        if filter.equal_to  != nil
+          hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value => filter.equal_to , :tstamp.in => values_tstamp }]).to_a )
         end
 
-        if @hst != nil
-          @values_tstamp = capture_values_array(@hst)
-          flag = 1
-        else
-          break
+        if filter.different_to
+          hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value.ne => filter.different_to , :tstamp.in => values_tstamp }]).to_a )
         end
-
-        puts 'historicos rango'
-        puts @hst.as_json
-        puts 'bandera'
-        puts flag
-        puts 'array tstamp'
-        puts @values_tstamp
-      end
-
-
-      if filter.equal_to
-
-        if flag == 0
-          @hst = AtrHst.by_attr_and_value_equal(filter.associated_attribute, filter.equal_to)
-        end
-
-        if flag == 1
-          @hst = AtrHst.by_attr_and_value_equal_ts(filter.associated_attribute, filter.equal_to, @values_tstamp)
-          @values_tstamp.clear
-        end
-
-        if @hst != nil
-          @values_tstamp = capture_values_array(@hst)
-          flag = 1
-        else
-          break
-        end
-
-        puts 'historicos igual a'
-        puts @hst.as_json
-        puts 'bandera'
-        puts flag
-        puts 'array tstamp'
-        puts @values_tstamp
 
       end
 
-      if  filter.different_to
+      if first_filter == nil
 
-        if flag == 0
-          @hst = AtrHst.by_attr_and_value_different(filter.associated_attribute, filter.different_to)
+        puts 'entro_b'
+
+        first_filter = filter.associated_attribute.to_s
+
+        if filter.less_to && filter.higher_to
+          hst =  AtrHst.by_attr_and_value(filter.associated_attribute , ([{:value.gt => filter.higher_to, :value.lt => filter.less_to}]).to_a)
         end
 
-        if flag == 1
-          @hst = AtrHst.by_attr_and_value_different_ts(filter.associated_attribute, filter.different_to, @values_tstamp)
-          @values_tstamp.clear
+        if filter.equal_to
+          hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value => filter.equal_to}]).to_a )
         end
 
-        if @hst != nil
-          @values_tstamp = capture_values_array(@hst)
-          flag = 1
-        else
-          break
+        if filter.different_to
+          hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value.ne => filter.different_to}]).to_a )
         end
 
-        puts 'historicos diferente a'
-        puts @hst.as_json
-        puts 'bandera'
-        puts flag
-        puts 'array tstamp'
-        puts @values_tstamp
+      end
 
+      if !hst.nil?
+        puts 'historicos'
+        puts hst.as_json
+        values_tstamp.clear
+        values_tstamp = capture_values_array(hst)
+         puts 'con bandera'
+         puts values_tstamp
+      else
+        break
       end
 
     end
 
+  end
+
 
     #consultas para determinar los valores de los filtros
-
     puts 'este es mi atributo variable'
     puts variable_atr
     puts 'array_tstamp'
-    puts @values_tstamp
+    puts values_tstamp
 
 
-    if @values_tstamp.blank?
+    if values_tstamp.blank?
 
       @hst_variable_atr = AtrHst.atr_hst_only_variable_atr(variable_atr)
       puts 'valores sin filtro de array de atr variable'
@@ -156,7 +130,7 @@ class Reports::Composite::Configurator
 
     else
 
-      @hst_variable_atr = AtrHst.atr_hst_variable_atr(variable_atr, @values_tstamp)
+      @hst_variable_atr = AtrHst.atr_hst_variable_atr(variable_atr, values_tstamp)
       puts 'valores con filtro de atr variable'
       puts @hst_variable_atr.as_json
 
