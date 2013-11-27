@@ -1,4 +1,3 @@
-var integer_radio;
 var  prev_checked_radio;
 $(document).ready(create_options_form);
 
@@ -40,13 +39,13 @@ function unblock_row_by_type(rownumber)
  var type  = $("#input_text_type_"+rownumber).val();
  // string
  if (type == 'string')
- {   $("#input_text_equal_to_"+rownumber).attr("disabled", true);
-     $("#input_text_different_to_"+rownumber).attr("disabled", true);
+ {   $("#input_text_higher_"+rownumber).attr("disabled", true);
+     $("#input_text_less_to_"+rownumber).attr("disabled", true);
  }
  //boolean
  if (type == 'boolean')
- {   $("#input_text_equal_to_"+rownumber).attr("disabled", true);
-     $("#input_text_different_to_"+rownumber).attr("disabled", true);
+ {   $("#input_text_higher_"+rownumber).attr("disabled", true);
+     $("#input_text_less_to_"+rownumber).attr("disabled", true);
  }
 }
 
@@ -66,14 +65,19 @@ function radio_click_change(value , id)
     $('#'+id_invisible_atr+'').val(value);
     id_row_str = $('#'+id+'').attr('id').replace(/\D/g, '');
     block_row(id_row_str , 1);
-    if (prev_checked_radio)
+    if (prev_checked_radio != null)
     {
         if(!$("#radio_"+prev_checked_radio).is(":checked"))
         {
+            console.log('Hola no checked');
+            console.log(prev_checked_radio);
             block_row(prev_checked_radio,2);
         }
-        if($("#radio_"+prev_checked_radio).is(":checked"))
+        if($("#radio_"+prev_checked_radio).is(":checked") && id_row_str != prev_checked_radio)
         {
+
+            console.log('Hola checked');
+            console.log(prev_checked_radio);
             unblock_row(prev_checked_radio , 1);
         }
     }
@@ -197,8 +201,6 @@ function recovery_fields()
     {
         enable_row(index_radio);
         var filter_atr = $('#reports_composite_configurator_filters_attributes_'+index_radio+'_filter_attribute').val();
-
-
         if (variable_atr == $("#"+field_radio.id+"").val())
         {
             $("#"+field_radio.id+"").prop('checked',true);

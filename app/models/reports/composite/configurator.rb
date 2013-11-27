@@ -22,7 +22,7 @@ class Reports::Composite::Configurator
 
   def filters_validity
     filters.each do |filter|
-      if (filter.filter_attribute != nil)
+      if filter.filter_attribute.present?
         unless filter.valid?
           errors.add(:filters, "El filtro con nombre: #{filter.name_attribute} es invalido ")
         end
@@ -34,7 +34,7 @@ class Reports::Composite::Configurator
   def self.update_attributes(report_configurator, params)
     report_configurator.variable_atr = params.variable_atr
     report_configurator.filters.each do |filter|
-      if params.filters != nil
+      if params.filters.present?
       params.filters.each do |filter_param|
         if filter_param.associated_attribute.to_s == filter.associated_attribute.to_s
           filter.different_to = filter_param.different_to
@@ -57,56 +57,62 @@ class Reports::Composite::Configurator
 
     filters.each do |filter|
 
-      puts 'problemas filter', filter.filter_attribute.nil?
+      puts 'problemas filter', filter.filter_attribute.nil? , filter.filter_attribute.present?
 
-      if !filter.filter_attribute.nil?
+      if filter.filter_attribute.present?
 
         puts 'entro'
 
-      if  first_filter != nil && values_tstamp   #van por rango de tiempos
 
-        if filter.less_to && filter.higher_to
+      if  first_filter.present? && values_tstamp.present?   #van por rango de tiempos
+
+        if filter.less_to.present? && filter.higher_to.present?
           hst =  AtrHst.by_attr_and_value(filter.associated_attribute , ([{:value.gt => filter.higher_to, :value.lt => filter.less_to , :tstamp.in => values_tstamp}]).to_a)
         end
 
-        if filter.equal_to  != nil
+        if filter.equal_to.present?
+          puts 'entro equal present'
           hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value => filter.equal_to , :tstamp.in => values_tstamp }]).to_a )
         end
 
-        if filter.different_to
+        if filter.different_to.present?
+          puts 'entro a diferente'
           hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value.ne => filter.different_to , :tstamp.in => values_tstamp }]).to_a )
         end
 
       end
 
-      if first_filter == nil
+      if !first_filter.present?
 
         puts 'entro_b'
 
         first_filter = filter.associated_attribute.to_s
 
-        if filter.less_to && filter.higher_to
+        if filter.less_to.present? && filter.higher_to.present?
           hst =  AtrHst.by_attr_and_value(filter.associated_attribute , ([{:value.gt => filter.higher_to, :value.lt => filter.less_to}]).to_a)
         end
 
-        if filter.equal_to
+        if filter.equal_to.present?
+          puts 'entro present equal'
           hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value => filter.equal_to}]).to_a )
         end
 
-        if filter.different_to
+        if filter.different_to.present?
           hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value.ne => filter.different_to}]).to_a )
         end
 
       end
 
-      if !hst.nil?
+      if hst.present?
         puts 'historicos'
         puts hst.as_json
         values_tstamp.clear
         values_tstamp = capture_values_array(hst)
+        hst.clear
          puts 'con bandera'
          puts values_tstamp
       else
+        values_tstamp.clear
         break
       end
 
