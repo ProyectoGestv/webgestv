@@ -2,12 +2,14 @@
  - if @report_configurator.errors.any?
   #errorExplanation
    %h2
-    = pluralize(@report_configurator.errors.count, "error")
+    = pluralize(@report_configurator.errors.count, 'error')
     Revise los campos del formulario:
-    %ul
-     - @report_configurator.errors.full_messages.each do |msg|
-      %li
-       = msg
+    - @report_configurator.filters.each do |filter|
+     %ul
+      - filter.errors.full_messages.each do |msg|
+       %li
+        = "filtro #{Atr.find_by(id: filter.associated_attribute).name}: "
+        = msg
 
 #div_visible_form
  %table#table_visible_form.table.table-bordered
