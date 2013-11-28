@@ -6,7 +6,7 @@
     Revise los campos del formulario:
     - @report_configurator.filters.each do |filter|
      %ul
-      - filter.errors.full_messages.each do |msg|
+      - filter.errors.messages.values.flatten.each do |msg|
        %li
         = "filtro #{Atr.find_by(id: filter.associated_attribute).name}: "
         = msg
