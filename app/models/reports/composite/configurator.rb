@@ -57,34 +57,25 @@ class Reports::Composite::Configurator
 
     filters.each do |filter|
 
-      puts 'problemas filter', filter.filter_attribute.nil? , filter.filter_attribute.present?
-
       if filter.filter_attribute.present?
 
-        puts 'entro'
-
-
-      if  first_filter.present? && values_tstamp.present?   #van por rango de tiempos
+       if  first_filter.present? && values_tstamp.present?   #van por rango de tiempos
 
         if filter.less_to.present? && filter.higher_to.present?
           hst =  AtrHst.by_attr_and_value(filter.associated_attribute , ([{:value.gt => filter.higher_to, :value.lt => filter.less_to , :tstamp.in => values_tstamp}]).to_a)
         end
 
         if filter.equal_to.present?
-          puts 'entro equal present'
           hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value => filter.equal_to , :tstamp.in => values_tstamp }]).to_a )
         end
 
         if filter.different_to.present?
-          puts 'entro a diferente'
           hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value.ne => filter.different_to , :tstamp.in => values_tstamp }]).to_a )
         end
 
       end
 
       if !first_filter.present?
-
-        puts 'entro_b'
 
         first_filter = filter.associated_attribute.to_s
 
@@ -93,7 +84,6 @@ class Reports::Composite::Configurator
         end
 
         if filter.equal_to.present?
-          puts 'entro present equal'
           hst = AtrHst.by_attr_and_value(filter.associated_attribute, ([{:value => filter.equal_to}]).to_a )
         end
 
@@ -104,13 +94,9 @@ class Reports::Composite::Configurator
       end
 
       if hst.present?
-        puts 'historicos'
-        puts hst.as_json
         values_tstamp.clear
         values_tstamp = capture_values_array(hst)
         hst.clear
-         puts 'con bandera'
-         puts values_tstamp
       else
         values_tstamp.clear
         break
@@ -122,24 +108,12 @@ class Reports::Composite::Configurator
 
 
     #consultas para determinar los valores de los filtros
-    puts 'este es mi atributo variable'
-    puts variable_atr
-    puts 'array_tstamp'
-    puts values_tstamp
-
-
     if values_tstamp.blank?
 
       @hst_variable_atr = AtrHst.atr_hst_only_variable_atr(variable_atr)
-      puts 'valores sin filtro de array de atr variable'
-      puts @hst_variable_atr.as_json
-
     else
 
       @hst_variable_atr = AtrHst.atr_hst_variable_atr(variable_atr, values_tstamp)
-      puts 'valores con filtro de atr variable'
-      puts @hst_variable_atr.as_json
-
     end
 
     return @hst_variable_atr

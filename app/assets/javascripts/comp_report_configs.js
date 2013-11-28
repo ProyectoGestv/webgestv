@@ -196,7 +196,6 @@ function recovery_fields()
         });
     });
 
-
     $.each($(".input_radio_visible"),function(index_radio , field_radio)
     {
         enable_row(index_radio);
