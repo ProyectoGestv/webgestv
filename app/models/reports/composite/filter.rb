@@ -11,13 +11,12 @@ class Reports::Composite::Filter
   attribute :less_to
   attribute :name_attribute
   attribute :tipo_attribute
-
   attr_accessor  :tipo_attribute , :filter_attribute , :equal , :different_to , :higher_to , :less_to , :name_attribute , :associated_attribute
 
 
   validate :validate_presence_filter
   validates_numericality_of :higher_to, :only_integer => false, :allow_nil => false, :message => "debe ser un número entero o decimal."
-  validates_numericality_of :less_to, :only_integer => false, :allow_nil => false,:message => "cldebe ser un número entero o decimal."
+  validates_numericality_of :less_to, :only_integer => false, :allow_nil => false,:message => "debe ser un número entero o decimal."
 
 def validate_presence_filter
 

@@ -159,10 +159,12 @@ function send_form()
 {    verify_fields_and_remove();
      verify_data_to_send();
      var valuesconfig = $('#form_report_composite').serialize();
+     var value = $('#mcr_atr_configurator').val();
+
      jQuery.ajax({
         type: "POST" ,
         url: "/send_form",
-        data: valuesconfig,
+        data:"mcr_atr="+value+"&reports_composite_configurator"+valuesconfig,
         dataType: "json",
         success: function(data)
         {

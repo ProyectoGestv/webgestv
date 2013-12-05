@@ -42,6 +42,8 @@
    %td
     =text_field_tag "input_text_different_to_#{index}" , nil , :onchange => "input_text_different_change(this.value , this.id)" , :data => {target: "reports_composite_configurator_filters_attributes_#{index}_different_to"} , :class => "row_visible_#{index} text_field_v_#{index} input_text_field"
 
+#div_field_mcr_atr
+ %input{ :type => 'hidden' , :value => @search_mcr_atr , :id => 'mcr_atr_configurator'}
 
 #div_invisible_form
 =simple_form_for  @report_configurator , id:'form_report_composite_config', remote:true , :html => {:id =>'form_report_composite'} , :url => {:action => 'search_information'}  do |f|
