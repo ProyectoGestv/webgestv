@@ -7,12 +7,20 @@ Webgestv::Application.routes.draw do
   #match 'users/:id' => 'users#destroy', :via => :delete
   resources :users
   resources :atr_hsts
+
+
   match "/reports/index" => "reports#index"
   match '/reports/datostiemporeal' => 'reports#datostiemporeal'
   match '/actualizartabla' => 'reports#actualizartabla'
   match '/buscaratributo' => 'reports#buscaratributo'
   match '/buscarmacroatributo' => 'reports#buscarmacroatr'
   match '/rango' => 'reports#rango'
+
+
+  match '/report_composite/index' => 'comp_report_configs#index'
+  match '/send_form'=> 'comp_report_configs#search_information' , :via => :post
+
+
   resources :topologies
   resources :alrts
 

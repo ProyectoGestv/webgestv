@@ -14,6 +14,7 @@ class Atr
   belongs_to :mcr_atr
   has_many :alrts
   has_many :atr_hsts
+  has_one :monitor_atr_composite
   embeds_one :qos_mon, :class_name => 'AlrMntr'
   embeds_one :alr_mon, :class_name => 'AlrMntr'
   accepts_nested_attributes_for :qos_mon, :alr_mon

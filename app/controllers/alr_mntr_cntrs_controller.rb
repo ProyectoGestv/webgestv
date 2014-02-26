@@ -8,7 +8,7 @@ class AlrMntrCntrsController < ApplicationController
     @alr_mntr_cntrs = AlrMntrCntr.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @alr_mntr_cntrs }
     end
   end

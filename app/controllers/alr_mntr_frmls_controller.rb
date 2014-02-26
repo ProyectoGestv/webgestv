@@ -6,7 +6,7 @@ class AlrMntrFrmlsController < ApplicationController
     @alr_mntr_frmls = AlrMntrFrml.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @alr_mntr_frmls }
     end
   end

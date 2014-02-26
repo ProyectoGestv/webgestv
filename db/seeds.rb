@@ -13,7 +13,10 @@ McrAtr.delete_all
 Atr.delete_all
 Alrt.delete_all
 User.delete_all
-(1..5).each do |i|
+
+macomposite=McrAtr.create(name:"ma12", desc: "macro attribute composite", tipo: "composite")
+
+(1..2).each do |i|
   conn0= Conn.new(ip: "1.1.0.#{i}", port: i)
   laynetele = LaynetEle.create(name: "nle#{i}", domain:'SNMPServerIntegration', desc: "network layer element #{i}")
   laynetele.conn=conn0
@@ -24,8 +27,28 @@ User.delete_all
   serv=Serv.create(name:"s#{i}",  domain: netele.name, desc: "service #{i}", mother: netele._id)
   serv.conn=conn2
   ma=McrAtr.create(name:"ma#{i}", desc: "macro attribute #{i}", tipo: "simple")
+
   serv.mcr_atrs << ma
+  serv.mcr_atrs << macomposite
+  (10..20).each do |t|
+    a5=Atr.create(name:"a#{t+20+i}", desc: "attribute #{t+20+i}", tipo: "integer")
+    macomposite.atrs << a5
+    (1..100).each do |n|
+      h1 = AtrHst.create(value: 1+i+n , tstamp: Chronic.parse('today').to_i)
+      a5.atr_hsts << h1
+    end
+
+  end
+  (21..22).each do |t|
+    a6=Atr.create(name:"a#{t+20+i}", desc: "attribute #{t+20+i}", tipo: "string")
+    macomposite.atrs << a6
+
+    h1 = AtrHst.create(value: t+10+i , tstamp: Chronic.parse('today').to_i)
+    a6.atr_hsts << h1
+
+  end
   a1=Atr.create(name:"a#{i}", desc: "attribute #{i}", tipo: "integer")
+  a2=Atr.create(name:"a#{i+20}", desc: "attribute #{i+20}", tipo: "integer")
   ma.atrs << a1
 
   tsini=Time.now.to_i+i
@@ -68,8 +91,3 @@ user = User.create! :name => 'juan', :role => 'admin', :email => 'juan@example.c
 puts 'New user created: ' << user.name
 user2 = User.create! :name => 'cho', :role => 'oper', :email => 'cho@example.com', :password => 'jajaja', :password_confirmation => 'jajaja'
 puts 'New user created: ' << user2.name
-
-
-
- 
-  

@@ -1,5 +1,12 @@
 var valoresenviar;
 
+$(document).ready(function()
+{
+ var recurso = $('#report_manrsc').val()
+
+});
+
+
 function enviarinformacion()
 {
     valoresenviar = $('#formu').serialize();
@@ -27,7 +34,6 @@ function enviarinformacion()
         var strUser = e.options[e.selectedIndex].value;
         visibletiempofecha(strUser);
         }
-
         });
 
 
@@ -54,7 +60,7 @@ function recargarmacroatributo(id){
     jQuery.ajax({
         url: "/buscarmacroatributo",
         type: "GET",
-        data: {"manrsc" : id},
+        data: {"manrsc" : id  },
         dataType: "html",
         success: function(data)
         {
