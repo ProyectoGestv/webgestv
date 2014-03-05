@@ -75,5 +75,4 @@ group :development, :test do
   gem 'debugger'
   gem 'haml-rails'
   gem 'better_errors'
->>>>>>> composite_new
 end
