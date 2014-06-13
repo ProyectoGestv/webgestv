@@ -95,7 +95,7 @@ class UploadsController < ApplicationController
 
     if man_rsc.mngbl
       #Remueve el MR a través de una llamada al webservice del núcleo
-      http = Net::HTTP.new("192.168.119.35",9999)
+      http = Net::HTTP.new("192.168.119.163",9999)
       post_params = {'ip' => man_rsc.conn.ip, 'port' => man_rsc.conn.port}
       request = Net::HTTP::Delete.new("/mbs/#{man_rsc.domain}/#{man_rsc.name}")
       request.set_form_data(post_params)

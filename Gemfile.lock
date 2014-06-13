@@ -20,6 +20,9 @@ GEM
       rack-cache (~> 1.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.2.1)
+    active_attr (0.8.3)
+      activemodel (>= 3.0.2, < 4.2)
+      activesupport (>= 3.0.2, < 4.2)
     activemodel (3.2.11)
       activesupport (= 3.2.11)
       builder (~> 3.0.0)
@@ -59,9 +62,16 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    columnize (0.8.9)
     d3-rails (0.0.5)
       railties (>= 3.1)
     debug_inspector (0.0.2)
+    debugger (1.6.6)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.3.2)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.3.2)
     descriptive-statistics (2.1.0)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
@@ -96,6 +106,7 @@ GEM
       callsite
       rack-contrib
       railties
+    method_source (0.8.2)
     mime-types (1.25)
     mini_portile (0.5.1)
     mongoid (3.1.4)
@@ -112,6 +123,15 @@ GEM
     origin (1.1.0)
     orm_adapter (0.4.0)
     polyglot (0.3.3)
+    pry (0.9.12.6)
+      coderay (~> 1.0)
+      method_source (~> 0.8)
+      slop (~> 3.4)
+    pry-doc (0.6.0)
+      pry (~> 0.9)
+      yard (~> 0.8)
+    pry-nav (0.2.3)
+      pry (~> 0.9.10)
     rack (1.4.5)
     rack-cache (1.2)
       rack (>= 0.4)
@@ -141,6 +161,7 @@ GEM
     rdoc (3.12.2)
       json (~> 1.4)
     ref (1.0.5)
+    ruby-prof (0.15.0)
     sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
@@ -149,6 +170,7 @@ GEM
     simple_form (2.1.0)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    slop (3.5.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -168,11 +190,13 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     warden (1.2.3)
       rack (>= 1.0)
+    yard (0.8.7.4)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_attr
   awesome_print
   bcrypt-ruby!
   better_errors
@@ -185,6 +209,7 @@ DEPENDENCIES
   chronic
   coffee-rails (~> 3.2.1)
   d3-rails
+  debugger
   descriptive-statistics
   devise (~> 2.2.3)
   haml
@@ -196,8 +221,12 @@ DEPENDENCIES
   mongoid (= 3.1.4)
   morrisjs-rails
   nokogiri
+  pry
+  pry-doc
+  pry-nav
   rails (= 3.2.11)
   raphael-rails
+  ruby-prof
   sass-rails (~> 3.2.3)
   simple_form (~> 2.1.0)
   therubyracer

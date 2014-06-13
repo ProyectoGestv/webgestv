@@ -42,11 +42,11 @@ class ManRscsController < ApplicationController
     @man_rsc.mngbl=act
     @man_rsc.save
 
-    http = Net::HTTP.new("192.168.119.35",9999)
+    http = Net::HTTP.new("192.168.119.163",9999)
     if act == 'true'
       post_params = {'ip' => @man_rsc.conn.ip, 'port' => @man_rsc.conn.port, 'domain' => @man_rsc.domain, 'type' => @man_rsc.name}
       #post_params = "ip=#{@man_rsc.conn.ip}, port=#{@man_rsc.conn.port}, domain=#{@man_rsc.domain}, type=#{@man_rsc.name}"
-      #resp = Net::HTTP.post_form URI('http://192.168.119.35:9999/mbs/register'), post_params
+      #resp = Net::HTTP.post_form URI('http://192.168.119.163:9999/mbs/register'), post_params
       request = Net::HTTP::Post.new("/mbs/register")
       request.set_form_data(post_params)
       begin
@@ -77,7 +77,7 @@ class ManRscsController < ApplicationController
     @man_rsc.save
 
     if @man_rsc.mngbl
-      http = Net::HTTP.new("192.168.119.35",9999)
+      http = Net::HTTP.new("192.168.119.163",9999)
       if act == 'true'
         request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/alerts/act")
         begin

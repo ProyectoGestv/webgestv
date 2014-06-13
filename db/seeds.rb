@@ -75,14 +75,14 @@ macomposite=McrAtr.create(name:"ma12", desc: "macro attribute composite", tipo: 
   a1.atr_hsts << h6
 end
 
-conn1= Conn.new(ip: "192.168.119.35", port: 1)
+conn1= Conn.new(ip: "192.168.119.163", port: 1)
 netele = NetEle.create(name: "broadcaster", domain:'SNMPServerIntegration', desc: "broadcaster")
 netele.conn=conn1
 
-conn2=Conn.new(ip: "192.168.119.35", port: 10000)
+conn2=Conn.new(ip: "192.168.119.163", port: 10000)
 serv=Serv.create(name:"Parrilla",  domain: netele.name, desc: "parrilla", mother: netele._id)
 serv.conn=conn2
-conn3=Conn.new(ip: "192.168.119.35", port: 10001)
+conn3=Conn.new(ip: "192.168.119.163", port: 10001)
 serv=Serv.create(name:"Webservices",  domain: netele.name, desc: "webservices", mother: netele._id)
 serv.conn=conn3
 

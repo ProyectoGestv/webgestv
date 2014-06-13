@@ -72,7 +72,7 @@ class LaynetElesController < ApplicationController
         modify_links(oldname,newname)
         if @laynet_ele.mngbl
           #Si se modifico algo se reinicia el MR a través de los llamados a webservices registrar y remover del núcleo
-          http = Net::HTTP.new("192.168.119.35",9999)
+          http = Net::HTTP.new("192.168.119.163",9999)
           post_params = {'ip' => oldip, 'port' => oldport}
           request = Net::HTTP::Delete.new("/mbs/#{@laynet_ele.domain}/#{oldname}")
           request.set_form_data(post_params)
