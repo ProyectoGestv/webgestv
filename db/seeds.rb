@@ -14,6 +14,8 @@ Atr.delete_all
 Alrt.delete_all
 User.delete_all
 
+=begin
+
 macomposite=McrAtr.create(name:"ma12", desc: "macro attribute composite", tipo: "composite")
 
 (1..2).each do |i|
@@ -86,8 +88,10 @@ conn3=Conn.new(ip: "192.168.119.163", port: 10001)
 serv=Serv.create(name:"Webservices",  domain: netele.name, desc: "webservices", mother: netele._id)
 serv.conn=conn3
 
+=end
+
 puts 'SETTING UP DEFAULT USER LOGIN'
-user = User.create! :name => 'juan', :role => 'admin', :email => 'juan@example.com', :password => 'jajaja', :password_confirmation => 'jajaja'
+user = User.create! :name => 'admin', :role => 'admin', :email => 'admin@example.com', :password => 'admin123', :password_confirmation => 'admin123'
 puts 'New user created: ' << user.name
-user2 = User.create! :name => 'cho', :role => 'oper', :email => 'cho@example.com', :password => 'jajaja', :password_confirmation => 'jajaja'
+user2 = User.create! :name => 'operario', :role => 'oper', :email => 'operario@example.com', :password => 'operario123', :password_confirmation => 'operario123'
 puts 'New user created: ' << user2.name
