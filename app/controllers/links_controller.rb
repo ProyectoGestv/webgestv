@@ -6,7 +6,7 @@ class LinksController < ApplicationController
     @links = Link.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @links }
     end
   end

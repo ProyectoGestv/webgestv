@@ -8,7 +8,7 @@ class NetElesController < ApplicationController
     @net_eles = NetEle.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @net_eles }
     end
   end
@@ -70,7 +70,7 @@ class NetElesController < ApplicationController
       if pass
         if @net_ele.mngbl
           #Si se modifico algo se reinicia el MR a través de los llamados a webservices registrar y remover del núcleo
-          http = Net::HTTP.new("192.168.119.35",9999)
+          http = Net::HTTP.new("192.168.119.163",9999)
           post_params = {'ip' => oldip, 'port' => oldport}
           request = Net::HTTP::Delete.new("/mbs/#{@net_ele.domain}/#{oldname}")
           request.set_form_data(post_params)
@@ -91,7 +91,7 @@ class NetElesController < ApplicationController
         @net_ele.children.each do |h|
           if h.mngbl
             #Si se modifico algo se remueve el MR hijo a través del llamado al webservice remover del núcleo
-            http = Net::HTTP.new("192.168.119.35",9999)
+            http = Net::HTTP.new("192.168.119.163",9999)
             post_params = {'ip' => h.conn.ip, 'port' => h.conn.port}
             request = Net::HTTP::Delete.new("/mbs/#{h.domain}/#{h.name}")
             request.set_form_data(post_params)

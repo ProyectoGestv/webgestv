@@ -34,6 +34,8 @@
                       =link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/alr_mntr_frmls/#{mcr_atr.alr_mon._id}", :method => :delete, :data => { :confirm => t('forms.delalarms.confirm') }
                   -else
                     %td=link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}), "mcr_atrs/#{mcr_atr._id}/alr_mntr_frmls/new"
+                  %td=link_to image_tag('chart.jpg', {:title => "Reportes Compuestos"}), "/report_composite/index/?mcr_atr=#{mcr_atr.id}"
+
           %div{:id => "collapse#{i}", :class => "accordion-body collapse in"}
             .accordion-inner
               %table.table.table-striped
@@ -47,6 +49,7 @@
                   -if mcr_atr.tipo == 'simple'
                     %th Monitor QoS
                     %th Monitor Alarma
+                    %th Reporte
                 %tbody
                   -mcr_atr.atrs.order_by(:name.asc).each do |atr|
                     %tr
@@ -89,6 +92,9 @@
                             = link_to image_tag('alr_delete.png', {:title => t('forms.delalarm')}), "mcr_atrs/#{mcr_atr._id}/atrs/#{atr._id}/#{tipo}/#{atr.alr_mon._id}?alr_cat=alr", :method => :delete, :data => { :confirm => t('forms.delparams.confirm') }
                           -else
                             = link_to image_tag('alr_add.png', {:title => t('forms.addalarm')}),'#', :onclick => "$('#myMntr').modal({aid:'#{atr._id}', maid:'#{mcr_atr._id}', alrcat:'alr'})"
+                        %td
+                          = link_to image_tag('chart.jpg', {:title => "Reportes Simples"}), "/reports/index/?mcr_atr=#{mcr_atr.id}&atr=#{atr.id}"
+
 
     #myMntr.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myMntrLabel", :role => "dialog", :tabindex => "-1"}
       .modal-header

@@ -8,7 +8,7 @@ class AlrMntrCntrsController < ApplicationController
     @alr_mntr_cntrs = AlrMntrCntr.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @alr_mntr_cntrs }
     end
   end
@@ -148,7 +148,7 @@ class AlrMntrCntrsController < ApplicationController
 
   def message_state(mr, ma, atr, alr_cat, state)
     if mr.mngbl && mr.alrtbl
-      http = Net::HTTP.new("192.168.119.35",9999)
+      http = Net::HTTP.new("192.168.119.163",9999)
       request = Net::HTTP::Put.new("/mbs/#{mr.domain}/#{mr.name}/#{ma.name}/#{atr._id}/#{alr_cat}/#{state}")
       begin
         http.request(request)

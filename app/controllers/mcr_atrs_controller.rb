@@ -8,7 +8,7 @@ class McrAtrsController < ApplicationController
     @mr_name=mr.name
     @back=mr._type
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @mcr_atrs }
     end
   end

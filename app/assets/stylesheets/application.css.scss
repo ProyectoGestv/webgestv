@@ -495,3 +495,18 @@ abbr[title], abbr[data-original-title] {
 width: 800px;
 }
 
+////////////////////////////////// COMPOSITE CONFIGURATOR /////////////////////////////
+#form_composite
+{
+  width: 1100px;
+  margin: 5px;
+}
+.input_text_field
+{
+  width: 100px;
+}
+#errorExplanation
+{
+ background-color: #FA8072;
+ border-color: #FF0000;
+}

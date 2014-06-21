@@ -8,7 +8,7 @@ class ServsController < ApplicationController
     @servs = Serv.all.order_by(:name.asc)
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @servs }
     end
   end
@@ -95,7 +95,7 @@ class ServsController < ApplicationController
     if pass
       if @serv.mngbl
         #Si se modifico algo se reinicia el MR a través de los llamados a webservices registrar y remover del núcleo
-        http = Net::HTTP.new("192.168.119.35",9999)
+        http = Net::HTTP.new("192.168.119.163",9999)
         post_params = {'ip' => oldip, 'port' => oldport}
         request = Net::HTTP::Delete.new("/mbs/#{olddomain}/#{oldname}")
         request.set_form_data(post_params)
@@ -132,7 +132,7 @@ class ServsController < ApplicationController
     @serv = Serv.find(params[:id])
     if @serv.mngbl
       #Remueve el MR a través de una llamada al webservice del núcleo
-      http = Net::HTTP.new("192.168.119.35",9999)
+      http = Net::HTTP.new("192.168.119.163",9999)
       post_params = {'ip' => @serv.conn.ip, 'port' => @serv.conn.port}
       request = Net::HTTP::Delete.new("/mbs/#{@serv.domain}/#{@serv.name}")
       request.set_form_data(post_params)

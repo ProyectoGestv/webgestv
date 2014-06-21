@@ -8,7 +8,7 @@ class AtrsController < ApplicationController
     @atrs = Atr.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html # index.html.haml
       format.json { render json: @atrs }
     end
   end
@@ -83,7 +83,7 @@ class AtrsController < ApplicationController
     @atr = Atr.find(params[:id])
     @mcr_atr=@atr.mcr_atr
     @man_rsc=@mcr_atr.man_rsc
-    http = Net::HTTP.new("192.168.119.35",9999)
+    http = Net::HTTP.new("192.168.119.163",9999)
     post_params = {'value' => @atr.value}
     request = Net::HTTP::Put.new("/mbs/#{@man_rsc.domain}/#{@man_rsc.name}/#{@mcr_atr.name}/#{@atr.name}")
     request.set_form_data(post_params)

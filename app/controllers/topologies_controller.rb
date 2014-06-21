@@ -12,8 +12,10 @@ class TopologiesController < ApplicationController
     @enlaces = @enlaces.to_json
 
     respond_to do |format|
+
       format.html # index.html.erb
       format.json { render :json => { :nodos => @nodos, :enlaces => @enlaces } }
+
     end
   end
 

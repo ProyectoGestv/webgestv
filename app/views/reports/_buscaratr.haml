@@ -1,2 +1,2 @@
 = simple_fields_for @reporte do |f|
- = f.input :atrsim, label:'Atributo', :collection => @busquedaatributo.map{ |c| [c.name, c.id] }, include_blank:'Seleccione atributo'
+ = f.input :atrsim, label:'Atributo', :collection => @busquedaatributo.map{ |c| [c.name, c.id] }, :selected => @atr_preselected.id ,  include_blank:'Seleccione atributo'

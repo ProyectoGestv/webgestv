@@ -1,0 +1,66 @@
+%script(type="text/javascript")
+
+ Highcharts.setOptions
+ ({
+ global:
+ {
+ useUTC:false
+ }
+ });
+
+ $(function(){
+ new Highcharts.Chart({
+ chart:
+ {
+ renderTo: 'graficoestatico',
+ type: 'spline'
+ },
+ title:{
+ text: 'Analisis de Monitores'
+ },
+ subtitle: {
+ text: 'Teniendo en cuenta los filtros de seleccion'
+ },
+ xAxis:{
+ type: 'datetime',
+ tickPixelInterval: 500
+ },
+ yAxis:{
+ title:{
+ text: 'Valor'
+ }
+ },
+ tooltip:{
+ formatter: function(){
+ return '<b>'+ this.series.name +'</b><br/>'+
+ Highcharts.dateFormat('%Y-%m-%d %H:%M:%S', this.x) +'<br/>'+
+ Highcharts.numberFormat(this.y, 2);
+ }
+ },
+ exporting:
+ {
+ enabled: true
+ },
+ series: [{
+ name: 'Historicos',
+ color: '#006600',
+ data:(function()
+ {
+ var data = [];
+ -@hst_filtered.each do |dat|
+  var d  = #{dat.tstamp}
+  console.log(d);
+  var  y = parseInt(#{dat.tstamp})
+  var total = #{dat['value']}
+  var z = new Date(y*1000).getTime();
+  var array_date = [z,total];
+  data.push(array_date);
+ console.log(data)
+ return data;
+ })()
+ }]
+ });
+ });
+
+%h2.the-legend Grafico
+#graficoestatico{:align => "center"}
